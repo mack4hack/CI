@@ -17,16 +17,20 @@
 		    $this->methods['player_get']['limit'] = 500; // 500 requests per hour per user/key
 		    $this->methods['player_post']['limit'] = 100; // 100 requests per hour per user/key
 		    $this->methods['player_delete']['limit'] = 50; // 50 requests per hour per user/key
+		    $this->load->database(); // load database
+		    $this->load->model('Admin_model'); // load model
 		}	
 
 		public function index_get()
 		{
 				// Users from a data store e.g. database
-			        $users = [
+			        /*$players = [
 			            ['id' => 1, 'name' => 'John', 'email' => 'john@example.com', 'fact' => 'Loves coding'],
 			            ['id' => 2, 'name' => 'Jim', 'email' => 'jim@example.com', 'fact' => 'Developed on CodeIgniter'],
 			            ['id' => 3, 'name' => 'Jane', 'email' => 'jane@example.com', 'fact' => 'Lives in the USA', ['hobbies' => ['guitar', 'cycling']]],
-			        ];
+			        ];*/
+
+			        $players = $this->Admin_model->get_players();
 
 			        $id = $this->get('id');
 
@@ -35,10 +39,10 @@
 			        if ($id === NULL)
 			        {
 			            // Check if the users data store contains users (in case the database result returns NULL)
-			            if ($users)
+			            if ($players)
 			            {
 			                // Set the response and exit
-			                $this->response($users, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+			                $this->response($players, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
 			            }
 			            else
 			            {
@@ -64,20 +68,20 @@
 			        // Get the user from the array, using the id as key for retreival.
 			        // Usually a model is to be used for this.
 
-			        $user = NULL;
+			        $player = NULL;
 
-			        if (!empty($users))
+			        if (!empty($players))
 			        {
-			            foreach ($users as $key => $value)
+			            foreach ($players as $key => $value)
 			            {
 			                if (isset($value['id']) && $value['id'] === $id)
 			                {
-			                    $user = $value;
+			                    $player = $value;
 			                }
 			            }
 			        }
 
-			        if (!empty($user))
+			        if (!empty($player))
 			        {
 			            $this->set_response($user, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
 			        }
