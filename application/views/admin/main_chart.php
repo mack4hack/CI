@@ -78,9 +78,7 @@
 												<div id="clockDisplay" class="clockStyle"></div>
 											</div>
 											<div class="col-sm-3">
-												<a href="javascript:;" class="btn red">
-															Time to next draw <i class="fa fa-edit"></i>
-															</a>
+												<div id="countdownDisplay" class="clockStyle"></div>
 											</div>
 											<div class="col-sm-3">
 												<a href="javascript:;" class="btn red">
@@ -897,6 +895,49 @@ function renderTime() {
 	myClock.innerText = h + ":" + m + ":" + s + " " + diem;
 }
 renderTime();
+
+function countdown() {
+	var currentTime = new Date();
+	//console.log(currentTime);
+	var diem = "AM";
+	var h = currentTime.getHours();
+	var m = currentTime.getMinutes();
+    var s = currentTime.getSeconds();
+	setTimeout('countdown()',1000);
+    if (h == 0) {
+		h = 12;
+	} else if (h > 12) { 
+		h = h - 12;
+		diem="PM";
+	}
+	if (h < 10) {
+		h = "0" + h;
+	}
+	/*if (m < 10) {
+		m = "0" + m;
+	}*/
+	if (m > 45) {
+		m = 60-m;
+	}
+	else if (m > 30) {
+		m = 30-m;
+	}
+	else if (m > 15) {
+		m = 15-m;
+	}
+	else if (m < 15) {
+		m = 15-m;
+	}
+	
+	if (s > 0) {
+		s = 60-s;
+	}
+
+    var myClock = document.getElementById('countdownDisplay');
+	myClock.textContent = m + ":" + s + " Sec";
+	myClock.innerText = m + ":" + s + " Sec";
+}
+countdown();
 </script>
 <!-- CODE END -->
 <!-- BEGIN FOOTER -->
