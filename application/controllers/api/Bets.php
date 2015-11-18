@@ -21,13 +21,14 @@
 			echo "you are in Bets controller";	
 		}
 
-		public function firstDigitBet_post()
+		public function PlaceBet_post()
 		{
-
 			$payout = ($this->post('bet_amount')*9);
+			if($this->post('digit') > 9)
+				$payout = ($this->post('bet_amount')*90);
 
 			$data = array(
-				'game_type'=>1,
+				'game_type'=>>$this->post('game_type'),
 				'player_id'=>$this->post('player_id'),
 				'digit'=>$this->post('digit'),
 				'bet'=>1,
@@ -35,7 +36,7 @@
 				'payout'=>$payout
 				); 
 
-			$this->Bets_model->firstdigitbet($data);
+			$this->Bets_model->placebet($data);
 		}
 		
 	}

@@ -12,7 +12,7 @@ class Bets_model extends CI_Model {
 		parent::__construct();
 	}
 
-	function firstdigitbet($data)
+	function placebet($data)
 	{
 		$this->db->insert('game_lottery', $data);
 	}
