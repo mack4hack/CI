@@ -57,5 +57,24 @@ function getData($loadType,$loadId)
    //echo $this->db->last_query();
    return $query;
  }
+ 
+ function getCountries()
+{
+   $query = $this->db->get('countries');
+   return $query->result();
+}
+ function getStates($id)
+{
+   $this->db->where(array('country_id' => $id));
+   $query = $this->db->get('states');
+   return $query->result();
+}
+ function getCities($id)
+{
+   $this->db->where(array('state_id' => $id));
+   $query = $this->db->get('cities');
+   return $query->result();
+}
+ 
 }
 ?>

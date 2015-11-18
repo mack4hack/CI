@@ -22,7 +22,7 @@ public function index()
    $this->load->model('model');
    $result=$this->model->getData($loadType,$loadId);
    $HTML="";
-
+   
    if($result->num_rows() > 0){
      foreach($result->result() as $list){
        $HTML.="<option value='".$list->id."'>".$list->name."</option>";

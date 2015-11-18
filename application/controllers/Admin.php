@@ -83,7 +83,7 @@ class Admin extends CI_Controller {
 	  $paddedNum = sprintf("%05d", $ret+1);
 	    
 	  $query = $this->db->query("select * from user_master where id='".$_POST['dealer_id']."'");
-$row = $query->row_array(); 
+      $row = $query->row_array(); 
 
 	  $user_code = $row['user_code']."".$paddedNum;
 

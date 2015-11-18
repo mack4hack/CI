@@ -8,7 +8,7 @@
 
 			<!-- BEGIN PAGE HEADER-->
 			<h3 class="page-title">
-			amChart <small>charting library & maps. Where all data goes visual</small>
+			Admin Lottery Chart <small>Where all data goes visual</small>
 			</h3>
 			<div class="page-bar">
 				<ul class="page-breadcrumb">
@@ -22,9 +22,10 @@
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
-						<a href="#">amChart</a>
+						<a href="#">Lottery Chart</a>
 					</li>
 				</ul>
+<!--
 				<div class="page-toolbar">
 					<div class="btn-group pull-right">
 						<button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true">
@@ -48,6 +49,7 @@
 						</ul>
 					</div>
 				</div>
+-->
 			</div>
 			<!-- END PAGE HEADER-->
 			<!-- BEGIN PAGE CONTENT-->
@@ -107,40 +109,10 @@
 									<th>
 										 Digit
 									</th>
-									<th>
-										 0
-									</th>
-									<th>
-										 1
-									</th>
-									<th>
-										 2
-									</th>
-									<th>
-										 3
-									</th>
-									<th>
-										 4
-									</th>
-									<th>
-										 5
-									</th>
-									<th>
-										 6
-									</th>
-									<th>
-										 6
-									</th>
-									<th>
-										 7
-									</th>
-									<th>
-										 8
-									</th>
-									<th>
-										 9
-									</th>
+									<?php for($i=0 ;$i<=9 ;$i++){ ?>
 									
+									<th><?php  $i = sprintf("%02d", $i);  echo $i;  ?></th>
+									<?php }?>
 								</tr>
 								</thead>
 								<tbody>
@@ -148,390 +120,304 @@
 									<td>
 										 Total Bets
 									</td>
-									<td>
-										 10
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
+									<?php for($i=0 ;$i<=9; $i++){ ?>
+									
+									<td><?php  echo $i+25;?></td>
+									<?php }?>
 								</tr>
 								<tr class="success">
 									<td>
 										 Total Payouts
 									</td>
-									<td>
-										 87
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
+									<?php for($i=0 ;$i<=9; $i++){ ?>
+									
+									<td><?php  echo $i+65;?></td>
+									<?php }?>
 								</tr>
 								</tbody>
-								<tbody>
+								<thead>
 								<tr>
-									<td>
+									<th>
 										 Digit
-									</td>
-									<td>
-										 10
-									</td>
-									<td>
-										 11
-									</td>
-									<td>
-										 12
-									</td>
-									<td>
-										 13
-									</td>
-									<td>
-										 14
-									</td>
-									<td>
-										 15
-									</td>
-									<td>
-										 16
-									</td>
-									<td>
-										 17
-									</td>
-									<td>
-										 18
-									</td>
-									<td>
-										 19
-									</td>
-									<td>
-										 20
-									</td>
+									</th>
+									<?php for($i=10 ;$i<=19 ;$i++){ ?>
+									
+									<th><?php   echo $i;  ?></th>
+									<?php }?>
 								</tr>
+								</thead>
 								<tbody>
 								<tr class="active">
 									<td>
 										 Total Bets
 									</td>
-									<td>
-										 10
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
+									<?php for($i=10 ;$i<=19; $i++){ ?>
+									
+									<td><?php  echo $i+25;?></td>
+									<?php }?>
 								</tr>
 								<tr class="success">
 									<td>
 										 Total Payouts
 									</td>
-									<td>
-										 87
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
+									<?php for($i=10 ;$i<=19; $i++){ ?>
+									
+									<td><?php  echo $i+35;?></td>
+									<?php }?>
 								</tr>
 								</tbody>
+								<thead>
 								<tr>
-									<td>
+									<th>
 										 Digit
-									</td>
-									<td>
-										 21
-									</td>
-									<td>
-										 22
-									</td>
-									<td>
-										 23
-									</td>
-									<td>
-										 24
-									</td>
-									<td>
-										 25
-									</td>
-									<td>
-										 26
-									</td>
-									<td>
-										 27
-									</td>
-									<td>
-										 28
-									</td>
-									<td>
-										 29
-									</td>
-									<td>
-										 30
-									</td>
-									<td>
-										 31
-									</td>
+									</th>
+									<?php for($i=20 ;$i<=29 ;$i++){ ?>
+									
+									<th><?php   echo $i;  ?></th>
+									<?php }?>
 								</tr>
+								</thead>
 								<tbody>
 								<tr class="active">
 									<td>
 										 Total Bets
 									</td>
-									<td>
-										 10
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
+									<?php for($i=20 ;$i<=29; $i++){ ?>
+									
+									<td><?php  echo $i+25;?></td>
+									<?php }?>
 								</tr>
 								<tr class="success">
 									<td>
 										 Total Payouts
 									</td>
-									<td>
-										 87
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
+									<?php for($i=20 ;$i<=29; $i++){ ?>
+									
+									<td><?php  echo $i+35;?></td>
+									<?php }?>
 								</tr>
 								</tbody>
+								<thead>
 								<tr>
-									<td>
-										 3
-									</td>
-									<td>
-										 87
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
+									<th>
+										 Digit
+									</th>
+									<?php for($i=30 ;$i<=39 ;$i++){ ?>
+									
+									<th><?php   echo $i;  ?></th>
+									<?php }?>
 								</tr>
-								<tr class="danger">
+								</thead>
+								<tbody>
+								<tr class="active">
 									<td>
-										 4
+										 Total Bets
 									</td>
+									<?php for($i=30 ;$i<=39; $i++){ ?>
+									
+									<td><?php  echo $i+25;?></td>
+									<?php }?>
+								</tr>
+								<tr class="success">
 									<td>
-										 92
+										 Total Payouts
 									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
+									<?php for($i=30 ;$i<=39; $i++){ ?>
+									
+									<td><?php  echo $i+35;?></td>
+									<?php }?>
 								</tr>
 								</tbody>
+								<thead>
+								<tr>
+									<th>
+										 Digit
+									</th>
+									<?php for($i=40 ;$i<=49 ;$i++){ ?>
+									
+									<th><?php   echo $i;  ?></th>
+									<?php }?>
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="active">
+									<td>
+										 Total Bets
+									</td>
+									<?php for($i=40 ;$i<=49; $i++){ ?>
+									
+									<td><?php  echo $i+25;?></td>
+									<?php }?>
+								</tr>
+								<tr class="success">
+									<td>
+										 Total Payouts
+									</td>
+									<?php for($i=40 ;$i<=49; $i++){ ?>
+									
+									<td><?php  echo $i+35;?></td>
+									<?php }?>
+								</tr>
+								</tbody>
+								<thead>
+								<tr>
+									<th>
+										 Digit
+									</th>
+									<?php for($i=50 ;$i<=59 ;$i++){ ?>
+									
+									<th><?php   echo $i;  ?></th>
+									<?php }?>
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="active">
+									<td>
+										 Total Bets
+									</td>
+									<?php for($i=50 ;$i<=59; $i++){ ?>
+									
+									<td><?php  echo $i+25;?></td>
+									<?php }?>
+								</tr>
+								<tr class="success">
+									<td>
+										 Total Payouts
+									</td>
+									<?php for($i=50 ;$i<=59; $i++){ ?>
+									
+									<td><?php  echo $i+35;?></td>
+									<?php }?>
+								</tr>
+								</tbody>
+								<thead>
+								<tr>
+									<th>
+										 Digit
+									</th>
+									<?php for($i=60 ;$i<=69 ;$i++){ ?>
+									
+									<th><?php   echo $i;  ?></th>
+									<?php }?>
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="active">
+									<td>
+										 Total Bets
+									</td>
+									<?php for($i=60 ;$i<=69; $i++){ ?>
+									
+									<td><?php  echo $i+25;?></td>
+									<?php }?>
+								</tr>
+								<tr class="success">
+									<td>
+										 Total Payouts
+									</td>
+									<?php for($i=60 ;$i<=69; $i++){ ?>
+									
+									<td><?php  echo $i+35;?></td>
+									<?php }?>
+								</tr>
+								</tbody>
+								<thead>
+								<tr>
+									<th>
+										 Digit
+									</th>
+									<?php for($i=70 ;$i<=79 ;$i++){ ?>
+									
+									<th><?php   echo $i;  ?></th>
+									<?php }?>
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="active">
+									<td>
+										 Total Bets
+									</td>
+									<?php for($i=70 ;$i<=79; $i++){ ?>
+									
+									<td><?php  echo $i+25;?></td>
+									<?php }?>
+								</tr>
+								<tr class="success">
+									<td>
+										 Total Payouts
+									</td>
+									<?php for($i=70 ;$i<=79; $i++){ ?>
+									
+									<td><?php  echo $i+35;?></td>
+									<?php }?>
+								</tr>
+								</tbody>
+								<thead>
+								<tr>
+									<th>
+										 Digit
+									</th>
+									<?php for($i=80 ;$i<=89 ;$i++){ ?>
+									
+									<th><?php   echo $i;  ?></th>
+									<?php }?>
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="active">
+									<td>
+										 Total Bets
+									</td>
+									<?php for($i=80 ;$i<=89; $i++){ ?>
+									
+									<td><?php  echo $i+25;?></td>
+									<?php }?>
+								</tr>
+								<tr class="success">
+									<td>
+										 Total Payouts
+									</td>
+									<?php for($i=80 ;$i<=89; $i++){ ?>
+									
+									<td><?php  echo $i+35;?></td>
+									<?php }?>
+								</tr>
+								</tbody>
+								<thead>
+								<tr>
+									<th>
+										 Digit
+									</th>
+									<?php for($i=90 ;$i<=99 ;$i++){ ?>
+									
+									<th><?php   echo $i;  ?></th>
+									<?php }?>
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="active">
+									<td>
+										 Total Bets
+									</td>
+									<?php for($i=90 ;$i<=99; $i++){ ?>
+									
+									<td><?php  echo $i+25;?></td>
+									<?php }?>
+								</tr>
+								<tr class="success">
+									<td>
+										 Total Payouts
+									</td>
+									<?php for($i=90 ;$i<=99; $i++){ ?>
+									
+									<td><?php  echo $i+35;?></td>
+									<?php }?>
+								</tr>
+								</tbody>
+								
+								
 								</table>	
+								
 								</div>
 							</div>
 							<!-- END CHART PORTLET-->
@@ -555,39 +441,10 @@
 									<th>
 										 Digit
 									</th>
-									<th>
-										 0
-									</th>
-									<th>
-										 1
-									</th>
-									<th>
-										 2
-									</th>
-									<th>
-										 3
-									</th>
-									<th>
-										 4
-									</th>
-									<th>
-										 5
-									</th>
-									<th>
-										 6
-									</th>
-									<th>
-										 6
-									</th>
-									<th>
-										 7
-									</th>
-									<th>
-										 8
-									</th>
-									<th>
-										 9
-									</th>
+									<?php for($i=0 ;$i<=9; $i++){ ?>
+									
+									<th><?php  echo $i;?></th>
+									<?php }?>
 									
 								</tr>
 								</thead>
@@ -596,77 +453,19 @@
 									<td>
 										 Total Bets
 									</td>
-									<td>
-										 10
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
+									<?php for($i=0 ;$i<=9; $i++){ ?>
+									
+									<td><?php  echo $i+12;?></td>
+									<?php }?>
 								</tr>
 								<tr class="success">
 									<td>
 										 Total Payouts
 									</td>
-									<td>
-										 87
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
+									<?php for($i=0 ;$i<=9; $i++){ ?>
+									
+									<td><?php  echo $i+15;?></td>
+									<?php }?>
 								</tr>
 								</tbody>
 								</table>	
@@ -678,39 +477,10 @@
 									<th>
 										 Digit
 									</th>
-									<th>
-										 0
-									</th>
-									<th>
-										 1
-									</th>
-									<th>
-										 2
-									</th>
-									<th>
-										 3
-									</th>
-									<th>
-										 4
-									</th>
-									<th>
-										 5
-									</th>
-									<th>
-										 6
-									</th>
-									<th>
-										 6
-									</th>
-									<th>
-										 7
-									</th>
-									<th>
-										 8
-									</th>
-									<th>
-										 9
-									</th>
+									<?php for($i=0 ;$i<=9; $i++){ ?>
+									
+									<th><?php  echo $i;?></th>
+									<?php }?>
 									
 								</tr>
 								</thead>
@@ -719,77 +489,19 @@
 									<td>
 										 Total Bets
 									</td>
-									<td>
-										 10
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
+									<?php for($i=0 ;$i<=9; $i++){ ?>
+									
+									<td><?php  echo $i+12;?></td>
+									<?php }?>
 								</tr>
 								<tr class="success">
 									<td>
 										 Total Payouts
 									</td>
-									<td>
-										 87
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
+									<?php for($i=0 ;$i<=9; $i++){ ?>
+									
+									<td><?php  echo $i+15;?></td>
+									<?php }?>
 								</tr>
 								</tbody>
 								</table>	
