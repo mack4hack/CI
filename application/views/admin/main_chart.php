@@ -1,4 +1,6 @@
-<?php include'header.php';?>
+<?php include'header.php';
+date_default_timezone_set('Asia/Calcutta');
+?>
 	<!-- BEGIN CONTENT -->
 	<div class="page-content-wrapper">
 		<div class="page-content">
