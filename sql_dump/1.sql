@@ -40,3 +40,16 @@
        `api_key` VARCHAR(40) NOT NULL,
        PRIMARY KEY (`id`)
    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#save lottery betting  details 
+ CREATE TABLE IF NOT EXISTS `game_lottery` (
+  `game_id` int(11) NOT NULL AUTO_INCREMENT,
+  `game_type` int(11) NOT NULL,
+  `player_id` int(11) NOT NULL,
+  `digit` int(2) NOT NULL,
+  `bet` int(11) NOT NULL,
+  `bet_amount` decimal(10,2) NOT NULL,
+  `payout` decimal(10,2) NOT NULL,
+  `timeslot` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`game_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
