@@ -21,6 +21,23 @@ class Bets_model extends CI_Model {
 	{
 	   $this->db->select('*');
 	   $this->db->from('game_lottery');
+	   $this->db->where('game_type',1);
+	   $query=$this->db->get();
+	   return $query->result();
+	}
+	function getseconddigitchart()
+	{
+	   $this->db->select('*');
+	   $this->db->from('game_lottery');
+	   $this->db->where('game_type',3);
+	   $query=$this->db->get();
+	   return $query->result();
+	}
+	function getjodichart()
+	{
+	   $this->db->select('*');
+	   $this->db->from('game_lottery');
+	   $this->db->where('game_type',3);
 	   $query=$this->db->get();
 	   return $query->result();
 	}

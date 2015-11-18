@@ -36,8 +36,21 @@
 				'payout'=>$payout
 				); 
 
-			$this->Bets_model->placebet($data);
+			if($this->Bets_model->placebet($data))
+			{	                
+				$this->response([
+					'status' => TRUE,
+					'message' => 'Bets Placed Successfully'
+				], REST_Controller::HTTP_OK); // NOT_FOUND (404) being the HTTP response code
+				            
+			}else{   
+				$this->response([
+					'status' => FALSE,
+					'message' => 'Bets Cannot Be Placed!'
+				], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+			}
+
 		}
-		
 	}
+		
 ?>	
