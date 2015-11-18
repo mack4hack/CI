@@ -946,6 +946,7 @@ $current_timestamp = $date->getTimestamp();
 		}
 		else if (m < 15) {
 			m = 15-m;
+		}if(m < 10){
 			m = "0" + m;
 		}
 		
