@@ -172,7 +172,7 @@ class Admin extends CI_Controller {
 	  $paddedNum = sprintf("%03d", $ret+1);
 	 
 	  $user_code = $dealer_city."".$paddedNum;
-
+     //code
 	  //$user_code ="PUN000005";
 	  $data = array("first_name" => $_POST['fname'],
 					"last_name" => $_POST['lname'],
