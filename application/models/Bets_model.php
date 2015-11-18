@@ -19,25 +19,28 @@ class Bets_model extends CI_Model {
 
 	function getfirstdigitchart()
 	{
-	   $this->db->select('*');
+	   $this->db->select('sum(bet_amount ) as bet_amount ,digit,sum(payout ) as payout');
 	   $this->db->from('game_lottery');
 	   $this->db->where('game_type',1);
+	   $this->db->group_by('digit');
 	   $query=$this->db->get();
 	   return $query;
 	}
 	function getseconddigitchart()
 	{
-	   $this->db->select('*');
+	   $this->db->select('sum(bet_amount ) as bet_amount ,digit,sum(payout ) as payout');
 	   $this->db->from('game_lottery');
-	   $this->db->where('game_type',3);
+	   $this->db->where('game_type',2);
+	   $this->db->group_by('digit');
 	   $query=$this->db->get();
 	   return $query;
 	}
 	function getjodichart()
 	{
-	   $this->db->select('*');
+	   $this->db->select('sum(bet_amount ) as bet_amount ,digit,sum(payout ) as payout');
 	   $this->db->from('game_lottery');
 	   $this->db->where('game_type',3);
+	   $this->db->group_by('digit');
 	   $query=$this->db->get();
 	   return $query;
 	}

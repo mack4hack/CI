@@ -28,7 +28,7 @@
 				$payout = ($this->post('bet_amount')*90);
 
 			$data = array(
-				'game_type'=>>$this->post('game_type'),
+				'game_type'=>$this->post('game_type'),
 				'player_id'=>$this->post('player_id'),
 				'digit'=>$this->post('digit'),
 				'bet'=>1,

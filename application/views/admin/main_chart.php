@@ -401,39 +401,10 @@ $current_timestamp = $date->getTimestamp();
 											<th>
 												 Digit
 											</th>
-											<th>
-												 0
-											</th>
-											<th>
-												 1
-											</th>
-											<th>
-												 2
-											</th>
-											<th>
-												 3
-											</th>
-											<th>
-												 4
-											</th>
-											<th>
-												 5
-											</th>
-											<th>
-												 6
-											</th>
-											<th>
-												 6
-											</th>
-											<th>
-												 7
-											</th>
-											<th>
-												 8
-											</th>
-											<th>
-												 9
-											</th>
+										<?php for($i = 0 ;$i <= 9;$i++){ ?>
+
+											<th><?php echo $i ;?></th>
+										<?php	}?>
 											
 										</tr>
 										</thead>
@@ -442,77 +413,24 @@ $current_timestamp = $date->getTimestamp();
 											<td>
 												 Total Bets
 											</td>
-											<td>
-												 10
-											</td>
-											<td>
-												 32
-											</td>
-											<td>
-												 32
-											</td>
-											<td>
-												 32
-											</td>
-											<td>
-												 32
-											</td>
-											<td>
-												 32
-											</td>
-											<td>
-												 32
-											</td>
-											<td>
-												 32
-											</td>
-											<td>
-												 32
-											</td>
-											<td>
-												 32
-											</td>
-											<td>
-												 32
-											</td>
+											<?php foreach ($first_digit_data->result() as $fd ) { ?>
+                                          <?php for($i = 0 ; $i <= 9 ; $i++){ 
+											   
+                                            	if($i == $fd->digit ){ ?>
+												  <td><?php echo $fd->bet_amount; ?></td>
+
+												<?php }else{ ?>
+													<th></th>
+												<?php }
+
+												} }	?>
+										   	
 										</tr>
 										<tr class="success">
 											<td>
 												 Total Payouts
 											</td>
-											<td>
-												 87
-											</td>
-											<td>
-												 32
-											</td>
-											<td>
-												 32
-											</td>
-											<td>
-												 32
-											</td>
-											<td>
-												 32
-											</td>
-											<td>
-												 32
-											</td>
-											<td>
-												 32
-											</td>
-											<td>
-												 32
-											</td>
-											<td>
-												 32
-											</td>
-											<td>
-												 32
-											</td>
-											<td>
-												 32
-											</td>
+											
 										</tr>
 										</tbody>
 										</table>	
