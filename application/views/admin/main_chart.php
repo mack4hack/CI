@@ -53,25 +53,11 @@ $current_timestamp = $date->getTimestamp();
 					</div>
 				</div>
 			</div>
-			<!-- END PAGE HEADER-->
-			<!-- BEGIN PAGE CONTENT-->
-			<div class="row">
+
+
+                            <div class="row">
 				<div class="col-md-12">
-					
-					<!-- BEGIN ROW -->
-					
-					<!-- END ROW -->
-					<!-- BEGIN ROW -->
-					
-					<!-- END ROW -->
-					<!-- BEGIN ROW -->
-					
-					<!-- END ROW -->
-					<!-- BEGIN ROW -->
-					
-					<!-- END ROW -->
-					<!-- BEGIN ROW -->
-					<div class="well margin-top-20">
+				<div class="well margin-top-20">
 										<div class="row">
 											<div class="col-sm-3">
 												<a href="<?php echo base_url()?>admin/info" class="btn red">
@@ -90,9 +76,13 @@ $current_timestamp = $date->getTimestamp();
 															</a>
 											</div>
 										</div>
-									</div>
+					</div>
+                    </div>
+                    </div>
+
+
 					<div class="row">
-						<div class="col-md-12" >
+						    <div class="col-md-12" >
 							<!-- BEGIN CHART PORTLET-->
 							<div class="portlet light bordered">
 								<div class="portlet-title">
@@ -103,6 +93,485 @@ $current_timestamp = $date->getTimestamp();
 									
 								</div>
 								<div class="portlet-body">
+								<table class="table table-bordered table-hover">
+								<thead>
+								<tr>
+									<th>
+										 Digit
+									</th>
+								<?php for($i=0; $i<=9 ;$i++) { ?>
+									  <th><?php echo "0".$i; ?></th>
+								<?php	} ?>	
+								  	
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="active">
+									<td>
+										 Total Bets
+									</td>
+									<?php for($i=0; $i<=9 ;$i++) { ?>
+									  <th></th>
+								<?php	} ?>
+									
+								</tr>
+								<tr class="success">
+									<td>
+										 Total Payouts
+									</td>
+									<?php for($i=0; $i<=9 ;$i++) { ?>
+									  <th></th>
+								<?php	} ?>
+									
+								</tr>
+								</tbody>
+								
+								
+								<thead>
+								<tr>
+									<th>
+										 Digit
+									</th>
+								<?php for($i=10; $i<=19 ;$i++) { ?>
+									  <th><?php echo $i; ?></th>
+								<?php	} ?>	
+								  	
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="active">
+									<td>
+										 Total Bets
+									</td>
+									<?php for($i=10; $i<=19 ;$i++) { ?>
+									  <th></th>
+								<?php	} ?>
+									
+								</tr>
+								<tr class="success">
+									<td>
+										 Total Payouts
+									</td>
+									<?php for($i=10; $i<=19 ;$i++) { ?>
+									  <th></th>
+								<?php	} ?>
+									
+								</tr>
+								</tbody>
+									
+								<thead>
+								<tr>
+									<th>
+										 Digit
+									</th>
+								<?php for($i=20; $i<=29 ;$i++) { ?>
+									  <th><?php echo $i; ?></th>
+								<?php	} ?>	
+								  	
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="active">
+									<td>
+										 Total Bets
+									</td>
+									<?php for($i=20; $i<=29 ;$i++) { ?>
+									  <th></th>
+								<?php	} ?>
+									
+								</tr>
+								<tr class="success">
+									<td>
+										 Total Payouts
+									</td>
+									<?php for($i=20; $i<=29 ;$i++) { ?>
+									  <th></th>
+								<?php	} ?>
+									
+								</tr>
+								</tbody>
+								
+								
+								<thead>
+								<tr>
+									<th>
+										 Digit
+									</th>
+								<?php for($i=30; $i<=39 ;$i++) { ?>
+									  <th><?php echo $i; ?></th>
+								<?php	} ?>	
+								  	
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="active">
+									<td>
+										 Total Bets
+									</td>
+									<?php for($i=30; $i<=39 ;$i++) { ?>
+									  <th></th>
+								<?php	} ?>
+									
+								</tr>
+								<tr class="success">
+									<td>
+										 Total Payouts
+									</td>
+									<?php for($i=30; $i<=39 ;$i++) { ?>
+									  <th></th>
+								<?php	} ?>
+									
+								</tr>
+								</tbody>
+								
+								
+								<thead>
+								<tr>
+									<th>
+										 Digit
+									</th>
+								<?php for($i=40; $i<=49 ;$i++) { ?>
+									  <th><?php echo $i; ?></th>
+								<?php	} ?>	
+								  	
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="active">
+									<td>
+										 Total Bets
+									</td>
+									<?php for($i=40; $i<=49 ;$i++) { ?>
+									  <th></th>
+								<?php	} ?>
+									
+								</tr>
+								<tr class="success">
+									<td>
+										 Total Payouts
+									</td>
+									<?php for($i=40; $i<=49 ;$i++) { ?>
+									  <th></th>
+								<?php	} ?>
+									
+								</tr>
+								</tbody>
+								
+								
+								<thead>
+								<tr>
+									<th>
+										 Digit
+									</th>
+								<?php for($i=50; $i<=59 ;$i++) { ?>
+									  <th><?php echo $i; ?></th>
+								<?php	} ?>	
+								  	
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="active">
+									<td>
+										 Total Bets
+									</td>
+									<?php for($i=50; $i<=59 ;$i++) { ?>
+									  <th></th>
+								<?php	} ?>
+									
+								</tr>
+								<tr class="success">
+									<td>
+										 Total Payouts
+									</td>
+									<?php for($i=50; $i<=59 ;$i++) { ?>
+									  <th></th>
+								<?php	} ?>
+									
+								</tr>
+								</tbody>
+								
+								
+								<thead>
+								<tr>
+									<th>
+										 Digit
+									</th>
+								<?php for($i=60; $i<=69 ;$i++) { ?>
+									  <th><?php echo $i; ?></th>
+								<?php	} ?>	
+								  	
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="active">
+									<td>
+										 Total Bets
+									</td>
+									<?php for($i=60; $i<=69 ;$i++) { ?>
+									  <th></th>
+								<?php	} ?>
+									
+								</tr>
+								<tr class="success">
+									<td>
+										 Total Payouts
+									</td>
+									<?php for($i=60; $i<=69 ;$i++) { ?>
+									  <th></th>
+								<?php	} ?>
+									
+								</tr>
+								</tbody>
+								<thead>
+								<tr>
+									<th>
+										 Digit
+									</th>
+								<?php for($i=70; $i<=79 ;$i++) { ?>
+									  <th><?php echo $i; ?></th>
+								<?php	} ?>	
+								  	
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="active">
+									<td>
+										 Total Bets
+									</td>
+									<?php for($i=70; $i<=79 ;$i++) { ?>
+									  <th></th>
+								<?php	} ?>
+									
+								</tr>
+								<tr class="success">
+									<td>
+										 Total Payouts
+									</td>
+									<?php for($i=70; $i<=79 ;$i++) { ?>
+									  <th></th>
+								<?php	} ?>
+									
+								</tr>
+								</tbody>
+								
+								<thead>
+								<tr>
+									<th>
+										 Digit
+									</th>
+								<?php for($i=80; $i<=89 ;$i++) { ?>
+									  <th><?php echo $i; ?></th>
+								<?php	} ?>	
+								  	
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="active">
+									<td>
+										 Total Bets
+									</td>
+									<?php for($i=80; $i<=89 ;$i++) { ?>
+									  <th></th>
+								<?php	} ?>
+									
+								</tr>
+								<tr class="success">
+									<td>
+										 Total Payouts
+									</td>
+									<?php for($i=80; $i<=89 ;$i++) { ?>
+									  <th></th>
+								<?php	} ?>
+									
+								</tr>
+								</tbody>
+								
+								
+								<thead>
+								<tr>
+									<th>
+										 Digit
+									</th>
+								<?php for($i=90; $i<=99 ;$i++) { ?>
+									  <th><?php echo $i; ?></th>
+								<?php	} ?>	
+								  	
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="active">
+									<td>
+										 Total Bets
+									</td>
+									<?php for($i=90; $i<=99 ;$i++) { ?>
+									  <th></th>
+								<?php	} ?>
+									
+								</tr>
+								<tr class="success">
+									<td>
+										 Total Payouts
+									</td>
+									<?php for($i=90; $i<=99 ;$i++) { ?>
+									  <th></th>
+								<?php	} ?>
+									
+								</tr>
+								</tbody>
+								
+								</div>
+							</div>
+							<!-- END CHART PORTLET-->
+					</div>
+					</div>
+						
+						    <div class="row">
+						    <div class="col-md-12" >
+							<!-- BEGIN CHART PORTLET-->
+							<div class="portlet light bordered">
+								<div class="portlet-title">
+									<div class="caption">
+										<i class="icon-bar-chart font-green-haze"></i>
+										<span class="caption-subject bold uppercase font-green-haze">Single Digit First</span>
+										
+									</div>
+									
+								</div>
+								
+							<table class="table table-bordered table-hover">
+								<thead>
+								<tr>
+									<th>
+										 Digit
+									</th>
+									<th>
+										 0
+									</th>
+									<th>
+										 1
+									</th>
+									<th>
+										 2
+									</th>
+									<th>
+										 3
+									</th>
+									<th>
+										 4
+									</th>
+									<th>
+										 5
+									</th>
+									<th>
+										 6
+									</th>
+									<th>
+										 6
+									</th>
+									<th>
+										 7
+									</th>
+									<th>
+										 8
+									</th>
+									<th>
+										 9
+									</th>
+									
+								</tr>
+								</thead>
+								<tbody>
+								<tr class="active">
+									<td>
+										 Total Bets
+									</td>
+									<td>
+										 10
+									</td>
+									<td>
+										 32
+									</td>
+									<td>
+										 32
+									</td>
+									<td>
+										 32
+									</td>
+									<td>
+										 32
+									</td>
+									<td>
+										 32
+									</td>
+									<td>
+										 32
+									</td>
+									<td>
+										 32
+									</td>
+									<td>
+										 32
+									</td>
+									<td>
+										 32
+									</td>
+									<td>
+										 32
+									</td>
+								</tr>
+								<tr class="success">
+									<td>
+										 Total Payouts
+									</td>
+									<td>
+										 87
+									</td>
+									<td>
+										 32
+									</td>
+									<td>
+										 32
+									</td>
+									<td>
+										 32
+									</td>
+									<td>
+										 32
+									</td>
+									<td>
+										 32
+									</td>
+									<td>
+										 32
+									</td>
+									<td>
+										 32
+									</td>
+									<td>
+										 32
+									</td>
+									<td>
+										 32
+									</td>
+									<td>
+										 32
+									</td>
+								</tr>
+								</tbody>
+								</table>	
+								</div>
+							</div>	
+							</div>	
+								
+						<div class="row">
+								 <div class="col-md-12" >
+								   <div class="portlet light bordered">
+								    <div class="portlet-title">
+									 <div class="caption">
+										<i class="icon-bar-chart font-green-haze"></i>
+										<span class="caption-subject bold uppercase font-green-haze">Single Digit Second </span>
+									 </div>
+									</div>
 								<table class="table table-bordered table-hover">
 								<thead>
 								<tr>
@@ -223,578 +692,11 @@ $current_timestamp = $date->getTimestamp();
 									</td>
 								</tr>
 								</tbody>
-								<tbody>
-								<tr>
-									<td>
-										 Digit
-									</td>
-									<td>
-										 10
-									</td>
-									<td>
-										 11
-									</td>
-									<td>
-										 12
-									</td>
-									<td>
-										 13
-									</td>
-									<td>
-										 14
-									</td>
-									<td>
-										 15
-									</td>
-									<td>
-										 16
-									</td>
-									<td>
-										 17
-									</td>
-									<td>
-										 18
-									</td>
-									<td>
-										 19
-									</td>
-									<td>
-										 20
-									</td>
-								</tr>
-								<tbody>
-								<tr class="active">
-									<td>
-										 Total Bets
-									</td>
-									<td>
-										 10
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-								</tr>
-								<tr class="success">
-									<td>
-										 Total Payouts
-									</td>
-									<td>
-										 87
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-								</tr>
-								</tbody>
-								<tr>
-									<td>
-										 Digit
-									</td>
-									<td>
-										 21
-									</td>
-									<td>
-										 22
-									</td>
-									<td>
-										 23
-									</td>
-									<td>
-										 24
-									</td>
-									<td>
-										 25
-									</td>
-									<td>
-										 26
-									</td>
-									<td>
-										 27
-									</td>
-									<td>
-										 28
-									</td>
-									<td>
-										 29
-									</td>
-									<td>
-										 30
-									</td>
-									<td>
-										 31
-									</td>
-								</tr>
-								<tbody>
-								<tr class="active">
-									<td>
-										 Total Bets
-									</td>
-									<td>
-										 10
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-								</tr>
-								<tr class="success">
-									<td>
-										 Total Payouts
-									</td>
-									<td>
-										 87
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-								</tr>
-								</tbody>
-								<tr>
-									<td>
-										 3
-									</td>
-									<td>
-										 87
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-								</tr>
-								<tr class="danger">
-									<td>
-										 4
-									</td>
-									<td>
-										 92
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-								</tr>
-								</tbody>
 								</table>	
 								</div>
-							</div>
-							<!-- END CHART PORTLET-->
-						</div>
-						<div class="col-md-12" >
-							<!-- BEGIN CHART PORTLET-->
-							<div class="portlet light bordered">
-								<div class="portlet-title">
-									<div class="caption">
-										<i class="icon-bar-chart font-green-haze"></i>
-										<span class="caption-subject bold uppercase font-green-haze"> 3D Pie Chart</span>
-										<span class="caption-helper">bar and line chart mix</span>
-									</div>
-									
 								</div>
-								<div class="portlet-body">
-								<h4>Single Digit First</h4>
-									<table class="table table-bordered table-hover">
-								<thead>
-								<tr>
-									<th>
-										 Digit
-									</th>
-									<th>
-										 0
-									</th>
-									<th>
-										 1
-									</th>
-									<th>
-										 2
-									</th>
-									<th>
-										 3
-									</th>
-									<th>
-										 4
-									</th>
-									<th>
-										 5
-									</th>
-									<th>
-										 6
-									</th>
-									<th>
-										 6
-									</th>
-									<th>
-										 7
-									</th>
-									<th>
-										 8
-									</th>
-									<th>
-										 9
-									</th>
-									
-								</tr>
-								</thead>
-								<tbody>
-								<tr class="active">
-									<td>
-										 Total Bets
-									</td>
-									<td>
-										 10
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-								</tr>
-								<tr class="success">
-									<td>
-										 Total Payouts
-									</td>
-									<td>
-										 87
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-								</tr>
-								</tbody>
-								</table>	
-								
-								<h4>Single Digit Second</h4>
-									<table class="table table-bordered table-hover">
-								<thead>
-								<tr>
-									<th>
-										 Digit
-									</th>
-									<th>
-										 0
-									</th>
-									<th>
-										 1
-									</th>
-									<th>
-										 2
-									</th>
-									<th>
-										 3
-									</th>
-									<th>
-										 4
-									</th>
-									<th>
-										 5
-									</th>
-									<th>
-										 6
-									</th>
-									<th>
-										 6
-									</th>
-									<th>
-										 7
-									</th>
-									<th>
-										 8
-									</th>
-									<th>
-										 9
-									</th>
-									
-								</tr>
-								</thead>
-								<tbody>
-								<tr class="active">
-									<td>
-										 Total Bets
-									</td>
-									<td>
-										 10
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-								</tr>
-								<tr class="success">
-									<td>
-										 Total Payouts
-									</td>
-									<td>
-										 87
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-									<td>
-										 32
-									</td>
-								</tr>
-								</tbody>
-								</table>	
+								</div>
+							
 								<div class="row">
 											<div class="col-sm-3">
 												<b>Total Bets All</b>
@@ -843,19 +745,19 @@ $current_timestamp = $date->getTimestamp();
 											</div>-->
 											
 								</div>
-								</div>
-							</div>
-							<!-- END CHART PORTLET-->
-						</div>
-					</div>
-					<!-- END ROW -->
-				</div>
-			</div>
-			<!-- END PAGE CONTENT-->
-		</div>
-	</div>
+								
+							
+					 
+
+
+
+
+			<!-- END PAGE HEADER-->
+			<!-- BEGIN PAGE CONTENT-->
+			
 	<!-- END CONTENT -->
 	
+</div>
 </div>
 <!-- END CONTAINER -->
 <!-- CODE FOR DIGITAL CLOCK -->
@@ -919,47 +821,57 @@ $current_timestamp = $date->getTimestamp();
 			}
 		var d = new Date(timer);
 		
-		var h = d.getHours();
-		var m = d.getMinutes();
-		var s = d.getSeconds();
+		var h1 = d.getHours();
+		var m1 = d.getMinutes();
+		var s1 = d.getSeconds();
 
-	    if (h == 0) {
-			h = 12;
-		} else if (h > 12) { 
-			h = h - 12;
+	    if (h1 == 0) {
+			h1 = 12;
+		} else if (h1 > 12) { 
+			h1 = h1 - 12;
 			diem="PM";
 		}
-		if (h < 10) {
-			h = "0" + h;
+		if (h1 < 10) {
+			h1 = "0" + h1;
 		}
 		/*if (m < 10) {
 			m = "0" + m;
 		}*/
-		if (m >= 45) {
-			m = 60-m;
+		if (m1 >= 45) {
+			m1 = 59-m1;
 		}
-		else if (m >= 30) {
-			m = 45-m;
+		else if (m1 >= 30) {
+			m1 = 44-m1;
 		}
-		else if (m >= 15) {
-			m = 30-m;
+		else if (m1 >= 15) {
+			m1 = 29-m1;
 		}
-		else if (m < 15) {
-			m = 15-m;
-		}if(m < 10){
-			m = "0" + m;
+		else if (m1 < 15) {
+			m1 = 14-m1;
+		}if(m1 < 10){
+			m1 = "0" + m1;
 		}
 		
-		if (s > 0) {
-			s = 60-s;
+		if(s1 == 60)
+		{
+		   s1 = "00";
 		}
-		if(s < 10){
-			s = "0" + s;
+		else if(s1 == 0)
+		{
+		   s1 = "0";
+		}
+		else if(s1 > 0 && s1 < 60)
+		{
+		   s1 = 60 - s1;
+		}
+		 if(s1 < 10)
+		{
+		   s1 = "0" + s1;
 		}
 
 	    var myClock = document.getElementById('countdownDisplay');
-		myClock.textContent = m + ":" + s + " Sec";
-		myClock.innerText = m + ":" + s + " Sec";
+		myClock.textContent = m1 + ":" + s1 + " Sec";
+		myClock.innerText = m1 + ":" + s1 + " Sec";
 
 		flag1 = false;
 		timer1 = timer1 + 1000;
