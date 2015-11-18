@@ -12,6 +12,7 @@ class Admin extends CI_Controller {
 		$this->load->model('Auth_model');
 		$this->load->model('Getlocation');
 		$this->load->model('Admin_model');
+		$this->load->model('Bets_model');
 		
     }
 	public function index()
@@ -25,8 +26,10 @@ class Admin extends CI_Controller {
 	}
 	public function lot_chart()
     {        
-	$result['list']=$this->Getlocation->getCountry();
-	$this->load->view('admin/main_chart',$result); 
+		$result['first_digit_data']=$this->Bets_model->getfirstdigitchart();
+		$result['second_digit_data']=$this->Bets_model->getseconddigitchart();
+		$result['jodi_data']=$this->Bets_model->getjodichart();
+		$this->load->view('admin/main_chart',$result); 
 	}
 	public function edit()
     {        
