@@ -872,7 +872,6 @@ $current_timestamp = $date->getTimestamp();
 }
 </style>
 <script>
-<script>
 	flag = true;
 	timer = '';
 	var diem = "AM";
@@ -965,7 +964,6 @@ $current_timestamp = $date->getTimestamp();
 		timer1 = timer1 + 1000;
 	}
 	countdown();
-</script>
 </script>
 <!-- CODE END -->
 <!-- BEGIN FOOTER -->
