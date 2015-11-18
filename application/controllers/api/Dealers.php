@@ -5,7 +5,7 @@
 	
 		
 
-	class Players extends REST_Controller
+	class Dealers extends REST_Controller
 	{
 		function __construct()
 		{
@@ -14,14 +14,14 @@
 
 		    // Configure limits on our controller methods
 		    // Ensure you have created the 'limits' table and enabled 'limits' within application/config/rest.php
-		    $this->methods['player_get']['limit'] = 500; // 500 requests per hour per user/key
-		    $this->methods['player_post']['limit'] = 100; // 100 requests per hour per user/key
-		    $this->methods['player_delete']['limit'] = 50; // 50 requests per hour per user/key
+		    $this->methods['dealer_get']['limit'] = 500; // 500 requests per hour per user/key
+		    $this->methods['dealer_post']['limit'] = 100; // 100 requests per hour per user/key
+		    $this->methods['dealer_delete']['limit'] = 50; // 50 requests per hour per user/key
 		    $this->load->database(); // load database
 		    $this->load->model('Admin_model'); // load model
 		}	
 
-		public function player_get($id = false)
+		public function dealer_get($id)
 		{
 				// Users from a data store e.g. database
 			        /*$players = [
@@ -30,26 +30,26 @@
 			            ['id' => 3, 'name' => 'Jane', 'email' => 'jane@example.com', 'fact' => 'Lives in the USA', ['hobbies' => ['guitar', 'cycling']]],
 			        ];*/
 
-			        $players = $this->Admin_model->get_players();
+			        $dealers = $this->Admin_model->get_dealers();
 
-			       
+			       // $id = $this->get('id');
 
 			        // If the id parameter doesn't exist return all the users
 
-			        if ($id == false)
+			        if ($id === NULL)
 			        {
 			            // Check if the users data store contains users (in case the database result returns NULL)
-			            if ($players)
+			            if ($dealers)
 			            {
 			                // Set the response and exit
-			                $this->response($players, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+			                $this->response($dealers, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
 			            }
 			            else
 			            {
 			                // Set the response and exit
 			                $this->response([
 			                    'status' => FALSE,
-			                    'message' => 'No Player were found'
+			                    'message' => 'No Dealer were found'
 			                ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
 			            }
 			        }
@@ -68,35 +68,35 @@
 			        // Get the user from the array, using the id as key for retreival.
 			        // Usually a model is to be used for this.
 
-			        $player = NULL;
+			        $dealer = NULL;
                     
-			        if (!empty($players))
+			        if (!empty($dealers))
 			        {
-			            foreach ($players as $key => $value)
+			            foreach ($dealers as $key => $value)
 			            {
 			                if ( $value->id  == $id)
 			                {
 			                    
-			                    $player = $value;
+			                    $dealer = $value;
 			                }
 			            }
 			        }
 
-			        if (!empty($player))
+			        if (!empty($dealer))
 			        {
-			            $this->set_response($player, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+			            $this->set_response($dealer, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
 			        }
 			        else
 			        {
 			            $this->set_response([
 			                'status' => FALSE,
-			                'message' => 'Players could not be found'
+			                'message' => 'Dealers could not be found'
 			            ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
 			        }
 		}
 
-		public function player_delete($id)
-     {
+		public function dealer_delete($id)
+       {
        // $id = (int) $this->get('id');
       
         // Validate the id.
@@ -106,61 +106,89 @@
             $this->response(NULL, REST_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) being the HTTP response code
         }
 
-        $this->Admin_model->delete_player($id);
+        $this->Admin_model->delete_dealer($id);
         $message = [
             'id' => $id,
-            'message' => 'Deleted the player'
+            'message' => 'Deleted the dealer'
         ];
 
         $this->set_response($message, REST_Controller::HTTP_OK); // NO_CONTENT (204) being the HTTP response code
     }
-    function addPlayer_post()
+    
+       public function areawisedealer_get()
+		{
+				 $country_id = (int) $this->get('country');   
+				 $state_id = (int) $this->get('state');   
+				 $city_id = (int) $this->get('city');
+				
+				
+				
+				 $dealers = $this->Admin_model->getAreaWiseDealers($country_id,$state_id,$city_id);
+		          if ($dealers)
+			            {
+			                // Set the response and exit
+			                $this->response($dealers, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+			            }
+			            else
+			            {
+			                // Set the response and exit
+			                $this->response([
+			                    'status' => FALSE,
+			                    'message' => 'No Dealer were found'
+			                ], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+			            }
+		
+		
+		}
+		
+		
+		
+   function addDealer_post()
       {
+	   
+	   $this->db->select('name');
+	   $this->db->from('cities');
+	   $this->db->where(array('id' => $_POST['city_id']));
+	   $query = $this->db->get();
+	   $city_name  = $query->row()->name;
+	   $dealer_city =substr(strtoupper($city_name), 0, 3);
 	  
-	    
-	   $ar = array('role_id'=>'3','city_id'=>$_POST['city_id']);
+	   $ar = array('role_id'=>'2','city_id'=>$_POST['city_id']);
 	   $ret = $this->db
        ->where($ar)
        ->count_all_results('user_master');
-	  $paddedNum = sprintf("%05d", $ret+1);
-	  
-	   $query = $this->db->query("select * from user_master where id='".$_POST['dealer_id']."'");
-       $row = $query->row_array(); 
-
-	   $user_code = $row['user_code']."".$paddedNum;
-	   
+	 
+	   $paddedNum = sprintf("%03d", $ret+1);
+	 
+	   $user_code = $dealer_city."".$paddedNum;
 	   $data = array("first_name" => $_POST['fname'],
 					"last_name"   => $_POST['lname'],
 					"country_id"  => $_POST['country_id'],
 					"state_id"    => $_POST['state_id'],
-				    "user_code"   => $user_code,
+					"user_code"   => $user_code,
 					"city_id"     => $_POST['city_id'],
 					"email_id"    => $_POST['email'],
 					"password"    =>    $_POST['password'],
-					"role_id"     => '3',
+					"role_id"     => '2',
 					"address_1"   => $_POST['address1'],
 					"contact_no"  => $_POST['contact_no'],
 					"alternate_no"=> $_POST['alternate_no'],
 					"address_2"   => $_POST['address2'],
 					"pincode"     => $_POST['pincode'],
 					"activation_date" => date("Y-m-d"),
-					"created_time" => date('Y-m-d h:s:a'),
+					"created_time" => date('Y-m-d H:i:s'),
 	  );
 	  if($this->db->insert('user_master',$data))
 	  {	                
-		    $data1 = array("dealer_id" => $_POST['dealer_id'],
-					 "player_id" => $this->db->insert_id(),
-					 "created_time" => date("Y-m-d h:s:a"));
-	        $insert1 = $this->db->insert('dealer_player',$data1); 
 			$this->response([
 				'status' => TRUE,
-				'message' => 'Player Added Successfully'
+				'message' => 'Dealer Added Successfully'
 			], REST_Controller::HTTP_OK); // NOT_FOUND (404) being the HTTP response code
 			            
         }else{   
 			$this->response([
 				'status' => FALSE,
-				'message' => 'No Player were added'
+				'message' => 'No Dealer were added'
 			], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
 		}
 	  
@@ -168,7 +196,7 @@
 
 		
     
-    function updatePlayer_post()
+    function updateDealer_post()
       {
 	  
 	   $data = array("first_name" => $_POST['fname'],
@@ -179,35 +207,33 @@
 					"city_id"     => $_POST['city_id'],
 					"email_id"    => $_POST['email'],
 					"password"    =>    $_POST['password'],
-					"role_id"     => '3',
+					"role_id"     => '2',
 					"address_1"   => $_POST['address1'],
 					"contact_no"  => $_POST['contact_no'],
 					"alternate_no"=> $_POST['alternate_no'],
 					"address_2"   => $_POST['address2'],
 					"pincode"     => $_POST['pincode'],
 					"activation_date" => date("Y-m-d"),
-					"updated_time" => date('Y-m-d h:s:a'),
+					"updated_time" => date('Y-m-d H:i:s'),
 	  );
 	  $this->db->where('id', $_POST['update_id']);
 	  if($this->db->update('user_master', $data))
 	  {	                
 			$this->response([
 				'status' => TRUE,
-				'message' => 'Player Updated Successfully'
+				'message' => 'Dealer Updated Successfully'
 			], REST_Controller::HTTP_OK); // NOT_FOUND (404) being the HTTP response code
 			            
         }else{   
 			$this->response([
 				'status' => FALSE,
-				'message' => 'No Player were updated'
+				'message' => 'No Dealer were updated'
 			], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
 		}
 	  
      }
 
 		
-   
-    
    
     
     
