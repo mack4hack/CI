@@ -14,7 +14,8 @@ class Bets_model extends CI_Model {
 
 	function placebet($data)
 	{
-		$this->db->insert('game_lottery', $data);
+		return $this->db->insert('game_lottery', $data);
+		 
 	}
 
 	function getfirstdigitchart()

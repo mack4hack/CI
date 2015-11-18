@@ -992,4 +992,16 @@ $current_timestamp = $date->getTimestamp();
 <!-- CODE END -->
 <!-- BEGIN FOOTER -->
 <?php include'footer.php';?>
+
 <!-- END FOOTER -->
+	<script type="text/javascript" >
+		$(document).ready(function() {   
+   // initiate layout and plugins
+   Metronic.init(); // init metronic core components
+Layout.init(); // init current layout
+QuickSidebar.init(); // init quick sidebar
+Demo.init(); // init demo features
+   FormValidation.init();
+   //TableManaged.init();
+});
+</script>

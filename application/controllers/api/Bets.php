@@ -33,7 +33,8 @@
 				'digit'=>$this->post('digit'),
 				'bet'=>1,
 				'bet_amount'=>$this->post('bet_amount'),
-				'payout'=>$payout
+				'payout'=>$payout,
+				'timeslot' => date('Y-m-d H:i:s')
 				); 
 
 			if($this->Bets_model->placebet($data))
