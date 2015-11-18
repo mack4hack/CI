@@ -90,7 +90,7 @@ date_default_timezone_set('Asia/Calcutta');
 										</div>
 									</div>
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-12" >
 							<!-- BEGIN CHART PORTLET-->
 							<div class="portlet light bordered">
 								<div class="portlet-title">
@@ -536,7 +536,7 @@ date_default_timezone_set('Asia/Calcutta');
 							</div>
 							<!-- END CHART PORTLET-->
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-12" >
 							<!-- BEGIN CHART PORTLET-->
 							<div class="portlet light bordered">
 								<div class="portlet-title">
