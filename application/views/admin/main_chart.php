@@ -1,5 +1,7 @@
 <?php include'header.php';
 date_default_timezone_set('Asia/Calcutta');
+$date = new DateTime();
+$current_timestamp = $date->getTimestamp();
 ?>
 	<!-- BEGIN CONTENT -->
 	<div class="page-content-wrapper">
@@ -870,76 +872,100 @@ date_default_timezone_set('Asia/Calcutta');
 }
 </style>
 <script>
-function renderTime() {
-	var currentTime = new Date();
+<script>
+	flag = true;
+	timer = '';
 	var diem = "AM";
-	var h = currentTime.getHours();
-	var m = currentTime.getMinutes();
-    var s = currentTime.getSeconds();
-	setTimeout('renderTime()',1000);
-    if (h == 0) {
-		h = 12;
-	} else if (h > 12) { 
-		h = h - 12;
-		diem="PM";
-	}
-	if (h < 10) {
-		h = "0" + h;
-	}
-	if (m < 10) {
-		m = "0" + m;
-	}
-	if (s < 10) {
-		s = "0" + s;
-	}
-    var myClock = document.getElementById('clockDisplay');
-	myClock.textContent = h + ":" + m + ":" + s + " " + diem;
-	myClock.innerText = h + ":" + m + ":" + s + " " + diem;
-}
-renderTime();
+	setInterval(function(){renderTime();},1000);
+	function renderTime() {
+		if ( flag ) {
+			timer = <?php echo $current_timestamp;?>*1000;
+		}
+		var d = new Date(timer);
 
-function countdown() {
-	var currentTime = new Date();
-	//console.log(currentTime);
-	var diem = "AM";
-	var h = currentTime.getHours();
-	var m = currentTime.getMinutes();
-    var s = currentTime.getSeconds();
-	setTimeout('countdown()',1000);
-    if (h == 0) {
-		h = 12;
-	} else if (h > 12) { 
-		h = h - 12;
-		diem="PM";
-	}
-	if (h < 10) {
-		h = "0" + h;
-	}
-	/*if (m < 10) {
-		m = "0" + m;
-	}*/
-	if (m >= 45) {
-		m = 60-m;
-	}
-	else if (m >= 30) {
-		m = 45-m;
-	}
-	else if (m >= 15) {
-		m = 30-m;
-	}
-	else if (m < 15) {
-		m = 15-m;
-	}
-	
-	if (s > 0) {
-		s = 60-s;
-	}
+		var h = d.getHours();
+		var m = d.getMinutes();
+		var s = d.getSeconds();
 
-    var myClock = document.getElementById('countdownDisplay');
-	myClock.textContent = m + ":" + s + " Sec";
-	myClock.innerText = m + ":" + s + " Sec";
-}
-countdown();
+	    if (h == 0) {
+			h = 12;
+		} else if (h > 12) { 
+			h = h - 12;
+			diem="PM";
+		}
+		if (h < 10) {
+			h = "0" + h;
+		}
+		if (m < 10) {
+			m = "0" + m;
+		}
+		if (s < 10) {
+			s = "0" + s;
+		}
+	    var myClock = document.getElementById('clockDisplay');
+		myClock.textContent = h + ":" + m + ":" + s + " " + diem;
+		myClock.innerText = h + ":" + m + ":" + s + " " + diem;
+
+		flag = false;
+		timer = timer + 1000;
+	}
+	renderTime();
+
+	flag1 = true;
+	timer1 = '';
+	setInterval(function(){countdown();},1000);
+	function countdown() {
+		if ( flag1 ) {
+				timer1 = <?php echo $current_timestamp;?>*1000;
+			}
+		var d = new Date(timer);
+		
+		var h = d.getHours();
+		var m = d.getMinutes();
+		var s = d.getSeconds();
+
+	    if (h == 0) {
+			h = 12;
+		} else if (h > 12) { 
+			h = h - 12;
+			diem="PM";
+		}
+		if (h < 10) {
+			h = "0" + h;
+		}
+		/*if (m < 10) {
+			m = "0" + m;
+		}*/
+		if (m >= 45) {
+			m = 60-m;
+		}
+		else if (m >= 30) {
+			m = 45-m;
+		}
+		else if (m >= 15) {
+			m = 30-m;
+		}
+		else if (m < 15) {
+			m = 15-m;
+			m = "0" + m;
+		}
+		
+		if (s > 0) {
+			s = 60-s;
+		}
+		if(s < 10){
+			s = "0" + s;
+		}
+
+	    var myClock = document.getElementById('countdownDisplay');
+		myClock.textContent = m + ":" + s + " Sec";
+		myClock.innerText = m + ":" + s + " Sec";
+
+		flag1 = false;
+		timer1 = timer1 + 1000;
+	}
+	countdown();
+</script>
 </script>
 <!-- CODE END -->
 <!-- BEGIN FOOTER -->
