@@ -916,14 +916,14 @@ function countdown() {
 	/*if (m < 10) {
 		m = "0" + m;
 	}*/
-	if (m > 45) {
+	if (m >= 45) {
 		m = 60-m;
 	}
-	else if (m > 30) {
-		m = 30-m;
+	else if (m >= 30) {
+		m = 45-m;
 	}
-	else if (m > 15) {
-		m = 15-m;
+	else if (m >= 15) {
+		m = 30-m;
 	}
 	else if (m < 15) {
 		m = 15-m;
