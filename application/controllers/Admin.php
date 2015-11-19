@@ -226,4 +226,23 @@ class Admin extends CI_Controller {
 			echo "0";
 		}
     }
+
+    public function generateFirstDigit()
+    {
+    	echo $number = rand(0, 9);
+    }
+
+    public function generateSecondDigit()
+    {
+    	echo $number = rand(0, 9);
+    }
+
+    public function generateJodiDigit()
+    {
+    	$number = rand(00, 99);
+    	if($number < 10){
+    		$number = '0'.$number;
+    	}
+    	echo "$number";
+    }
 }
