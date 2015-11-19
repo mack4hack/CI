@@ -74,3 +74,6 @@
   `timeslot` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+ALTER TABLE `user_master` ADD `deposited_amount` DECIMAL(10,4) NOT NULL AFTER `is_blocked`, ADD `present_amount` DECIMAL(10,4) NOT NULL AFTER `deposited_amount`;
+ 

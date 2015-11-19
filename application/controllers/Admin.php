@@ -257,13 +257,16 @@ class Admin extends CI_Controller {
     	lucky_draw($jodi);
     }
 
-    public function lucky_draw($jodi=02)
+    public function lucky_draw($jodi)
     {
     	$players = $this->Admin_model->getLuckyPlayers($jodi);
 
-    	print_r($players);
     	foreach ($players as $player) {
-    		# code...
+    		$credit = array(
+				'id'=>$player->player_id,
+				'bet_amount'=>$player->payout,
+				);
+    		$this->Bets_model->credit($credit);
     	}
     	//add payout in users account
     	//update player history

@@ -45,10 +45,24 @@
 				'timeslot' => date('Y-m-d H:i:s')
 				);
 
+			$debit = array(
+				'id'=>$this->post('player_id'),
+				'bet_amount'=>$this->post('bet_amount'),
+				);
+
+			$credit = array(
+				'id'=>1,
+				'bet_amount'=>$this->post('bet_amount'),
+				);
+
 			if($this->Bets_model->placebet($data))
 			{	                
 				$this->Bets_model->addplayerhistory($history);
 
+				$this->Bets_model->debit($debit);
+				
+				$this->Bets_model->credit($credit);
+				
 				$this->response([
 					'status' => TRUE,
 					'message' => 'Bets Placed Successfully'
@@ -85,10 +99,24 @@
 				'payout'=>$payout,
 				'timeslot' => date('Y-m-d H:i:s')
 				);
+			
+			$debit = array(
+				'id'=>$this->post('player_id'),
+				'bet_amount'=>$this->post('bet_amount'),
+				);
+
+			$credit = array(
+				'id'=>1,
+				'bet_amount'=>$this->post('bet_amount'),
+				);
 
 			if($this->Bets_model->placebet($data))
 			{	                
 				$this->Bets_model->addplayerhistory($history);
+
+				$this->Bets_model->debit($debit);
+				
+				$this->Bets_model->credit($credit);
 
 				$this->response([
 					'status' => TRUE,
@@ -127,9 +155,23 @@
 				'timeslot' => date('Y-m-d H:i:s')
 				);
 
+			$debit = array(
+				'id'=>$this->post('player_id'),
+				'bet_amount'=>$this->post('bet_amount'),
+				);
+
+			$credit = array(
+				'id'=>1,
+				'bet_amount'=>$this->post('bet_amount'),
+				);
+
 			if($this->Bets_model->placebet($data))
 			{	                
 				$this->Bets_model->addplayerhistory($history);
+
+				$this->Bets_model->debit($debit);
+				
+				$this->Bets_model->credit($credit);
 
 				$this->response([
 					'status' => TRUE,

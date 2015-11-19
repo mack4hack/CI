@@ -49,4 +49,19 @@ class Bets_model extends CI_Model {
 	{
 		$this->db->insert('player_history', $data);
 	}
+
+	function debit($data)
+	{
+		$this->db->set('present_amount','present_amount-'.$data['bet_amount'],FALSE);
+		$this->db->where('id',$data['id']);
+		$this->db->update('user_master');
+	}
+
+	function credit($data)
+	{
+		$this->db->set('present_amount','present_amount+'.$data['bet_amount'],FALSE);
+		$this->db->where('id',$data['id']);
+		$this->db->update('user_master');
+	}
+
 }
