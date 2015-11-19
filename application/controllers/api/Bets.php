@@ -23,9 +23,9 @@
 
 		public function PlaceBet_post()
 		{
-			$payout = ($this->post('bet_amount')*9);
+			$payout = ($this->post('bet_amount')*8.5);
 			if($this->post('digit') > 9)
-				$payout = ($this->post('bet_amount')*90);
+				$payout = ($this->post('bet_amount')*85);
 
 			$data = array(
 				'game_type'=>$this->post('game_type'),
