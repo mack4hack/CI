@@ -237,11 +237,14 @@ class Admin extends CI_Controller {
     		$jodi = $number;
     	}
 
-    	$luck_nubers = array(
+    	$luck_numbers = array(
     		'lucky_number' => $jodi,
     		'timeslot' => date('Y-m-d H:i:s')
     		);
-    	if($this->Admin_model->saveLuckyNumbers($luck_nubers))
+
+    	//if() get numbers from db
+
+    	if($this->Admin_model->saveLuckyNumbers($luck_numbers))
     	{
     		$json = array(
 					'status' => TRUE,
@@ -250,6 +253,22 @@ class Admin extends CI_Controller {
 
     		echo json_encode($json);
     	}
+
+    	lucky_draw($jodi);
+    }
+
+    public function lucky_draw($jodi=02)
+    {
+    	$players = $this->Admin_model->getLuckyPlayers($jodi);
+
+    	print_r($players);
+    	foreach ($players as $player) {
+    		# code...
+    	}
+    	//add payout in users account
+    	//update player history
+    	//debit payout from admin account
+
     }
     
 }

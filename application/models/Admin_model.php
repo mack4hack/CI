@@ -54,7 +54,19 @@ function delete_dealer($id)
 
 	function saveLuckyNumbers($data)
 	{
-		$this->db->insert('lucky_number',$data);
+		return $this->db->insert('lucky_numbers',$data);
+	}
+
+	function getLuckyPlayers($jodi)
+	{
+		$first = floor($jodi/10);
+    	$second = $jodi%10;
+
+		$where = '(digit='.$first.' or digit='.$second.' or digit='.$jodi.')';
+   		$this->db->where($where);
+   		$query=$this->db->get('game_lottery');//employee is a table in the database
+	    
+	    return $query->result();
 	}
 
 }
