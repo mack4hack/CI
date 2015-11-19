@@ -248,13 +248,13 @@ class Admin extends CI_Controller {
     	{
     		$json = array(
 					'status' => TRUE,
-					'message' => 'Luck Number Generated'
+					'message' => 'Lucky Number Generated'
 				);
 
     		echo json_encode($json);
     	}
 
-    	lucky_draw($jodi);
+    	$this->lucky_draw($jodi);
     }
 
     public function lucky_draw($jodi)
