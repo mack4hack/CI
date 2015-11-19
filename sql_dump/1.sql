@@ -47,9 +47,23 @@
   `game_type` int(11) NOT NULL,
   `player_id` int(11) NOT NULL,
   `digit` int(2) NOT NULL,
-  `bet` int(11) NOT NULL,
   `bet_amount` decimal(10,2) NOT NULL,
   `payout` decimal(10,2) NOT NULL,
   `timeslot` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`game_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+
+ CREATE TABLE IF NOT EXISTS `player_history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `player_id` int(11) NOT NULL,
+  `game_type` int(11) NOT NULL,
+  `timeslot` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `first_digit` int(1) DEFAULT NULL,
+  `second_digit` int(1) DEFAULT NULL,
+  `jodi_digit` int(2) DEFAULT NULL,
+  `bet_amount` decimal(10,4) NOT NULL,
+  `result` tinyint(1) NOT NULL DEFAULT '0',
+  `payout` decimal(10,4) NOT NULL,
+  `total_points` decimal(10,4) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
