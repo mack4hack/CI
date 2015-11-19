@@ -15,7 +15,6 @@ class Bets_model extends CI_Model {
 	function placebet($data)
 	{
 		return $this->db->insert('game_lottery', $data);
-		 
 	}
 
 	function getfirstdigitchart()
@@ -44,5 +43,10 @@ class Bets_model extends CI_Model {
 	   $this->db->group_by('digit');
 	   $query=$this->db->get();
 	   return $query;
+	}
+
+	function addplayerhistory($data)
+	{
+		$this->db->insert('player_history', $data);
 	}
 }
