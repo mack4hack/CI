@@ -52,4 +52,9 @@ function delete_dealer($id)
 	  return true;
 }
 
+	function saveLuckyNumbers($data)
+	{
+		$this->db->insert('lucky_number',$data);
+	}
+
 }

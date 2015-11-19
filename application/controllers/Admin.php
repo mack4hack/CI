@@ -227,22 +227,21 @@ class Admin extends CI_Controller {
 		}
     }
 
-    public function generateFirstDigit()
+    public function generateLuckyNumbers()
     {
-    	echo $number = rand(0, 9);
-    }
+    	$first = rand(0, 9);
+    	$second = rand(0, 9);
+    	$jodi = rand(00, 99);
+    	if($jodi < 10)
+    		$jodi = '0'.$jodi;
 
-    public function generateSecondDigit()
-    {
-    	echo $number = rand(0, 9);
+    	$luck_nubers = array(
+    		'first_digit' => $first,
+    		'second_digit' => $second,
+    		'jodi_digit' => $jodi,
+    		'timeslot' => date('Y-m-d H:i:s')
+    		);
+    	$this->Admin_model->saveLuckyNumbers($luck_nubers);
     }
-
-    public function generateJodiDigit()
-    {
-    	$number = rand(00, 99);
-    	if($number < 10){
-    		$number = '0'.$number;
-    	}
-    	echo "$number";
-    }
+    
 }
