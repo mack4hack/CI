@@ -29,7 +29,6 @@
 				'game_type'=>1,
 				'player_id'=>$this->post('player_id'),
 				'digit'=>$this->post('digit'),
-				'bet'=>1,
 				'bet_amount'=>$this->post('bet_amount'),
 				'payout'=>$payout,
 				'timeslot' => date('Y-m-d H:i:s')
@@ -40,6 +39,8 @@
 				'player_id'=>$this->post('player_id'),
 				'bet_amount'=>$this->post('bet_amount'),
 				'first_digit'=>$this->post('digit'),
+				'second_digit'=>null,
+				'jodi_digit'=>null,
 				'payout'=>$payout,
 				'timeslot' => date('Y-m-d H:i:s')
 				);
@@ -69,7 +70,6 @@
 				'game_type'=>2,
 				'player_id'=>$this->post('player_id'),
 				'digit'=>$this->post('digit'),
-				'bet'=>1,
 				'bet_amount'=>$this->post('bet_amount'),
 				'payout'=>$payout,
 				'timeslot' => date('Y-m-d H:i:s')
@@ -79,7 +79,9 @@
 				'game_type'=>2,
 				'player_id'=>$this->post('player_id'),
 				'bet_amount'=>$this->post('bet_amount'),
+				'first_digit'=>null,
 				'second_digit'=>$this->post('digit'),
+				'jodi_digit'=>null,
 				'payout'=>$payout,
 				'timeslot' => date('Y-m-d H:i:s')
 				);
@@ -109,7 +111,6 @@
 				'game_type'=>3,
 				'player_id'=>$this->post('player_id'),
 				'digit'=>$this->post('digit'),
-				'bet'=>1,
 				'bet_amount'=>$this->post('bet_amount'),
 				'payout'=>$payout,
 				'timeslot' => date('Y-m-d H:i:s')
@@ -119,6 +120,8 @@
 				'game_type'=>3,
 				'player_id'=>$this->post('player_id'),
 				'bet_amount'=>$this->post('bet_amount'),
+				'first_digit'=>null,
+				'second_digit'=>null,
 				'jodi_digit'=>$this->post('digit'),
 				'payout'=>$payout,
 				'timeslot' => date('Y-m-d H:i:s')
