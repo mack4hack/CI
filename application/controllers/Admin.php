@@ -229,16 +229,16 @@ class Admin extends CI_Controller {
 
     public function generateLuckyNumbers()
     {
-    	$first = rand(0, 9);
-    	$second = rand(0, 9);
-    	$jodi = rand(00, 99);
-    	if($jodi < 10)
-    		$jodi = '0'.$jodi;
+    	$number = rand(00, 99);
+    	if($number < 10){
+    		$jodi = '0'.$number;
+    	}
+    	else{
+    		$jodi = $number;
+    	}
 
     	$luck_nubers = array(
-    		'first_digit' => $first,
-    		'second_digit' => $second,
-    		'jodi_digit' => $jodi,
+    		'lucky_number' => $jodi,
     		'timeslot' => date('Y-m-d H:i:s')
     		);
     	$this->Admin_model->saveLuckyNumbers($luck_nubers);

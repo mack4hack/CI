@@ -67,3 +67,10 @@
   `total_points` decimal(10,4) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+
+ CREATE TABLE IF NOT EXISTS `lucky_numbers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `lucky_number` int(2) NOT NULL,
+  `timeslot` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
