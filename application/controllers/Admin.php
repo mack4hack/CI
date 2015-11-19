@@ -241,7 +241,15 @@ class Admin extends CI_Controller {
     		'lucky_number' => $jodi,
     		'timeslot' => date('Y-m-d H:i:s')
     		);
-    	$this->Admin_model->saveLuckyNumbers($luck_nubers);
+    	if($this->Admin_model->saveLuckyNumbers($luck_nubers))
+    	{
+    		$json = array(
+					'status' => TRUE,
+					'message' => 'Luck Number Generated'
+				);
+
+    		echo json_encode($json);
+    	}
     }
     
 }
