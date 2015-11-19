@@ -268,10 +268,6 @@ class Admin extends CI_Controller {
 				);
     		$this->Bets_model->credit($credit);
     	}
-    	//add payout in users account
-    	//update player history
-    	//debit payout from admin account
-
     }
     
 }
