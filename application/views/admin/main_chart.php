@@ -931,10 +931,19 @@ $current_timestamp = $date->getTimestamp();
 				timer1 = <?php echo $current_timestamp;?>*1000;
 			}
 		var d = new Date(timer);
+		var ash = document.getElementById('clockDisplay').innerText;
+		var arr = ash.split(':');
 		
 		var h1 = d.getHours();
 		var m1 = d.getMinutes();
 		var s1 = d.getSeconds();
+
+         var h1 = arr[0];
+         var m1 = arr[1];
+         var seconds = arr[2];
+         var seconds = seconds.split(' ');
+         var s1 = seconds[0];
+         
 
 	    if (h1 == 0) {
 			h1 = 12;
