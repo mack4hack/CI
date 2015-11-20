@@ -62,11 +62,42 @@ function delete_dealer($id)
 		$first = floor($jodi/10);
     	$second = $jodi%10;
 
-		$where = '(digit='.$first.' or digit='.$second.' or digit='.$jodi.')';
-   		$this->db->where($where);
-   		$query=$this->db->get('game_lottery');//employee is a table in the database
+    	date_default_timezone_set("Asia/Calcutta");
+		$now = getdate();
+		$minutes = $now['minutes'] - $now['minutes']%15;
+
+		 //Can add this to go to the nearest 15min interval (up or down)
+		 // $rmin  = $now['minutes']%15;
+		  //if ($rmin > 7){
+		  //  $minutes = $now['minutes'] + (15-$rmin);
+		 //  }else{
+		 //     $minutes = $now['minutes'] - $rmin;
+		 // }
+
+		$rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
+		//echo $rounded;
+    	$max_time = date('Y-m-d H:i:s');
+    	/*select TRUNC_15_MINUTES(timeslot) AS period_starting, digit from game_lottery 
+    	where timeslot >= $rounded and timeslot < date('Y-m-d H:i:s') 
+    	group by TRUNC_15_MINUTES(timeslot), digit order by TRUNC_15_MINUTES(timeslot)*/
+    	$query = $this->db->query("select player_id,payout from game_lottery 
+    	where timeslot >= '".$rounded."' and timeslot < '".$max_time."'  
+    	and ( digit=".$first." or digit=".$second." or digit=".$jodi." )");
+
+    	//echo $this->db->last_query();
+
+		//$where = '(digit='.$first.' or digit='.$second.' or digit='.$jodi.')';
+   		//$this->db->where($where);
+   		//$query=$this->db->get('game_lottery');//employee is a table in the database
 	    
 	    return $query->result();
+	}
+
+	function updatePlayerHistory($data)
+	{
+		$this->db->set('result',1,FALSE);
+		$this->db->where('id',$data['id']);
+		$this->db->update('player_history');		
 	}
 
 }
