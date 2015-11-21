@@ -159,6 +159,28 @@ foreach($edit_data->result() as $data){}
 													<!--/span-->
 												</div>
 												<!--/row-->
+												
+												<h3 class="form-section">Account Deatils</h3>
+												<!--/row-->
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label class="control-label col-md-3">Initial Amount</label>
+															<div class="col-md-9">
+																<input type="text" value="<?php echo $data->deposited_amount; ?>" name="deposited_amount" class="form-control">
+															</div>
+														</div>
+													</div>
+											        <div class="col-md-6">
+														<div class="form-group">
+															<label class="control-label col-md-3">Present Amount</label>
+															<div class="col-md-9">
+																<input type="text" value="<?php echo $data->present_amount; ?>"  disabled name="present_amount" class="form-control">
+															</div>
+														</div>
+													</div>   
+												</div>
+											
 											</div>
 											<div class="form-actions">
 												<div class="row">

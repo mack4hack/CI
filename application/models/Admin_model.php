@@ -64,6 +64,7 @@ function delete_dealer($id)
 
     	date_default_timezone_set("Asia/Calcutta");
 		$now = getdate();
+		$now['minutes'] = $now['minutes'] - 1;
 		$minutes = $now['minutes'] - $now['minutes']%15;
 
 		 //Can add this to go to the nearest 15min interval (up or down)
