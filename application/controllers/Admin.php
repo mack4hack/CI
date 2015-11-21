@@ -105,6 +105,7 @@ class Admin extends CI_Controller {
 					"address_2" => $_POST['address2'],
 					"pincode" => $_POST['pincode'],
 					"deposited_amount" => $_POST['deposited_amount'],
+					"present_amount" => $_POST['deposited_amount'],
 					"activation_date" => date("Y-m-d")
 	  );
 	  
@@ -147,7 +148,7 @@ class Admin extends CI_Controller {
 					"address_2" => $_POST['address2'],
 					"pincode" => $_POST['pincode'],
 					"deposited_amount" => $_POST['deposited_amount'],
-					"present_amount" => $_POST['deposited_amount'],
+					
 	  );
 	  $this->db->where('id', $_POST['updateid']);
 	  $update = $this->db->update('user_master', $data);
