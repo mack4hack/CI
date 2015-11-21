@@ -94,10 +94,23 @@ function delete_dealer($id)
 	    return $query->result();
 	}
 
-	function updatePlayerHistory($data)
+	function updatePlayerHistory($jodi)
 	{
+
+		$first = floor($jodi/10);
+    	$second = $jodi%10;
+
+		date_default_timezone_set("Asia/Calcutta");
+		$now = getdate();
+		$now['minutes'] = $now['minutes'] - 1;
+		$minutes = $now['minutes'] - $now['minutes']%15;
+
+		$rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
+    	$max_time = date('Y-m-d H:i:s');
+
 		$this->db->set('result',1,FALSE);
-		$this->db->where('id',$data['id']);
+		$where = '((timeslot >='.$rounded.' and timeslot < '.$max_time.') and  (digit='.$first.' or digit='.$second.' or digit='.$jodi.'))';
+   		$this->db->where($where);
 		$this->db->update('player_history');		
 	}
 

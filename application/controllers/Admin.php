@@ -272,6 +272,8 @@ class Admin extends CI_Controller {
 				);
     		$this->Bets_model->credit($credit);
     	}
+
+    	$this->Admin_model->updatePlayerHistory($jodi);
     }
     
 }
