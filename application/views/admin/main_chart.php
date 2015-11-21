@@ -5,7 +5,7 @@ $current_timestamp = $date->getTimestamp();
 ?>
 	<!-- BEGIN CONTENT -->
 	<div class="page-content-wrapper">
-		<div class="page-content">
+		<div class="page-content" >
 			
 			
 			
@@ -1013,4 +1013,16 @@ Demo.init(); // init demo features
    FormValidation.init();
    //TableManaged.init();
 });
+
+function loadlink(){
+    
+    $('#ash').load('<?php echo base_url("/admin/lot_chart"); ?>',function () {
+         $(this).unwrap();
+    });
+}
+
+loadlink(); // This will run on page load
+setInterval(function(){
+    loadlink() // this will run after every 5 seconds
+}, 5000);
 </script>
