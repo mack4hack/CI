@@ -175,7 +175,17 @@ foreach($edit_data->result() as $data){}
 														<div class="form-group">
 															<label class="control-label col-md-3">Present Amount</label>
 															<div class="col-md-9">
-																<input type="text" value="<?php echo $data->present_amount; ?>"  disabled name="present_amount" class="form-control">
+																<input type="text" value="<?php echo $data->present_amount; ?>"  readonly name="present_amount" class="form-control">
+															</div>
+														</div>
+													</div>   
+												</div>
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label class="control-label col-md-3">Add Amount</label>
+															<div class="col-md-9">
+																<input type="text"   name="add_amount" class="form-control">
 															</div>
 														</div>
 													</div>   

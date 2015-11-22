@@ -149,6 +149,7 @@ class Admin extends CI_Controller {
 					"address_2" => $_POST['address2'],
 					"pincode" => $_POST['pincode'],
 					"deposited_amount" => $_POST['deposited_amount'],
+					"present_amount" => $_POST['add_amount']+$_POST['present_amount'],
 					
 	  );
 	  $this->db->where('id', $_POST['updateid']);
