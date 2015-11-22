@@ -44,6 +44,16 @@ class Bets_model extends CI_Model {
 	   $query=$this->db->get();
 	   return $query;
 	}
+	
+	function getTotalPayoutAndBets()
+	{
+	   $this->db->select('sum(bet_amount ) as bet_amount,sum(payout ) as payout');
+	   $this->db->from('game_lottery');
+	   //$this->db->where('game_type',3);
+	   //$this->db->group_by('digit');
+	   $query=$this->db->get()->row();
+	   return $query;
+	}
 
 	function addplayerhistory($data)
 	{

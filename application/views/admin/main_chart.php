@@ -816,7 +816,10 @@ $current_timestamp = $date->getTimestamp();
 											</div>
 											<div class="col-sm-3">
 												<a href="javascript:;" class="btn red">
-														XX <i class="fa fa-edit"></i>
+														<?php echo($total_payout->bet_amount);?>
+<!--
+														<i class="fa fa-edit"></i>
+-->
 															</a>
 											</div>
 											<div class="col-sm-3">
@@ -850,7 +853,10 @@ $current_timestamp = $date->getTimestamp();
 											</div>
 											<div class="col-sm-3">
 												<a href="javascript:;" class="btn red">
-														XX <i class="fa fa-edit"></i>
+														<?php echo($total_payout->payout);?>
+<!--
+														<i class="fa fa-edit"></i>
+-->
 															</a>
 											</div>
 											<!--<div class="col-sm-4">
