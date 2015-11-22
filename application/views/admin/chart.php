@@ -768,6 +768,54 @@
 								</div>
 								</div>
 								</div>
-
+								<div class="row" class="col-sm-12">
+											<div class="col-sm-3">
+												<b>Total Bets All</b>
+											</div>
+											<div class="col-sm-3">
+												<a href="javascript:;" class="btn red">
+														<?php echo($total_payout->bet_amount);?>
+<!--
+														<i class="fa fa-edit"></i>
+-->
+															</a>
+											</div>
+											
+								</div>	
+								<BR>
+								<div class="row">
+											<div class="col-sm-3">
+												<b>Winning Number</b>
+											</div>
+											<div class="col-sm-3">
+												<a href="javascript:;" class="btn red">
+														XX <i class="fa fa-edit"></i>
+															</a>
+											</div>
+											<div class="col-sm-3">
+												
+											</div>
+											<div class="col-sm-3">
+												
+											</div>
+								</div>
+								<BR>
+								<div class="row">
+											<div class="col-sm-3">
+												<b>Total Payouts</b>
+											</div>
+											<div class="col-sm-3">
+												<a href="javascript:;" class="btn red">
+														<?php echo($total_payout->payout);?>
+<!--
+														<i class="fa fa-edit"></i>
+-->
+															</a>
+											</div>
+											<!--<div class="col-sm-4">
+												<button type="button" class="btn btn-primary">Primary</button>
+											</div>-->
+											
+								</div>
 
 			

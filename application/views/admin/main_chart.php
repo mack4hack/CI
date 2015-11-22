@@ -809,7 +809,7 @@ $current_timestamp = $date->getTimestamp();
 								</div>
 
 
-			</div>				
+							
 				           <div class="row" class="col-sm-12">
 											<div class="col-sm-3">
 												<b>Total Bets All</b>
@@ -822,12 +822,7 @@ $current_timestamp = $date->getTimestamp();
 -->
 															</a>
 											</div>
-											<div class="col-sm-3">
-												<input type="text" class="form-control" placeholder="Enter Result">
-											</div>
-											<div class="col-sm-3">
-												<button type="button" class="btn btn-primary">Execute</button>
-											</div>
+											
 								</div>	
 								<BR>
 								<div class="row">
@@ -863,6 +858,16 @@ $current_timestamp = $date->getTimestamp();
 												<button type="button" class="btn btn-primary">Primary</button>
 											</div>-->
 											
+								</div>
+				</div>				
+								<BR>
+								<div class="row">
+											<div class="col-sm-3">
+												<input type="text" class="form-control" placeholder="Enter Result">
+											</div>
+											<div class="col-sm-3">
+												<button type="button" class="btn btn-primary">Execute</button>
+											</div>
 								</div>			
 					 
 
