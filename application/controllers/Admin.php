@@ -47,7 +47,10 @@ class Admin extends CI_Controller {
 	
 	public function chart()
     {
-        $this->load->view('admin/main_chart');
+    	$result['first_digit_data']=$this->Bets_model->getfirstdigitchart();
+		$result['second_digit_data']=$this->Bets_model->getseconddigitchart();
+		$result['jodi_data']=$this->Bets_model->getjodichart();
+        $this->load->view('admin/chart',$result);
     }
 	public function info()
     {
