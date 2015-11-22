@@ -107,9 +107,10 @@ function delete_dealer($id)
 
 		$rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
     	$max_time = date('Y-m-d H:i:s');
+    	
 
 		$this->db->set('result',1,FALSE);
-		$where = '((timeslot >='.$rounded.' and timeslot < '.$max_time.') and  (digit='.$first.' or digit='.$second.' or digit='.$jodi.'))';
+		$where = "((timeslot >= '".$rounded."' and timeslot < '".$max_time."') and  (  first_digit='".$first."' or second_digit='".$second."' or jodi_digit='".$jodi."'))";
    		$this->db->where($where);
 		$this->db->update('player_history');		
 	}
