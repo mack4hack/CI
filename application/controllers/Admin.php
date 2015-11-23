@@ -13,11 +13,15 @@ class Admin extends CI_Controller {
 		$this->load->model('Getlocation');
 		$this->load->model('Admin_model');
 		$this->load->model('Bets_model');
+		$this->load->library('ion_auth');
 		
     }
 	public function index()
     {
-        $this->load->view('admin/dashboard');
+    	if (!$this->ion_auth->logged_in())
+			redirect('auth/login', 'refresh');
+		else
+    		$this->load->view('admin/dashboard');
     }
 	public function add_dealer()
     {        
