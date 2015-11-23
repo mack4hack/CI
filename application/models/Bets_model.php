@@ -125,10 +125,14 @@ class Bets_model extends CI_Model {
 	    $this->db->where("timeslot >= '".$date."' and timeslot < '".$rounded."' ");
 	    $query=$this->db->get()->row();
 	    
+	    if(!empty($query)){
 	    if($query->lucky_number <=9 ){
 		   $query->lucky_number = "0".$query->lucky_number;
 		}
 		return $query->lucky_number;
+		}else{
+		  return "";	
+		}
 	}
 
 }
