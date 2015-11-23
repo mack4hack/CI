@@ -19,6 +19,7 @@
 		    $this->methods['player_delete']['limit'] = 50; // 50 requests per hour per user/key
 		    $this->load->database(); // load database
 		    $this->load->model('Admin_model'); // load model
+		    $this->load->library('ion_auth');
 		}	
 
 		public function player_get($id = false)
@@ -204,6 +205,25 @@
 		}
 	  
      }
+
+	function login_post()
+	{
+		if($this->ion_auth->login($this->input->post('identity'), $this->input->post('password')))
+		{	                
+			date_default_timezone_set("Asia/Calcutta");
+			$this->response([
+				'status' => TRUE,
+				'message' => 'Login Successfully',
+				'data' => date('Y-m-d H:i:s')
+			], REST_Controller::HTTP_OK); // NOT_FOUND (404) being the HTTP response code
+			            
+		}else{   
+			$this->response([
+				'status' => FALSE,
+				'message' => 'Login Failed'
+			], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+		}
+	}
 
 		
    
