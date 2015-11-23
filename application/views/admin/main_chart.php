@@ -28,7 +28,12 @@ $current_timestamp = $date->getTimestamp();
 											</div>
 											<div class="col-sm-3">
 												<a href="javascript:;" class="btn red">
-															Current Result <i class="fa fa-edit"></i>
+														Last Number	<span id="ash"><?php echo $lucky_number;  ?></span> 	
+
+<!--
+															<i class="fa fa-edit"></i>
+-->
+
 															</a>
 											</div>
 										</div>
@@ -933,6 +938,7 @@ $current_timestamp = $date->getTimestamp();
 		if (s < 10) {
 			s = "0" + s;
 		}
+		
 	    var myClock = document.getElementById('clockDisplay');
 		myClock.textContent = h + ":" + m + ":" + s + " " + diem;
 		myClock.innerText = h + ":" + m + ":" + s + " " + diem;
@@ -1045,4 +1051,16 @@ function loadlink(){
 setInterval(function(){
     loadlink() // this will run after every 5 seconds
 }, 5000);
+
+function loadresult(){
+    
+        $.get('<?php echo base_url("/admin/getLuckyNumber"); ?>',function(data) {
+		   $('#ash').val(data);
+		});
+}
+
+//loadlink(); // This will run on page load
+setInterval(function(){
+    loadresult() // this will run after every 5 seconds
+}, 900000);
 </script>

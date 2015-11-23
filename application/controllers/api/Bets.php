@@ -186,6 +186,26 @@
 			}
 
 		}
+		public function getLuckyNumber_get(){
+		
+		    $result =   $this->Bets_model->getLuckyNumber();
+		    if(!empty($result))
+			{	                
+				
+				$this->response([
+					'status' => TRUE,
+					'lucky_number'   => $result->lucky_number
+					
+				], REST_Controller::HTTP_OK); // NOT_FOUND (404) being the HTTP response code
+				            
+			}else{   
+				$this->response([
+					'status' => FALSE,
+					'message' => 'No lucky number found!'
+				], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+			}
+			
+		}
 	}
 		
 ?>	
