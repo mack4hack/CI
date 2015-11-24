@@ -47,7 +47,7 @@ $current_timestamp = $date->getTimestamp();
 														Total Bets All:  <span id="bet_amount"><?php if(!empty($total_payout->bet_amount)){
 															echo $total_payout->bet_amount;
 															}else{
-																echo "0.00";
+																echo "0";
 																}?></span>
 <!--
 														<i class="fa fa-edit"></i>
@@ -60,7 +60,7 @@ $current_timestamp = $date->getTimestamp();
 													Total Payout:		<span id="payout"><?php if(!empty($total_payout->payout)){
 															echo $total_payout->payout;
 															}else{
-																echo "0.00";
+																echo "0";
 																}?></span>
                     							</a>
 											</div>
