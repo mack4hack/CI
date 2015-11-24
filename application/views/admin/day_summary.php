@@ -16,17 +16,20 @@ $current_timestamp = $date->getTimestamp();
 				    <div class="well margin-top-20">
 										<div class="row">
 											<div class="col-sm-3">
-												<select name="time_slot">
+												<select name="time_slot" id="time_slot">
 													<?php foreach ($time_slots as $time_slot) { 
-														if($time_slot < date('Y-m-d H:i')){
+														
+														$time = explode(' To ',$time_slot);
+														
+														if($time['1'] < date('Y-m-d H:i')){
 														?>
-														<option><?php echo $time_slot; ?></option>
+														<option  value="<?php echo $time_slot; ?>"><?php echo $time_slot; ?></option>
 													<?php }} ?>
 												</select>
 											</div>
-											<div class="col-sm-3">
+											<div class="col-sm-2">
 												<a href="javascript:;" class="btn red">
-														Last Number	<span id="ash"><?php echo $lucky_number;  ?></span> 	
+														Winning Number	<span id="lucky_number"><?php echo $lucky_number;  ?></span> 	
 
 <!--
 															<i class="fa fa-edit"></i>
@@ -34,6 +37,34 @@ $current_timestamp = $date->getTimestamp();
 
 															</a>
 											</div>
+											
+								
+											<div class="col-sm-2">
+												<a href="javascript:;" class="btn red">
+														Total Bets All:  <span id="bet_amount"><?php if(!empty($total_payout->bet_amount)){
+															echo $total_payout->bet_amount;
+															}else{
+																echo "0.00";
+																}?></span>
+<!--
+														<i class="fa fa-edit"></i>
+-->
+															</a>
+											</div>
+								
+											<div class="col-sm-2">
+												<a href="javascript:;" class="btn red">
+													Total Payout:		<span id="payout"><?php if(!empty($total_payout->payout)){
+															echo $total_payout->payout;
+															}else{
+																echo "0.00";
+																}?></span>
+                    							</a>
+											</div>
+										
+								
+											
+											
 										</div>
 					</div>
                   </div>
@@ -813,73 +844,10 @@ $current_timestamp = $date->getTimestamp();
 
 
 							
-				           <div class="row" class="col-sm-12">
-											<div class="col-sm-3">
-												<b>Total Bets All</b>
-											</div>
-											<div class="col-sm-3">
-												<a href="javascript:;" class="btn red">
-														<?php if(!empty($total_payout->bet_amount)){
-															echo $total_payout->bet_amount;
-															}else{
-																echo "0.00";
-																}?>
-<!--
-														<i class="fa fa-edit"></i>
--->
-															</a>
-											</div>
-											
-								</div>	
-								<BR>
-								<div class="row">
-											<div class="col-sm-3">
-												<b>Winning Number</b>
-											</div>
-											<div class="col-sm-3">
-												<a href="javascript:;" class="btn red">
-														XX <i class="fa fa-edit"></i>
-															</a>
-											</div>
-											<div class="col-sm-3">
-												
-											</div>
-											<div class="col-sm-3">
-												
-											</div>
-								</div>
-								<BR>
-								<div class="row">
-											<div class="col-sm-3">
-												<b>Total Payouts</b>
-											</div>
-											<div class="col-sm-3">
-												<a href="javascript:;" class="btn red">
-																			<?php if(!empty($total_payout->payout)){
-															echo $total_payout->payout;
-															}else{
-																echo "0.00";
-																}?>
-<!--
-														<i class="fa fa-edit"></i>
--->
-															</a>
-											</div>
-											<!--<div class="col-sm-4">
-												<button type="button" class="btn btn-primary">Primary</button>
-											</div>-->
-											
-								</div>
+				           
 				</div>				
-								<BR>
-								<div class="row">
-											<div class="col-sm-3">
-												<input type="text" class="form-control" placeholder="Enter Result">
-											</div>
-											<div class="col-sm-3">
-												<button type="button" class="btn btn-primary">Execute</button>
-											</div>
-								</div>			
+								
+										
 					 
 
 
@@ -914,6 +882,8 @@ $current_timestamp = $date->getTimestamp();
 <!-- END FOOTER -->
 	<script type="text/javascript" >
 		$(document).ready(function() {   
+			
+			$('#mack').hide();
    // initiate layout and plugins
    Metronic.init(); // init metronic core components
 Layout.init(); // init current layout
@@ -922,6 +892,28 @@ Demo.init(); // init demo features
    ///FormValidation.init();
    //TableManaged.init();
 });
+
+
+     $('#time_slot').on('change',function(){
+        	    var time_slot = $(this).val();
+				
+				jQuery.ajax({
+				type: "POST",
+				url: "<?php echo base_url(); ?>" + "admin/daySummary",
+				dataType: 'json',
+				data: {time: time_slot},
+				success: function(res) {
+					  $('#mack').show(); 
+					  $('#mack').html(res);
+					  
+				  }
+				});
+	   
+	
+	});
+
+
+
 
 
 </script>

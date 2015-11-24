@@ -34,6 +34,16 @@ class Bets_model extends CI_Model {
 	   $query=$this->db->get();
 	   return $query;
 	}
+	function getfirstdigitchartAccToTime($start,$end)
+	{
+	   $this->db->select('sum(bet_amount ) as bet_amount ,digit,sum(payout ) as payout');
+	   $this->db->from('game_lottery');
+	   $this->db->where('game_type',1);
+	   $this->db->where("timeslot >= '".$start."' and timeslot < '".$end."' ");
+	   $this->db->group_by('digit');
+	   $query=$this->db->get();
+	   return $query;
+	}
 	function getseconddigitchart()
 	{
 		date_default_timezone_set("Asia/Calcutta");
@@ -47,6 +57,16 @@ class Bets_model extends CI_Model {
 	   $this->db->from('game_lottery');
 	   $this->db->where('game_type',2);
 	   $this->db->where("timeslot >= '".$rounded."' and timeslot < '".$max_time."' ");
+	   $this->db->group_by('digit');
+	   $query=$this->db->get();
+	   return $query;
+	}
+	function getSeconddigitchartAccToTime($start,$end)
+	{
+	   $this->db->select('sum(bet_amount ) as bet_amount ,digit,sum(payout ) as payout');
+	   $this->db->from('game_lottery');
+	   $this->db->where('game_type',2);
+	   $this->db->where("timeslot >= '".$start."' and timeslot < '".$end."' ");
 	   $this->db->group_by('digit');
 	   $query=$this->db->get();
 	   return $query;
@@ -67,9 +87,19 @@ class Bets_model extends CI_Model {
 	    $this->db->where("timeslot >= '".$rounded."' and timeslot < '".$max_time."' ");
 	    $this->db->group_by('digit');
 	    $query=$this->db->get();
+	    
 	    return $query;
 	}
-	
+	function getjodichartAccToTime($start,$end)
+	{
+	   $this->db->select('sum(bet_amount ) as bet_amount ,digit,sum(payout ) as payout');
+	   $this->db->from('game_lottery');
+	   $this->db->where('game_type',3);
+	   $this->db->where("timeslot >= '".$start."' and timeslot < '".$end."' ");
+	   $this->db->group_by('digit');
+	   $query=$this->db->get();
+	   return $query;
+	}
 	function getTotalPayoutAndBets()
 	{
 	    date_default_timezone_set("Asia/Calcutta");
@@ -82,6 +112,17 @@ class Bets_model extends CI_Model {
 	   $this->db->select('sum(bet_amount ) as bet_amount,sum(payout ) as payout');
 	   $this->db->from('game_lottery');
 	   $this->db->where("timeslot >= '".$rounded."' and timeslot < '".$max_time."' ");
+	   //$this->db->where('game_type',3);
+	   //$this->db->group_by('digit');
+	   $query=$this->db->get()->row();
+	   return $query;
+	}
+	function getTotalPayoutAndBetsAccToTime($start,$end)
+	{
+		
+	   $this->db->select('sum(bet_amount ) as bet_amount,sum(payout ) as payout');
+	   $this->db->from('game_lottery');
+	   $this->db->where("timeslot >= '".$start."' and timeslot < '".$end."' ");
 	   //$this->db->where('game_type',3);
 	   //$this->db->group_by('digit');
 	   $query=$this->db->get()->row();
@@ -134,5 +175,25 @@ class Bets_model extends CI_Model {
 		  return "";	
 		}
 	}
+	function getLuckyNumberAccToTime($start,$end)
+	{
+		
+	    $this->db->select('lucky_number');
+	    $this->db->from('lucky_numbers');
+	    $this->db->where("timeslot >= '".$start."' and timeslot < '".$end."' ");
+	    $query=$this->db->get()->row();
+	    
+	    if(!empty($query)){
+	    if($query->lucky_number <=9 ){
+		   $query->lucky_number = "0".$query->lucky_number;
+		}
+		return $query->lucky_number;
+		}else{
+		  return "";	
+		}
+	}
+	
+	
+	
 
 }

@@ -295,11 +295,29 @@ class Admin extends CI_Controller {
     }
     public function daySummary()
     {        
+		
+		if(isset($_POST['time'])){
+			
+			  $time = explode(' To ',$_POST['time']);
+			  $start = $time['0'];
+			  $end = $time['1'];
+			  
+			  $result['first_digit_data']=$this->Bets_model->getfirstdigitchartAccToTime($start,$end);
+              $result['second_digit_data']=$this->Bets_model->getseconddigitchartAccToTime($start,$end);
+		      $result['jodi_data']=$this->Bets_model->getjodichartAccToTime($start,$end);
+		      $result['total_payout']=$this->Bets_model->getTotalPayoutAndBetsAccToTime($start,$end);
+		      $result['lucky_number']=$this->Bets_model->getLuckyNumberAccToTime($start,$end);
+
+        			
+			  print_r( $result);die;
+			
+		}
 		$result['first_digit_data']=$this->Bets_model->getfirstdigitchart();
 		$result['second_digit_data']=$this->Bets_model->getseconddigitchart();
 		$result['jodi_data']=$this->Bets_model->getjodichart();
 		$result['total_payout']=$this->Bets_model->getTotalPayoutAndBets();
 		$result['lucky_number']=$this->Bets_model->getLuckyNumber();
+
 
 		for($i=0*60;$i<=24*60;$i+=15){
 			$hr = floor($i/60);
@@ -310,7 +328,14 @@ class Admin extends CI_Controller {
 			if($min < 9)
 				$min = '0'.$min;
 
-  			$time_slots[] = date('Y-m-d')." ". $hr . ":" . $min;
+    
+    
+            
+            
+  			$start = date('Y-m-d')." ". $hr . ":" . $min;
+  			
+  			$newTime = date("Y-m-d H:i",strtotime($start." +15 minutes"));
+  			$time_slots[] = $start." To ".$newTime;
 		}
 		
 		$result['time_slots'] = $time_slots;

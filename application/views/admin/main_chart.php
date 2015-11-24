@@ -28,7 +28,7 @@ $current_timestamp = $date->getTimestamp();
 											</div>
 											<div class="col-sm-3">
 												<a href="javascript:;" class="btn red">
-														Last Number	<span id="ash"><?php echo $lucky_number;  ?></span> 	
+														Last Number:	<span id="ash"><?php echo $lucky_number;  ?></span> 	
 
 <!--
 															<i class="fa fa-edit"></i>
