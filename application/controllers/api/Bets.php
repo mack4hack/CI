@@ -186,15 +186,15 @@
 			}
 
 		}
-		public function getLuckyNumber_get(){
+		public function LuckyNumber_get(){
 		
-		    $result =   $this->Bets_model->getLuckyNumber();
+		    $result['lucky_number'] = $this->Bets_model->getLuckyNumber();
 		    if(!empty($result))
 			{	                
 				
 				$this->response([
 					'status' => TRUE,
-					'lucky_number'   => $result->lucky_number
+					'lucky_number'   => $result['lucky_number']
 					
 				], REST_Controller::HTTP_OK); // NOT_FOUND (404) being the HTTP response code
 				            

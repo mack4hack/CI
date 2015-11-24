@@ -293,5 +293,33 @@ class Admin extends CI_Controller {
 
     	$this->Admin_model->updatePlayerHistory($jodi);
     }
+    public function daySummary()
+    {        
+		$result['first_digit_data']=$this->Bets_model->getfirstdigitchart();
+		$result['second_digit_data']=$this->Bets_model->getseconddigitchart();
+		$result['jodi_data']=$this->Bets_model->getjodichart();
+		$result['total_payout']=$this->Bets_model->getTotalPayoutAndBets();
+		$result['lucky_number']=$this->Bets_model->getLuckyNumber();
+
+		for($i=0*60;$i<=24*60;$i+=15){
+			$hr = floor($i/60);
+			if($hr < 9)
+				$hr = '0'.$hr;
+			
+			$min = ($i/60-floor($i/60))*60;
+			if($min < 9)
+				$min = '0'.$min;
+
+  			$time_slots[] = date('Y-m-d')." ". $hr . ":" . $min;
+		}
+		
+		$result['time_slots'] = $time_slots;
+
+		//echo date('Y-m-d H:i');
+
+		//print_r($time_slots); die;
+
+		$this->load->view('admin/day_summary',$result); 
+	}
     
 }
