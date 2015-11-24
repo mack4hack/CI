@@ -11,7 +11,10 @@ $current_timestamp = $date->getTimestamp();
 			
 
 
-                <div class="row">
+                
+
+            <div id="mack">
+				<div class="row">
 				  <div class="col-md-12">
 				    <div class="well margin-top-20">
 										<div class="row">
@@ -69,8 +72,6 @@ $current_timestamp = $date->getTimestamp();
 					</div>
                   </div>
                 </div>
-
-            <div id="mack">
 				<div class="row">
 					<div class="col-md-12" >
 							<!-- BEGIN CHART PORTLET-->
