@@ -779,7 +779,7 @@
 														<?php if(!empty($total_payout->bet_amount)){
 															echo $total_payout->bet_amount;
 															}else{
-																echo "0.00";
+																echo "0";
 																}?>
 <!--
 														<i class="fa fa-edit"></i>
@@ -815,7 +815,7 @@
 														<?php if(!empty($total_payout->payout)){
 															echo $total_payout->payout;
 															}else{
-																echo "0.00";
+																echo "0";
 																}?>
 <!--
 														<i class="fa fa-edit"></i>

@@ -824,7 +824,7 @@ $current_timestamp = $date->getTimestamp();
 														<?php if(!empty($total_payout->bet_amount)){
 															echo $total_payout->bet_amount;
 															}else{
-																echo "0.00";
+																echo "0";
 																}?>
 <!--
 														<i class="fa fa-edit"></i>
@@ -860,7 +860,7 @@ $current_timestamp = $date->getTimestamp();
 																			<?php if(!empty($total_payout->payout)){
 															echo $total_payout->payout;
 															}else{
-																echo "0.00";
+																echo "0";
 																}?>
 <!--
 														<i class="fa fa-edit"></i>
@@ -880,6 +880,16 @@ $current_timestamp = $date->getTimestamp();
 											</div>
 											<div class="col-sm-3">
 												<button type="button" class="btn btn-primary">Execute</button>
+											</div>
+											
+											
+											<div class="col-sm-3">
+												<a href="<?php echo base_url()?>admin/daysummary" class="btn red">
+															Day Summary 
+<!--
+															<i class="fa fa-edit"></i>
+-->
+															</a>
 											</div>
 								</div>			
 					 
