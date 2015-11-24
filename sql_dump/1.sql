@@ -83,4 +83,6 @@ CHANGE  `total_points`  `total_points` INT( 11 ) NOT NULL ;
 
 ALTER TABLE  `game_lottery` CHANGE  `bet_amount`  `bet_amount` INT( 11 ) NOT NULL ,
 CHANGE  `payout`  `payout` INT( 11 ) NOT NULL ;
- 
+
+ALTER TABLE  `user_master` CHANGE  `deposited_amount`  `deposited_amount` INT( 11 ) NOT NULL ,
+CHANGE  `present_amount`  `present_amount` INT( 11 ) NOT NULL ;
