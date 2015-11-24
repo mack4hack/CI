@@ -883,7 +883,7 @@ $current_timestamp = $date->getTimestamp();
 	<script type="text/javascript" >
 		$(document).ready(function() {   
 			
-			$('#mack').hide();
+			//$('#mack').hide();
    // initiate layout and plugins
    Metronic.init(); // init metronic core components
 Layout.init(); // init current layout
@@ -895,19 +895,21 @@ Demo.init(); // init demo features
 
 
      $('#time_slot').on('change',function(){
-        	    var time_slot = $(this).val();
-				
-				jQuery.ajax({
-				type: "POST",
-				url: "<?php echo base_url(); ?>" + "admin/daySummary",
-				dataType: 'json',
-				data: {time: time_slot},
-				success: function(res) {
-					  $('#mack').show(); 
-					  $('#mack').html(res);
-					  
-				  }
-				});
+		 
+		 	    var time_slot = $(this).val();
+		 	    time_slot = encodeURIComponent(time_slot);
+		 	    $('#mack').load('<?php echo base_url("/admin/summary?time="); ?>'+time_slot,function () { });
+		 	    //~ jQuery.ajax({
+				//~ type: "POST",
+				//~ url: "<?php echo base_url(); ?>" + "admin/Summary",
+				//~ dataType: 'json',
+				//~ data: {time: time_slot},
+				//~ success: function(res) {
+					 //~ 
+					  //~ $('#mack').html();
+					  //~ 
+				  //~ }
+				//~ });
 	   
 	
 	});

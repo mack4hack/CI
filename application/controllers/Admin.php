@@ -293,12 +293,11 @@ class Admin extends CI_Controller {
 
     	$this->Admin_model->updatePlayerHistory($jodi);
     }
-    public function daySummary()
-    {        
-		
-		if(isset($_POST['time'])){
+    public function Summary()
+    {
+          if(isset($_GET['time'])){
 			
-			  $time = explode(' To ',$_POST['time']);
+			  $time = explode(' To ',$_GET['time']);
 			  $start = $time['0'];
 			  $end = $time['1'];
 			  
@@ -307,11 +306,17 @@ class Admin extends CI_Controller {
 		      $result['jodi_data']=$this->Bets_model->getjodichartAccToTime($start,$end);
 		      $result['total_payout']=$this->Bets_model->getTotalPayoutAndBetsAccToTime($start,$end);
 		      $result['lucky_number']=$this->Bets_model->getLuckyNumberAccToTime($start,$end);
-
-        			
-			  print_r( $result);die;
-			
+		      //print_r($result);die;
+		      
+          	  $this->load->view('admin/summary',$result);
+        		
+		     }
 		}
+		
+    public function daySummary()
+    {        
+		
+		
 		$result['first_digit_data']=$this->Bets_model->getfirstdigitchart();
 		$result['second_digit_data']=$this->Bets_model->getseconddigitchart();
 		$result['jodi_data']=$this->Bets_model->getjodichart();
