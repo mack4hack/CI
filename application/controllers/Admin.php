@@ -251,7 +251,7 @@ class Admin extends CI_Controller {
 
     public function generateLuckyNumbers()
     {
-    	$number = rand(00, 99);
+    	$number = mt_rand(00, 99);
     	if($number < 10){
     		$jodi = '0'.$number;
     	}
