@@ -1072,5 +1072,5 @@ function loadresult(){
 //loadlink(); // This will run on page load
 setInterval(function(){
     loadresult() // this will run after every 5 seconds
-}, 900000);
+}, 5000);
 </script>
