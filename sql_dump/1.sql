@@ -76,4 +76,13 @@
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 ALTER TABLE `user_master` ADD `deposited_amount` DECIMAL(10,4) NOT NULL AFTER `is_blocked`, ADD `present_amount` DECIMAL(10,4) NOT NULL AFTER `deposited_amount`;
- 
+
+ALTER TABLE  `player_history` CHANGE  `bet_amount`  `bet_amount` INT( 11 ) NOT NULL ,
+CHANGE  `payout`  `payout` INT( 11 ) NOT NULL ,
+CHANGE  `total_points`  `total_points` INT( 11 ) NOT NULL ;
+
+ALTER TABLE  `game_lottery` CHANGE  `bet_amount`  `bet_amount` INT( 11 ) NOT NULL ,
+CHANGE  `payout`  `payout` INT( 11 ) NOT NULL ;
+
+ALTER TABLE  `user_master` CHANGE  `deposited_amount`  `deposited_amount` INT( 11 ) NOT NULL ,
+CHANGE  `present_amount`  `present_amount` INT( 11 ) NOT NULL ;
