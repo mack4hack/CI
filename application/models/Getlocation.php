@@ -55,7 +55,7 @@ function getData($loadType,$loadId)
 	   
 	   $this->db->select('player_id');
        $this->db->from('dealer_player');
-      // $this->db->where('dealer_id',$loadId);
+       $this->db->where('dealer_id',$loadId);
        $query1=$this->db->get();
        
        if(!empty($query1->result())){
