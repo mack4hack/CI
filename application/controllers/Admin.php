@@ -78,11 +78,16 @@ class Admin extends CI_Controller {
    $this->load->model('Getlocation');
    $result=$this->Getlocation->getData($loadType,$loadId);
    $HTML="";
-
+   if(!empty($result)){
    if($result->num_rows() > 0){
      foreach($result->result() as $list){
-       $HTML.="<option value='".$list->id."@".$list->name ."'>".$list->name ." ".$list->lname ."</option>";
+		 if(isset($list->lname)){
+       $HTML.="<option value='".$list->id."'>".$list->name ." ".$list->lname ."</option>";
+       }else{
+		   $HTML.="<option value='".$list->id."'>".$list->name ."</option>";
+		   }
      }
+    }
    }
    echo $HTML;
  }
@@ -372,5 +377,46 @@ class Admin extends CI_Controller {
 
 		$this->load->view('admin/day_summary',$result); 
 	}
+	
+	public function add_amount(){
+		
+		$result['list'] = $this->Getlocation->getCountry();
+	    $this->load->view('admin/add_amount',$result); 
+	}	
+	public function update_amount(){
+		  
+		   if(isset($_POST['add_amount']) &&  isset($_POST['user_id']) ){
+			    
+			     $query = $this->db->query("select present_amount from user_master where id='".$_POST['user_id']."'");
+                 $row = $query->row_array();
+                 $amount =   $_POST['add_amount'] + $row['present_amount'];
+ 			     $data = array("present_amount" => $amount, 
+		                );
+					  $this->db->where('id', $_POST['user_id']);
+					  $update = $this->db->update('user_master', $data);
+					  //echo $this->db->last_query();
+					  echo $update > 0 ?  1 : 0;
+			     
+			}
+	}	
+	public function block_player(){
+		
+		$result['list'] = $this->Getlocation->getCountry();
+	    $this->load->view('admin/block_player',$result); 
+	}	
+	public function ajax_block_player(){
+		  
+		   if(isset($_POST['user_id']) ){
+ 			     $data = array("is_blocked" => 1, 
+		                );
+					  $this->db->where('id', $_POST['user_id']);
+					  $update = $this->db->update('user_master', $data);
+					  //echo $this->db->last_query();
+					  echo $update > 0 ?  1 : 0;
+			     
+			}
+	}	
+	
+	
     
 }
