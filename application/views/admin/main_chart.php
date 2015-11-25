@@ -883,14 +883,29 @@ $current_timestamp = $date->getTimestamp();
 											</div>
 											
 											
-											<div class="col-sm-3">
+											<div class="col-sm-6">
 												<a href="<?php echo base_url()?>admin/daysummary" class="btn red">
 															Day Summary 
 <!--
 															<i class="fa fa-edit"></i>
 -->
 															</a>
+															
+													<a href="<?php echo base_url()?>admin/add_amount" class="btn green">
+															Add Amount
+<!--
+															<i class="fa fa-edit"></i>
+-->
+															</a>
+														<a href="<?php echo base_url()?>admin/block_player" class="btn red">
+															Block Player 
+<!--
+															<i class="fa fa-edit"></i>
+-->
+															</a>	
+																	
 											</div>
+											
 								</div>			
 					 
 
@@ -1045,7 +1060,7 @@ $current_timestamp = $date->getTimestamp();
 Layout.init(); // init current layout
 QuickSidebar.init(); // init quick sidebar
 Demo.init(); // init demo features
-   FormValidation.init();
+  // FormValidation.init();
    //TableManaged.init();
 });
 

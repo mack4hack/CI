@@ -99,7 +99,7 @@
 Layout.init(); // init current layout
 QuickSidebar.init(); // init quick sidebar
 Demo.init(); // init demo features
-   FormValidation.init();
+   //FormValidation.init();
    //TableManaged.init();
 });
 </script>

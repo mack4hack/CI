@@ -26,12 +26,18 @@ function getData($loadType,$loadId)
 	$this->db->select($fieldList);
     $this->db->from($table);
     $this->db->where($fieldName, $loadId);
+    
+    
+    $this->db->order_by($orderByField, 'asc');
+   $query=$this->db->get();
+   //echo $this->db->last_query();
+   return $query;
      }
    else if($loadType=="dealer")
    {
-	 $array = array('city_id' => $loadId, 'role_id' => '1', 'is_active' => '1');  
-	$fieldList='first_name as name,last_name as lname,id';
-    $table='user_master';
+	 $array = array('city_id' => $loadId, 'role_id' => '2', 'is_active' => '1');  
+	 $fieldList='first_name as name,last_name as lname,id';
+     $table='user_master';
 	
     $orderByField='first_name';
 	
@@ -39,6 +45,41 @@ function getData($loadType,$loadId)
     $this->db->from($table);
     $this->db->where($array);
     
+    $this->db->order_by($orderByField, 'asc');
+   $query=$this->db->get();
+   //echo $this->db->last_query();
+   return $query;
+   }
+   else if($loadType=="user")
+   {
+	   
+	   $this->db->select('player_id');
+       $this->db->from('dealer_player');
+      // $this->db->where('dealer_id',$loadId);
+       $query1=$this->db->get();
+       
+       if(!empty($query1->result())){
+		   foreach($query1->result() as $result){
+			     $ids[] = $result->player_id;
+			}
+		   //$ids = implode(',',$ids);
+		   
+		  
+			 $fieldList='first_name as name,last_name as lname,id';
+			 $table='user_master';
+			
+			 $orderByField='first_name';
+			
+			 $this->db->select($fieldList);
+			 $this->db->from($table);
+			 $this->db->where_in('id',$ids);
+			 $this->db->where('is_active',1);
+				   
+		     $this->db->order_by($orderByField, 'asc');
+   $query=$this->db->get();
+   //echo $this->db->last_query();
+   return $query;
+		   }		   
    }
    else{
     $fieldList='id,name';
@@ -50,12 +91,14 @@ function getData($loadType,$loadId)
     $this->db->from($table);
     $this->db->where($fieldName, $loadId);
     
-   }
-   
-   $this->db->order_by($orderByField, 'asc');
+    $this->db->order_by($orderByField, 'asc');
    $query=$this->db->get();
    //echo $this->db->last_query();
    return $query;
+    
+   }
+   
+   
  }
  
  function getCountries()
