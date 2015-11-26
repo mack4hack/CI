@@ -206,6 +206,29 @@
 			}
 			
 		}
+		public function CancelBet_post()
+		{
+			$player_id = $this->post('player_id');
+            
+			
+			if($this->Bets_model->cancelbet($player_id))
+			{	                
+				
+				$this->response([
+					'status' => TRUE,
+					'message' => 'Bets Cancelled Successfully'
+				], REST_Controller::HTTP_OK); // NOT_FOUND (404) being the HTTP response code
+				            
+			}else{   
+				$this->response([
+					'status' => FALSE,
+					'message' => 'Bets Cannot Be Cancelled!'
+				], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+			}
+
+		}
+		
+		
 	}
 		
 ?>	
