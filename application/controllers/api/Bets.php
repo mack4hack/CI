@@ -23,13 +23,15 @@
 
 		public function PlaceBetFirst_post()
 		{
-			$payout = ($this->post('bet_amount')*8.5);
+			foreach($this->post('data') as $jodi_data){
+			
+			$payout = ($jodi_data['bet_amount']*8.5);
 
 			$data = array(
 				'game_type'=>1,
 				'player_id'=>$this->post('player_id'),
-				'digit'=>$this->post('digit'),
-				'bet_amount'=>$this->post('bet_amount'),
+				'digit'=>$jodi_data['digit'],
+				'bet_amount'=>$jodi_data['bet_amount'],
 				'payout'=>$payout,
 				'timeslot' => date('Y-m-d H:i:s')
 				); 
@@ -37,8 +39,8 @@
 			$history = array(
 				'game_type'=>1,
 				'player_id'=>$this->post('player_id'),
-				'bet_amount'=>$this->post('bet_amount'),
-				'first_digit'=>$this->post('digit'),
+				'bet_amount'=>$jodi_data['bet_amount'],
+				'first_digit'=>$jodi_data['digit'],
 				'second_digit'=>null,
 				'jodi_digit'=>null,
 				'payout'=>$payout,
@@ -47,12 +49,12 @@
 
 			$debit = array(
 				'id'=>$this->post('player_id'),
-				'bet_amount'=>$this->post('bet_amount'),
+				'bet_amount'=>$jodi_data['bet_amount'],
 				);
 
 			$credit = array(
 				'id'=>1,
-				'bet_amount'=>$this->post('bet_amount'),
+				'bet_amount'=>$jodi_data['bet_amount'],
 				);
 
 			if($this->Bets_model->placebet($data))
@@ -63,28 +65,39 @@
 				
 				$this->Bets_model->credit($credit);
 				
-				$this->response([
-					'status' => TRUE,
-					'message' => 'Bets Placed Successfully'
-				], REST_Controller::HTTP_OK); // NOT_FOUND (404) being the HTTP response code
+				$success = true; 
 				            
 			}else{   
+				$success = false; 
+			}
+          }
+          if($success)
+			{
 				$this->response([
-					'status' => FALSE,
-					'message' => 'Bets Cannot Be Placed!'
+				'status' => TRUE,
+				'message' => 'Bets Placed Successfully'
+				], REST_Controller::HTTP_OK); // NOT_FOUND (404) being the HTTP response code
+
+			}else{
+				$this->response([
+				   'status' => FALSE,
+				   'message' => 'Bets Cannot Be Placed!'
 				], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
 			}
-
+          
+          
 		}
 		public function PlaceBetSecond_post()
 		{
-			$payout = ($this->post('bet_amount')*8.5);
+			foreach($this->post('data') as $jodi_data){
+			
+			$payout = ($jodi_data['bet_amount']*8.5);
 			
 			$data = array(
 				'game_type'=>2,
 				'player_id'=>$this->post('player_id'),
-				'digit'=>$this->post('digit'),
-				'bet_amount'=>$this->post('bet_amount'),
+				'digit'=>$jodi_data['digit'],
+				'bet_amount'=>$jodi_data['bet_amount'],
 				'payout'=>$payout,
 				'timeslot' => date('Y-m-d H:i:s')
 				); 
@@ -92,9 +105,9 @@
 			$history = array(
 				'game_type'=>2,
 				'player_id'=>$this->post('player_id'),
-				'bet_amount'=>$this->post('bet_amount'),
+				'bet_amount'=>$jodi_data['bet_amount'],
 				'first_digit'=>null,
-				'second_digit'=>$this->post('digit'),
+				'second_digit'=>$jodi_data['digit'],
 				'jodi_digit'=>null,
 				'payout'=>$payout,
 				'timeslot' => date('Y-m-d H:i:s')
@@ -102,12 +115,12 @@
 			
 			$debit = array(
 				'id'=>$this->post('player_id'),
-				'bet_amount'=>$this->post('bet_amount'),
+				'bet_amount'=>$jodi_data['bet_amount'],
 				);
 
 			$credit = array(
 				'id'=>1,
-				'bet_amount'=>$this->post('bet_amount'),
+				'bet_amount'=>$jodi_data['bet_amount'],
 				);
 
 			if($this->Bets_model->placebet($data))
@@ -118,28 +131,41 @@
 				
 				$this->Bets_model->credit($credit);
 
-				$this->response([
-					'status' => TRUE,
-					'message' => 'Bets Placed Successfully'
-				], REST_Controller::HTTP_OK); // NOT_FOUND (404) being the HTTP response code
+				 $success = true; 
 				            
 			}else{   
+				 $success = false; 
+			 }
+		   }
+		   if($success)
+			{
 				$this->response([
-					'status' => FALSE,
-					'message' => 'Bets Cannot Be Placed!'
+				'status' => TRUE,
+				'message' => 'Bets Placed Successfully'
+				], REST_Controller::HTTP_OK); // NOT_FOUND (404) being the HTTP response code
+
+			}else{
+				$this->response([
+				   'status' => FALSE,
+				   'message' => 'Bets Cannot Be Placed!'
 				], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
 			}
-
+		
 		}
 		public function PlaceBetJodi_post()
 		{
-			$payout = ($this->post('bet_amount')*85);
+			
+			//print_r($this->post('player_id'));die;
+			foreach($this->post('data') as $jodi_data){
+			
+			
+			$payout = ( $jodi_data['bet_amount']*85);
 
 			$data = array(
 				'game_type'=>3,
 				'player_id'=>$this->post('player_id'),
-				'digit'=>$this->post('digit'),
-				'bet_amount'=>$this->post('bet_amount'),
+				'digit'=> $jodi_data['digit'],
+				'bet_amount'=>$jodi_data['bet_amount'],
 				'payout'=>$payout,
 				'timeslot' => date('Y-m-d H:i:s')
 				); 
@@ -147,41 +173,48 @@
 			$history = array(
 				'game_type'=>3,
 				'player_id'=>$this->post('player_id'),
-				'bet_amount'=>$this->post('bet_amount'),
+				'bet_amount'=>$jodi_data['bet_amount'],
 				'first_digit'=>null,
 				'second_digit'=>null,
-				'jodi_digit'=>$this->post('digit'),
+				'jodi_digit'=>$jodi_data['digit'],
 				'payout'=>$payout,
 				'timeslot' => date('Y-m-d H:i:s')
 				);
 
 			$debit = array(
 				'id'=>$this->post('player_id'),
-				'bet_amount'=>$this->post('bet_amount'),
+				'bet_amount'=>$jodi_data['bet_amount'],
 				);
 
 			$credit = array(
 				'id'=>1,
-				'bet_amount'=>$this->post('bet_amount'),
+				'bet_amount'=>$jodi_data['bet_amount'],
 				);
 
-			if($this->Bets_model->placebet($data))
-			{	                
+			 if($this->Bets_model->placebet($data))
+			 {	                
 				$this->Bets_model->addplayerhistory($history);
 
 				$this->Bets_model->debit($debit);
 				
 				$this->Bets_model->credit($credit);
-
+                 $success = true; 
+				          
+			 }else{   
+				$success = false;
+			 }
+		   }
+			if($success)
+			{
 				$this->response([
-					'status' => TRUE,
-					'message' => 'Bets Placed Successfully'
+				'status' => TRUE,
+				'message' => 'Bets Placed Successfully'
 				], REST_Controller::HTTP_OK); // NOT_FOUND (404) being the HTTP response code
-				            
-			}else{   
+
+			}else{
 				$this->response([
-					'status' => FALSE,
-					'message' => 'Bets Cannot Be Placed!'
+				   'status' => FALSE,
+				   'message' => 'Bets Cannot Be Placed!'
 				], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
 			}
 
