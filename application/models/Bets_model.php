@@ -193,7 +193,7 @@ class Bets_model extends CI_Model {
 		}
 	}
 	
-	function cancelbet($player_id){
+	function cancelbet($player_id,$digit,$game_type){
 	    date_default_timezone_set("Asia/Calcutta");
 		$now = getdate();
 		$now['minutes'] = $now['minutes'] - 1;
@@ -206,6 +206,16 @@ class Bets_model extends CI_Model {
 	    $this->db->select('bet_amount,id,jodi_digit');
 	    $this->db->from('player_history');
 	    $this->db->where('player_id',$player_id);
+	    if($game_type == 1){
+		   $this->db->where('first_digit',$digit);
+		   $this->db->where('game_type',1);
+		}else if($game_type ==2 ){
+		      $this->db->where('second_digit',$digit);
+		      $this->db->where('game_type',2);
+		}else{
+		    $this->db->where('jodi_digit',$digit);
+		    $this->db->where('game_type',3);
+		}
         $this->db->where("timeslot >= '".$rounded."' and timeslot <= '".$date."' ");
         $this->db->order_by('id','desc');
         $this->db->limit(1);
