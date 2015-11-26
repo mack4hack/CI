@@ -447,9 +447,9 @@ class Admin extends CI_Controller {
 	    
 	            
 	            
-	  			$start = date('Y-m-d')." ". $hr . ":" . $min;
+	  			$start = $hr . ":" . $min;
 	  			
-	  			$newTime = date("Y-m-d H:i",strtotime($start." +15 minutes"));
+	  			$newTime = date('H:i',strtotime($start." +15 minutes"));
 	  			$time_slots[] = $start." To ".$newTime;
 			}
 		
@@ -459,11 +459,11 @@ class Admin extends CI_Controller {
 			  $start = $time['0'];
 			  $end = $time['1'];
 			  
-			  $result['first_digit_data']=$this->Bets_model->getfirstdigitchartAccToTime($start,$end);
-              $result['second_digit_data']=$this->Bets_model->getseconddigitchartAccToTime($start,$end);
-		      $result['jodi_data']=$this->Bets_model->getjodichartAccToTime($start,$end);
-		      $result['total_payout']=$this->Bets_model->getTotalPayoutAndBetsAccToTime($start,$end);
-		      $result['lucky_number']=$this->Bets_model->getLuckyNumberAccToTime($start,$end);
+			  //$result['first_digit_data']=$this->Bets_model->getfirstdigitchartAccToTime($start,$end);
+              //$result['second_digit_data']=$this->Bets_model->getseconddigitchartAccToTime($start,$end);
+		      //$result['jodi_data']=$this->Bets_model->getjodichartAccToTime($start,$end);
+		      //$result['total_payout']=$this->Bets_model->getTotalPayoutAndBetsAccToTime($start,$end);
+		      $result['lucky_number']=$this->Bets_model->getLuckyNumberByMonth($start,$end);
 		      //print_r($result);die;
 		      
           	  $this->load->view('admin/numbering',$result);
