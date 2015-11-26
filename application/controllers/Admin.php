@@ -95,10 +95,13 @@ class Admin extends CI_Controller {
  function ajax_player_data_save()
   {
 	  
-	  $city_id = explode('@',$_POST['city_id']);
+	 /* $city_id = explode('@',$_POST['city_id']);
 	  $city_name = $city_id[1];
-	  $cityid = $city_id[0];
+	  $cityid = $city_id[0];*/
+	  $cityid = $_POST['city_id'];
+	  $city_name = $_POST['city_name'];
 	  
+	  //die;
 	 
 	$ar = array('role_id'=>'3','city_id'=>$cityid);
 	  $ret = $this->db
@@ -112,6 +115,8 @@ class Admin extends CI_Controller {
 
 	  $user_code = $row['user_code']."".$paddedNum;
 
+	  $password = $_POST['password'];
+
 	  $data = array("first_name" => $_POST['fname'], 
 					"last_name" => $_POST['lname'],
 					"country_id" => $_POST['country_id'],
@@ -119,7 +124,7 @@ class Admin extends CI_Controller {
 					"state_id" => $_POST['state_id'],
 					"city_id" => $cityid,
 					"email_id" => $_POST['email'],
-					"password" => $_POST['password'],
+					"password" => $this->hash_password($password, FALSE),
 					"role_id" => '3',
 					"address_1" => $_POST['address1'],
 					"contact_no" => $_POST['contact_no'],
@@ -128,7 +133,8 @@ class Admin extends CI_Controller {
 					"pincode" => $_POST['pincode'],
 					"deposited_amount" => $_POST['deposited_amount'],
 					"present_amount" => $_POST['deposited_amount'],
-					"activation_date" => date("Y-m-d")
+					"activation_date" => date("Y-m-d"),
+					"active" => 1
 	  );
 	  
 	  $insert = $this->db->insert('user_master',$data);
@@ -185,10 +191,13 @@ class Admin extends CI_Controller {
   
   function ajax_dealer_data_save()
   {
-	  $city_id = explode('@',$_POST['city_id']);
+	  /*$city_id = explode('@',$_POST['city_id']);
 	  $city_name = $city_id[1];
-	  $cityid = $city_id[0];
+	  $cityid = $city_id[0];*/
 	  
+	  $cityid = $_POST['city_id'];
+	  $city_name = $_POST['city_name'];
+
 	  $dealer_city =substr(strtoupper($city_name), 0, 3);
 	  
 	  
@@ -204,6 +213,9 @@ class Admin extends CI_Controller {
 	  $user_code = $dealer_city."".$paddedNum;
      //code
 	  //$user_code ="PUN000005";
+
+	  $password = $_POST['password'];
+
 	  $data = array("first_name" => $_POST['fname'],
 					"last_name" => $_POST['lname'],
 					"country_id" => $_POST['country_id'],
@@ -211,14 +223,15 @@ class Admin extends CI_Controller {
 					"user_code" => $user_code,
 					"city_id" => $_POST['city_id'],
 					"email_id" => $_POST['email'],
-					"password" => $_POST['password'],
+					"password" => $this->hash_password($password, FALSE),
 					"role_id" => '2',
 					"address_1" => $_POST['address1'],
 					"contact_no" => $_POST['contact_no'],
 					"alternate_no" => $_POST['alternate_no'],
 					"address_2" => $_POST['address2'],
 					"pincode" => $_POST['pincode'],
-					"activation_date" => date("Y-m-d")
+					"activation_date" => date("Y-m-d"),
+					"active" => 1
 	  );
 	  $insert = $this->db->insert('user_master',$data);
 	  $this->load->library('email');
@@ -470,6 +483,7 @@ class Admin extends CI_Controller {
 			return FALSE;
 		}
 
+		$this->hash_method = $this->config->item('hash_method', 'ion_auth');
 		// bcrypt
 		if ($use_sha1_override === FALSE && $this->hash_method == 'bcrypt')
 		{
