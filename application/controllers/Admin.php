@@ -456,6 +456,36 @@ class Admin extends CI_Controller {
           	  $this->load->view('admin/numbering',$result);
         		
      	//}
+	}
+	/**
+	 * Hashes the password to be stored in the database.
+	 *
+	 * @return void
+	 * @author Mathew
+	 **/
+	public function hash_password($password, $salt=false, $use_sha1_override=FALSE)
+	{
+		if (empty($password))
+		{
+			return FALSE;
+		}
+
+		// bcrypt
+		if ($use_sha1_override === FALSE && $this->hash_method == 'bcrypt')
+		{
+			return $this->bcrypt->hash($password);
+		}
+
+
+		if ($this->store_salt && $salt)
+		{
+			return  sha1($password . $salt);
+		}
+		else
+		{
+			$salt = $this->salt();
+			return  $salt . substr(sha1($salt . $password), 0, -$this->salt_length);
+		}
 	}	
 	
 	
