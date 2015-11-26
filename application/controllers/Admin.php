@@ -415,6 +415,47 @@ class Admin extends CI_Controller {
 					  echo $update > 0 ?  1 : 0;
 			     
 			}
+	}
+
+	public function Numbering_chart()
+    {
+      	//if(isset($_GET['time'])){
+			
+		   	for($i=0*60;$i<=24*60;$i+=15){
+				$hr = floor($i/60);
+				if($hr < 9)
+					$hr = '0'.$hr;
+				
+				$min = ($i/60-floor($i/60))*60;
+				if($min < 9)
+					$min = '0'.$min;
+
+	    
+	    
+	            
+	            
+	  			$start = date('Y-m-d')." ". $hr . ":" . $min;
+	  			
+	  			$newTime = date("Y-m-d H:i",strtotime($start." +15 minutes"));
+	  			$time_slots[] = $start." To ".$newTime;
+			}
+		
+				$result['time_slots'] = $time_slots;
+			
+			  $time = explode(' To ',$_GET['time']);
+			  $start = $time['0'];
+			  $end = $time['1'];
+			  
+			  $result['first_digit_data']=$this->Bets_model->getfirstdigitchartAccToTime($start,$end);
+              $result['second_digit_data']=$this->Bets_model->getseconddigitchartAccToTime($start,$end);
+		      $result['jodi_data']=$this->Bets_model->getjodichartAccToTime($start,$end);
+		      $result['total_payout']=$this->Bets_model->getTotalPayoutAndBetsAccToTime($start,$end);
+		      $result['lucky_number']=$this->Bets_model->getLuckyNumberAccToTime($start,$end);
+		      //print_r($result);die;
+		      
+          	  $this->load->view('admin/numbering',$result);
+        		
+     	//}
 	}	
 	
 	
