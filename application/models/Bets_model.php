@@ -193,6 +193,47 @@ class Bets_model extends CI_Model {
 		}
 	}
 	
+	function cancelbet($player_id){
+	    date_default_timezone_set("Asia/Calcutta");
+		$now = getdate();
+		$now['minutes'] = $now['minutes'] - 1;
+		$minutes = $now['minutes'] - $now['minutes']%15;
+		$rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
+		
+		$time = strtotime($rounded);
+        $time = $time + (15 * 60);
+        $date = date("Y-m-d H:i:s", $time);	
+	    $this->db->select('bet_amount,id,jodi_digit');
+	    $this->db->from('player_history');
+	    $this->db->where('player_id',$player_id);
+        $this->db->where("timeslot >= '".$rounded."' and timeslot <= '".$date."' ");
+        $this->db->order_by('id','desc');
+        $this->db->limit(1);
+        $query = $this->db->get()->row();
+        
+        if(!empty($query)){
+		        $bet_amount = $query->bet_amount;   //debit from admin and credit back to player
+		        $id = $query->id;  //delete the bet from history
+		        $debit = array(
+				'id'=>1,
+				'bet_amount'=>$bet_amount,
+				);
+
+			    $credit = array(
+				'id'=>$player_id,
+				'bet_amount'=>$bet_amount,
+				);
+		        $this->debit($debit);
+				$this->credit($credit);
+		        $this->db->delete('player_history', array('id' => $id));  
+		        return true;
+		        	
+			}else{
+				return false;
+				}
+        
+	}
+	
 	
 	
 
