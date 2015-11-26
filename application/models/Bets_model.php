@@ -236,7 +236,7 @@ class Bets_model extends CI_Model {
 
 	function addAdminHistory($data)
 	{
-		$this->db->select('sum(total) as total');
+		$this->db->select('total');
 		$this->db->from('admin_history');
 		$this->db->order_by("id", "desc"); 
 		$this->db->limit(1);
