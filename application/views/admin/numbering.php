@@ -30,8 +30,7 @@
 								   <tbody>
 								   <tr class="active">
 								     	 <!-- <td> -->
-										 <?php foreach ($time_slots as $time_slot) { 
-											$time = explode(' To ',$time_slot); ?>
+										 <?php foreach ($time_slots as $time_slot) { ?>
 										<tr><td><?php echo $time_slot; ?></td><tr>
 										<?php } ?>
 									     <!-- </td> -->
