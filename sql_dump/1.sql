@@ -110,3 +110,7 @@ CREATE TABLE IF NOT EXISTS `admin_history` (
   `timeslot` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;  
+
+
+
+ALTER TABLE `lucky_numbers` ADD `draw_id` INT( 11 ) NOT NULL AFTER `id` ;
