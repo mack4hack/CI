@@ -117,10 +117,56 @@ function delete_dealer($id)
 
 	function getAdminHistory()
 	{
-		//$this->db->where('role_id','3');
-	   	$query=$this->db->get('admin_history');
-	  	
-	  	return $query->result();
+		$this->db->select('timeslot');
+		$this->db->from('admin_history');
+		$this->db->group_by('timeslot');
+		$query=$this->db->get();	
+
+		$timeslots = $query->result();
+
+		foreach ($timeslots as $timeslot)
+		{
+			$this->db->select('sum(bet_amount) as credited');
+			$this->db->from('admin_history');
+			$this->db->where('bet_amount >= 0');
+			$this->db->where('timeslot',$timeslot->timeslot);
+			$query=$this->db->get()->row();
+			$credited = $query->credited;
+
+			$this->db->select('sum(bet_amount) as debited');
+			$this->db->from('admin_history');
+			$this->db->where('bet_amount < 0');
+			$this->db->where('timeslot',$timeslot->timeslot);
+			$query=$this->db->get()->row();
+			$debited = $query->debited;
+
+			$this->db->select('sum(total) as day_total');
+			$this->db->from('admin_history');
+			$this->db->where('timeslot',$timeslot->timeslot);
+			$this->db->group_by('timeslot');
+		   	$query=$this->db->get()->row();
+		   	$day_total = $query->day_total;
+
+
+		   	$data[]= array(
+		   			'timeslot'=>$timeslot->timeslot,
+		   			'credited'=>$credited,
+		   			'debited'=>$debited,
+		   			'day_total'=>$day_total,
+		   		);
+		}
+
+
+		   	$this->db->select('sum(total) as total');
+			$this->db->from('admin_history');
+			$this->db->group_by('timeslot');
+		   	$query=$this->db->get()->row();
+		   	$total = $query->total;
+	   		$data['final_total']= $total;
+
+		echo "<pre>";
+		print_r($data); die();
+	  	return $data;
 	}
 
 }

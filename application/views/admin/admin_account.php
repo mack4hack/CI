@@ -1,4 +1,7 @@
-<?php include'header.php'; ?>
+<?php include'header.php'; 
+//echo "<pre>";
+//print_r($data); die;
+?>
 	<!-- BEGIN CONTENT -->
 	<div class="page-content-wrapper">
 		<div class="page-content" >
@@ -20,9 +23,6 @@
 								   <thead>
 								     <tr>
 									<th>
-										 ID
-									</th>
-									<th>
 										 Date
 									</th>
 									<th>
@@ -32,20 +32,22 @@
 										 Debited
 									</th>
 									<th>
-										 Remaining
+										 Total
 									</th>
-								<!--      <?php for($i=0; $i<=9 ;$i++) { ?>
-									  <th><?php echo "0".$i; ?></th>
-								     <?php	} ?>	 -->
 								    </tr>
 								   </thead>
 								   <tbody>
 								   <tr class="active">
 								     	<?php foreach ($data as $d) { ?>
-								     	 	<tr><td><?php echo $d->id ?><td></tr>
-								     	 	<tr><td><?php echo $d->game_type ?><td></tr>
+								     	 	<td><?php echo $d->timeslot; ?></td>
+								     	 	<td><?php echo $d->Credited; ?></td>
+								     	 	<td><?php echo $d->debited; ?></td>
+								     	 	<td><?php echo $d->total; ?></td>
+								     	 	
+					     	 	 	</tr>
 								    <?php 	} ?>
-								   </tr>
+								   <!-- </tr> -->
+								  
 								   
 								</tbody>
 								</table>

@@ -107,6 +107,6 @@ CREATE TABLE IF NOT EXISTS `admin_history` (
   `player_id` int(11) NOT NULL,
   `bet_amount` int(11) NOT NULL,
   `total` int(11) NOT NULL,
-  `timeslot` datetime NOT NULL,
+  `timeslot` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;  
