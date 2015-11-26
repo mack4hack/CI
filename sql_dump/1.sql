@@ -86,3 +86,17 @@ CHANGE  `payout`  `payout` INT( 11 ) NOT NULL ;
 
 ALTER TABLE  `user_master` CHANGE  `deposited_amount`  `deposited_amount` INT( 11 ) NOT NULL ,
 CHANGE  `present_amount`  `present_amount` INT( 11 ) NOT NULL ;
+
+alter table `user_master` add
+`ip_address` varchar(15) NOT NULL, add
+  `salt` varchar(255) DEFAULT NULL, add
+  `email` varchar(100) NOT NULL, add
+  `activation_code` varchar(40) DEFAULT NULL, add
+  `forgotten_password_code` varchar(40) DEFAULT NULL, add
+  `forgotten_password_time` int(11) unsigned DEFAULT NULL, add
+  `remember_code` varchar(40) DEFAULT NULL, add
+  `created_on` int(11) unsigned NOT NULL, add
+  `last_login` int(11) unsigned DEFAULT NULL, add
+  `active` tinyint(1) unsigned DEFAULT NULL, add
+  `company` varchar(100) DEFAULT NULL, add
+  `phone` varchar(20) DEFAULT NULL;
