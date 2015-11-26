@@ -269,9 +269,11 @@
 		public function CancelBet_post()
 		{
 			$player_id = $this->post('player_id');
+			$digit = $this->post('digit');
+			$game_type = $this->post('game_type');
             
 			
-			if($this->Bets_model->cancelbet($player_id))
+			if($this->Bets_model->cancelbet($player_id,$digit,$game_type))
 			{	                
 				
 				$this->response([
