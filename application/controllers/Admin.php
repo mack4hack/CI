@@ -525,8 +525,16 @@ class Admin extends CI_Controller {
 
 	public function dealerAccount()
 	{
+		$result['dealers']=$this->Admin_model->get_dealers();
 		$result['data']=$this->Admin_model->getDealerHistory();
         $this->load->view('admin/dealer_account',$result);
+	}
+
+	public function dealerAccountChart()
+	{
+		$dealer_id = $_GET['dealer'];
+		$result['data']=$this->Admin_model->getDealerHistoryById($dealer_id);
+        $this->load->view('admin/dealer_account_chart',$result);
 	}	
 	
 	

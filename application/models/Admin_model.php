@@ -202,12 +202,65 @@ function delete_dealer($id)
 		   	$query=$this->db->get()->row();
 		   	$day_total = $query->total;
 
-		   	$this->db->select('sum(total) as total');
+		   	/*$this->db->select('sum(total) as total');
 			$this->db->from('dealer_history');
 			$this->db->group_by('timeslot');
 		   	$query=$this->db->get()->row();
-		   	$total = $query->total;
+		   	$total = $query->total;*/
 
+		   	$data[]= array(
+		   			'timeslot'=>$timeslot->timeslot,
+		   			'credited'=>$credited,
+		   			'debited'=>$debited,
+		   			'day_total'=>$day_total,
+		   			'final_total'=>$day_total
+		   		);
+		}
+
+	  	return $data;
+	}
+	function getDealerHistoryById($dealer_id)
+	{
+		$this->db->select('timeslot');
+		$this->db->from('dealer_history');
+		$this->db->where('dealer_id',$dealer_id);
+		$this->db->group_by('timeslot');
+		$query=$this->db->get();	
+		$timeslots = $query->result();
+		$data = array();
+		foreach ($timeslots as $timeslot)
+		{
+			$this->db->select('sum(bet_amount) as credited');
+			$this->db->from('dealer_history');
+			$this->db->where('bet_amount >= 0');
+			$this->db->where('timeslot',$timeslot->timeslot);
+			$this->db->where('dealer_id',$dealer_id);
+			$query=$this->db->get()->row();
+			$credited = $query->credited;
+
+			$this->db->select('sum(bet_amount) as debited');
+			$this->db->from('dealer_history');
+			$this->db->where('bet_amount < 0');
+			$this->db->where('timeslot',$timeslot->timeslot);
+			$this->db->where('dealer_id',$dealer_id);
+			$query=$this->db->get()->row();
+			$debited = $query->debited;
+
+			$this->db->select('total');
+			$this->db->from('dealer_history');
+			$this->db->where('timeslot',$timeslot->timeslot);
+			$this->db->where('dealer_id',$dealer_id);
+			$this->db->order_by("id", "desc"); 
+			$this->db->limit(1);
+			//$this->db->group_by('timeslot');
+		   	$query=$this->db->get()->row();
+		   	$day_total = $query->total;
+
+		   	/*$this->db->select('sum(total) as total');
+			$this->db->from('dealer_history');
+			$this->db->group_by('timeslot');
+		   	$query=$this->db->get()->row();
+		   	$total = $query->total;*/
 
 		   	$data[]= array(
 		   			'timeslot'=>$timeslot->timeslot,
