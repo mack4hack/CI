@@ -107,10 +107,20 @@ CREATE TABLE IF NOT EXISTS `admin_history` (
   `player_id` int(11) NOT NULL,
   `bet_amount` int(11) NOT NULL,
   `total` int(11) NOT NULL,
-  `timeslot` datetime NOT NULL,
+  `timeslot` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;  
 
-
-
 ALTER TABLE `lucky_numbers` ADD `draw_id` INT( 11 ) NOT NULL AFTER `id` ;
+
+CREATE TABLE IF NOT EXISTS `dealer_history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `game_type` int(11) NOT NULL,
+  `player_id` int(11) NOT NULL,
+  `dealer_id` int(11) NOT NULL,
+  `bet_amount` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
+  `timeslot` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;    
+

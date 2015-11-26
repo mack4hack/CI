@@ -515,6 +515,18 @@ class Admin extends CI_Controller {
 			$salt = $this->salt();
 			return  $salt . substr(sha1($salt . $password), 0, -$this->salt_length);
 		}
+	}
+
+	public function adminAccount()
+	{
+		$result['data']=$this->Admin_model->getAdminHistory();
+        $this->load->view('admin/admin_account',$result);
+	}
+
+	public function dealerAccount()
+	{
+		$result['data']=$this->Admin_model->getDealerHistory();
+        $this->load->view('admin/dealer_account',$result);
 	}	
 	
 	

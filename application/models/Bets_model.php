@@ -252,10 +252,32 @@ class Bets_model extends CI_Model {
 		$this->db->limit(1);
 		$query=$this->db->get()->row();
 		$old_total = $query->total;
-		$new_total = $old_total + $data['bet_amount'];
+		$new_total = ($old_total + $data['bet_amount']);
 		$data['total'] = $new_total;
 
 		$this->db->insert('admin_history', $data);
+	}
+
+	function getDealerId($player_id)
+	{
+		$this->db->select('dealer_id');
+		$this->db->where('player_id',$player_id);
+		$query = $this->db->get('dealer_player')->row();
+		return $query->dealer_id;
+	}
+
+	function addDealerHistory($data)
+	{
+		$this->db->select('total');
+		$this->db->from('dealer_history');
+		$this->db->order_by("id", "desc"); 
+		$this->db->limit(1);
+		$query=$this->db->get()->row();
+		$old_total = $query->total;
+		$new_total = ($old_total + $data['bet_amount']);
+		$data['total'] = $new_total;
+
+		$this->db->insert('dealer_history', $data);
 	}
 	
 	

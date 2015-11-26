@@ -64,11 +64,21 @@
 				'timeslot' => date('Y-m-d H:i:s')
 				);
 
+			$dealer_history = array(
+				'game_type'=>1,
+				'player_id'=>$this->post('player_id'),
+				'dealer_id'=>$this->getDealerId($this->post('player_id')),
+				'bet_amount'=>$jodi_data['bet_amount'],
+				'timeslot' => date('Y-m-d H:i:s')
+				);
+
 			if($this->Bets_model->placebet($data))
 			{	                
 				$this->Bets_model->addplayerhistory($history);
 
 				$this->Bets_model->addAdminHistory($admin_history);
+				
+				$this->Bets_model->addDealerHistory($dealer_history);
 
 				$this->Bets_model->debit($debit);
 				
@@ -139,11 +149,21 @@
 				'timeslot' => date('Y-m-d H:i:s')
 				);
 
+			$dealer_history = array(
+				'game_type'=>2,
+				'player_id'=>$this->post('player_id'),
+				'dealer_id'=>$this->getDealerId($this->post('player_id')),
+				'bet_amount'=>$jodi_data['bet_amount'],
+				'timeslot' => date('Y-m-d H:i:s')
+				);
+
 			if($this->Bets_model->placebet($data))
 			{	                
 				$this->Bets_model->addplayerhistory($history);
 				
 				$this->Bets_model->addAdminHistory($admin_history);
+				
+				$this->Bets_model->addDealerHistory($dealer_history);
 
 				$this->Bets_model->debit($debit);
 				
@@ -216,11 +236,21 @@
 				'timeslot' => date('Y-m-d H:i:s')
 				);
 
+			$dealer_history = array(
+				'game_type'=>3,
+				'player_id'=>$this->post('player_id'),
+				'dealer_id'=>$this->getDealerId($this->post('player_id')),
+				'bet_amount'=>$jodi_data['bet_amount'],
+				'timeslot' => date('Y-m-d H:i:s')
+				);
+
 			 if($this->Bets_model->placebet($data))
 			 {	                
 				$this->Bets_model->addplayerhistory($history);
 
 				$this->Bets_model->addAdminHistory($admin_history);
+				
+				$this->Bets_model->addDealerHistory($dealer_history);
 
 				$this->Bets_model->debit($debit);
 				
@@ -288,6 +318,11 @@
 				], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
 			}
 
+		}
+
+		public function getDealerId($player_id)
+		{
+			return $this->Bets_model->getDealerId($player_id);
 		}
 		
 		
