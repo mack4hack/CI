@@ -210,12 +210,12 @@
 	{
 		if($this->ion_auth->login($this->input->post('identity'), $this->input->post('password')))
 		{	                
-			$user = $this->ion_auth_model->user($id)->row();
+			$user_id = $this->ion_auth->get_user_id();
 			date_default_timezone_set("Asia/Calcutta");
 			$this->response([
 				'status' => TRUE,
 				'message' => 'Login Successfully',
-				'data' => array('player_id'=>$user->id,'date'=>date('Y-m-d H:i:s'))
+				'data' => array('player_id'=>$user_id,'date'=>date('Y-m-d H:i:s'))
 			], REST_Controller::HTTP_OK); // NOT_FOUND (404) being the HTTP response code
 			            
 		}else{   
