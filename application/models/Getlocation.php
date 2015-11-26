@@ -58,7 +58,7 @@ function getData($loadType,$loadId)
        $this->db->where('dealer_id',$loadId);
        $query1=$this->db->get();
        
-       if(!empty($query1->result())){
+       if(!empty($query1)){
 		   foreach($query1->result() as $result){
 			     $ids[] = $result->player_id;
 			}
