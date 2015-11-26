@@ -276,9 +276,24 @@ class Admin extends CI_Controller {
     	else{
     		$jodi = $number;
     	}
-
+                  $this->db->select('draw_id');
+                  $this->db->order_by('id','desc');
+                  $this->db->limit(1);
+                  $query=$this->db->get('lucky_numbers')->row();        
+                  if(!empty($query))
+                  {
+                       $latest_id  =    $query->draw_id;
+                       if($latest_id == 99999)
+                       {
+                           $latest_id = 0;
+                       }
+                       $latest_id = $latest_id +1 ;
+                  }
+                  
+                  
     	$luck_numbers = array(
     		'lucky_number' => $jodi,
+    		'draw_id' => $latest_id,
     		'timeslot' => date('Y-m-d H:i:s')
     		);
 

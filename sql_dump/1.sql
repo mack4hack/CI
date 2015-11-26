@@ -109,7 +109,9 @@ CREATE TABLE IF NOT EXISTS `admin_history` (
   `total` int(11) NOT NULL,
   `timeslot` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;  
+
+ALTER TABLE `lucky_numbers` ADD `draw_id` INT( 11 ) NOT NULL AFTER `id` ;
 
 CREATE TABLE IF NOT EXISTS `dealer_history` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -121,3 +123,4 @@ CREATE TABLE IF NOT EXISTS `dealer_history` (
   `timeslot` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;    
+
