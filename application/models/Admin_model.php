@@ -180,21 +180,21 @@ function delete_dealer($id)
 		foreach ($timeslots as $timeslot)
 		{
 			$this->db->select('sum(bet_amount) as credited');
-			$this->db->from('admin_history');
+			$this->db->from('dealer_history');
 			$this->db->where('bet_amount >= 0');
 			$this->db->where('timeslot',$timeslot->timeslot);
 			$query=$this->db->get()->row();
 			$credited = $query->credited;
 
 			$this->db->select('sum(bet_amount) as debited');
-			$this->db->from('admin_history');
+			$this->db->from('dealer_history');
 			$this->db->where('bet_amount < 0');
 			$this->db->where('timeslot',$timeslot->timeslot);
 			$query=$this->db->get()->row();
 			$debited = $query->debited;
 
 			$this->db->select('total');
-			$this->db->from('admin_history');
+			$this->db->from('dealer_history');
 			$this->db->where('timeslot',$timeslot->timeslot);
 			$this->db->order_by("id", "desc"); 
 			$this->db->limit(1);
@@ -203,7 +203,7 @@ function delete_dealer($id)
 		   	$day_total = $query->total;
 
 		   	$this->db->select('sum(total) as total');
-			$this->db->from('admin_history');
+			$this->db->from('dealer_history');
 			$this->db->group_by('timeslot');
 		   	$query=$this->db->get()->row();
 		   	$total = $query->total;
