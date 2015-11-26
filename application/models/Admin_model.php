@@ -115,4 +115,12 @@ function delete_dealer($id)
 		$this->db->update('player_history');		
 	}
 
+	function getAdminHistory()
+	{
+		//$this->db->where('role_id','3');
+	   	$query=$this->db->get('admin_history');
+	  	
+	  	return $query->result();
+	}
+
 }
