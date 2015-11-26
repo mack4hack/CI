@@ -64,14 +64,111 @@ class Admin extends CI_Controller {
 	public function getLuckyNumber()
     {
     	$result['lucky_number'] = $this->Bets_model->getLuckyNumber();
-        echo $result['lucky_number'];
+                   echo $result['lucky_number'];
     }
-	public function info()
+
+    public function info()
     {
-        $this->load->view('admin/info');
+                  date_default_timezone_set("Asia/Calcutta");
+        	//get current time
+	$now = getdate();
+	$rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$now['minutes'].":".$now['seconds'];
+	$time = strtotime($rounded);
+                  $end = date("Y-m-d H:i:s", $time);
+                  //echo $date;die;
+        
+                  //get start time like 2015-26-11 00:00:00
+                  $now = getdate();
+	$rounded = $now['year']."-".$now['mon']."-".$now['mday']." "."00".":"."00".":00";
+	$time = strtotime($rounded);
+	$start = date("Y-m-d H:i:s", $time);
+	//echo $date;die;
+        
+                   
+                  $this->db->select('*');
+                  $this->db->where('timeslot >=',$start);
+                  $this->db->where('timeslot <=',$end);
+                  $query=$this->db->get('lucky_numbers');
+                  $info = array();
+                  if(!empty($query)){
+                           $sr_no = 1;
+                           
+                           foreach($query->result() as $result) 
+                           {
+                                    $draw_id = $result->draw_id;
+                                    $timeslot = $result->timeslot;
+                                    
+                                    $timeslot1 =  explode(' ', $timeslot);
+                                    $date = $timeslot1['0'];
+                                    $time = $timeslot1['1'];
+                                    
+                                    $date_in_detail =  explode('-', $date);
+                                    $year = $date_in_detail['0'];
+                                    $mon = $date_in_detail['1'];
+                                    $day = $date_in_detail['2'];
+                                    
+                                    $time_in_detail =  explode(':', $time);
+                                    $hours = $time_in_detail['0'];
+                                    $minutes = $time_in_detail['1'];
+                                    $secs = $time_in_detail['2'];
+                                     
+                                    $minutes = $minutes - $minutes%15;
+                                    if($minutes<=9)
+                                    {
+                                        $minutes = "0".$minutes;
+                                    }
+		$rounded = $year."-".$mon."-".$day." ".$hours.":".$minutes.":00";
+                                    $endTime = strtotime("+15 minutes", strtotime($rounded));
+                                     $endTime  = date('Y-m-d H:i:s',$endTime);
+                                    //credit
+                                    $this->db->select('sum(bet_amount ) as credit');
+                                    $this->db->where('result',0);
+                                    $this->db->where('timeslot >=',$rounded);
+                                    $this->db->where('timeslot <=',$endTime);
+                                    $query=$this->db->get('player_history')->row();
+                                    if(!empty($query)){
+                                            $credit =  $query->credit;
+                                    }else{
+                                        $credit = 0;
+                                    }
+                                    //
+                                    //debit
+                                    $this->db->select('sum(payout) as debit');
+                                    $this->db->where('result',1);
+                                    $this->db->where('timeslot >=',$rounded);
+                                    $this->db->where('timeslot <=',$endTime);
+                                    $query=$this->db->get('player_history')->row();
+                                    if(!empty($query)){
+                                            $debit =  $query->debit;
+                                    }else{
+                                        $debit = 0;
+                                    }
+                                    //
+                                    $number = $credit - $debit;
+                                   $profit = 0;
+                                    if($credit){
+                                       $profit =  ($number/$credit) *100;
+                                    }
+                                    $info['active_draw'][]  = array(
+                                        'sr_no' => $sr_no,
+                                        'draw_id' => $draw_id,
+                                        'timeslot' => $timeslot,
+                                        'profit' => number_format($profit, 2, '.', '')."%",
+                                    );
+                                    
+                                    $sr_no++;
+                           }
+                      
+                  }
+        
+                  
+                   $this->load->view('admin/info',$info);
+        
+        
+        
     }
 	
-	public function loadData()
+public function loadData()
  {
    $loadType=$_POST['loadType'];
    $loadId=$_POST['loadId'];

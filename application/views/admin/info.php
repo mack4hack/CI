@@ -68,38 +68,22 @@
 								</tr>
 								</thead>
 								<tbody>
-								<tr class="active">
-									<td>
-										 1
-									</td>
-									<td>
-										 10
-									</td>
-									<td>
-										 2015-11-04 11:15:15
-									</td>
-									<td>
-										 70%
-									</td>
+                                                                                                                            <?php if(!empty($active_draw)  ) {
+
+                                                                                                                                      foreach($active_draw as $draw){  ?>
+                                                                                                                                          
+                                                                                                                                                <tr class="success">
+									<td><?php echo $draw['sr_no']; ?></td>
+									<td><?php echo $draw['draw_id']; ?></td>
+									<td><?php echo $draw['timeslot']; ?></td>
+									<td><?php echo $draw['profit']; ?></td>
 									
-								</tr>
-								<tr class="success">
-									<td>
-										 2
-									</td>
-									<td>
-										 20
-									</td>
-									<td>
-										 2015-11-04 10:15:15
-									</td>
-									<td>
-										 60%
-									</td>
-									
-						
-									
-								</tr>
+								</tr> 
+                                                                                                                                          
+                                                                                                                                    <?php  }                                                                                                                                       
+
+
+                                                                                                                            } ?>
 								</tbody>
 								</table>	
 									</div>
