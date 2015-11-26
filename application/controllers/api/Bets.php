@@ -57,9 +57,18 @@
 				'bet_amount'=>$jodi_data['bet_amount'],
 				);
 
+			$admin_history = array(
+				'game_type'=>1,
+				'player_id'=>$this->post('player_id'),
+				'bet_amount'=>$jodi_data['bet_amount'],
+				'timeslot' => date('Y-m-d H:i:s')
+				);
+
 			if($this->Bets_model->placebet($data))
 			{	                
 				$this->Bets_model->addplayerhistory($history);
+
+				$this->Bets_model->addAdminHistory($admin_history);
 
 				$this->Bets_model->debit($debit);
 				
@@ -123,9 +132,18 @@
 				'bet_amount'=>$jodi_data['bet_amount'],
 				);
 
+			$admin_history = array(
+				'game_type'=>2,
+				'player_id'=>$this->post('player_id'),
+				'bet_amount'=>$jodi_data['bet_amount'],
+				'timeslot' => date('Y-m-d H:i:s')
+				);
+
 			if($this->Bets_model->placebet($data))
 			{	                
 				$this->Bets_model->addplayerhistory($history);
+				
+				$this->Bets_model->addAdminHistory($admin_history);
 
 				$this->Bets_model->debit($debit);
 				
@@ -191,9 +209,18 @@
 				'bet_amount'=>$jodi_data['bet_amount'],
 				);
 
+			$admin_history = array(
+				'game_type'=>3,
+				'player_id'=>$this->post('player_id'),
+				'bet_amount'=>$jodi_data['bet_amount'],
+				'timeslot' => date('Y-m-d H:i:s')
+				);
+
 			 if($this->Bets_model->placebet($data))
 			 {	                
 				$this->Bets_model->addplayerhistory($history);
+
+				$this->Bets_model->addAdminHistory($admin_history);
 
 				$this->Bets_model->debit($debit);
 				
