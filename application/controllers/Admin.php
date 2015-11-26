@@ -506,6 +506,12 @@ class Admin extends CI_Controller {
 	{
 		$result['data']=$this->Admin_model->getAdminHistory();
         $this->load->view('admin/admin_account',$result);
+	}
+
+	public function dealerAccount()
+	{
+		$result['data']=$this->Admin_model->getDealerHistory();
+        $this->load->view('admin/dealer_account',$result);
 	}	
 	
 	

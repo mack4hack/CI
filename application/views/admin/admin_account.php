@@ -1,4 +1,4 @@
-<?php include'header.php'; 
+<?php  include'header.php'; 
 //echo "<pre>";
 //print_r($data); die;
 ?>
@@ -39,10 +39,10 @@
 								   <tbody>
 								   <tr class="active">
 								     	<?php foreach ($data as $d) { ?>
-								     	 	<td><?php echo $d->timeslot; ?></td>
-								     	 	<td><?php echo $d->Credited; ?></td>
-								     	 	<td><?php echo $d->debited; ?></td>
-								     	 	<td><?php echo $d->total; ?></td>
+								     	 	<td><?php echo $d['timeslot']; ?></td>
+								     	 	<td><?php echo $d['credited']; ?></td>
+								     	 	<td><?php echo $d['debited']; ?></td>
+								     	 	<td><?php echo $d['day_total']; ?></td>
 								     	 	
 					     	 	 	</tr>
 								    <?php 	} ?>
