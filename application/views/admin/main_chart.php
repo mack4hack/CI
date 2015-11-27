@@ -903,7 +903,10 @@ $current_timestamp = $date->getTimestamp();
 															<i class="fa fa-edit"></i>
 -->
 															</a>	
-																	
+															<a href="<?php echo base_url()?>admin/adminaccount" class="btn red">
+																Admin Accounts </a>	
+															<a href="<?php echo base_url()?>admin/dealeraccount" class="btn red">
+																Dealer Accounts	</a>																
 											</div>
 											
 								</div>			
