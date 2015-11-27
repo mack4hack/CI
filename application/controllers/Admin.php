@@ -544,9 +544,9 @@ public function loadData()
 
 	public function Numbering_chart()
     {
-      	//if(isset($_GET['time'])){
+      	if(isset($_GET['month'])){
 			
-		   	for($i=0*60;$i<=24*60;$i+=15){
+		   	for($i=0*60;$i<24*60;$i+=15){
 				$hr = floor($i/60);
 				if($hr < 9)
 					$hr = '0'.$hr;
@@ -555,32 +555,53 @@ public function loadData()
 				if($min < 9)
 					$min = '0'.$min;
 
-	    
-	    
-	            
-	            
 	  			$start = $hr . ":" . $min;
 	  			
 	  			$newTime = date('H:i',strtotime($start." +15 minutes"));
 	  			$time_slots[] = $start." To ".$newTime;
 			}
 		
-				$result['time_slots'] = $time_slots;
+			$result['time_slots'] = $time_slots;
 			
-			  //$time = explode(' To ',$_GET['time']);
+			$result['months'] = array(
+				array( 'no' => date("m-Y"),
+						'name'=>date("F Y")
+						),
+				array(	'no' => date("m-Y",strtotime("-1 Months")),
+						'name'=>date("F Y",strtotime("-1 Months"))
+				));
+
+			/*echo "<pre>";
+			print_r($result['months']); die; 	*/
+			
+			// $month = $this->get('month');
+			//$start = $_GET['month'].'-01 00:00:00';
+			//$end = $_GET['month'].'-31 23:59:59';
+
+			for($i = 1; $i <= 31; $i++)
+			{
+				$start = $_GET['month'].'-'.$i.' 00:00:00';
+				$end = $_GET['month'].'-'.$i.' 23:59:59';
+
+				$result['lucky_numbers'][$i]=$this->Bets_model->getLuckyNumberAccToMonth($start,$end);
+			}
+
+			 /* $time = explode(' To ',$_GET['time']);
 			  $start = $time['0'];
-			  $end = $time['1'];
+			  $end = $time['1'];*/
 			  
 			  //$result['first_digit_data']=$this->Bets_model->getfirstdigitchartAccToTime($start,$end);
               //$result['second_digit_data']=$this->Bets_model->getseconddigitchartAccToTime($start,$end);
 		      //$result['jodi_data']=$this->Bets_model->getjodichartAccToTime($start,$end);
 		      //$result['total_payout']=$this->Bets_model->getTotalPayoutAndBetsAccToTime($start,$end);
-		      $result['lucky_number']=$this->Bets_model->getLuckyNumberAccToTime($start);
+		      //$result['lucky_numbers']=$this->Bets_model->getLuckyNumberAccToMonth($start,$end);
 		      //print_r($result);die;
 		      
+		      echo "<pre>";
+		      print_r($result['lucky_numbers']); die; 
           	  $this->load->view('admin/numbering',$result);
         		
-     	//}
+     	}
 	}
 	/**
 	 * Hashes the password to be stored in the database.
