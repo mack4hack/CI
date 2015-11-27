@@ -62,28 +62,44 @@
 										 Draw Date Time
 									</th>
 									<th>
-										 Profit Percentage
+										 Credit
 									</th>
+									<th>
+										 Debit
+									</th>
+									<th>
+										 Profit
+									</th>
+<!--									<th>
+										 Profit Percentage
+									</th>-->
 									
 								</tr>
 								</thead>
 								<tbody>
                                                                                                                             <?php if(!empty($active_draw)  ) {
-
+                                                                                                                                                  $i =1;      
                                                                                                                                       foreach($active_draw as $draw){  ?>
                                                                                                                                           
                                                                                                                                                 <tr class="success">
-									<td><?php echo $draw['sr_no']; ?></td>
+									<td><?php echo $i; ?></td>
 									<td><?php echo $draw['draw_id']; ?></td>
 									<td><?php echo $draw['timeslot']; ?></td>
+									<td><?php echo $draw['credit']; ?></td>
+									<td><?php echo $draw['debit']; ?></td>
 									<td><?php echo $draw['profit']; ?></td>
+<!--									<td><?php //echo $draw['profit']; ?></td>-->
 									
 								</tr> 
                                                                                                                                           
-                                                                                                                                    <?php  }                                                                                                                                       
+                                                                                                                                    <?php  $i++;  }                                                                                                                                       
 
 
-                                                                                                                            } ?>
+                                                                                                                            }else{ ?>
+                                                                                                                                
+                                                                                                                                <tr class='active'><th style='text-align:center'; colspan='6'>No Records Found</th></tr>
+                                                                                                                                
+                                                                                                                           <?php  } ?>
 								</tbody>
 								</table>	
 									</div>
@@ -107,36 +123,25 @@
 								</tr>
 								</thead>
 								<tbody>
-								<tr class="active">
-									<td>
-										 1
-									</td>
-									<td>
-										 PUN00100001
-									</td>
-									<td>
-										 Harish
-									</td>
-									<td>
-										 100
-									</td>
-									
-								</tr>
-								<tr class="success">
-									<td>
-										 2
-									</td>
-									<td>
-										 PUN00100002
-									</td>
-									<td>
-										 Mahesh
-									</td>
-									<td>
-										 95
-									</td>
-									
-								</tr>
+								<?php if(!empty($active_player)  ) {
+                                                                                                                                                  $i =1;      
+                                                                                                                                                                    foreach($active_player as $player){  ?>
+
+                                                                                                                                                                 <tr class="success">
+                                                                                                                                                                            <td><?php echo $i; ?></td>
+                                                                                                                                                                            <td><?php echo $player['user_code']; ?></td>
+                                                                                                                                                                            <td><?php echo $player['name']; ?></td>
+                                                                                                                                                                            <td><?php echo $player['stake']; ?></td>
+                                                                                                                                                                    </tr> 
+
+                                                                                                                                                                   <?php  $i++;  }                                                                                                                                       
+
+
+                                                                                                                                                          }else{ ?>
+
+                                                                                                                                                              <tr class='active'><th style='text-align:center'; colspan='6'>No Records Found</th></tr>
+
+                                                                                                                                                         <?php  } ?>
 								</tbody>
 								</table>	
 									</div>
@@ -160,36 +165,25 @@
 								</tr>
 								</thead>
 								<tbody>
-								<tr class="active">
-									<td>
-										 1
-									</td>
-									<td>
-										 PUN001
-									</td>
-									<td>
-										 Saurav Patil
-									</td>
-									<td>
-										 150
-									</td>
-									
-								</tr>
-								<tr class="success">
-									<td>
-										 2
-									</td>
-									<td>
-										 PUN002
-									</td>
-									<td>
-										 Harish
-									</td>
-									<td>
-										 125
-									</td>
-									
-								</tr>
+								<?php if(!empty($active_dealer)  ) {
+                                                                                                                                                  $i =1;      
+                                                                                                                                                                    foreach($active_dealer as $player){  ?>
+
+                                                                                                                                                                 <tr class="success">
+                                                                                                                                                                            <td><?php echo $i; ?></td>
+                                                                                                                                                                            <td><?php echo $player['user_code']; ?></td>
+                                                                                                                                                                            <td><?php echo $player['name']; ?></td>
+                                                                                                                                                                            <td><?php echo $player['stake']; ?></td>
+                                                                                                                                                                    </tr> 
+
+                                                                                                                                                                   <?php  $i++;  }                                                                                                                                       
+
+
+                                                                                                                                                          }else{ ?>
+
+                                                                                                                                                              <tr class='active'><th style='text-align:center'; colspan='6'>No Records Found</th></tr>
+
+                                                                                                                                                         <?php  } ?>
 								</tbody>
 								</table>	
 									</div>

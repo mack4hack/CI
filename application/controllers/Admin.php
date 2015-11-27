@@ -69,14 +69,17 @@ class Admin extends CI_Controller {
 
     public function info()
     {
-                  date_default_timezone_set("Asia/Calcutta");
-        	//get current time
-	$now = getdate();
+                  $info = array();
+                   date_default_timezone_set("Asia/Calcutta");
+        	
+                  //code starts to get active draw
+                  //get current time
+                  $now = getdate();
 	$rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$now['minutes'].":".$now['seconds'];
 	$time = strtotime($rounded);
                   $end = date("Y-m-d H:i:s", $time);
-                  //echo $date;die;
-        
+                 // echo $end;die;
+                 
                   //get start time like 2015-26-11 00:00:00
                   $now = getdate();
 	$rounded = $now['year']."-".$now['mon']."-".$now['mday']." "."00".":"."00".":00";
@@ -89,7 +92,7 @@ class Admin extends CI_Controller {
                   $this->db->where('timeslot >=',$start);
                   $this->db->where('timeslot <=',$end);
                   $query=$this->db->get('lucky_numbers');
-                  $info = array();
+                  
                   if(!empty($query)){
                            $sr_no = 1;
                            
@@ -119,7 +122,7 @@ class Admin extends CI_Controller {
                                     }
 		$rounded = $year."-".$mon."-".$day." ".$hours.":".$minutes.":00";
                                     $endTime = strtotime("+15 minutes", strtotime($rounded));
-                                     $endTime  = date('Y-m-d H:i:s',$endTime);
+                                    $endTime  = date('Y-m-d H:i:s',$endTime);
                                     //credit
                                     $this->db->select('sum(bet_amount ) as credit');
                                     $this->db->where('result',0);
@@ -131,7 +134,9 @@ class Admin extends CI_Controller {
                                     }else{
                                         $credit = 0;
                                     }
-                                    //
+                                    if(empty($credit)){
+                                        $credit =0;
+                                    }//
                                     //debit
                                     $this->db->select('sum(payout) as debit');
                                     $this->db->where('result',1);
@@ -143,31 +148,130 @@ class Admin extends CI_Controller {
                                     }else{
                                         $debit = 0;
                                     }
-                                    //
+                                    if(empty($debit)){
+                                        $debit =0;
+                                    }
+                                     //
                                     $number = $credit - $debit;
                                    $profit = 0;
                                     if($credit){
                                        $profit =  ($number/$credit) *100;
                                     }
                                     $info['active_draw'][]  = array(
-                                        'sr_no' => $sr_no,
+                                     //   'sr_no' => $sr_no,
                                         'draw_id' => $draw_id,
                                         'timeslot' => $timeslot,
-                                        'profit' => number_format($profit, 2, '.', '')."%",
+                                        'credit' => $credit,
+                                        'debit' => $debit,
+                                        //'profit' => number_format($profit, 2, '.', '')."%",
+                                        'profit' => $credit - $debit,
                                     );
                                     
                                     $sr_no++;
                            }
+                           
+                          $info['active_draw'] =  $this->aasort($info['active_draw'],"profit");
+                          //$info['active_draw'] =  '';
+                          // echo "<pre>";print_r($info['active_draw']);die;
                       
+                  }else{
+                      $info['active_draw'] = '';
                   }
-        
                   
+                  //code ends here
+                  
+                  
+                  
+                  $this->db->select('sum(bet_amount) as stake,player_id');
+                  $this->db->where('timeslot >=',$rounded);
+                  $this->db->where('timeslot <=',$end);
+                  $this->db->group_by('player_id');
+                  $this->db->order_by('stake','desc');
+                  $query=$this->db->get('player_history');
+                  if(!empty($query)){
+                           foreach($query->result() as $result) 
+                           {
+                                            $stake =  $result->stake;
+                                            $player_id =  $result->player_id;
+                                            
+                                            $this->db->select('user_code,first_name,last_name');
+                                            $this->db->where('id',$player_id);
+                                            $query1=$this->db->get('user_master')->row(); 
+                                            
+                                            
+                                            $info['active_player'][]  = array(
+                                                       'player_id' => $player_id,
+                                                       'stake' => $stake,
+                                                       'user_code' => $query1->user_code,
+                                                       'name' => $query1->first_name." ".$query1->last_name,
+                                             );
+                                    
+                           }
+                          
+                  }else{
+                      $info['active_player'] =  '';
+                  }
+                  
+                  
+                  $this->db->select('sum(bet_amount) as stake,dealer_id');
+                  $this->db->where('timeslot =',date('Y-m-d'));
+                  $this->db->group_by('dealer_id');
+                  $this->db->order_by('stake','desc');
+                  $query=$this->db->get('dealer_history');
+                  if(!empty($query)){
+                           foreach($query->result() as $result) 
+                           {
+                                            $stake =  $result->stake;
+                                            $player_id =  $result->dealer_id;
+                                            
+                                            $this->db->select('user_code,first_name,last_name');
+                                            $this->db->where('id',$player_id);
+                                            $query1=$this->db->get('user_master')->row(); 
+                                            
+                                            
+                                            $info['active_dealer'][]  = array(
+                                                       'player_id' => $player_id,
+                                                       'stake' => $stake,
+                                                       'user_code' => $query1->user_code,
+                                                       'name' => $query1->first_name." ".$query1->last_name,
+                                             );
+                                    
+                           }
+                          
+                  }else{
+                      $info['active_dealer'] =  '';
+                  }
+                  
+                  
+                  
+                  
+                  //$info['active_player'] =  '';
+                  //echo "<pre>";print_r($info['active_player']);die;
+                  //code ends here
                    $this->load->view('admin/info',$info);
         
         
         
     }
-	
+public function aasort (&$array, $key) {
+    $sorter=array();
+    $ret=array();
+    reset($array);
+      
+    foreach ($array as $ii => $va) {
+        $sorter[$ii]=$va[$key];
+    }
+    
+    arsort($sorter);
+    //asort($sorter);
+    
+    foreach ($sorter as $ii => $va) {
+        $ret[$ii]=$array[$ii];
+    }
+    
+    $array=$ret;
+    return $array;
+}	
 public function loadData()
  {
    $loadType=$_POST['loadType'];
