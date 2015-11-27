@@ -1,6 +1,7 @@
 <?php  include'header.php'; 
 //echo "<pre>";
 //print_r($data); die;
+foreach ($data as $d){}
 ?>
 	<!-- BEGIN CONTENT -->
 	<div class="page-content-wrapper">
@@ -15,6 +16,12 @@
 									<div class="caption">
 										<i class="icon-bar-chart font-green-haze"></i>
 										<span class="caption-subject bold uppercase font-green-haze">Admin Account</span>
+									</div>
+									<div class="caption" style="float:right">
+										<i class="font-green-haze"></i>
+										<span class="caption-subject bold uppercase font-green-haze">Total Balance : 
+											<?php echo $d['day_total']; ?>
+										</span>
 									</div>
 								  </div>
 								
