@@ -7,7 +7,7 @@ foreach ($data as $d){}
 	<div class="page-content-wrapper">
 		<div class="page-content" >
 		<div class="portlet-body">
-            <div id="mack">
+            <div id="mack" class=".mack">
 				<div class="row">
 					<div class="col-md-12" >
 						<div class="portlet light bordered">
@@ -22,6 +22,7 @@ foreach ($data as $d){}
 											<?php echo $d['day_total']; ?>
 										</span>
 									</div>
+
 								  </div>
 								
 								<div class="portlet-body">
@@ -85,7 +86,7 @@ Demo.init(); // init demo features
 </script>
 <style type="text/css">
 	@media print {
-    #mack {
+    .mack {
         background-color: white;
         height: 100%;
         width: 100%;

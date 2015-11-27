@@ -5,7 +5,7 @@
 	<!-- BEGIN CONTENT -->
 	<div class="page-content-wrapper">
 		<div class="page-content" >
-		<table class="print">
+		
 				<div class="row">
 				  <div class="col-md-12">
 				    <div class="well margin-top-20">
@@ -23,7 +23,8 @@
 					</div>
                   </div>
                 </div>
-            <div id="mack"></div>	
+            <table class="print">
+            <div id="mack" class="mack"></div>	
             </table>		
 					 
 
