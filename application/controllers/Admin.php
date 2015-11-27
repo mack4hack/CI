@@ -23,6 +23,28 @@ class Admin extends CI_Controller {
 		else
     		$this->load->view('admin/dashboard');
     }
+    public function dealer_dashboard()
+    {
+    	if (!$this->ion_auth->logged_in())
+			redirect('auth/login', 'refresh');
+		else{
+			$data['dealer_name'] = 'mack';
+    		$this->load->view('admin/dealer_dashboard',$data);
+		}
+    }
+    public function dealer_main_chart()
+    {
+    	if (!$this->ion_auth->logged_in())
+			redirect('auth/login', 'refresh');
+		else{
+			$result['first_digit_data']=$this->Bets_model->getfirstdigitchart();
+			$result['second_digit_data']=$this->Bets_model->getseconddigitchart();
+			$result['jodi_data']=$this->Bets_model->getjodichart();
+			$result['total_payout']=$this->Bets_model->getTotalPayoutAndBets();
+			$result['lucky_number']=$this->Bets_model->getLuckyNumber();
+    		$this->load->view('admin/dealer_main_chart',$result);
+		}
+    }
 	public function add_dealer()
     {        
 	$result['list']=$this->Getlocation->getCountry();
@@ -663,8 +685,13 @@ public function loadData()
 	  			
 	  			$newTime = date('H:i',strtotime($start." +15 minutes"));
 	  			$time_slots[] = $start." To ".$newTime;
+
+	  			$mack['mack'][]=$this->Bets_model->getLuckyNumberByTimeSlot($start);
+
 			}
 		
+			print_r($mack); die;
+
 			$result['time_slots'] = $time_slots;
 			
 			$result['months'] = array(
@@ -750,6 +777,12 @@ public function loadData()
 		$result['dealers']=$this->Admin_model->get_dealers();
 		$result['data']=$this->Admin_model->getDealerHistory();
         $this->load->view('admin/dealer_account',$result);
+	}
+	public function dealer_dealer_account()
+	{
+		$result['dealers']=$this->Admin_model->get_dealers();
+		$result['data']=$this->Admin_model->getDealerHistory();
+        $this->load->view('admin/dealer_dealer_account',$result);
 	}
 
 	public function dealerAccountChart()

@@ -856,3 +856,20 @@
 <!-- BEGIN FOOTER -->
 <?php include'footer.php';?>
 <!-- END FOOTER -->
+
+<style type="text/css">
+	@media print {
+    .print {
+        background-color: white;
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 15px;
+        font-size: 14px;
+        line-height: 18px;
+    }
+}
+</style>

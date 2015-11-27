@@ -47,15 +47,58 @@ foreach ($lucky_numbers as $number) {
 										</th>
 									     <?php for($i=01; $i<=31 ;$i++) { ?>
 										  <th><?php echo $i; ?></th>
-									     <?php	} ?>	
+									     <?php	} ?>
+
 								    </tr>
 								   </thead>
 								   <tbody>
 								   <tr class="active">
 								     	 <!-- <td> -->
-										 <?php foreach ($time_slots as $time_slot) { ?>
-										<tr><td><?php echo $time_slot; ?></td><tr>
+									<!-- 	 <?php foreach ($time_slots as $time_slot) { ?>
+										<tr><td><?php //echo $time_slot; ?></td> -->
+										
+ 										<?php foreach ($lucky_numbers as $key => $number): ?>
+											<?php if(!empty($number)){
+												foreach ($number as $num) 
+												{
+													echo $num->digit;
+												}
+											} ?>
+										<?php endforeach ?>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<tr>
 										<?php } ?>
+
 									     <!-- </td> -->
 								<!-- 	<?php for($i = 0 ; $i <= 9 ; $i++){ 
 											     $count = false; 

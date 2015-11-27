@@ -25,6 +25,11 @@ class Auth extends CI_Controller {
 		}
 		elseif (!$this->ion_auth->is_admin()) // remove this elseif if you want to enable this for non-admins
 		{
+			if($this->ion_auth->in_group('dealer'))
+			{
+				redirect('admin/dealer_dashboard', 'refresh');
+				//$this->_render_page('admin/dealer_dashboard');
+			}
 			// redirect them to the home page because they must be an administrator to view this
 			return show_error('You must be an administrator to view this page.');
 		}

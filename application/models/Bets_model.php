@@ -290,8 +290,30 @@ class Bets_model extends CI_Model {
 	    $this->db->where("timeslot >= '".$start."' and timeslot < '".$end."' ");
 	    $query=$this->db->get();
 
-	    //echo $this->db->last_query(); die;
-	    
+	    echo $this->db->last_query(); die;
+	    	
+	    $data = $query->result();
+
+	    if(!empty($query)){
+			return $query->result();
+		}else{
+		  return "";	
+		}
+	}
+
+	function getLuckyNumberByTimeSlot($time)
+	{
+		
+	    $this->db->select('lucky_number,timeslot');
+	    $this->db->from('lucky_numbers');
+	    $this->db->where("timeslot like '%".$time."%'");
+	    $query=$this->db->get();
+
+	    /*echo $this->db->last_query();
+	    echo '<br/>';*/
+	    	
+	   // $data = $query->result();
+
 	    if(!empty($query)){
 			return $query->result();
 		}else{
