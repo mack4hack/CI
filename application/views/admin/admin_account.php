@@ -6,13 +6,11 @@ foreach ($data as $d){}
 	<!-- BEGIN CONTENT -->
 	<div class="page-content-wrapper">
 		<div class="page-content" >
-		<table class="print">
+		<div class="portlet-body">
             <div id="mack">
 				<div class="row">
 					<div class="col-md-12" >
-							<!-- BEGIN CHART PORTLET-->
-							    <div class="portlet light bordered">
-								
+						<div class="portlet light bordered">
 								   <div class="portlet-title">
 									<div class="caption">
 										<i class="icon-bar-chart font-green-haze"></i>
@@ -30,46 +28,30 @@ foreach ($data as $d){}
 								 <table class="table table-bordered table-hover">
 								   <thead>
 								     <tr>
-									<th>
-										 Date
-									</th>
-									<th>
-										 Credited
-									</th>
-									<th>
-										 Debited
-									</th>
-									<th>
-										 Total
-									</th>
+									<th>Date</th>
+									<th>Credited</th>
+									<th>Debited</th>
+									<th>Total</th>
 								    </tr>
 								   </thead>
 								   <tbody>
-								   <tr class="active">
+								   		<?php if(!empty($data)) { ?>
 								     	<?php foreach ($data as $d) { ?>
-								     	 	<td><?php echo $d['timeslot']; ?></td>
-								     	 	<td><?php echo $d['credited']; ?></td>
-								     	 	<td><?php echo $d['debited']; ?></td>
-								     	 	<td><?php echo $d['day_total']; ?></td>
-								     	 	
-					     	 	 	</tr>
-								    <?php 	} ?>
-								   <!-- </tr> -->
-								  
-								   
-								</tbody>
+									     	<tr class="active">
+									     	 	<td><?php echo $d['timeslot']; ?></td>
+									     	 	<td><?php echo $d['credited']; ?></td>
+									     	 	<td><?php echo $d['debited']; ?></td>
+									     	 	<td><?php echo $d['day_total']; ?></td>
+						     	 	 		</tr>
+								    	<?php 	} } 
+								    	else echo "<tr class='active'><th style='text-align:center'; colspan='4'>No Records Found</th></tr>"; ?>
+									</tbody>
 								</table>
 								</div>
 							</div>
-							<!-- END CHART PORTLET-->
 					</div>
-					</div>
-						
-
-				 
-											
-								</div>			
-	    </table>
+				</div>
+			</div>			
 
 
 
@@ -103,7 +85,7 @@ Demo.init(); // init demo features
 </script>
 <style type="text/css">
 	@media print {
-    .print {
+    #mack {
         background-color: white;
         height: 100%;
         width: 100%;

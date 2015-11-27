@@ -5,6 +5,7 @@
 	<!-- BEGIN CONTENT -->
 	<div class="page-content-wrapper">
 		<div class="page-content" >
+		<table class="print">
 				<div class="row">
 				  <div class="col-md-12">
 				    <div class="well margin-top-20">
@@ -22,7 +23,8 @@
 					</div>
                   </div>
                 </div>
-            <div id="mack"></div>			
+            <div id="mack"></div>	
+            </table>		
 					 
 
 
@@ -60,3 +62,19 @@ Demo.init(); // init demo features
 
 });
 </script>
+<style type="text/css">
+	@media print {
+    .print {
+        background-color: white;
+        height: 100%;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 15px;
+        font-size: 14px;
+        line-height: 18px;
+    }
+}
+</style>
