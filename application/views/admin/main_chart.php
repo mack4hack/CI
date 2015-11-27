@@ -878,12 +878,12 @@ $current_timestamp = $date->getTimestamp();
 											<div class="col-sm-3">
 												<input type="text" class="form-control" placeholder="Enter Result">
 											</div>
-											<div class="col-sm-3">
+											<div class="col-sm-1">
 												<button type="button" class="btn btn-primary">Execute</button>
 											</div>
 											
 											
-											<div class="col-sm-6">
+											<div class="col-sm-8">
 												<a href="<?php echo base_url()?>admin/daysummary" class="btn red">
 															Day Summary 
 <!--
@@ -903,7 +903,7 @@ $current_timestamp = $date->getTimestamp();
 															<i class="fa fa-edit"></i>
 -->
 															</a>	
-															<a href="<?php echo base_url()?>admin/adminaccount" class="btn red">
+															<a href="<?php echo base_url()?>admin/adminaccount" class="btn green">
 																Admin Accounts </a>	
 															<a href="<?php echo base_url()?>admin/dealeraccount" class="btn red">
 																Dealer Accounts	</a>																
