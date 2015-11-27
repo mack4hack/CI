@@ -1,7 +1,30 @@
-<?php include'header.php';?>
+<?php include'header.php';
+foreach ($lucky_numbers as $number) {
+	//echo $number->lucky_number;
+}
+?>
 	<!-- BEGIN CONTENT -->
 	<div class="page-content-wrapper">
 		<div class="page-content" >
+		
+		<div class="row">
+		  <div class="col-md-12">
+		    <div class="well margin-top-20">
+				<div class="row">
+					<div class="col-sm-3">
+						<strong>Select Month : </strong>
+						<select name="dealer" id="dealer">
+						<option value="">--Select Month--</option>
+						<?php foreach ($months as $month) { ?>
+							<option value="<?php echo $month['no'];?>"><?php echo $month['name'];?></option>
+						<?php } ?>
+						</select>
+					</div>
+				</div>
+			</div>
+          </div>
+        </div>
+
             <div id="mack">
 				<div class="row">
 					<div class="col-md-12" >
