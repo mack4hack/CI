@@ -20,7 +20,7 @@
 			</div>
           </div>
         </div>
-
+                    <div id="loadingDiv" style="padding: 5% 0 0 30%;" ><img src="<?php echo base_url();  ?>images/ajax-loader.gif" />  </div>
             <div id="mack">
 				<div class="row">
 					<div class="col-md-12" >
@@ -103,10 +103,20 @@ Demo.init(); // init demo features
     //$( "#mack" ).empty();
     $('#month').on('change',function(){
     	var month = $(this).val();
+                 if(month !=''){
     	$('#mack').load('<?php echo base_url("/admin/ajaxnumberingchart?month="); ?>'+month,function () {
         // $(this).unwrap();
-    });	
+                   });
+               }	
     })
-    
+    $('#loadingDiv')
+    .hide()  // Hide it initially
+    .ajaxStart(function() {
+        $(this).show();
+    })
+    .ajaxStop(function() {
+        $(this).hide();
+    })
+;
 
 </script>

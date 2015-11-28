@@ -963,6 +963,9 @@ public function loadData()
                              if($lucky['date'] == $j && $lucky['timeslot_id'] == $i){
                                
                                 $digit = $lucky['lucky_number'];  
+                                if($digit < 10){
+                                    $digit = "0".$digit;
+                                }  
                                    $result['data'][$i][$j] = array(
 
                                    'digit' => $digit,
