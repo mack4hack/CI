@@ -516,7 +516,7 @@ public function loadData()
             $time_slot_id = 1;
             foreach ($time_slots as $key => $slots) {
                 if($c_time >= $slots['start'] && $c_time < $slots['end']){
-                  $timeslot_id = $key;  
+                  $timeslot_id = $key+1;  
                 }
             }
 
