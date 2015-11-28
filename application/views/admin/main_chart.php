@@ -10,8 +10,8 @@ $current_timestamp = $date->getTimestamp();
 	<div class="page-content-wrapper">
 		<div class="page-content" >
 			
-			
-			
+		<!-- If condition added to show/hide info -->
+		<?php if(!$this->ion_auth->in_group('dealer')) {?>	
 
 
                 <div class="row">
@@ -877,6 +877,7 @@ $current_timestamp = $date->getTimestamp();
 								</div>
 				</div>				
 								<BR>
+	<?php } ?> 	<!-- group users-->
 								<div class="row">
 									<?php if(!$this->ion_auth->in_group('dealer')) {?>
 										<div class="col-sm-3">
