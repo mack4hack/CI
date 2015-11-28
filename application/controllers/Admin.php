@@ -36,7 +36,7 @@ class Admin extends CI_Controller {
 		$result['jodi_data']=$this->Bets_model->getjodichart();
 //	echo "<pre>";print_r($result['jodi_data']->result());die;
                 
-                                    $result['total_payout']=$this->Bets_model->getTotalPayoutAndBets();
+        $result['total_payout']=$this->Bets_model->getTotalPayoutAndBets();
 		$result['lucky_number']=$this->Bets_model->getLuckyNumber();
 		
 		$this->load->view('admin/main_chart',$result); 
@@ -67,7 +67,7 @@ class Admin extends CI_Controller {
 	public function getLuckyNumber()
     {
     	$result['lucky_number'] = $this->Bets_model->getLuckyNumber();
-                   echo $result['lucky_number'];
+        echo $result['lucky_number'];
     }
 
     public function info()
