@@ -157,15 +157,17 @@ class Bets_model extends CI_Model {
 		$minutes = $now['minutes'] - $now['minutes']%15;
 		$rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
 		$time = strtotime($rounded);
-                                    $time = $time - (15 * 60);
+                                    $time = $time + (15 * 60);
                                     $date = date("Y-m-d H:i:s", $time);
 		
 		//echo $date;die;
 	                  $this->db->select('lucky_number');
 	                  $this->db->from('lucky_numbers');
-	                  $this->db->where("timeslot >= '".$date."' and timeslot < '".$rounded."' ");
+	                  $this->db->where('timeslot <= ', $date);
+	                  $this->db->where('timeslot >= ', $rounded);
+	                  //$this->db->where("timeslot >= '".$date."' and timeslot < '".$rounded."' ");
 	                  $query=$this->db->get()->row();
-	    
+	                  //echo $this->db->last_query();die; 
 	                  if(!empty($query)){
 	                  if($query->lucky_number <=9 ){
 		   $query->lucky_number = "0".$query->lucky_number;

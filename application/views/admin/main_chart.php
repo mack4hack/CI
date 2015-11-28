@@ -1091,7 +1091,7 @@ function loadlink(){
 
 //loadlink(); // This will run on page load
 setInterval(function(){
-    loadlink() // this will run after every 5 seconds
+    loadlink() ;// this will run after every 5 seconds
 }, 5000);
 
 function loadresult(){
@@ -1103,7 +1103,7 @@ function loadresult(){
 
 //loadlink(); // This will run on page load
 setInterval(function(){
-    loadresult() // this will run after every 5 seconds
+    loadresult() ;// this will run after every 5 seconds
 }, 5000);
 </script>
 

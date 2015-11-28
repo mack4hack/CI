@@ -64,10 +64,10 @@ class Admin extends CI_Controller {
 		$result['lucky_number']=$this->Bets_model->getLuckyNumber();
                                     $this->load->view('admin/chart',$result);
     }
-	public function getLuckyNumber()
-    {
+public function getLuckyNumber()
+    {    
     	$result['lucky_number'] = $this->Bets_model->getLuckyNumber();
-        echo $result['lucky_number'];
+                  echo $result['lucky_number'];
     }
 
     public function info()
