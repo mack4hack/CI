@@ -904,7 +904,7 @@ $current_timestamp = $date->getTimestamp();
 											Admin Accounts	</a>
 
 											<a href="<?php echo base_url()?>admin/numbering_chart" class="btn green">
-											Admin Accounts	</a>
+											Numbering Chart	</a>
 
 										<?php }?>
 												
