@@ -900,8 +900,12 @@ $current_timestamp = $date->getTimestamp();
 												Block Player</a>	
 
 											
-												<a href="<?php echo base_url()?>admin/accountaccount" class="btn red">
-												Admin Accounts	</a>						
+											<a href="<?php echo base_url()?>admin/accountaccount" class="btn red">
+											Admin Accounts	</a>
+
+											<a href="<?php echo base_url()?>admin/numbering_chart" class="btn green">
+											Admin Accounts	</a>
+
 										<?php }?>
 												
 											<a href="<?php echo base_url()?>admin/dealeraccount" class="btn red">
