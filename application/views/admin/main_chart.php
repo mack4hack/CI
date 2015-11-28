@@ -888,7 +888,7 @@ $current_timestamp = $date->getTimestamp();
 										</div>
 									<?php }?>		
 											
-									<div class="col-sm-12">
+									<div class="col-sm-10">
 										<?php if(!$this->ion_auth->in_group('dealer')) {?>		
 											<a href="<?php echo base_url()?>admin/daysummary" class="btn red">
 														Day Summary</a>
