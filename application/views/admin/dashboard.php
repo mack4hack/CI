@@ -1,4 +1,8 @@
-<?php include'header.php';?>
+<?php if($this->ion_auth->in_group('dealer'))
+		include 'dealer_header.php';
+		else 
+			include 'dealer_header.php';
+		?>
 <!-- BEGIN CONTENT -->
 	<div class="page-content-wrapper">
 		<div class="page-content">

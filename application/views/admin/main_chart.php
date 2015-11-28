@@ -1,4 +1,7 @@
-<?php include'header.php';
+<?php if($this->ion_auth->in_group('dealer'))
+			include 'dealer_header.php';
+		else 
+			include 'dealer_header.php';
 date_default_timezone_set('Asia/Calcutta');
 $date = new DateTime();
 $current_timestamp = $date->getTimestamp();
@@ -875,40 +878,34 @@ $current_timestamp = $date->getTimestamp();
 				</div>				
 								<BR>
 								<div class="row">
-											<div class="col-sm-3">
-												<input type="text" class="form-control" placeholder="Enter Result">
-											</div>
-											<div class="col-sm-1">
-												<button type="button" class="btn btn-primary">Execute</button>
-											</div>
+									<?php if(!$this->ion_auth->in_group('dealer')) {?>
+										<div class="col-sm-3">
+											<input type="text" class="form-control" placeholder="Enter Result">
+										</div>
+										<div class="col-sm-1">
+											<button type="button" class="btn btn-primary">Execute</button>
+										</div>
+									<?php }?>		
 											
+									<div class="col-sm-8">
+										<?php if(!$this->ion_auth->in_group('dealer')) {?>		
+											<a href="<?php echo base_url()?>admin/daysummary" class="btn red">
+														Day Summary</a>
+														
+											<a href="<?php echo base_url()?>admin/add_amount" class="btn green">
+													Add Amount</a>
+												
+											<a href="<?php echo base_url()?>admin/block_player" class="btn red">
+												Block Player</a>	
+
 											
-											<div class="col-sm-8">
-												<a href="<?php echo base_url()?>admin/daysummary" class="btn red">
-															Day Summary 
-<!--
-															<i class="fa fa-edit"></i>
--->
-															</a>
-															
-													<a href="<?php echo base_url()?>admin/add_amount" class="btn green">
-															Add Amount
-<!--
-															<i class="fa fa-edit"></i>
--->
-															</a>
-														<a href="<?php echo base_url()?>admin/block_player" class="btn red">
-															Block Player 
-<!--
-															<i class="fa fa-edit"></i>
--->
-															</a>	
-															<a href="<?php echo base_url()?>admin/adminaccount" class="btn green">
-																Admin Accounts </a>	
-															<a href="<?php echo base_url()?>admin/dealeraccount" class="btn red">
-																Dealer Accounts	</a>																
-											</div>
-											
+												<a href="<?php echo base_url()?>admin/accountaccount" class="btn red">
+												Admin Accounts	</a>						
+										<?php }?>
+												
+											<a href="<?php echo base_url()?>admin/dealeraccount" class="btn red">
+											Dealer Accounts	</a>						
+									</div>
 								</div>			
 					 
 
