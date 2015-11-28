@@ -153,21 +153,21 @@ class Bets_model extends CI_Model {
 		
 		date_default_timezone_set("Asia/Calcutta");
 		$now = getdate();
-		$now['minutes'] = $now['minutes'] - 1;
+		//$now['minutes'] = $now['minutes'] - 1;
 		$minutes = $now['minutes'] - $now['minutes']%15;
 		$rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
 		$time = strtotime($rounded);
-        $time = $time - (15 * 60);
-        $date = date("Y-m-d H:i:s", $time);
+                                    $time = $time - (15 * 60);
+                                    $date = date("Y-m-d H:i:s", $time);
 		
-		
-	    $this->db->select('lucky_number');
-	    $this->db->from('lucky_numbers');
-	    $this->db->where("timeslot >= '".$date."' and timeslot < '".$rounded."' ");
-	    $query=$this->db->get()->row();
+		//echo $date;die;
+	                  $this->db->select('lucky_number');
+	                  $this->db->from('lucky_numbers');
+	                  $this->db->where("timeslot >= '".$date."' and timeslot < '".$rounded."' ");
+	                  $query=$this->db->get()->row();
 	    
-	    if(!empty($query)){
-	    if($query->lucky_number <=9 ){
+	                  if(!empty($query)){
+	                  if($query->lucky_number <=9 ){
 		   $query->lucky_number = "0".$query->lucky_number;
 		}
 		return $query->lucky_number;
