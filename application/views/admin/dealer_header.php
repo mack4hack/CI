@@ -446,7 +446,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				</li>
 				<!-- BEGIN ANGULARJS LINK -->
 				<li class="tooltips" data-container="body" data-placement="right" data-html="true" data-original-title="Dashboard">
-					<a href="<?php echo base_url()?>admin/dealer_dashboard">
+					<a href="<?php echo base_url()?>admin/">
 					<i class="icon-paper-plane"></i>
 					<span class="title">
 					Dashboard</span>

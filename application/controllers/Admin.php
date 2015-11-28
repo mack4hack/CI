@@ -23,28 +23,7 @@ class Admin extends CI_Controller {
 		else
     		$this->load->view('admin/dashboard');
     }
-    public function dealer_dashboard()
-    {
-    	if (!$this->ion_auth->logged_in())
-			redirect('auth/login', 'refresh');
-		else{
-			$data['dealer_name'] = 'mack';
-    		$this->load->view('admin/dealer_dashboard',$data);
-		}
-    }
-    public function dealer_main_chart()
-    {
-    	if (!$this->ion_auth->logged_in())
-			redirect('auth/login', 'refresh');
-		else{
-			$result['first_digit_data']=$this->Bets_model->getfirstdigitchart();
-			$result['second_digit_data']=$this->Bets_model->getseconddigitchart();
-			$result['jodi_data']=$this->Bets_model->getjodichart();
-			$result['total_payout']=$this->Bets_model->getTotalPayoutAndBets();
-			$result['lucky_number']=$this->Bets_model->getLuckyNumber();
-    		$this->load->view('admin/dealer_main_chart',$result);
-		}
-    }
+    
 	public function add_dealer()
     {        
 	$result['list']=$this->Getlocation->getCountry();
@@ -515,12 +494,37 @@ public function loadData()
                        }
                        $latest_id = $latest_id +1 ;
                   }
-                  
-                  
+          
+            for($i=0*60;$i<24*60;$i+=15)
+            {
+              $hr = floor($i/60);
+              if($hr < 9)
+              $hr = '0'.$hr;
+
+              $min = ($i/60-floor($i/60))*60;
+              if($min < 9)
+              $min = '0'.$min;
+
+              $start = $hr . ":" . $min;
+
+              $newTime = date("H:i",strtotime($start." +15 minutes"));
+              //$time_slots[] = $start." To ".$newTime;
+              $time_slots[] = array('start' => $start,'end' => $newTime, );
+            }  
+
+            $c_time = date('H:i');
+            $time_slot_id = 1;
+            foreach ($time_slots as $key => $slots) {
+                if($c_time >= $slots['start'] && $c_time < $slots['end']){
+                  $timeslot_id = $key;  
+                }
+            }
+
     	$luck_numbers = array(
     		'lucky_number' => $jodi,
     		'draw_id' => $latest_id,
-    		'timeslot' => date('Y-m-d H:i:s')
+        'timeslot' => date('Y-m-d H:i:s'),
+    		'timeslot_id' => $timeslot_id
     		);
 
     	//if() get numbers from db
@@ -671,10 +675,15 @@ public function loadData()
 			}
 	}
 
-	public function Numbering_chart()
-                {
-      	   
-                       $result['months'] = array(
+	public function Numbering_chart(){
+
+      	
+          	     $number = 31;
+                       if(isset($_GET['month']))
+                       {
+                           
+                           $result['months'] = array(
+
 				array( 'no' => date("m-Y"),
 						'name'=>date("F Y")
 						),
@@ -682,16 +691,23 @@ public function loadData()
 						'name'=>date("F Y",strtotime("-1 Months"))
 				));
 
-          	    $number = 31;
-                       if(isset($_GET['month']))
-                       {
+                           
+                           
                            $var  = explode('-', $_GET['month']);
                            $year = $var[0];
                            $month = $var[1];
                                     $number = cal_days_in_month(CAL_GREGORIAN, $month, $year);
                                    
-                       }
-                       $result['number'] = $number;
+                       
+                                    
+                                        $result['lucky_numbers']=$this->Bets_model->getLuckyNumberAccToMonth($_GET['month']);
+		
+			//print_r($result['lucky_numbers']); die;
+
+			//$result['time_slots'] = $time_slots;
+		
+                       
+                        $result['number'] = $number;
                         for($i=0*60;$i<24*60;$i+=15){
                         $hr = floor($i/60);
                         if($hr < 9)
@@ -705,70 +721,100 @@ public function loadData()
 
                           $newTime = date('H:i',strtotime($start." +15 minutes"));
                           $time_slots[] = $start." To ".$newTime;
-                         }
                          
-                         
-                       for($i=0 ; $i<=96; $i++){
-                           
-                           if($i == 0){
+                          $time_slots1[] = array('start' => $start,'end' => $newTime, );
+                          
+                        }         
+                                    
+                       $result['data'] =array();
                                
-                               for($j=0 ; $j <= $number; $j++){
+                       for($i=0 ; $i<=96; $i++){
+						   
+                        //   for($j=0 ; $j <= $number; $j++){
+                                     
+								   if($i == 0){
+											 for($j=0 ; $j <= $number; $j++){
+											  if($j==0){
+													$result['data'][$i][$j] = array(
 
-                                      if($j==0){
-                                            $result['data'][$i][$j] = array(
+														 'digit' => "Time slot",
 
-                                                 'digit' => "Time slot",
+												 );
+											  }else{
+												$result['data'][$i][$j] = array(
 
-                                         );
-                                      }else{
-                                        $result['data'][$i][$j] = array(
+															 'digit' => $j,
 
-                                                 'digit' => $j,
-
-                                         );
-                                      }
-                                 }
-                           }else{
-                                   
-                                   for($j=0 ; $j <= $number; $j++){
-
-                                      if($j==0){
-        
-                                          foreach ($time_slots as $k => $v){
+												 );
+											  }
+									         }
+								   }
+								   if($i > 0){
+											 for($j=0 ; $j <= $number; $j++){
+												 
+											  if($j==0){
+													
+													foreach ($time_slots as $k => $v){
                                                                                                                                                  
-                                                 if( $k == $i-1){
-                                                     $digit =  $v;
-                                                 }
-                                           }
-                                         
-                                            $result['data'][$i][$j] = array(
+															 if( $k == $i-1){
+																 $digit =  $v;
+															 }
+													   }
+													
+													$result['data'][$i][$j] = array(
 
-                                                 'digit' => $digit,
+														 'digit' => $digit,
 
-                                         );
-                                        }else{
-                                        $result['data'][$i][$j] = array(
+												 );
+											  }else{
+												
+												  foreach($result['lucky_numbers'] as $lucky){
+													   if($lucky['date'] == $j && $lucky['timeslot_id'] == $i){
+														   
+														    $digit = $lucky['lucky_number'];  
+  														     $result['data'][$i][$j] = array(
 
-                                                 'digit' => 1,
+																	 'digit' => $digit,
 
-                                         );
-                                      }
-                                 }
-                                      
+																);break;
+
+														 }else{
+															 
+															$result['data'][$i][$j] = array(
+
+																	 'digit' => '',
+
+																);
+
+													     }
+													
+													   
+													}
+													// echo "<pre>";print_r($result['data']); 
+																								  
+											  }
+									         }
+								   }
+                          //    }  
                            }
-                            
-                        }
+                        
+                        
+                       }
+                       
+                       
+                        
+                    //die;
                         
                        
-                     //die;   
-                     
-                        
-                       
-                       //echo "<pre>";print_r($result['data']);die;
+                      // echo "<pre>";print_r($result['data']);die;
                        $this->load->view('admin/numbering',$result);
         	     	
-     	
-	}
+        		
+                             }
+
+                   
+
+	
 	/**
 	 * Hashes the password to be stored in the database.
 	 *
@@ -813,13 +859,7 @@ public function loadData()
 		$result['data']=$this->Admin_model->getDealerHistory();
         $this->load->view('admin/dealer_account',$result);
 	}
-	public function dealer_dealer_account()
-	{
-		$result['dealers']=$this->Admin_model->get_dealers();
-		$result['data']=$this->Admin_model->getDealerHistory();
-        $this->load->view('admin/dealer_dealer_account',$result);
-	}
-
+	
 	public function dealerAccountChart()
 	{
 		$dealer_id = $_GET['dealer'];

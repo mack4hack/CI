@@ -282,20 +282,30 @@ class Bets_model extends CI_Model {
 		$this->db->insert('dealer_history', $data);
 	}
 	
-	function getLuckyNumberAccToMonth($start,$end)
+	function getLuckyNumberAccToMonth($month)
 	{
 		
-	    $this->db->select('lucky_number,timeslot');
+	    $this->db->select('lucky_number,timeslot,timeslot_id');
 	    $this->db->from('lucky_numbers');
-	    $this->db->where("timeslot >= '".$start."' and timeslot < '".$end."' ");
+	    $this->db->where("timeslot like '".$month."%'");
 	    $query=$this->db->get();
 
-	    echo $this->db->last_query(); die;
+	    //echo $this->db->last_query(); die;
 	    	
 	    $data = $query->result();
 
+	    //print_r($data); die;
+
+	    foreach ($data as $d) {
+	    		//$d->timeslot; die;
+	    		$date = explode(' ', $d->timeslot)[0];
+	    		$datearr= explode('-', $date);
+				$day = end($datearr);		
+	    		$numbers [] = array('lucky_number' => $d->lucky_number,'date' => $day,'timeslot_id' => $d->timeslot_id, );
+	    }
+
 	    if(!empty($query)){
-			return $query->result();
+			return $numbers;
 		}else{
 		  return "";	
 		}

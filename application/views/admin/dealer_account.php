@@ -1,4 +1,7 @@
-<?php  include'header.php'; 
+<?php if($this->ion_auth->in_group('dealer'))
+			include 'dealer_header.php';
+		else 
+			include 'header.php';
 //echo "<pre>";
 //print_r($data); die;
 ?>
@@ -6,27 +9,49 @@
 	<div class="page-content-wrapper">
 		<div class="page-content" >
 		
-				<div class="row">
-				  <div class="col-md-12">
-				    <div class="well margin-top-20">
-						<div class="row">
-							<div class="col-sm-3">
-								<strong>Select Dealer Account : </strong>
-								<select name="dealer" id="dealer">
-								<option value="">--Select Dealer--</option>
-								<?php foreach ($dealers as $dealer) { ?>
-									<?php if($this->ion_auth->in_group('dealer') && $dealer->id == $this->ion_auth->get_user_id()){ ?>
-										<option selected value="<?php echo $dealer->id;?>"><?php echo $dealer->first_name.' '.$dealer->last_name;?></option>
-								<?php }
-									else {?>
-										<option value="<?php echo $dealer->id;?>"><?php echo $dealer->first_name.' '.$dealer->last_name;?></option>
-								<?php } }?>
-								</select>
+				<?php if($this->ion_auth->in_group('dealer'))
+				 { ?>
+					 <div class="row" style="display:none;">
+					  <div class="col-md-12">
+					    <div class="well margin-top-20">
+							<div class="row" >
+								<div class="col-sm-3" >
+									<strong>Select Dealer Account : </strong>
+									<select name="dealer" id="dealer">
+									<?php foreach ($dealers as $dealer) { ?>
+										<?php if($this->ion_auth->in_group('dealer') && $dealer->id == $this->ion_auth->get_user_id()){ ?>
+											<option selected value="<?php echo $dealer->id;?>"><?php echo $dealer->first_name.' '.$dealer->last_name;?></option>
+									<?php } } ?>
+									</select>
+								</div>
 							</div>
 						</div>
-					</div>
-                  </div>
-                </div>
+		              </div>
+		            </div>
+		    	<?php } else 
+		         { ?>
+					<div class="row">
+					  <div class="col-md-12">
+					    <div class="well margin-top-20">
+							<div class="row">
+								<div class="col-sm-3">
+									<strong>Select Dealer Account : </strong>
+									<select name="dealer" id="dealer">
+									<option value="">--Select Dealer--</option>
+									<?php foreach ($dealers as $dealer) { ?>
+										<?php if($this->ion_auth->in_group('dealer') && $dealer->id == $this->ion_auth->get_user_id()){ ?>
+											<option selected value="<?php echo $dealer->id;?>"><?php echo $dealer->first_name.' '.$dealer->last_name;?></option>
+									<?php }
+										else {?>
+											<option value="<?php echo $dealer->id;?>"><?php echo $dealer->first_name.' '.$dealer->last_name;?></option>
+									<?php } }?>
+									</select>
+								</div>
+							</div>
+						</div>
+	                  </div>
+	                </div>
+	            <?php } ?>    
             <table class="print">
             <div id="mack" class="mack"></div>	
             </table>		

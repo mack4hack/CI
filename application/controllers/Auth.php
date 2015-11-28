@@ -27,7 +27,7 @@ class Auth extends CI_Controller {
 		{
 			if($this->ion_auth->in_group('dealer'))
 			{
-				redirect('admin/dealer_dashboard', 'refresh');
+				redirect('admin', 'refresh');
 				//$this->_render_page('admin/dealer_dashboard');
 			}
 			// redirect them to the home page because they must be an administrator to view this
