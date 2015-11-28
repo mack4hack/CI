@@ -880,11 +880,11 @@ $current_timestamp = $date->getTimestamp();
 	<?php } ?> 	<!-- group users-->
 								<div class="row">
 									<?php if(!$this->ion_auth->in_group('dealer')) {?>
-										<div class="col-sm-3">
+										<!-- <div class="col-sm-3">
 											<input type="text" class="form-control" placeholder="Enter Result">
-										</div>
+										</div> -->
 										<div class="col-sm-1">
-											<button type="button" class="btn btn-primary">Execute</button>
+											<a href="javascript:show_popup('my_popup')"><button type="button" class="btn btn-primary" id="execute">Execute</button></a>
 										</div>
 									<?php }?>		
 											
@@ -917,6 +917,18 @@ $current_timestamp = $date->getTimestamp();
 			<!-- BEGIN PAGE CONTENT-->
 			
 	<!-- END CONTENT -->
+
+	<div id="my_popup" style="display:none;border:1px dotted gray;padding:.3em;background-color:white;position:absolute;width:200px;height:200px;left:100px;top:100px">
+	<div align="right">
+		<a href="javascript:hide_popup('my_popup')">close</a>
+	</div>
+<h3>Vooler PopUp</h3>
+<p>You contents go here, whatever style or anything</p>
+</div>
+
+
+Somewhere in code
+<a href="javascript:show_popup('my_popup')">Show popup</a>
 	
 </div>
 </div>
@@ -1090,3 +1102,23 @@ setInterval(function(){
     loadresult() // this will run after every 5 seconds
 }, 5000);
 </script>
+
+<script type="text/javascript" >
+function show_popup(id) {
+	if (document.getElementById){ 
+		obj = document.getElementById(id); 
+		if (obj.style.display == "none") { 
+			obj.style.display = ""; 
+		} 
+	} 
+}
+function hide_popup(id){ 
+	if (document.getElementById){ 
+		obj = document.getElementById(id); 
+		if (obj.style.display == ""){ 
+			obj.style.display = "none"; 
+		} 
+	} 
+}
+</script>
+
