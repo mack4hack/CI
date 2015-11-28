@@ -888,7 +888,7 @@ $current_timestamp = $date->getTimestamp();
 										</div>
 									<?php }?>		
 											
-									<div class="col-sm-8">
+									<div class="col-sm-10">
 										<?php if(!$this->ion_auth->in_group('dealer')) {?>		
 											<a href="<?php echo base_url()?>admin/daysummary" class="btn red">
 														Day Summary</a>
@@ -900,8 +900,12 @@ $current_timestamp = $date->getTimestamp();
 												Block Player</a>	
 
 											
-												<a href="<?php echo base_url()?>admin/accountaccount" class="btn red">
-												Admin Accounts	</a>						
+											<a href="<?php echo base_url()?>admin/accountaccount" class="btn red">
+											Admin Accounts	</a>
+
+											<a href="<?php echo base_url()?>admin/numbering_chart" class="btn green">
+											Numbering Chart	</a>
+
 										<?php }?>
 												
 											<a href="<?php echo base_url()?>admin/dealeraccount" class="btn red">
