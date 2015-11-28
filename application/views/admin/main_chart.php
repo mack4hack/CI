@@ -1097,7 +1097,7 @@ setInterval(function(){
 function loadresult(){
     
         $.get('<?php echo base_url("/admin/getLuckyNumber"); ?>',function(data) {
-		   $('#ash').val(data);
+		   $('#ash').text(data);
 		});
 }
 
