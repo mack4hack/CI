@@ -1,7 +1,7 @@
 <!-- BEGIN FOOTER -->
 <div class="page-footer">
 	<div class="page-footer-inner">
-		 2015 &copy; GamePlay
+		 2015 &copy; Money Play
 	</div>
 	<div class="scroll-to-top">
 		<i class="icon-arrow-up"></i>
