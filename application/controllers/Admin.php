@@ -701,8 +701,8 @@ public function loadData()
 		      //$result['lucky_numbers']=$this->Bets_model->getLuckyNumberAccToMonth($start,$end);
 		      //print_r($result);die;
 		      
-		      echo "<pre>";
-		      print_r($result['lucky_numbers']); die; 
+//		      echo "<pre>";
+//		      print_r($result['lucky_numbers']); die; 
           	  $this->load->view('admin/numbering',$result);
         		
      	}

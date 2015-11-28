@@ -83,7 +83,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Password" name="password"/>
       </div>
     </div>
-    <div class="form-actions">
+    <div class="form-actions" style="margin-left:-7px ;">
       <label class="checkbox">
       <input type="checkbox" name="remember" value="1"/> Remember me </label>
       <button type="submit" id="submit" class="btn green-haze pull-right">
