@@ -1,7 +1,7 @@
 <?php if($this->ion_auth->in_group('dealer'))
 			include 'dealer_header.php';
 		else 
-			include 'dealer_header.php';
+			include 'header.php';
 date_default_timezone_set('Asia/Calcutta');
 $date = new DateTime();
 $current_timestamp = $date->getTimestamp();
