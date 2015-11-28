@@ -124,3 +124,4 @@ CREATE TABLE IF NOT EXISTS `dealer_history` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;    
 
+ALTER TABLE `lucky_numbers` ADD `timeslot_id` INT(11) NOT NULL ;

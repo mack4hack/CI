@@ -57,14 +57,14 @@ foreach ($lucky_numbers as $number) {
 									<!-- 	 <?php foreach ($time_slots as $time_slot) { ?>
 										<tr><td><?php //echo $time_slot; ?></td> -->
 										
- 										<?php foreach ($lucky_numbers as $key => $number): ?>
+ 									<!-- 	<?php foreach ($lucky_numbers as $key => $number): ?>
 											<?php if(!empty($number)){
 												foreach ($number as $num) 
 												{
 													echo $num->digit;
 												}
 											} ?>
-										<?php endforeach ?>
+										<?php endforeach ?> -->
 										<th></th>
 										<th></th>
 										<th></th>

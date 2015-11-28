@@ -491,12 +491,37 @@ public function loadData()
                        }
                        $latest_id = $latest_id +1 ;
                   }
-                  
-                  
+          
+            for($i=0*60;$i<24*60;$i+=15)
+            {
+              $hr = floor($i/60);
+              if($hr < 9)
+              $hr = '0'.$hr;
+
+              $min = ($i/60-floor($i/60))*60;
+              if($min < 9)
+              $min = '0'.$min;
+
+              $start = $hr . ":" . $min;
+
+              $newTime = date("H:i",strtotime($start." +15 minutes"));
+              //$time_slots[] = $start." To ".$newTime;
+              $time_slots[] = array('start' => $start,'end' => $newTime, );
+            }  
+
+            $c_time = date('H:i');
+            $time_slot_id = 1;
+            foreach ($time_slots as $key => $slots) {
+                if($c_time >= $slots['start'] && $c_time < $slots['end']){
+                  $timeslot_id = $key;  
+                }
+            }
+
     	$luck_numbers = array(
     		'lucky_number' => $jodi,
     		'draw_id' => $latest_id,
-    		'timeslot' => date('Y-m-d H:i:s')
+        'timeslot' => date('Y-m-d H:i:s'),
+    		'timeslot_id' => $timeslot_id
     		);
 
     	//if() get numbers from db
@@ -663,15 +688,25 @@ public function loadData()
 	  			$start = $hr . ":" . $min;
 	  			
 	  			$newTime = date('H:i',strtotime($start." +15 minutes"));
-	  			$time_slots[] = $start." To ".$newTime;
+	  			//$time_slots[] = $start." To ".$newTime;
 
-	  			$mack['mack'][]=$this->Bets_model->getLuckyNumberByTimeSlot($start);
+	  			//$mack['mack'][]=$this->Bets_model->getLuckyNumberByTimeSlot($start);
+           $time_slots[] = array('start' => $start,'end' => $newTime, );
+			  }
 
-			}
+        $c_time = date('H:i');
+        $time_slot_id = 1;
+        foreach ($time_slots as $key => $slots) {
+            if($c_time >= $slots['start'] && $c_time < $slots['end']){
+              $timeslot_id = $key;  
+            }
+        }
+
+        $result['lucky_numbers']=$this->Bets_model->getLuckyNumberAccToMonth($_GET['month']);
 		
-			print_r($mack); die;
+			//print_r($result['lucky_numbers']); die;
 
-			$result['time_slots'] = $time_slots;
+			//$result['time_slots'] = $time_slots;
 			
 			$result['months'] = array(
 				array( 'no' => date("m-Y"),
@@ -684,9 +719,9 @@ public function loadData()
 			/*echo "<pre>";
 			print_r($result['months']); die; 	*/
 			
-			// $month = $this->get('month');
-			//$start = $_GET['month'].'-01 00:00:00';
-			//$end = $_GET['month'].'-31 23:59:59';
+			//$month = $this->get('month');
+			/*$start = $_GET['month'].'-01 00:00:00';
+			$end = $_GET['month'].'-31 23:59:59';
 
 			for($i = 1; $i <= 31; $i++)
 			{
@@ -694,7 +729,7 @@ public function loadData()
 				$end = $_GET['month'].'-'.$i.' 23:59:59';
 
 				$result['lucky_numbers'][$i]=$this->Bets_model->getLuckyNumberAccToMonth($start,$end);
-			}
+			}*/
 
 			 /* $time = explode(' To ',$_GET['time']);
 			  $start = $time['0'];
@@ -707,8 +742,8 @@ public function loadData()
 		      //$result['lucky_numbers']=$this->Bets_model->getLuckyNumberAccToMonth($start,$end);
 		      //print_r($result);die;
 		      
-		      echo "<pre>";
-		      print_r($result['lucky_numbers']); die; 
+		      /*echo "<pre>";
+		      print_r($result['lucky_numbers']); die; */
           	  $this->load->view('admin/numbering',$result);
         		
      	}
