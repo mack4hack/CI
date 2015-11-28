@@ -295,13 +295,13 @@ class Bets_model extends CI_Model {
 	    $data = $query->result();
 
 	    //print_r($data); die;
-
+	    $numbers = array();
 	    foreach ($data as $d) {
 	    		//$d->timeslot; die;
 	    		$date = explode(' ', $d->timeslot)[0];
 	    		$datearr= explode('-', $date);
 				$day = end($datearr);		
-	    		$numbers [] = array('lucky_number' => $d->lucky_number,'date' => $day,'timeslot_id' => $d->timeslot_id, );
+	    		$numbers[] = array('lucky_number' => $d->lucky_number,'date' => $day,'timeslot_id' => $d->timeslot_id, );
 	    }
 
 	    if(!empty($query)){

@@ -679,35 +679,35 @@ public function loadData()
 
       	
           	     $number = 31;
-                       if(isset($_GET['month']))
-                       {
+                     //  if(isset($_GET['month']))
+                     //  {
                            
                            $result['months'] = array(
 
-				array( 'no' => date("m-Y"),
+				array( 'no' => date("Y-m"),
 						'name'=>date("F Y")
 						),
-				array(	'no' => date("m-Y",strtotime("-1 Months")),
+				array(	'no' => date("Y-m",strtotime("-1 Months")),
 						'name'=>date("F Y",strtotime("-1 Months"))
 				));
 
                            
                            
-                           $var  = explode('-', $_GET['month']);
+                           /*$var  = explode('-', $_GET['month']);
                            $year = $var[0];
                            $month = $var[1];
                                     $number = cal_days_in_month(CAL_GREGORIAN, $month, $year);
                                    
                        
                                     
-                                        $result['lucky_numbers']=$this->Bets_model->getLuckyNumberAccToMonth($_GET['month']);
+                                        $result['lucky_numbers']=$this->Bets_model->getLuckyNumberAccToMonth($_GET['month']);*/
 		
 			//print_r($result['lucky_numbers']); die;
 
 			//$result['time_slots'] = $time_slots;
 		
                        
-                        $result['number'] = $number;
+                        /*$result['number'] = $number;
                         for($i=0*60;$i<24*60;$i+=15){
                         $hr = floor($i/60);
                         if($hr < 9)
@@ -796,10 +796,10 @@ public function loadData()
 									         }
 								   }
                           //    }  
-                           }
+                           }*/
                         
                         
-                       }
+                    //   }
                        
                        
                         
@@ -810,7 +810,7 @@ public function loadData()
                        $this->load->view('admin/numbering',$result);
         	     	
         		
-                             }
+   }
 
                    
 
@@ -861,10 +861,144 @@ public function loadData()
 	}
 	
 	public function dealerAccountChart()
-	{
-		$dealer_id = $_GET['dealer'];
-		$result['data']=$this->Admin_model->getDealerHistoryById($dealer_id);
+  {
+    $dealer_id = $_GET['dealer'];
+    $result['data']=$this->Admin_model->getDealerHistoryById($dealer_id);
         $this->load->view('admin/dealer_account_chart',$result);
+  }
+
+  public function ajaxNumberingChart()
+	{
+		$number = 31;
+                       if(isset($_GET['month']))
+                       {
+                           
+                           $result['months'] = array(
+
+        array( 'no' => date("Y-m"),
+            'name'=>date("F Y")
+            ),
+        array(  'no' => date("Y-m",strtotime("-1 Months")),
+            'name'=>date("F Y",strtotime("-1 Months"))
+        ));
+
+                           
+                           
+                           $var  = explode('-', $_GET['month']);
+                           $year = $var[0];
+                           $month = $var[1];
+                                    $number = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+                                   
+                       
+                                    
+                                        $result['lucky_numbers']=$this->Bets_model->getLuckyNumberAccToMonth($_GET['month']);
+    
+      //print_r($result['lucky_numbers']); die;
+
+      //$result['time_slots'] = $time_slots;
+    
+                       
+                        $result['number'] = $number;
+                        for($i=0*60;$i<24*60;$i+=15){
+                        $hr = floor($i/60);
+                        if($hr < 9)
+                                $hr = '0'.$hr;
+
+                        $min = ($i/60-floor($i/60))*60;
+                        if($min < 9)
+                          $min = '0'.$min;
+
+                          $start = $hr . ":" . $min;
+
+                          $newTime = date('H:i',strtotime($start." +15 minutes"));
+                          $time_slots[] = $start." To ".$newTime;
+                         
+                          $time_slots1[] = array('start' => $start,'end' => $newTime, );
+                          
+                        }         
+                                    
+                       $result['data'] =array();
+                               
+                       for($i=0 ; $i<=96; $i++){
+               
+                        //   for($j=0 ; $j <= $number; $j++){
+                                     
+                   if($i == 0){
+                       for($j=0 ; $j <= $number; $j++){
+                        if($j==0){
+                          $result['data'][$i][$j] = array(
+
+                             'digit' => "Time slot",
+
+                         );
+                        }else{
+                        $result['data'][$i][$j] = array(
+
+                               'digit' => $j,
+
+                         );
+                        }
+                           }
+                   }
+                   if($i > 0){
+                       for($j=0 ; $j <= $number; $j++){
+                         
+                        if($j==0){
+                          
+                          foreach ($time_slots as $k => $v){
+                                                                                                                                                 
+                               if( $k == $i-1){
+                                 $digit =  $v;
+                               }
+                             }
+                          
+                          $result['data'][$i][$j] = array(
+
+                             'digit' => $digit,
+
+                         );
+                        }else{
+                        
+                          foreach($result['lucky_numbers'] as $lucky){
+                             if($lucky['date'] == $j && $lucky['timeslot_id'] == $i){
+                               
+                                $digit = $lucky['lucky_number'];  
+                                   $result['data'][$i][$j] = array(
+
+                                   'digit' => $digit,
+
+                                );break;
+
+                             }else{
+                               
+                              $result['data'][$i][$j] = array(
+
+                                   'digit' => '',
+
+                                );
+
+                               }
+                          
+                             
+                          }
+                          // echo "<pre>";print_r($result['data']); 
+                                                  
+                        }
+                           }
+                   }
+                          //    }  
+                           }
+                        
+                        
+                       }
+                       
+                       
+                        
+                    //die;
+                        
+                       
+                      // echo "<pre>";print_r($result['data']);die;
+                       $this->load->view('admin/ajax_numbering_chart',$result);
 	}	
 	
 	

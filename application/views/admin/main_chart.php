@@ -918,7 +918,7 @@ $current_timestamp = $date->getTimestamp();
 			
 	<!-- END CONTENT -->
 
-	<div id="my_popup" style="display:none;border:1px dotted gray;padding:.3em;background-color:white;position:absolute;width:200px;height:200px;left:100px;top:100px">
+<!-- 	<div id="my_popup" style="display:none;border:1px dotted gray;padding:.3em;background-color:white;position:absolute;width:200px;height:200px;left:100px;top:100px">
 	<div align="right">
 		<a href="javascript:hide_popup('my_popup')">close</a>
 	</div>
@@ -929,7 +929,7 @@ $current_timestamp = $date->getTimestamp();
 
 Somewhere in code
 <a href="javascript:show_popup('my_popup')">Show popup</a>
-	
+	 -->
 </div>
 </div>
 <!-- END CONTAINER -->
