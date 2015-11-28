@@ -128,7 +128,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 jQuery(document).ready(function() {     
-  Metronic.init(); // init metronic core components
+ // Metronic.init(); // init metronic core components
   Layout.init(); // init current layout
   Login.init();
   Demo.init();

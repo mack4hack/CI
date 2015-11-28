@@ -55,7 +55,9 @@ class Admin extends CI_Controller {
 		$result['first_digit_data']=$this->Bets_model->getfirstdigitchart();
 		$result['second_digit_data']=$this->Bets_model->getseconddigitchart();
 		$result['jodi_data']=$this->Bets_model->getjodichart();
-		$result['total_payout']=$this->Bets_model->getTotalPayoutAndBets();
+//	echo "<pre>";print_r($result['jodi_data']->result());die;
+                
+                                    $result['total_payout']=$this->Bets_model->getTotalPayoutAndBets();
 		$result['lucky_number']=$this->Bets_model->getLuckyNumber();
 		
 		$this->load->view('admin/main_chart',$result); 
@@ -191,8 +193,9 @@ class Admin extends CI_Controller {
                                     
                                     $sr_no++;
                            }
-                           
-                          $info['active_draw'] =  $this->aasort($info['active_draw'],"profit");
+                          if(!empty($info['active_draw'])){ 
+                              $info['active_draw'] =  $this->aasort($info['active_draw'],"profit");
+                          }
                           //$info['active_draw'] =  '';
                           // echo "<pre>";print_r($info['active_draw']);die;
                       
@@ -669,32 +672,9 @@ public function loadData()
 	}
 
 	public function Numbering_chart()
-    {
-      	if(isset($_GET['month'])){
-			
-		   	for($i=0*60;$i<24*60;$i+=15){
-				$hr = floor($i/60);
-				if($hr < 9)
-					$hr = '0'.$hr;
-				
-				$min = ($i/60-floor($i/60))*60;
-				if($min < 9)
-					$min = '0'.$min;
-
-	  			$start = $hr . ":" . $min;
-	  			
-	  			$newTime = date('H:i',strtotime($start." +15 minutes"));
-	  			$time_slots[] = $start." To ".$newTime;
-
-	  			$mack['mack'][]=$this->Bets_model->getLuckyNumberByTimeSlot($start);
-
-			}
-		
-			print_r($mack); die;
-
-			$result['time_slots'] = $time_slots;
-			
-			$result['months'] = array(
+                {
+      	   
+                       $result['months'] = array(
 				array( 'no' => date("m-Y"),
 						'name'=>date("F Y")
 						),
@@ -702,37 +682,92 @@ public function loadData()
 						'name'=>date("F Y",strtotime("-1 Months"))
 				));
 
-			/*echo "<pre>";
-			print_r($result['months']); die; 	*/
-			
-			// $month = $this->get('month');
-			//$start = $_GET['month'].'-01 00:00:00';
-			//$end = $_GET['month'].'-31 23:59:59';
+          	    $number = 31;
+                       if(isset($_GET['month']))
+                       {
+                           $var  = explode('-', $_GET['month']);
+                           $year = $var[0];
+                           $month = $var[1];
+                                    $number = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+                                   
+                       }
+                       $result['number'] = $number;
+                        for($i=0*60;$i<24*60;$i+=15){
+                        $hr = floor($i/60);
+                        if($hr < 9)
+                                $hr = '0'.$hr;
 
-			for($i = 1; $i <= 31; $i++)
-			{
-				$start = $_GET['month'].'-'.$i.' 00:00:00';
-				$end = $_GET['month'].'-'.$i.' 23:59:59';
+                        $min = ($i/60-floor($i/60))*60;
+                        if($min < 9)
+                          $min = '0'.$min;
 
-				$result['lucky_numbers'][$i]=$this->Bets_model->getLuckyNumberAccToMonth($start,$end);
-			}
+                          $start = $hr . ":" . $min;
 
-			 /* $time = explode(' To ',$_GET['time']);
-			  $start = $time['0'];
-			  $end = $time['1'];*/
-			  
-			  //$result['first_digit_data']=$this->Bets_model->getfirstdigitchartAccToTime($start,$end);
-              //$result['second_digit_data']=$this->Bets_model->getseconddigitchartAccToTime($start,$end);
-		      //$result['jodi_data']=$this->Bets_model->getjodichartAccToTime($start,$end);
-		      //$result['total_payout']=$this->Bets_model->getTotalPayoutAndBetsAccToTime($start,$end);
-		      //$result['lucky_numbers']=$this->Bets_model->getLuckyNumberAccToMonth($start,$end);
-		      //print_r($result);die;
-		      
-//		      echo "<pre>";
-//		      print_r($result['lucky_numbers']); die; 
-          	  $this->load->view('admin/numbering',$result);
-        		
-     	}
+                          $newTime = date('H:i',strtotime($start." +15 minutes"));
+                          $time_slots[] = $start." To ".$newTime;
+                         }
+                         
+                         
+                       for($i=0 ; $i<=96; $i++){
+                           
+                           if($i == 0){
+                               
+                               for($j=0 ; $j <= $number; $j++){
+
+                                      if($j==0){
+                                            $result['data'][$i][$j] = array(
+
+                                                 'digit' => "Time slot",
+
+                                         );
+                                      }else{
+                                        $result['data'][$i][$j] = array(
+
+                                                 'digit' => $j,
+
+                                         );
+                                      }
+                                 }
+                           }else{
+                                   
+                                   for($j=0 ; $j <= $number; $j++){
+
+                                      if($j==0){
+        
+                                          foreach ($time_slots as $k => $v){
+                                                                                                                                                 
+                                                 if( $k == $i-1){
+                                                     $digit =  $v;
+                                                 }
+                                           }
+                                         
+                                            $result['data'][$i][$j] = array(
+
+                                                 'digit' => $digit,
+
+                                         );
+                                        }else{
+                                        $result['data'][$i][$j] = array(
+
+                                                 'digit' => 1,
+
+                                         );
+                                      }
+                                 }
+                                      
+                           }
+                            
+                        }
+                        
+                       
+                     //die;   
+                     
+                        
+                       
+                       //echo "<pre>";print_r($result['data']);die;
+                       $this->load->view('admin/numbering',$result);
+        	     	
+     	
 	}
 	/**
 	 * Hashes the password to be stored in the database.
