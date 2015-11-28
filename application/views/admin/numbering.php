@@ -1,8 +1,4 @@
-<?php include'header.php';
-foreach ($lucky_numbers as $number) {
-	//echo $number->lucky_number;
-}
-?>
+<?php include'header.php';?>
 	<!-- BEGIN CONTENT -->
 	<div class="page-content-wrapper">
 		<div class="page-content" >
@@ -40,88 +36,33 @@ foreach ($lucky_numbers as $number) {
 								
 								<div class="portlet-body">
 								 <table class="table table-bordered table-hover">
-								   <thead>
-								     <tr>
-										<th>
-											 Times Slots\Dates
-										</th>
-									     <?php for($i=01; $i<=31 ;$i++) { ?>
-										  <th><?php echo $i; ?></th>
-									     <?php	} ?>
-
-								    </tr>
-								   </thead>
-								   <tbody>
-								   <tr class="active">
-								     	 <!-- <td> -->
-									<!-- 	 <?php foreach ($time_slots as $time_slot) { ?>
-										<tr><td><?php //echo $time_slot; ?></td> -->
-										
- 									<!-- 	<?php foreach ($lucky_numbers as $key => $number): ?>
-											<?php if(!empty($number)){
-												foreach ($number as $num) 
-												{
-													echo $num->digit;
-												}
-											} ?>
-										<?php endforeach ?> -->
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<th></th>
-										<tr>
-										<?php } ?>
-
-									     <!-- </td> -->
-								<!-- 	<?php for($i = 0 ; $i <= 9 ; $i++){ 
-											     $count = false; 
-											    foreach ($jodi_data->result() as $fd ) { 
-                                                 if($i == $fd->digit ){ 
-                                                 $count = true;	?>
-												  <td><?php echo $fd->bet_amount; ?></td>
-
-												<?php } 
-
-												}
-												if($count == false){ ?>
-
-													<th></th>
-												
-												<?php }
-
-												 }	?> -->
-									
-								   </tr>
-								   
-								   </tbody>
-								</table>
+								   <?php foreach($data as $key =>$value ) { 
+                                                                                                                                                        if($key == 0) {  ?> 
+                                                                                                                                                         <thead>   <tr>
+                                                                                                                                                          <?php  foreach($value as $a =>$b) {?>
+                                                                                                                                                         
+								                 <th><?php echo $b['digit']; ?></th>
+							                          
+                                                                                                                                                   <?php } ?>  
+                                                                                                                                                    </tr></thead>
+                                                                                                                                                   <?php }else{ ?>
+                                                                                                                                                       
+                                                                                                                                                       <tbody>   <tr>
+                                                                                                                                                          <?php  foreach($value as $a =>$b) {?>
+                                                                                                                                                            <?php if($a == 0){  ?>
+                                                                                                                                                               <th><?php echo $b['digit']; ?></th>
+                                                                                                                                                          <?php } else { ?>
+                                                                                                                                                            <td><?php echo $b['digit']; ?></td>
+                                                                                                                                                              <?php }  ?>
+                                                                                                                                                   <?php } ?>  
+                                                                                                                                                    </tr></tbody>
+                                                                                                                                                       
+                                                                                                                                                       
+                                                                                                                                                  <?php } ?>  
+                                                                                                                                                   <?php } ?>  
+                                                                    
+                                                                                                                                                
+                                                                                                                                                   </table>
 								</div>
 							</div>
 							<!-- END CHART PORTLET-->
