@@ -54,6 +54,7 @@ $current_timestamp = $date->getTimestamp();
 									<div class="caption">
 										<i class="icon-bar-chart font-green-haze"></i>
 										<span class="caption-subject bold uppercase font-green-haze"> Combination Chart</span>
+										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $jodi_bets;  ?> ) </span>
 									</div>
 								  </div>
 								
@@ -668,7 +669,7 @@ $current_timestamp = $date->getTimestamp();
 									<div class="caption">
 										<i class="icon-bar-chart font-green-haze"></i>
 										<span class="caption-subject bold uppercase font-green-haze">Single Digit First</span>
-										
+										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $first_bets;  ?> ) </span>
 									</div>
 									
 								</div>
@@ -747,6 +748,7 @@ $current_timestamp = $date->getTimestamp();
 									  <div class="caption">
 										<i class="icon-bar-chart font-green-haze"></i>
 										<span class="caption-subject bold uppercase font-green-haze">Single Digit Second </span>
+                                                                                                                                                                                    <span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $second_bets;  ?> ) </span>
 									  </div>
 									 </div>
 										<table class="table table-bordered table-hover">
@@ -883,9 +885,9 @@ $current_timestamp = $date->getTimestamp();
 										<!-- <div class="col-sm-3">
 											<input type="text" class="form-control" placeholder="Enter Result">
 										</div> -->
-										<div class="col-sm-1">
+<!--										<div class="col-sm-1">
 											<a href="javascript:show_popup('my_popup')"><button type="button" class="btn btn-primary" id="execute">Execute</button></a>
-										</div>
+										</div>-->
 									<?php }?>		
 											
 									<div class="col-sm-10">
@@ -900,15 +902,15 @@ $current_timestamp = $date->getTimestamp();
 												Block Player</a>	
 
 											
-											<a href="<?php echo base_url()?>admin/accountaccount" class="btn red">
+											<a href="<?php echo base_url()?>admin/accountaccount" class="btn green">
 											Admin Accounts	</a>
 
-											<a href="<?php echo base_url()?>admin/numbering_chart" class="btn green">
+											<a href="<?php echo base_url()?>admin/numbering_chart" class="btn red">
 											Numbering Chart	</a>
 
 										<?php }?>
 												
-											<a href="<?php echo base_url()?>admin/dealeraccount" class="btn red">
+											<a href="<?php echo base_url()?>admin/dealeraccount" class="btn green">
 											Dealer Accounts	</a>						
 									</div>
 								</div>			
@@ -922,7 +924,7 @@ $current_timestamp = $date->getTimestamp();
 			
 	<!-- END CONTENT -->
 
-	<div id="my_popup" style="display:block;border:1px dotted gray;padding:.3em;background-color:white;position:relative;width:750px;height:500px;left:100px;top:100px">
+	<div id="my_popup" style="display:none;border:1px dotted gray;padding:.3em;background-color:white;position:relative;width:750px;height:500px;left:100px;top:100px">
 		<div align="right">
 			<a href="javascript:hide_popup('my_popup')">close</a>
 		</div>

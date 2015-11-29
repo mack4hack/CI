@@ -325,6 +325,36 @@
 			return $this->Bets_model->getDealerId($player_id);
 		}
 		
+                
+                                  public function LuckyNumberChart_get(){
+		
+                                           $result =array();
+                                           if(isset($_GET['month'])){
+		       $result['lucky_numbers']=$this->Bets_model->getLuckyNumberAccToMonth($_GET['month']);
+                                           }else{
+                                               
+                                               $this->response([
+					'status' => FALSE,
+					'message' => 'please send a proper month in 0000-00 (year-month) format!'
+				], REST_Controller::HTTP_NOT_FOUND);
+                                           }
+		       if(!empty($result))
+			{	                
+				
+				$this->response([
+					'status' => TRUE,
+					'data'   => $result['lucky_numbers']
+					
+				], REST_Controller::HTTP_OK); // NOT_FOUND (404) being the HTTP response code
+				            
+			}else{   
+				$this->response([
+					'status' => FALSE,
+					'message' => 'No lucky numbers found!'
+				], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+			}
+			
+		}
 		
 	}
 		

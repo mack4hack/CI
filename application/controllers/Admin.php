@@ -17,11 +17,12 @@ class Admin extends CI_Controller {
 		
     }
 	public function index()
-    {
+    {            
+                  $result['profit'] = $this->Admin_model->getMonthlyProfit();
     	if (!$this->ion_auth->logged_in())
 			redirect('auth/login', 'refresh');
 		else
-    		$this->load->view('admin/dashboard');
+    		$this->load->view('admin/dashboard',$result);
     }
     
 	public function add_dealer()
@@ -48,14 +49,17 @@ class Admin extends CI_Controller {
         $start = strtotime($ash);        
       }
 
-		$result['first_digit_data']=$this->Bets_model->getfirstdigitchart();
+		$result['first_digit_data'] = $this->Bets_model->getfirstdigitchart();
 		$result['second_digit_data']=$this->Bets_model->getseconddigitchart();
 		$result['jodi_data']=$this->Bets_model->getjodichart();
-//	echo "<pre>";print_r($result['jodi_data']->result());die;
+	                  $result['jodi_bets'] = $result['jodi_data']->num_rows() ;
+	                  $result['first_bets'] = $result['first_digit_data']->num_rows() ;
+	                  $result['second_bets'] = $result['second_digit_data']->num_rows() ;
+        
                 
-                                    $result['total_payout']=$this->Bets_model->getTotalPayoutAndBets();
-    $result['lucky_number']=$this->Bets_model->getLuckyNumber();
-		$result['time_slots']= $time_slots;
+                                     $result['total_payout']=$this->Bets_model->getTotalPayoutAndBets();
+                                     $result['lucky_number']=$this->Bets_model->getLuckyNumber();
+		 $result['time_slots']= $time_slots;
 		
 		$this->load->view('admin/main_chart',$result); 
 	}
@@ -78,6 +82,10 @@ class Admin extends CI_Controller {
     	                  $result['first_digit_data']=$this->Bets_model->getfirstdigitchart();
 		$result['second_digit_data']=$this->Bets_model->getseconddigitchart();
 		$result['jodi_data']=$this->Bets_model->getjodichart();
+                                    $result['jodi_bets'] = $result['jodi_data']->num_rows() ;
+	                  $result['first_bets'] = $result['first_digit_data']->num_rows() ;
+	                  $result['second_bets'] = $result['second_digit_data']->num_rows() ;
+        
 		$result['total_payout']=$this->Bets_model->getTotalPayoutAndBets();
 		$result['lucky_number']=$this->Bets_model->getLuckyNumber();
                                     $this->load->view('admin/chart',$result);

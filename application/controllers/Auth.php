@@ -12,12 +12,13 @@ class Auth extends CI_Controller {
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 
 		$this->lang->load('auth');
+		$this->load->model('Admin_model'); 
 	}
 
 	// redirect if needed, otherwise display the user list
 	function index()
 	{
-
+                                      $result['profit'] = $this->Admin_model->getMonthlyProfit(); 
 		if (!$this->ion_auth->logged_in())
 		{
 			// redirect them to the login page
@@ -46,7 +47,7 @@ class Auth extends CI_Controller {
 			}
 
 			//$this->_render_page('auth/index', $this->data);
-			$this->_render_page('admin/dashboard');
+			$this->_render_page('admin/dashboard',$result);
 		}
 	}
 

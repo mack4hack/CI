@@ -34,7 +34,7 @@
 				<ul class="page-breadcrumb">
 					<li>
 						<i class="fa fa-home"></i>
-						<a href="index.html">Home</a>
+						 <a href="<?php echo base_url() ;?>admin">Home</a>
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
@@ -44,7 +44,8 @@
 				
 			</div>
 			<h3 class="page-title">
-			Dashboard <small>reports & statistics</small>
+			Dashboard 
+<!--                        <small>reports & statistics</small>-->
 			</h3>
 			<!-- END PAGE HEADER-->
 			<!-- BEGIN DASHBOARD STATS -->
@@ -56,7 +57,7 @@
 						</div>
 						<div class="details">
 							<div class="number">
-								 1349
+								<?php echo $profit;  ?>
 							</div>
 							<div class="desc">
 								 Lottery
