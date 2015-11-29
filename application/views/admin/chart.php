@@ -9,6 +9,7 @@
 									<div class="caption">
 										<i class="icon-bar-chart font-green-haze"></i>
 										<span class="caption-subject bold uppercase font-green-haze"> Combination Chart</span>
+                                                                                                                                                                                    <span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $jodi_bets;  ?> ) </span>                        
 									</div>
 								  </div>
 								
@@ -623,6 +624,7 @@
 									<div class="caption">
 										<i class="icon-bar-chart font-green-haze"></i>
 										<span class="caption-subject bold uppercase font-green-haze">Single Digit First</span>
+                                                                                                                                                                                <span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $first_bets;  ?> ) </span>
 										
 									</div>
 									
@@ -702,6 +704,7 @@
 									  <div class="caption">
 										<i class="icon-bar-chart font-green-haze"></i>
 										<span class="caption-subject bold uppercase font-green-haze">Single Digit Second </span>
+                                                                                                                                                                                        <span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $second_bets;  ?> ) </span>
 									  </div>
 									 </div>
 										<table class="table table-bordered table-hover">
