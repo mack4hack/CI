@@ -49,7 +49,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <body class="login">
 <!-- BEGIN LOGO -->
 <div class="logo">
-  <a href="index.html">
+    <a href="<?php echo base_url() ;?>admin">
   <img src="../assets/admin/layout/img/logo1.png" alt=""/>
   </a>
 </div>

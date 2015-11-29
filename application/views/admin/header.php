@@ -18,7 +18,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN HEAD -->
 <head>
 <meta charset="utf-8"/>
-<title>Money Play</title>
+<title>MoneyPlay</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -61,7 +61,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	<div class="page-header-inner">
 		<!-- BEGIN LOGO -->
 		<div class="page-logo">
-			<a href="index.html">
+			 <a href="<?php echo base_url() ;?>admin">
 			<img src="<?php echo base_url()?>assets/admin/layout/img/logo1.png" alt="logo" class="logo-default"/>
 			</a>
 			<div class="menu-toggler sidebar-toggler hide">
@@ -427,10 +427,10 @@ License: You must have a valid license purchased only from themeforest(the above
 					<!-- END SIDEBAR TOGGLER BUTTON -->
 				</li>
 				<!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
-				<li class="sidebar-search-wrapper">
-					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-					<!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
-					<!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
+<!--				<li class="sidebar-search-wrapper">
+					 BEGIN RESPONSIVE QUICK SEARCH FORM 
+					 DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box 
+					 DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box 
 					<form class="sidebar-search " action="extra_search.html" method="POST">
 						<a href="javascript:;" class="remove">
 						<i class="icon-close"></i>
@@ -442,25 +442,25 @@ License: You must have a valid license purchased only from themeforest(the above
 							</span>
 						</div>
 					</form>
-					<!-- END RESPONSIVE QUICK SEARCH FORM -->
-				</li>
+					 END RESPONSIVE QUICK SEARCH FORM 
+				</li>-->
 				<!-- BEGIN ANGULARJS LINK -->
 				<li class="tooltips" data-container="body" data-placement="right" data-html="true" data-original-title="AngularJS version demo">
-					<a href="<?php echo base_url()?>admin/">
+					<a href="<?php echo base_url() ; ?>admin/">
 					<i class="icon-paper-plane"></i>
 					<span class="title">
 					Dashboard</span>
 					</a>
 				</li>
 				<li class="tooltips" data-container="body" data-placement="right" data-html="true" data-original-title="AngularJS version demo">
-					<a href="<?php echo base_url()?>admin/add_dealer">
+					<a href="<?php echo base_url(); ?>admin/add_dealer">
 					<i class="icon-paper-plane"></i>
 					<span class="title">
 					Add Dealer</span>
 					</a>
 				</li>
 				<li class="tooltips" data-container="body" data-placement="right" data-html="true" data-original-title="AngularJS version demo">
-					<a href="<?php echo base_url()?>admin/add_player">
+					<a href="<?php echo base_url() ; ?>admin/add_player">
 					<i class="icon-paper-plane"></i>
 					<span class="title">
 					Add Player</span>

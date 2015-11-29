@@ -273,5 +273,23 @@ function delete_dealer($id)
 
 	  	return $data;
 	}
+        
+         function getMonthlyProfit()
+         {
+             
+                  date_default_timezone_set("Asia/Calcutta");
+	$now = getdate();
+	$rounded = $now['year']."-".$now['mon'];
+                  $this->db->select(' max(total) - min(total ) as profit');
+			$this->db->from('admin_history');
+                                                      $this->db->like('timeslot',$rounded);
+			$this->db->order_by('timeslot','desc');
+			$query=$this->db->get()->row();
+                                                      //echo $this->db->last_query();die;
+                        
+			$profit  = $query->profit;                                    
+			
+                                                      return $profit;
+         }
 
 }

@@ -17,11 +17,12 @@ class Admin extends CI_Controller {
 		
     }
 	public function index()
-    {
+    {            
+                  $result['profit'] = $this->Admin_model->getMonthlyProfit();
     	if (!$this->ion_auth->logged_in())
 			redirect('auth/login', 'refresh');
 		else
-    		$this->load->view('admin/dashboard');
+    		$this->load->view('admin/dashboard',$result);
     }
     
 	public function add_dealer()
