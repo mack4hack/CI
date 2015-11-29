@@ -922,18 +922,20 @@ $current_timestamp = $date->getTimestamp();
 			
 	<!-- END CONTENT -->
 
-<!-- 	<div id="my_popup" style="display:none;border:1px dotted gray;padding:.3em;background-color:white;position:absolute;width:200px;height:200px;left:100px;top:100px">
-	<div align="right">
-		<a href="javascript:hide_popup('my_popup')">close</a>
-	</div>
-<h3>Vooler PopUp</h3>
-<p>You contents go here, whatever style or anything</p>
-</div>
-
-
-Somewhere in code
-<a href="javascript:show_popup('my_popup')">Show popup</a>
-	 -->
+	<div id="my_popup" style="display:block;border:1px dotted gray;padding:.3em;background-color:white;position:relative;width:750px;height:500px;left:100px;top:100px">
+		<div align="right">
+			<a href="javascript:hide_popup('my_popup')">close</a>
+		</div>
+		<h3>Manual Numbers</h3>
+		<p>Enter Numbers for upcomming timeslots</p>
+		<?php $i=1; foreach($time_slots as $timeslot) { ?>
+			<input type="text" value="<?php echo $timeslot;?>" disabled /><input id="manual" name="ash[]" type="text"/>
+		<?php } ?>
+		<div style="float:right">
+			<button id="manuals">Submit</button>
+			<button >close</button>
+		</div>
+	</div>	
 </div>
 </div>
 <!-- END CONTAINER -->
@@ -1079,6 +1081,30 @@ QuickSidebar.init(); // init quick sidebar
 Demo.init(); // init demo features
   // FormValidation.init();
    //TableManaged.init();
+
+
+$('#manuals').click(function(){
+  	var saveData = {};
+	var i = 1;
+  $('#my_popup #manual').each(function(e){
+   	//while(i < 21){
+   		saveData.a = $(this).val();
+   		saveData.b = $(this).val();
+   		saveData.c = $(this).val();
+   		saveData.d = $(this).val();
+   		//i++;
+   //	}	
+  })
+  $.ajax({
+			  url: '<?php echo base_url("/admin/manualNumbers"); ?>',
+			  type: "POST",
+			  data: {numbers : saveData},
+			  dataType: "JSON"
+		});
+})
+
+
+
 });
 
 function loadlink(){

@@ -30,14 +30,32 @@ class Admin extends CI_Controller {
 	$this->load->view('admin/add_dealer',$result); 
 	}
 	public function lot_chart()
-    {        
+    { 
+      date_default_timezone_set("Asia/Calcutta");
+      $now = getdate();
+      $minutes = $now['minutes'] - $now['minutes']%15;
+
+      $rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
+      $start = strtotime('+15 minutes',strtotime($rounded));
+
+      $time_slots =array();
+      for($i=0 ;$i<20 ;$i++){
+        $ash = strtotime('+15 minutes',$start);
+        $ash =  date("H:i",$ash);
+        $start =  date("H:i",$start);
+        $time_slots[] = $start." To ".$ash; 
+
+        $start = strtotime($ash);        
+      }
+
 		$result['first_digit_data']=$this->Bets_model->getfirstdigitchart();
 		$result['second_digit_data']=$this->Bets_model->getseconddigitchart();
 		$result['jodi_data']=$this->Bets_model->getjodichart();
 //	echo "<pre>";print_r($result['jodi_data']->result());die;
                 
                                     $result['total_payout']=$this->Bets_model->getTotalPayoutAndBets();
-		$result['lucky_number']=$this->Bets_model->getLuckyNumber();
+    $result['lucky_number']=$this->Bets_model->getLuckyNumber();
+		$result['time_slots']= $time_slots;
 		
 		$this->load->view('admin/main_chart',$result); 
 	}
@@ -302,7 +320,7 @@ public function loadData()
 	  
 	 /* $city_id = explode('@',$_POST['city_id']);
 	  $city_name = $city_id[1];
-	  $cityid = $city_id[0];*/
+	  $cityid = $city_id[0];
 	  $cityid = $_POST['city_id'];
 	  $city_name = $_POST['city_name'];
 	  
@@ -1004,6 +1022,11 @@ public function loadData()
                        $this->load->view('admin/ajax_numbering_chart',$result);
 	}	
 	
-	
+	public function manualNumbers()
+  {
+    print_r($_POST['numbers']); die;
+    //$result['data']=$this->Admin_model->getAdminHistory();
+     //   $this->load->view('admin/admin_account',$result);
+  }
     
 }
