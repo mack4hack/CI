@@ -929,7 +929,7 @@ $current_timestamp = $date->getTimestamp();
 		<h3>Manual Numbers</h3>
 		<p>Enter Numbers for upcomming timeslots</p>
 		<?php $i=1; foreach($time_slots as $timeslot) { ?>
-			<input type="text" value="<?php echo $timeslot;?>" disabled /><input id="manual" name="ash[]" type="text"/>
+			<input type="text" value="<?php echo $timeslot;?>" disabled /><input id="manual" name="ash" type="text"/>
 		<?php } ?>
 		<div style="float:right">
 			<button id="manuals">Submit</button>
@@ -1083,24 +1083,24 @@ Demo.init(); // init demo features
    //TableManaged.init();
 
 
+
 $('#manuals').click(function(){
-  	var saveData = {};
-	var i = 1;
-  $('#my_popup #manual').each(function(e){
-   	//while(i < 21){
-   		saveData.a = $(this).val();
-   		saveData.b = $(this).val();
-   		saveData.c = $(this).val();
-   		saveData.d = $(this).val();
-   		//i++;
-   //	}	
-  })
-  $.ajax({
-			  url: '<?php echo base_url("/admin/manualNumbers"); ?>',
-			  type: "POST",
-			  data: {numbers : saveData},
-			  dataType: "JSON"
-		});
+	var saveData = {};
+	var i =1 ;
+
+	$('#my_popup #manual').each(function(){
+
+	saveData[i] = $(this).val();
+	i++;
+
+	})
+	saveData = JSON.stringify(saveData);
+    $.ajax({
+		  url: '<?php echo base_url("/admin/manualNumbers"); ?>',
+		  type: "POST",
+		  data: {numbers : saveData},
+		  dataType: "JSON"
+	});
 })
 
 
