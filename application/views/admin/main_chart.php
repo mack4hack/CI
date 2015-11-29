@@ -885,9 +885,9 @@ $current_timestamp = $date->getTimestamp();
 										<!-- <div class="col-sm-3">
 											<input type="text" class="form-control" placeholder="Enter Result">
 										</div> -->
-										<div class="col-sm-1">
+<!--										<div class="col-sm-1">
 											<a href="javascript:show_popup('my_popup')"><button type="button" class="btn btn-primary" id="execute">Execute</button></a>
-										</div>
+										</div>-->
 									<?php }?>		
 											
 									<div class="col-sm-10">
@@ -902,15 +902,15 @@ $current_timestamp = $date->getTimestamp();
 												Block Player</a>	
 
 											
-											<a href="<?php echo base_url()?>admin/accountaccount" class="btn red">
+											<a href="<?php echo base_url()?>admin/accountaccount" class="btn green">
 											Admin Accounts	</a>
 
-											<a href="<?php echo base_url()?>admin/numbering_chart" class="btn green">
+											<a href="<?php echo base_url()?>admin/numbering_chart" class="btn red">
 											Numbering Chart	</a>
 
 										<?php }?>
 												
-											<a href="<?php echo base_url()?>admin/dealeraccount" class="btn red">
+											<a href="<?php echo base_url()?>admin/dealeraccount" class="btn green">
 											Dealer Accounts	</a>						
 									</div>
 								</div>			

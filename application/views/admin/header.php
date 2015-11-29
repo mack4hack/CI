@@ -445,21 +445,21 @@ License: You must have a valid license purchased only from themeforest(the above
 					 END RESPONSIVE QUICK SEARCH FORM 
 				</li>-->
 				<!-- BEGIN ANGULARJS LINK -->
-				<li class="tooltips" data-container="body" data-placement="right" data-html="true" data-original-title="AngularJS version demo">
+				<li class="tooltips" data-container="body" data-placement="right" data-html="true" >
 					<a href="<?php echo base_url() ; ?>admin/">
 					<i class="icon-paper-plane"></i>
 					<span class="title">
 					Dashboard</span>
 					</a>
 				</li>
-				<li class="tooltips" data-container="body" data-placement="right" data-html="true" data-original-title="AngularJS version demo">
+				<li class="tooltips" data-container="body" data-placement="right" data-html="true" >
 					<a href="<?php echo base_url(); ?>admin/add_dealer">
 					<i class="icon-paper-plane"></i>
 					<span class="title">
 					Add Dealer</span>
 					</a>
 				</li>
-				<li class="tooltips" data-container="body" data-placement="right" data-html="true" data-original-title="AngularJS version demo">
+				<li class="tooltips" data-container="body" data-placement="right" data-html="true" >
 					<a href="<?php echo base_url() ; ?>admin/add_player">
 					<i class="icon-paper-plane"></i>
 					<span class="title">
