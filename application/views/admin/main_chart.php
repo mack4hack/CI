@@ -885,9 +885,9 @@ $current_timestamp = $date->getTimestamp();
 										<!-- <div class="col-sm-3">
 											<input type="text" class="form-control" placeholder="Enter Result">
 										</div> -->
-<!--										<div class="col-sm-1">
+										<div class="col-sm-1">
 											<a href="javascript:show_popup('my_popup')"><button type="button" class="btn btn-primary" id="execute">Execute</button></a>
-										</div>-->
+										</div>
 									<?php }?>		
 											
 									<div class="col-sm-10">
