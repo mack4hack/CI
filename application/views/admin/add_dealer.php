@@ -16,14 +16,7 @@
 				<div class="col-md-12">
 					<!-- BEGIN VALIDATION STATES-->
 						<form action="" id="form_sample_1" method="POST"  class="form-horizontal">
-						<div class="alert alert-danger display-hide">
-										<button class="close" data-close="alert"></button>
-										Oops...You have missed some input values. 
-									</div>
-									<div class="alert alert-success display-hide">
-										<button class="close" data-close="alert"></button>
-										Data saved succesfully.
-									</div>
+						
 						<div class="portlet light bordered">
 									<div class="portlet-title">
 										<div class="caption">
@@ -46,11 +39,11 @@
 											<div class="form-body">
 												<div class="row">
 												<div class="col-md-1"></div>
-													<div class="col-md-4">
+													<div class="col-md-4" style="display:none;">
 														<div class="form-group">
 															
 															<div class="col-md-9">
-																<select name="country_id" class="form-control required" onchange="selectState(this.options[this.selectedIndex].value)">
+																<select name="country_id" class="form-control " onchange="selectState(this.options[this.selectedIndex].value)">
 								<option value="">Select country</option>
 													<?php foreach($list->result() as $country)
 																	{
@@ -234,6 +227,15 @@
 										<!-- END FORM-->
 									</div>
 								</div>
+								<div class="alert alert-danger display-hide">
+									<button class="close" data-close="alert"></button>
+									Oops...You have missed some input values. 
+									<span id="alert-danger"></span>
+								</div>
+								<div class="alert alert-success display-hide">
+									<button class="close" data-close="alert"></button>
+									<span id="alert-success"></span>
+								</div>
 								</form>
 					<!-- END VALIDATION STATES-->
 					<div class="row">
@@ -412,6 +414,7 @@ QuickSidebar.init(); // init quick sidebar
 Demo.init(); // init demo features
    FormValidation.init();
    //TableManaged.init();
+   selectState(1);
 });
 </script>
 		 <script>
@@ -432,26 +435,27 @@ Demo.init(); // init demo features
 			    $.ajax({
                    url:url,
                    type:method,
-                   data:data
-                }).done(function(data){
-				//var returnedData = JSON.parse(data);
-				location.reload(true);
-                   if(data =='0')
-                    {   //alert(data);
-						$("#submit").html('Save');
-                        $("#error").show('fast');
-                        $('#error').delay(5000).fadeOut('slow');
-						
-                        //$('#form_sample_1')[0].reset();
-                    }
-                    else
-                    {	//alert(data);
-						$('#error').delay(5000).fadeOut('slow');
-						//$('#form_sample_1')[0].reset();
-                    throw new Error('go');
-                    } 
-                });
-			   }
+                   data:data,
+                   dataType:"JSON",
+                   success : function(data){
+	                   if(data.success == 'true')
+	                    {   //alert(data);
+							$("#submit").html('Save');
+							$("#alert-success").html(data.msg);
+	                        //$("#error").show('fast');
+	                        //$('#error').delay(5000).fadeOut('slow');
+							//location.reload(true);
+	                        $('#form_sample_1')[0].reset();
+	                    }
+	                    else
+	                    {	//alert(data);
+	                    	$("#submit").html('Save');
+							$("#alert-danger").html(data.msg);
+							$('#form_sample_1')[0].reset();
+	                    	//throw new Error('go');
+	                    } 
+                	}
+			   	})
             });
              
             
