@@ -16,14 +16,7 @@
 				<div class="col-md-12">
 					<!-- BEGIN VALIDATION STATES-->
 						<form action="" id="form_sample_1" method="POST"  class="form-horizontal">
-						<div class="alert alert-danger display-hide">
-										<button class="close" data-close="alert"></button>
-										Oops...You have missed some input values. 
-									</div>
-									<div class="alert alert-success display-hide">
-										<button class="close" data-close="alert"></button>
-										Data saved succesfully.
-									</div>
+						
 						<div class="portlet light bordered">
 									<div class="portlet-title">
 										<div class="caption">
@@ -260,6 +253,16 @@
 										<!-- END FORM-->
 									</div>
 								</div>
+								<div class="alert alert-danger display-hide">
+									<button class="close" data-close="alert"></button>
+									Oops...You have missed some input values. 
+									<span id="alert-danger"></span>
+								</div>
+								<div class="alert alert-success display-hide">
+									<button class="close" data-close="alert"></button>
+									<!-- Data saved succesfully. -->
+									<span id="alert-success"></span>
+								</div>
 								</form>
 					<!-- END VALIDATION STATES-->
 					<div class="row">
@@ -467,24 +470,27 @@ Demo.init(); // init demo features
 			    $.ajax({
                    url:url,
                    type:method,
-                   data:data
-                }).done(function(data){
-				//var returnedData = JSON.parse(data);
-                   if(data =='0')
-                    {   //alert(data);
-						$("#submit").html('Save');
-                        $("#error").show('fast');
-                        $('#error').delay(5000).fadeOut('slow');
-						location.reload(true);
-                       // $('#form_sample_1')[0].reset();
-                    }
-                    else
-                    {	//alert(data);
-						$('#error').delay(5000).fadeOut('slow');
-						$('#form_sample_1')[0].reset();
-                    	throw new Error('go');
-                    } 
-                });
+                   data:data,
+                   dataType:"JSON",
+                   success : function(data){
+	                   if(data.success == 'true')
+	                    {   //alert(data);
+							$("#submit").html('Save');
+							$("#alert-success").html(data.msg);
+	                        //$("#error").show('fast');
+	                        //$('#error').delay(5000).fadeOut('slow');
+							//location.reload(true);
+	                        $('#form_sample_1')[0].reset();
+	                    }
+	                    else
+	                    {	//alert(data);
+	                    	$("#submit").html('Save');
+							$("#alert-danger").html(data.msg);
+							$('#form_sample_1')[0].reset();
+	                    	//throw new Error('go');
+	                    } 
+                	}
+                })
 			   }
             });
              

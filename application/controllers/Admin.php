@@ -465,13 +465,13 @@ public function loadData()
           "group_id" => 3,
           
     );
-    $insert = $this->db->insert('users_groups',$user_group);
+    $insert1 = $this->db->insert('users_groups',$user_group);
 
 	  //Code to store data in dealer player table//
 	  $data1 = array("dealer_id" => $_POST['dealer_id'],
 					 "player_id" => $player_id,
 					 "created_time" => date("Y-m-d h:s:a"));
-	  $insert1 = $this->db->insert('dealer_player',$data1);
+	  $insert2 = $this->db->insert('dealer_player',$data1);
 	  //code end//
 	  $this->load->library('email');
 
@@ -481,14 +481,26 @@ public function loadData()
 	//$this->email->bcc('them@their-example.com'); 
 
 	$this->email->subject('Account Creation');
-	$this->email->message("Dear ".$_POST['fname'] ." ".$_POST['lname']."<BR><BR>Thank you for registering for bidding game.<BR>Your credentials are as below.<BR><BR>Link: ".base_url()."<BR>Username : ".$_POST['email']."<BR>Password : ".$_POST['password']."<BR><BR>Thanks Team");	
+	$this->email->message("Dear ".$_POST['fname'] ." ".$_POST['lname']."<BR><BR>Thank you for registering for bidding game.<BR>Your credentials are as below.<BR><BR><BR>Username : ".$user_code."<BR>Password : ".$_POST['password']."<BR><BR>Thanks Team");	
 	$this->email->set_mailtype('html');
 	$this->email->send();
 
 	//echo $this->email->print_debugger();
 	  //echo $this->db->last_query();
 	  //$success =0 ;
-	  echo $insert > 0 ?  1 : 0;
+	 // echo $insert > 0 ?  1 : 0;
+
+    if($insert > 0){
+      $json['success'] = 'true';
+      $json['msg'] = 'Player created successfully!   Code : '.$user_code.' & Password : '.$_POST['password'].''; 
+    }
+    else{
+      $json['success'] = 'false';
+      $json['msg'] = 'Player not created'; 
+    }
+    
+    echo json_encode($json);
+
 	  
   }  
   
@@ -569,7 +581,7 @@ public function loadData()
           "group_id" => 2,
           
     );
-    $insert = $this->db->insert('users_groups',$user_group);
+    $insert2 = $this->db->insert('users_groups',$user_group);
 
 
 
@@ -588,7 +600,16 @@ public function loadData()
 	//echo $this->email->print_debugger();
 	  //echo $this->db->last_query();
 	  //$success =0 ;
-	  echo $insert > 0 ?  1 : 0;
+	 if($insert > 0){
+      $json['success'] = 'true';
+      $json['msg'] = 'Dealer created successfully!   Code : '.$user_code.' & Password : '.$_POST['password'].''; 
+    }
+    else{
+      $json['success'] = 'false';
+      $json['msg'] = 'Dealer not created'; 
+    }
+    
+    echo json_encode($json);
 	  
   }  
   
