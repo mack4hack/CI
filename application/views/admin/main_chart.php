@@ -969,44 +969,44 @@ $current_timestamp = $date->getTimestamp();
 <!-- CODE FOR DIGITAL CLOCK -->
 
 <script>
-	flag = true;
-	timer = '';
-	var diem = "AM";
-	setInterval(function(){renderTime();},1000);
-	function renderTime() {
-		if ( flag ) {
-			timer = <?php echo $current_timestamp;?>*1000;
-		}
-		var d = new Date(timer);
-
-		var h = d.getHours();
-		var m = d.getMinutes();
-		var s = d.getSeconds();
-
-	    if (h == 0) {
-			h = 12;
-		} else if (h > 12) { 
-			h = h - 12;
-			diem="PM";
-		}
-		if (h < 10) {
-			h = "0" + h;
-		}
-		if (m < 10) {
-			m = "0" + m;
-		}
-		if (s < 10) {
-			s = "0" + s;
-		}
-		
-	    var myClock = document.getElementById('clockDisplay');
-		myClock.textContent = h + ":" + m + ":" + s + " " + diem;
-		myClock.innerText = h + ":" + m + ":" + s + " " + diem;
-
-		flag = false;
-		timer = timer + 1000;
-	}
-	renderTime();
+//	flag = true;
+//	timer = '';
+//	var diem = "AM";
+//	setInterval(function(){renderTime();},1000);
+//	function renderTime() {
+//		if ( flag ) {
+//			timer = <?php echo $current_timestamp;?>*1000;
+//		}
+//		var d = new Date(timer);
+//
+//		var h = d.getHours();
+//		var m = d.getMinutes();
+//		var s = d.getSeconds();
+//
+//	    if (h == 0) {
+//			h = 12;
+//		} else if (h > 12) { 
+//			h = h - 12;
+//			diem="PM";
+//		}
+//		if (h < 10) {
+//			h = "0" + h;
+//		}
+//		if (m < 10) {
+//			m = "0" + m;
+//		}
+//		if (s < 10) {
+//			s = "0" + s;
+//		}
+//		
+//	    var myClock = document.getElementById('clockDisplay');
+//		myClock.textContent = h + ":" + m + ":" + s + " " + diem;
+//		myClock.innerText = h + ":" + m + ":" + s + " " + diem;
+//
+//		flag = false;
+//		timer = timer + 1000;
+//	}
+//	renderTime();
 
 	flag1 = true;
 	timer1 = '';

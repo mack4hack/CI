@@ -98,7 +98,7 @@ function delete_dealer($id)
 	{
 
 		$first = floor($jodi/10);
-    	$second = $jodi%10;
+    	                  $second = $jodi%10;
 
 		date_default_timezone_set("Asia/Calcutta");
 		$now = getdate();
@@ -106,7 +106,7 @@ function delete_dealer($id)
 		$minutes = $now['minutes'] - $now['minutes']%15;
 
 		$rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
-    	$max_time = date('Y-m-d H:i:s');
+                         	$max_time = date('Y-m-d H:i:s');
     	
 
 		$this->db->set('result',1,FALSE);

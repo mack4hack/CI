@@ -710,7 +710,13 @@ public function loadData()
 				'id'=>$player->player_id,
 				'bet_amount'=>$player->payout,
 				);
+                                    $debit = array(
+				'id'=>1,
+				'bet_amount'=>$player->payout,
+		        ); 
+                
     		$this->Bets_model->credit($credit);
+    		$this->Bets_model->debit($debit);   //debit payout from admin
     	}
 
     	$this->Admin_model->updatePlayerHistory($jodi);
@@ -824,8 +830,10 @@ public function loadData()
 	public function ajax_block_player(){
 		  
 		   if(isset($_POST['user_id']) ){
- 			     $data = array("is_blocked" => 1, 
-		                );
+ 			     $data = array(
+                                                            "is_blocked" => 1, 
+                                                            "active" => 0, 
+		                     );
 					  $this->db->where('id', $_POST['user_id']);
 					  $update = $this->db->update('user_master', $data);
 					  //echo $this->db->last_query();

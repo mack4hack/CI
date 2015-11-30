@@ -131,3 +131,9 @@ delete FROM `countries` where id != 101;
 delete FROM `states` where country_id != 101;
 
 delete FROM `cities` where state_id not in (SELECT id FROM `states` )  ;
+
+
+
+
+ALTER TABLE `admin_history` ADD `commission` INT( 11 ) NOT NULL AFTER `bet_amount` ;
+ALTER TABLE `dealer_history` ADD `commission` INT( 11 ) NOT NULL AFTER `bet_amount` ;

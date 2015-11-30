@@ -140,8 +140,21 @@ class Bets_model extends CI_Model {
 		$this->db->where('id',$data['id']);
 		$this->db->update('user_master');
 	}
+	function debit_dealer($data)
+	{
+		$this->db->set('present_amount','present_amount-'.$data['bet_amount'],FALSE);
+		$this->db->where('id',$data['id']);
+		$this->db->update('user_master');
+	}
 
 	function credit($data)
+	{
+		$this->db->set('present_amount','present_amount+'.$data['bet_amount'],FALSE);
+		$this->db->where('id',$data['id']);
+		$this->db->update('user_master');
+	}
+	
+                  function credit_dealer($data)
 	{
 		$this->db->set('present_amount','present_amount+'.$data['bet_amount'],FALSE);
 		$this->db->where('id',$data['id']);
@@ -198,7 +211,10 @@ class Bets_model extends CI_Model {
 	}
 	
 	function cancelbet($player_id,$digit,$game_type){
-	    date_default_timezone_set("Asia/Calcutta");
+	    
+                        
+            
+                      date_default_timezone_set("Asia/Calcutta");
 		$now = getdate();
 		$now['minutes'] = $now['minutes'] - 1;
 		$minutes = $now['minutes'] - $now['minutes']%15;
@@ -220,26 +236,64 @@ class Bets_model extends CI_Model {
 		    $this->db->where('jodi_digit',$digit);
 		    $this->db->where('game_type',3);
 		}
-        $this->db->where("timeslot >= '".$rounded."' and timeslot <= '".$date."' ");
-        $this->db->order_by('id','desc');
-        $this->db->limit(1);
-        $query = $this->db->get()->row();
+                                    $this->db->where("timeslot >= '".$rounded."' and timeslot <= '".$date."' ");
+                                    $this->db->order_by('id','desc');
+                                    $this->db->limit(1);
+                                    $query = $this->db->get()->row();
         
         if(!empty($query)){
 		        $bet_amount = $query->bet_amount;   //debit from admin and credit back to player
 		        $id = $query->id;  //delete the bet from history
-		        $debit = array(
+                        
+                        
+                                             //calclulate commison and dealer id
+                                             $this->db->select('dealer_id');
+	                           $this->db->from('dealer_player');
+	                           $this->db->where('player_id',$player_id);
+                                             $query1 = $this->db->get()->row();
+	                           $dealer_id = $query1->dealer_id;
+                                             
+                                             $bet_amount_dealer = $bet_amount * 0.05;
+                                   
+                                   
+                                             $debit = array(
 				'id'=>1,
-				'bet_amount'=>$bet_amount,
-				);
-
-			    $credit = array(
+				'bet_amount'=>$bet_amount - $bet_amount_dealer,
+		        );
+		        $debit_dealer = array(
+				'id'=>$dealer_id,
+				'bet_amount'=> $bet_amount_dealer,
+		        );
+;
+		        $credit = array(
 				'id'=>$player_id,
 				'bet_amount'=>$bet_amount,
-				);
+	                           );
 		        $this->debit($debit);
-				$this->credit($credit);
-		        $this->db->delete('player_history', array('id' => $id));  
+		        $this->debit_dealer($debit_dealer) ;   //debit deslers commision
+		        $this->credit($credit);
+		        $this->db->delete('player_history', array('id' => $id));
+                        
+                                            //delete admin history and delaer history
+                                            $this->db->select('id');
+	                          $this->db->from('admin_history');
+	                          $this->db->where('player_id',$player_id);
+	                          $this->db->order_by('id','desc');
+	                          $this->db->limit(1);
+                                            $query2 = $this->db->get()->row();
+                                            $delete_id  =  $query2->id;
+                                            $this->db->delete('admin_history', array('id' => $delete_id));
+                                            
+                                            $this->db->select('id');
+	                          $this->db->from('dealer_history');
+	                          $this->db->where('player_id',$player_id);
+	                          $this->db->order_by('id','desc');
+	                          $this->db->limit(1);
+                                            $query3 = $this->db->get()->row();
+                                            $delete_id1  =  $query3->id;
+                                            $this->db->delete('dealer_history', array('id' => $delete_id1));
+                        
+                          
 		        return true;
 		        	
 			}else{

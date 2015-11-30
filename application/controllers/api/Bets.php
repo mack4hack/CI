@@ -47,20 +47,38 @@
 				'timeslot' => date('Y-m-d H:i:s')
 				);
 
+                                                               //calclulate commison and dealer id
+                                             $this->db->select('dealer_id');
+	                           $this->db->from('dealer_player');
+	                           $this->db->where('player_id',$this->post('player_id'));
+                                             $query1 = $this->db->get()->row();
+	                           $dealer_id = $query1->dealer_id;
+                                             
+                                             $bet_amount_dealer = $jodi_data['bet_amount'] * 0.05;
+                        
+                        
+                                                  
 			$debit = array(
 				'id'=>$this->post('player_id'),
 				'bet_amount'=>$jodi_data['bet_amount'],
 				);
 
+			$credit_dealer = array(
+				'id'=>$dealer_id,
+				'bet_amount'=>$bet_amount_dealer,
+				);
 			$credit = array(
 				'id'=>1,
-				'bet_amount'=>$jodi_data['bet_amount'],
+				'bet_amount'=>$jodi_data['bet_amount'] - $bet_amount_dealer,
 				);
+                        
+                        
 
 			$admin_history = array(
 				'game_type'=>1,
 				'player_id'=>$this->post('player_id'),
-				'bet_amount'=>$jodi_data['bet_amount'],
+				'bet_amount'=>$jodi_data['bet_amount'] ,
+                                                                        'commission'=>$bet_amount_dealer ,
 				'timeslot' => date('Y-m-d H:i:s')
 				);
 
@@ -69,6 +87,7 @@
 				'player_id'=>$this->post('player_id'),
 				'dealer_id'=>$this->getDealerId($this->post('player_id')),
 				'bet_amount'=>$jodi_data['bet_amount'],
+				'commission'=>$bet_amount_dealer,
 				'timeslot' => date('Y-m-d H:i:s')
 				);
 
@@ -83,6 +102,8 @@
 				$this->Bets_model->debit($debit);
 				
 				$this->Bets_model->credit($credit);
+                                
+                                                                        $this->Bets_model->credit_dealer($credit_dealer);
 				
 				$success = true; 
 				            
@@ -132,20 +153,38 @@
 				'timeslot' => date('Y-m-d H:i:s')
 				);
 			
+			                                       //calclulate commison and dealer id
+                                             $this->db->select('dealer_id');
+	                           $this->db->from('dealer_player');
+	                           $this->db->where('player_id',$this->post('player_id'));
+                                             $query1 = $this->db->get()->row();
+	                           $dealer_id = $query1->dealer_id;
+                                             
+                                             $bet_amount_dealer = $jodi_data['bet_amount'] * 0.05;
+                        
+                        
+                                                  
 			$debit = array(
 				'id'=>$this->post('player_id'),
 				'bet_amount'=>$jodi_data['bet_amount'],
 				);
 
+			$credit_dealer = array(
+				'id'=>$dealer_id,
+				'bet_amount'=>$bet_amount_dealer,
+				);
 			$credit = array(
 				'id'=>1,
-				'bet_amount'=>$jodi_data['bet_amount'],
+				'bet_amount'=>$jodi_data['bet_amount'] - $bet_amount_dealer,
 				);
+                        
+                        
 
 			$admin_history = array(
 				'game_type'=>2,
 				'player_id'=>$this->post('player_id'),
 				'bet_amount'=>$jodi_data['bet_amount'],
+                                                                        'commission'=> $bet_amount_dealer ,
 				'timeslot' => date('Y-m-d H:i:s')
 				);
 
@@ -154,6 +193,7 @@
 				'player_id'=>$this->post('player_id'),
 				'dealer_id'=>$this->getDealerId($this->post('player_id')),
 				'bet_amount'=>$jodi_data['bet_amount'],
+				'commission'=>$bet_amount_dealer,
 				'timeslot' => date('Y-m-d H:i:s')
 				);
 
@@ -168,6 +208,8 @@
 				$this->Bets_model->debit($debit);
 				
 				$this->Bets_model->credit($credit);
+				
+                                                                        $this->Bets_model->credit_dealer($credit_dealer);
 
 				 $success = true; 
 				            
@@ -218,20 +260,35 @@
 				'payout'=>$payout,
 				'timeslot' => date('Y-m-d H:i:s')
 				);
-
+                                                       //calclulate commison and dealer id
+                                             $this->db->select('dealer_id');
+	                           $this->db->from('dealer_player');
+	                           $this->db->where('player_id',$this->post('player_id'));
+                                             $query1 = $this->db->get()->row();
+	                           $dealer_id = $query1->dealer_id;
+                                             
+                                             $bet_amount_dealer = $jodi_data['bet_amount'] * 0.05;
+                        
+                        
+                                                  
 			$debit = array(
 				'id'=>$this->post('player_id'),
 				'bet_amount'=>$jodi_data['bet_amount'],
 				);
 
+			$credit_dealer = array(
+				'id'=>$dealer_id,
+				'bet_amount'=>$bet_amount_dealer,
+				);
 			$credit = array(
 				'id'=>1,
-				'bet_amount'=>$jodi_data['bet_amount'],
+				'bet_amount'=>$jodi_data['bet_amount'] - $bet_amount_dealer,
 				);
 
 			$admin_history = array(
 				'game_type'=>3,
 				'player_id'=>$this->post('player_id'),
+				'commission'=> $bet_amount_dealer ,
 				'bet_amount'=>$jodi_data['bet_amount'],
 				'timeslot' => date('Y-m-d H:i:s')
 				);
@@ -241,6 +298,7 @@
 				'player_id'=>$this->post('player_id'),
 				'dealer_id'=>$this->getDealerId($this->post('player_id')),
 				'bet_amount'=>$jodi_data['bet_amount'],
+				'commission'=>$bet_amount_dealer,
 				'timeslot' => date('Y-m-d H:i:s')
 				);
 
@@ -255,6 +313,8 @@
 				$this->Bets_model->debit($debit);
 				
 				$this->Bets_model->credit($credit);
+				
+                                                                         $this->Bets_model->credit_dealer($credit_dealer);
                  $success = true; 
 				          
 			 }else{   
