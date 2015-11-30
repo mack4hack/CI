@@ -328,13 +328,13 @@ public function loadData()
 	  
 	 /* $city_id = explode('@',$_POST['city_id']);
 	  $city_name = $city_id[1];
-	  $cityid = $city_id[0];
+	  $cityid = $city_id[0]; */
 	  $cityid = $_POST['city_id'];
 	  $city_name = $_POST['city_name'];
 	  
 	  //die;
 	 
-	$ar = array('role_id'=>'3','city_id'=>$cityid);
+	  $ar = array('role_id'=>'3','city_id'=>$cityid);
 	  $ret = $this->db
        ->where($ar)
        ->count_all_results('user_master');
@@ -369,11 +369,19 @@ public function loadData()
 	  );
 	  
 	  $insert = $this->db->insert('user_master',$data);
-	  $lastid = $this->db->insert_id();
-	  
+
+    $player_id = $this->db->insert_id();
+
+    //save data in user_groups
+    $user_group = array("user_id" => $player_id,
+          "group_id" => 3,
+          
+    );
+    $insert = $this->db->insert('users_groups',$user_group);
+
 	  //Code to store data in dealer player table//
 	  $data1 = array("dealer_id" => $_POST['dealer_id'],
-					 "player_id" => $lastid,
+					 "player_id" => $player_id,
 					 "created_time" => date("Y-m-d h:s:a"));
 	  $insert1 = $this->db->insert('dealer_player',$data1);
 	  //code end//
@@ -465,6 +473,18 @@ public function loadData()
 					"active" => 1
 	  );
 	  $insert = $this->db->insert('user_master',$data);
+
+    $user_id = $this->db->insert_id();
+
+    //save data in user_groups
+    $user_group = array("user_id" => $user_id,
+          "group_id" => 2,
+          
+    );
+    $insert = $this->db->insert('users_groups',$user_group);
+
+
+
 	  $this->load->library('email');
 
 	$this->email->from('credentials@pixmadness.in', 'Bidding');

@@ -125,3 +125,9 @@ CREATE TABLE IF NOT EXISTS `dealer_history` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;    
 
 ALTER TABLE `lucky_numbers` ADD `timeslot_id` INT(11) NOT NULL ;
+
+delete FROM `countries` where id != 101;
+
+delete FROM `states` where country_id != 101;
+
+delete FROM `cities` where state_id not in (SELECT id FROM `states` )  ;

@@ -25,7 +25,7 @@ function getData($loadType,$loadId)
 	
 	$this->db->select($fieldList);
     $this->db->from($table);
-    $this->db->where($fieldName, $loadId);
+  //  $this->db->where($fieldName, $loadId);
     
     
     $this->db->order_by($orderByField, 'asc');

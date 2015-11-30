@@ -45,11 +45,11 @@
 										<!-- BEGIN FORM-->
 											<div class="form-body">
 												<div class="row">
-													<div class="col-md-3">
+													<div class="col-md-3" style="display:none;">
 														<div class="form-group">
 															
 															<div class="col-md-9">
-																<select name="country_id" class="form-control required" onchange="selectState(this.options[this.selectedIndex].value)">
+																<select name="country_id" class="form-control" onchange="selectState(this.options[this.selectedIndex].value)">
 								<option value="">Select country</option>
 													<?php foreach($list->result() as $country)
 																	{
@@ -435,7 +435,7 @@ function myFunction() {
 <!-- BEGIN FOOTER -->
 <?php include'footer.php';?> 
 <!-- END FOOTER -->
-<script type="text/javascript" src="<?php echo base_url()?>assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
+<script src="<?php echo base_url()?>assets/global/plugins/jquery-validation/js/jquery.validate.min.js"></script>
 <script src="<?php echo base_url()?>assets/admin/pages/scripts/form-validation.js"></script> 
 <script>
 $(document).ready(function() {   
@@ -446,6 +446,7 @@ QuickSidebar.init(); // init quick sidebar
 Demo.init(); // init demo features
    FormValidation.init();
   // TableManaged.init();
+  selectState(1);
 });
 </script>
 		 <script>
@@ -481,7 +482,7 @@ Demo.init(); // init demo features
                     {	//alert(data);
 						$('#error').delay(5000).fadeOut('slow');
 						$('#form_sample_1')[0].reset();
-                    throw new Error('go');
+                    	throw new Error('go');
                     } 
                 });
 			   }
