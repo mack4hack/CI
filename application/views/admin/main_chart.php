@@ -18,20 +18,20 @@ $current_timestamp = $date->getTimestamp();
 				  <div class="col-md-12">
 				    <div class="well margin-top-20">
 										<div class="row">
-											<div class="col-sm-3">
+<!--											<div class="col-sm-3">
 												<a href="<?php echo base_url()?>admin/info" class="btn red">
 															Info <i class="fa fa-edit"></i>
 															</a>
-											</div>
-											<div class="col-sm-3">
+											</div>-->
+<!--											<div class="col-sm-3">
 												<div id="clockDisplay" class="clockStyle"></div>
+											</div>-->
+											<div class="col-sm-6">
+												<a id="countdownDisplay" class="btn red" style="font-size:16px;font-weight:bold;"  ></a>
 											</div>
-											<div class="col-sm-3">
-												<div id="countdownDisplay" class="clockStyle"></div>
-											</div>
-											<div class="col-sm-3">
-												<a href="javascript:;" class="btn red">
-														Last Number:	<span id="ash"><?php echo $lucky_number;  ?></span> 	
+											<div class="col-sm-6"   >
+												<a href="javascript:;" class="btn red"   style="float:right;" >
+														Last Result:	<span id="ash"   style="font-size:17px;font-weight:bold;"  ><?php echo $lucky_number;  ?></span> 	
 
 <!--
 															<i class="fa fa-edit"></i>
@@ -55,6 +55,13 @@ $current_timestamp = $date->getTimestamp();
 										<i class="icon-bar-chart font-green-haze"></i>
 										<span class="caption-subject bold uppercase font-green-haze"> Combination Chart</span>
 										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $jodi_bets;  ?> ) </span>
+									</div>
+									<div class="caption" style="float:right;">
+										
+										<span class="caption-subject bold uppercase font-green-haze"> Bet Amount</span>
+										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['bet_amount_jodi'];  ?> ) </span>
+										<span class="caption-subject bold uppercase font-green-haze"> Payout</span>
+										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['payout_jodi'];  ?> ) </span>
 									</div>
 								  </div>
 								
@@ -672,6 +679,15 @@ $current_timestamp = $date->getTimestamp();
 										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $first_bets;  ?> ) </span>
 									</div>
 									
+									<div class="caption" style="float:right;">
+										
+										<span class="caption-subject bold uppercase font-green-haze"> Bet Amount</span>
+										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['bet_amount_first'];  ?> ) </span>
+										<span class="caption-subject bold uppercase font-green-haze"> Payout</span>
+										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['payout_first'];  ?> ) </span>
+									</div>
+									
+									
 								</div>
 								
 									<table class="table table-bordered table-hover">
@@ -750,6 +766,15 @@ $current_timestamp = $date->getTimestamp();
 										<span class="caption-subject bold uppercase font-green-haze">Single Digit Second </span>
                                                                                                                                                                                     <span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $second_bets;  ?> ) </span>
 									  </div>
+                                                                                                                                                                     <div class="caption" style="float:right;">
+										
+										<span class="caption-subject bold uppercase font-green-haze"> Bet Amount</span>
+										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['bet_amount_second'];  ?> ) </span>
+										<span class="caption-subject bold uppercase font-green-haze"> Payout</span>
+										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['payout_second'];  ?> ) </span>
+									</div>
+                                                                         
+                                                                         
 									 </div>
 										<table class="table table-bordered table-hover">
 										<thead>
@@ -839,7 +864,7 @@ $current_timestamp = $date->getTimestamp();
 											
 								</div>	
 								<BR>
-								<div class="row">
+<!--								<div class="row">
 											<div class="col-sm-3">
 												<b>Winning Number</b>
 											</div>
@@ -855,7 +880,7 @@ $current_timestamp = $date->getTimestamp();
 												
 											</div>
 								</div>
-								<BR>
+								<BR>-->
 								<div class="row">
 											<div class="col-sm-3">
 												<b>Total Payouts</b>
@@ -895,14 +920,14 @@ $current_timestamp = $date->getTimestamp();
 											<a href="<?php echo base_url()?>admin/daysummary" class="btn red">
 														Day Summary</a>
 														
-											<a href="<?php echo base_url()?>admin/add_amount" class="btn green">
-													Add Amount</a>
+<!--											<a href="<?php //echo base_url()?>admin/add_amount" class="btn green">
+													Add Amount</a>-->
 												
-											<a href="<?php echo base_url()?>admin/block_player" class="btn red">
-												Block Player</a>	
+<!--											<a href="<?php //echo base_url()?>admin/block_player" class="btn red">
+												Block Player</a>	-->
 
 											
-											<a href="<?php echo base_url()?>admin/accountaccount" class="btn green">
+											<a href="<?php echo base_url()?>admin/adminaccount" class="btn green">
 											Admin Accounts	</a>
 
 											<a href="<?php echo base_url()?>admin/numbering_chart" class="btn red">
@@ -942,18 +967,7 @@ $current_timestamp = $date->getTimestamp();
 </div>
 <!-- END CONTAINER -->
 <!-- CODE FOR DIGITAL CLOCK -->
-<style>
-.clockStyle {
-	background-color:#cb5a5e;
-	padding:6px;
-	color:#fff;
-	font-family:"Arial Black", Gadget, sans-serif;
-    font-size:16px;
-    font-weight:bold;
-	letter-spacing: 2px;
-	display:inline;
-}
-</style>
+
 <script>
 	flag = true;
 	timer = '';
@@ -1061,8 +1075,8 @@ $current_timestamp = $date->getTimestamp();
 		}
 
 	    var myClock = document.getElementById('countdownDisplay');
-		myClock.textContent = m1 + ":" + s1 + " Sec";
-		myClock.innerText = m1 + ":" + s1 + " Sec";
+		myClock.textContent = m1 + ":" + s1 ;
+		myClock.innerText = m1 + ":" + s1 ;
 
 		flag1 = false;
 		timer1 = timer1 + 1000;
@@ -1087,6 +1101,8 @@ Demo.init(); // init demo features
 
 
 $('#manuals').click(function(){
+
+
 	var saveData = {};
 	var i =1 ;
 
@@ -1104,6 +1120,7 @@ $('#manuals').click(function(){
 		  dataType: "JSON"
 	});
 })
+
 
 
 

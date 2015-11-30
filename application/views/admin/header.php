@@ -1,3 +1,9 @@
+<?php 
+date_default_timezone_set('Asia/Calcutta');
+$date = new DateTime();
+$current_timestamp = $date->getTimestamp();
+?>
+
 <!DOCTYPE html>
 <!-- 
 Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.5
@@ -60,9 +66,9 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!-- BEGIN HEADER INNER -->
 	<div class="page-header-inner">
 		<!-- BEGIN LOGO -->
-		<div class="page-logo">
+		<div class="page-logo  col-sm-2">
 			 <a href="<?php echo base_url() ;?>admin">
-			<img src="<?php echo base_url()?>assets/admin/layout/img/logo1.png" alt="logo" class="logo-default"/>
+			<img   style="margin:0px;"  src="<?php echo base_url()?>assets/admin/layout/img/logo1.png" alt="logo" class="logo-default"/>
 			</a>
 			<div class="menu-toggler sidebar-toggler hide">
 				<!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
@@ -74,7 +80,13 @@ License: You must have a valid license purchased only from themeforest(the above
 		</a>
 		<!-- END RESPONSIVE MENU TOGGLER -->
 		<!-- BEGIN TOP NAVIGATION MENU -->
-		<div class="top-menu">
+		  <div class="col-sm-4"  style="padding:5px 0px 0px 0px">
+                                             <div id="clockDisplay" class="btn red"   style="float:right; font-size:16px;font-weight:bold;  "></div>
+                                        </div> 
+                                     <div class="top-menu col-sm-2">
+                                                   
+                                                             
+                                                 
 			<ul class="nav navbar-nav pull-right">
 				<!-- BEGIN NOTIFICATION DROPDOWN -->
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
@@ -466,9 +478,74 @@ License: You must have a valid license purchased only from themeforest(the above
 					Add Player</span>
 					</a>
 				</li>
+				<li class="tooltips" data-container="body" data-placement="right" data-html="true" >
+					<a href="<?php echo base_url()?>admin/info" >
+					<i class="icon-paper-plane"></i>
+					<span class="title">
+					Info</span>
+					</a>
+				</li>
+				<li class="tooltips" data-container="body" data-placement="right" data-html="true" >
+					<a href="<?php echo base_url()?>admin/add_amount" >
+					<i class="icon-paper-plane"></i>
+					<span class="title">
+					Add Amount</span>
+					</a>
+				</li>
+				<li class="tooltips" data-container="body" data-placement="right" data-html="true" >
+					<a href="<?php echo base_url()?>admin/block_player" >
+					<i class="icon-paper-plane"></i>
+					<span class="title">
+					Block Player</span>
+					</a>
+				</li>
 				<!-- END ANGULARJS LINK -->
 				</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>
 	</div>
 	<!-- END SIDEBAR -->
+        <script type="text/javascript">
+	flag = true;
+	timer = '';
+	var diem = "AM";
+	setInterval(function(){renderTime();},1000);
+	function renderTime() {
+		if ( flag ) {
+			timer = <?php  echo $current_timestamp; ?> * 1000;
+		}
+		var d = new Date(timer);
+
+		var h = d.getHours();
+		var m = d.getMinutes();
+		var s = d.getSeconds();
+
+	    if (h == 0) {
+			h = 12;
+		} else if (h > 12) { 
+			h = h - 12;
+			diem="PM";
+		}
+		if (h < 10) {
+			h = "0" + h;
+		}
+		if (m < 10) {
+			m = "0" + m;
+		}
+		if (s < 10) {
+			s = "0" + s;
+		}
+		
+	    var myClock = document.getElementById('clockDisplay');
+		myClock.textContent = h + ":" + m + ":" + s + " " + diem;
+		myClock.innerText = h + ":" + m + ":" + s + " " + diem;
+
+		flag = false;
+		timer = timer + 1000;
+	}
+	renderTime();
+
+	flag1 = true;
+	timer1 = '';
+	
+</script>

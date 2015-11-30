@@ -60,7 +60,7 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!-- BEGIN HEADER INNER -->
 	<div class="page-header-inner">
 		<!-- BEGIN LOGO -->
-		<div class="page-logo">
+		<div class="page-logo col-sm-2">
 			<a href="index.html">
 			<img src="<?php echo base_url()?>assets/admin/layout/img/logo.png" alt="logo" class="logo-default"/>
 			</a>
@@ -74,7 +74,10 @@ License: You must have a valid license purchased only from themeforest(the above
 		</a>
 		<!-- END RESPONSIVE MENU TOGGLER -->
 		<!-- BEGIN TOP NAVIGATION MENU -->
-		<div class="top-menu">
+                                     <div class="col-sm-4"  style="padding:5px 0px 0px 0px">
+                                             <div id="clockDisplay" class="clockStyle"   style="float:right;"></div>
+                                        </div> 
+		<div class="top-menu col-sm-2">
 			<ul class="nav navbar-nav pull-right">
 				<!-- BEGIN NOTIFICATION DROPDOWN -->
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
