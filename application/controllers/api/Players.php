@@ -208,8 +208,16 @@
 
 	function login_post()
 	{
+		
 		if($this->ion_auth->login($this->input->post('identity'), $this->input->post('password')))
-		{	                
+		{	
+			if($this->ion_auth->in_group('admin') OR $this->ion_auth->in_group('dealer') )
+			{
+				$this->response([
+					'status' => FALSE,
+					'message' => 'You must be a player to login into App.'
+				], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code			
+			}                
 			$user_id = $this->ion_auth->get_user_id();
 			date_default_timezone_set("Asia/Calcutta");
 			$this->response([

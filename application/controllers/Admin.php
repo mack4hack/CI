@@ -641,9 +641,34 @@ public function loadData()
     		'timeslot_id' => $timeslot_id
     		);
 
-    	//if() get numbers from db
+    	
+      // $curr_time = date('Y-m-d H:i:s');
+      $now = getdate();
+      $minutes = $now['minutes'] - $now['minutes']%15;
 
-    	if($this->Admin_model->saveLuckyNumbers($luck_numbers))
+      $start = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":01";
+      $end = strtotime('+15 minutes',strtotime($start));
+      $ends = date('Y-m-d H:i:s',$end);
+      // echo $start.'..'.$ends; die;
+
+      $this->db->select('lucky_number');
+      $this->db->from('lucky_numbers');
+      $this->db->where('timeslot >=',$start);
+      $this->db->where('timeslot <',$ends);
+      $query = $this->db->get()->row();
+
+      if(!empty($query->lucky_number)){
+          
+          $jodi = $query->lucky_number;  
+          
+          $json = array(
+          'status' => TRUE,
+          'message' => 'Lucky Number Alredy Present'
+        );
+
+        echo json_encode($json);
+      }
+      elseif($this->Admin_model->saveLuckyNumbers($luck_numbers))
     	{
     		$json = array(
 					'status' => TRUE,
@@ -1120,9 +1145,77 @@ public function loadData()
 	
 	public function manualNumbers()
   {
-    print_r($_POST['numbers']); die;
-    //$result['data']=$this->Admin_model->getAdminHistory();
-     //   $this->load->view('admin/admin_account',$result);
+    // print_r($_POST['numbers']); die;
+    $numbers = json_decode($_POST['numbers']);
+    date_default_timezone_set("Asia/Calcutta");
+    //  echo "<pre>";print_r($numbers);die;     
+        $twenty_time_slots =array();
+        $now = getdate();
+        $minutes = $now['minutes'] - $now['minutes']%15;
+
+          $rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
+          $start = $rounded;
+        foreach($numbers as $number){
+
+          $this->db->select('draw_id');
+          $this->db->order_by('id','desc');
+          $this->db->limit(1);
+          $query=$this->db->get('lucky_numbers')->row();        
+          if(!empty($query))
+          {
+               $latest_id  =    $query->draw_id;
+               if($latest_id == 99999)
+               {
+                   $latest_id = 0;
+               }
+               $latest_id = $latest_id +1 ;
+          }
+        
+          
+           
+
+          $start = strtotime('+15 minutes',strtotime($start));
+          $ash = strtotime('+15 minutes',$start);
+          $ash =  date("H:i",$ash);
+          $start =  date("H:i",$start);
+          $twenty_time_slots = $start." To ".$ash; 
+          $timeslots = $start." To ".$ash; 
+        //echo $start;
+          $this->db->select('timeslot_id');
+          $this->db->from('timeslots');
+          $this->db->where('timeslot',$timeslots);
+          $query=$this->db->get()->row();
+       //echo $this->db->last_query();
+          $timeslot_id = $query->timeslot_id;
+          $a = $start;
+          $insert_time = date("Y-m-d H:i:s" ,strtotime($a)); 
+//echo $start;
+          $time = strtotime('+1 second',strtotime($insert_time)); 
+        
+          $time =  date("Y-m-d H:i:s" ,$time) ;
+         // $start = strtotime($start);
+  
+          $luck_numbers = array(
+          'lucky_number' => $number,
+          'draw_id' => $latest_id,
+          'timeslot' => $time,
+          'timeslot_id' => $timeslot_id
+          );
+
+          if($this->Admin_model->saveLuckyNumbers($luck_numbers))
+            $flag = true;
+
+        }
+      if($flag)
+      {
+        $json = array(
+          'status' => TRUE,
+          'message' => 'Lucky Numbers Saved'
+        );
+
+        echo json_encode($json);
+      }
+
   }
     
 }
