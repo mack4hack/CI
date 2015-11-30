@@ -202,18 +202,19 @@ function delete_dealer($id)
 		   	$query=$this->db->get()->row();
 		   	$day_total = $query->total;
 
-		   	/*$this->db->select('sum(total) as total');
+		   	$this->db->select('sum(commission) as commission');
 			$this->db->from('dealer_history');
 			$this->db->group_by('timeslot');
 		   	$query=$this->db->get()->row();
-		   	$total = $query->total;*/
+		   	$commission = $query->commission;
 
 		   	$data[]= array(
 		   			'timeslot'=>$timeslot->timeslot,
 		   			'credited'=>$credited,
 		   			'debited'=>$debited,
 		   			'day_total'=>$day_total,
-		   			'final_total'=>$day_total
+		   			'final_total'=>$day_total,
+		   			'commission'=>$commission
 		   		);
 		}
 
@@ -256,18 +257,19 @@ function delete_dealer($id)
 		   	$query=$this->db->get()->row();
 		   	$day_total = $query->total;
 
-		   	/*$this->db->select('sum(total) as total');
+		   	$this->db->select('sum(commission) as commission');
 			$this->db->from('dealer_history');
-			$this->db->group_by('timeslot');
+			$this->db->where('timeslot',$timeslot->timeslot);
 		   	$query=$this->db->get()->row();
-		   	$total = $query->total;*/
+		   	$commission = $query->commission;
 
 		   	$data[]= array(
 		   			'timeslot'=>$timeslot->timeslot,
 		   			'credited'=>$credited,
 		   			'debited'=>$debited,
 		   			'day_total'=>$day_total,
-		   			'final_total'=>$day_total
+		   			'final_total'=>$day_total,
+		   			'commission'=>$commission
 		   		);
 		}
 

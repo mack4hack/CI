@@ -1044,7 +1044,7 @@ public function loadData()
 	public function dealerAccount()
 	{
 		$result['dealers']=$this->Admin_model->get_dealers();
-		$result['data']=$this->Admin_model->getDealerHistory();
+		//$result['data']=$this->Admin_model->getDealerHistory();
         $this->load->view('admin/dealer_account',$result);
 	}
 	

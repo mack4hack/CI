@@ -27,6 +27,9 @@
 										 Debited
 									</th>
 									<th>
+										 Commission
+									</th>
+									<th>
 										 Total
 									</th>
 								    </tr>
@@ -38,10 +41,11 @@
 									     	 	<td><?php echo $d['timeslot']; ?></td>
 									     	 	<td><?php echo $d['credited']; ?></td>
 									     	 	<td><?php echo $d['debited']; ?></td>
+									     	 	<td><?php echo $d['commission']; ?></td>
 									     	 	<td><?php echo $d['day_total']; ?></td>
 						     	 	 	</tr>
 								    <?php 	} }
-								    else echo "<tr class='active'><th style='text-align:center'; colspan='4'>No Records Found</th></tr>"; ?>
+								    else echo "<tr class='active'><th style='text-align:center'; colspan='5'>No Records Found</th></tr>"; ?>
 								</tbody>
 								</table>
 								</div>
