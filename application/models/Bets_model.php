@@ -81,14 +81,14 @@ class Bets_model extends CI_Model {
 		$rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
 		$max_time = date('Y-m-d H:i:s');
        
-                                    $this->db->select('sum(bet_amount ) as bet_amount ,digit,sum(payout ) as payout');
-                                    $this->db->from('game_lottery');
-                                    $this->db->where('game_type',3);
-                                    $this->db->where("timeslot >= '".$rounded."' and timeslot < '".$max_time."' ");
-                                    $this->db->group_by('digit');
-                                    $query=$this->db->get();
+                      $this->db->select('sum(bet_amount ) as bet_amount ,digit,sum(payout ) as payout');
+	    $this->db->from('game_lottery');
+	    $this->db->where('game_type',3);
+	    $this->db->where("timeslot >= '".$rounded."' and timeslot < '".$max_time."' ");
+	    $this->db->group_by('digit');
+	    $query=$this->db->get();
 	    
-	                  return $query;
+	    return $query;
 	}
 	function getjodichartAccToTime($start,$end)
 	{
@@ -332,6 +332,26 @@ class Bets_model extends CI_Model {
 		  return "";	
 		}
 	}
+        
+        
+          public function getNumberOfBets($game_type)
+          {
+              date_default_timezone_set("Asia/Calcutta");
+		$now = getdate();
+		$now['minutes'] = $now['minutes'] - 1;
+		$minutes = $now['minutes'] - $now['minutes']%15;
+		$rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
+		$max_time = date('Y-m-d H:i:s');
+		//echo $max_time;die;
+                                    $this->db->select('*');
+                                    $this->db->from('game_lottery');
+                                    $this->db->where('game_type',$game_type);
+                                    $this->db->where("timeslot >= '".$rounded."' and timeslot < '".$max_time."' ");
+                                    //$this->db->group_by('digit');
+                                    $query=$this->db->get();
+                                    return $query;
+              
+          }
 	
 
 }

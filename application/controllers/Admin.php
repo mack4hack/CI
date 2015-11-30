@@ -52,22 +52,65 @@ class Admin extends CI_Controller {
 		$result['first_digit_data'] = $this->Bets_model->getfirstdigitchart();
 		$result['second_digit_data']=$this->Bets_model->getseconddigitchart();
 		$result['jodi_data']=$this->Bets_model->getjodichart();
-	                  $result['jodi_bets'] = $result['jodi_data']->num_rows() ;
-	                  $result['first_bets'] = $result['first_digit_data']->num_rows() ;
-	                  $result['second_bets'] = $result['second_digit_data']->num_rows() ;
-        
+                                 
+                                     $bet_amount_jodi = 0;
+                                     $payout_jodi = 0;
+                                    if(!empty($result['jodi_data'])){
+                                        
+                                          foreach($result['jodi_data']->result() as $bets)
+                                          {
+                                                     $bet_amount_jodi   = $bet_amount_jodi + $bets->bet_amount;
+                                                     $payout_jodi   = $bet_amount_jodi + $bets->payout;
+                                          }
+                                    }
+                                    $bet_amount_first = 0;
+                                     $payout_first = 0;
+                                    if(!empty($result['first_digit_data'])){
+                                        
+                                          foreach($result['first_digit_data']->result() as $bets)
+                                          {
+                                                     $bet_amount_first   = $bet_amount_first + $bets->bet_amount;
+                                                     $payout_first  = $bet_amount_first + $bets->payout;
+                                          }
+                                    }
+                                     $bet_amount_second = 0;
+                                     $payout_second = 0;
+                                    if(!empty($result['second_digit_data'])){
+                                        
+                                          foreach($result['second_digit_data']->result() as $bets)
+                                          {
+                                                     $bet_amount_second   = $bet_amount_second + $bets->bet_amount;
+                                                     $payout_second   = $bet_amount_second + $bets->payout;
+                                          }
+                                    }
+                                    $bet_amount_and_payout = array(
+                                          
+                                            'bet_amount_jodi' => $bet_amount_jodi,
+                                            'payout_jodi' => $payout_jodi,
+                                            'bet_amount_first' => $bet_amount_first,
+                                            'payout_first' => $payout_first,
+                                            'bet_amount_second' => $bet_amount_second,
+                                            'payout_second' => $payout_second,
+                                    );
                 
-                                     $result['total_payout']=$this->Bets_model->getTotalPayoutAndBets();
-                                     $result['lucky_number']=$this->Bets_model->getLuckyNumber();
-		 $result['time_slots']= $time_slots;
+	                  $result['jodi_bets'] = $this->Bets_model->getNumberOfBets(3)->num_rows();
+	                  $result['first_bets'] = $this->Bets_model->getNumberOfBets(1)->num_rows();
+	                  $result['second_bets'] = $this->Bets_model->getNumberOfBets(2)->num_rows();
+                                   
+                     
+                          
+                                    $result['bets_and_payout']  = $bet_amount_and_payout;
+                                    $result['total_payout']=$this->Bets_model->getTotalPayoutAndBets();
+                                    $result['lucky_number']=$this->Bets_model->getLuckyNumber();
+		$result['time_slots']= $time_slots;
 		
 		$this->load->view('admin/main_chart',$result); 
 	}
 	public function edit()
     {        
 	$this->db->where('id',$this->uri->segment(3));
-    $query=$this->db->get('user_master');
-    //$query1 = $query->result();
+                  $query=$this->db->get('user_master');
+                    //$query1 = $query->result();
 	$result['edit_data'] = $query;
 	$this->load->view('admin/edit',$result); 
 	}
@@ -82,10 +125,55 @@ class Admin extends CI_Controller {
     	                  $result['first_digit_data']=$this->Bets_model->getfirstdigitchart();
 		$result['second_digit_data']=$this->Bets_model->getseconddigitchart();
 		$result['jodi_data']=$this->Bets_model->getjodichart();
-                                    $result['jodi_bets'] = $result['jodi_data']->num_rows() ;
-	                  $result['first_bets'] = $result['first_digit_data']->num_rows() ;
-	                  $result['second_bets'] = $result['second_digit_data']->num_rows() ;
-        
+                                  $result['jodi_bets'] = $this->Bets_model->getNumberOfBets(3)->num_rows();
+	                  $result['first_bets'] = $this->Bets_model->getNumberOfBets(1)->num_rows();
+	                  $result['second_bets'] = $this->Bets_model->getNumberOfBets(2)->num_rows();
+                          
+                          
+                          
+                          
+                          
+                                    $bet_amount_jodi = 0;
+                                     $payout_jodi = 0;
+                                    if(!empty($result['jodi_data'])){
+                                        
+                                          foreach($result['jodi_data']->result() as $bets)
+                                          {
+                                                     $bet_amount_jodi   = $bet_amount_jodi + $bets->bet_amount;
+                                                     $payout_jodi   = $bet_amount_jodi + $bets->payout;
+                                          }
+                                    }
+                                    $bet_amount_first = 0;
+                                     $payout_first = 0;
+                                    if(!empty($result['first_digit_data'])){
+                                        
+                                          foreach($result['first_digit_data']->result() as $bets)
+                                          {
+                                                     $bet_amount_first   = $bet_amount_first + $bets->bet_amount;
+                                                     $payout_first  = $bet_amount_first + $bets->payout;
+                                          }
+                                    }
+                                     $bet_amount_second = 0;
+                                     $payout_second = 0;
+                                    if(!empty($result['second_digit_data'])){
+                                        
+                                          foreach($result['second_digit_data']->result() as $bets)
+                                          {
+                                                     $bet_amount_second   = $bet_amount_second + $bets->bet_amount;
+                                                     $payout_second   = $bet_amount_second + $bets->payout;
+                                          }
+                                    }
+                                    $bet_amount_and_payout = array(
+                                          
+                                            'bet_amount_jodi' => $bet_amount_jodi,
+                                            'payout_jodi' => $payout_jodi,
+                                            'bet_amount_first' => $bet_amount_first,
+                                            'payout_first' => $payout_first,
+                                            'bet_amount_second' => $bet_amount_second,
+                                            'payout_second' => $payout_second,
+                                    );       
+                          
+                                    $result['bets_and_payout']  = $bet_amount_and_payout;
 		$result['total_payout']=$this->Bets_model->getTotalPayoutAndBets();
 		$result['lucky_number']=$this->Bets_model->getLuckyNumber();
                                     $this->load->view('admin/chart',$result);
