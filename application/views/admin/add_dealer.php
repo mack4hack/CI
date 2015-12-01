@@ -257,7 +257,7 @@
 							<div class="caption">
 								<i class="fa fa-globe"></i>All Dealers
 							</div>
-							
+							<input type="text" id="search_dealer"  class="col-sm-3"    placeholder ="Search  Dealer"   style="color:black;float: right;margin-top:8px;"  name="search_dealer" >
 						</div>
 						<div class="portlet-body">
 							
@@ -499,7 +499,39 @@ Demo.init(); // init demo features
 						$('#submit').prop('disabled', true);
                     } 
                 });
-			}
-        </script>
+		
+                }
+
+                            
+                    // New selector
+                    jQuery.expr[':'].Contains = function(a, i, m) {
+                     return jQuery(a).text().toUpperCase()
+                         .indexOf(m[3].toUpperCase()) >= 0;
+                    };
+
+                    // Overwrites old selecor
+                    jQuery.expr[':'].contains = function(a, i, m) {
+                     return jQuery(a).text().toUpperCase()
+                         .indexOf(m[3].toUpperCase()) >= 0;
+                    };
+
+             
+             
+                 $('#search_dealer').keyup(function () { 
+                    $('#sample_1  tbody tr').hide();
+                         $("#sample_1  tbody tr:Contains('"+ $("#search_dealer").val() +"')  ").show();
+                 });
+ 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 </script>
         
     
