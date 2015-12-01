@@ -771,35 +771,15 @@ public function loadData()
     }
     public function Summary()
     {
-          if(isset($_GET['time'])){
-			
-			   for($i=0*60;$i<=24*60;$i+=15){
-			$hr = floor($i/60);
-			if($hr < 9)
-				$hr = '0'.$hr;
-			
-			$min = ($i/60-floor($i/60))*60;
-			if($min < 9)
-				$min = '0'.$min;
-
-    
-    
-            
-            
-  			$start = date('Y-m-d')." ". $hr . ":" . $min;
-  			
-  			$newTime = date("Y-m-d H:i",strtotime($start." +15 minutes"));
-  			$time_slots[] = $start." To ".$newTime;
-		}
-		
-		$result['time_slots'] = $time_slots;
+      if(isset($_GET['time'])){
 			
 			  $time = explode(' To ',$_GET['time']);
+        $date = explode(' ',$time['0']);
 			  $start = $time['0'];
-			  $end = $time['1'];
+			  $end = $date['0'].' '.$time['1'];
 			  
-			  $result['first_digit_data']=$this->Bets_model->getfirstdigitchartAccToTime($start,$end);
-              $result['second_digit_data']=$this->Bets_model->getseconddigitchartAccToTime($start,$end);
+			    $result['first_digit_data']=$this->Bets_model->getfirstdigitchartAccToTime($start,$end);
+          $result['second_digit_data']=$this->Bets_model->getseconddigitchartAccToTime($start,$end);
 		      $result['jodi_data']=$this->Bets_model->getjodichartAccToTime($start,$end);
 		      $result['total_payout']=$this->Bets_model->getTotalPayoutAndBetsAccToTime($start,$end);
 		      $result['lucky_number']=$this->Bets_model->getLuckyNumberAccToTime($start,$end);
@@ -807,7 +787,7 @@ public function loadData()
 		      
           	  $this->load->view('admin/summary',$result);
         		
-		     }
+      }
 		}
 		
     public function daySummary()
@@ -821,7 +801,7 @@ public function loadData()
 		$result['lucky_number']=$this->Bets_model->getLuckyNumber();
 
 
-		for($i=0*60;$i<=24*60;$i+=15){
+		for($i=0*60;$i<24*60;$i+=15){
 			$hr = floor($i/60);
 			if($hr < 9)
 				$hr = '0'.$hr;
@@ -834,13 +814,27 @@ public function loadData()
     
             
             
-  			$start = date('Y-m-d')." ". $hr . ":" . $min;
-  			
-  			$newTime = date("Y-m-d H:i",strtotime($start." +15 minutes"));
-  			$time_slots[] = $start." To ".$newTime;
+        $start = date('Y-m-d')." ". $hr . ":" . $min;
+  			$val_start = $hr . ":" . $min;
+        $newTime = date("Y-m-d H:i",strtotime($start." +15 minutes"));
+        $val_end = date("H:i",strtotime($start." +15 minutes"));
+  			$display = date("h:i a",strtotime($newTime));
+
+  			$time_slots[] = array('value' => $val_start." To ".$val_end,
+                              'display' => $display,);
 		}
 		
-		$result['time_slots'] = $time_slots;
+    for ($i=1; $i <=cal_days_in_month ( CAL_GREGORIAN, date('m') , date('y') ) ; $i++) { 
+        if($i < 10)
+          $i = '0'.$i;
+        $dates[] = array('value'=>date('Y-m').'-'.$i,'display'=>$i.'-'.date('m-y'),);
+      }  
+   // $dates [] = date('m');
+    // print_r($dates); die;
+
+
+    $result['time_slots'] = $time_slots;
+		$result['dates'] = $dates;
 
 		//echo date('Y-m-d H:i');
 
