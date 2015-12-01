@@ -130,62 +130,65 @@ function delete_dealer($id)
 		 
 		$timeslots = $query->result();
 		$data = array();
-		foreach ($timeslots as $timeslot)
-		{
-			$this->db->select('sum(bet_amount) as credited');
-			$this->db->from('admin_history');
-			$this->db->where('bet_amount >= 0');
-			$this->db->where('timeslot_id',$timeslot->timeslot_id);
-			$this->db->where('timeslot',$timeslot->timeslot);
-			$query=$this->db->get()->row();
-			$credited = $query->credited;
+		if(!empty($timeslots))
+		{	
+			foreach ($timeslots as $timeslot)
+			{
+				$this->db->select('sum(bet_amount) as credited');
+				$this->db->from('admin_history');
+				$this->db->where('bet_amount >= 0');
+				$this->db->where('timeslot_id',$timeslot->timeslot_id);
+				$this->db->where('timeslot',$timeslot->timeslot);
+				$query=$this->db->get()->row();
+				$credited = $query->credited;
 
-			$this->db->select('sum(bet_amount) as debited');
-			$this->db->from('admin_history');
-			$this->db->where('bet_amount < 0');
-			$this->db->where('timeslot',$timeslot->timeslot);
-			$this->db->where('timeslot_id',$timeslot->timeslot_id);
-			$query=$this->db->get()->row();
-			$debited = $query->debited;
+				$this->db->select('sum(bet_amount) as debited');
+				$this->db->from('admin_history');
+				$this->db->where('bet_amount < 0');
+				$this->db->where('timeslot',$timeslot->timeslot);
+				$this->db->where('timeslot_id',$timeslot->timeslot_id);
+				$query=$this->db->get()->row();
+				$debited = $query->debited;
 
-			$this->db->select('total');
-			$this->db->from('admin_history');
-			$this->db->where('timeslot',$timeslot->timeslot);
-			$this->db->where('timeslot_id',$timeslot->timeslot_id);
-			$this->db->order_by("id", "desc"); 
-			$this->db->limit(1);
-			//$this->db->group_by('timeslot');
-		   	$query=$this->db->get()->row();
-		   	$day_total = $query->total;
+				$this->db->select('total');
+				$this->db->from('admin_history');
+				$this->db->where('timeslot',$timeslot->timeslot);
+				$this->db->where('timeslot_id',$timeslot->timeslot_id);
+				$this->db->order_by("id", "desc"); 
+				$this->db->limit(1);
+				//$this->db->group_by('timeslot');
+			   	$query=$this->db->get()->row();
+			   	$day_total = $query->total;
 
-		    $this->db->select('sum(commission) as commission');
-			$this->db->from('dealer_history');
-			$this->db->where('timeslot',$timeslot->timeslot);
-			$this->db->where('timeslot_id',$timeslot->timeslot_id);
-		   	$query=$this->db->get()->row();
-		   	$commission = $query->commission;
+			    $this->db->select('sum(commission) as commission');
+				$this->db->from('dealer_history');
+				$this->db->where('timeslot',$timeslot->timeslot);
+				$this->db->where('timeslot_id',$timeslot->timeslot_id);
+			   	$query=$this->db->get()->row();
+			   	$commission = $query->commission;
 
-		   	$this->db->select('total');
-			$this->db->from('admin_history');
-			$this->db->order_by("id", "desc"); 
-			$this->db->limit(1);
-		   	$query=$this->db->get()->row();
-		   	$final_total = $query->total;
+			   	$this->db->select('total');
+				$this->db->from('admin_history');
+				$this->db->order_by("id", "desc"); 
+				$this->db->limit(1);
+			   	$query=$this->db->get()->row();
+			   	$final_total = $query->total;
 
 
-		   	$timespan = $this->getTimeslotById($timeslot->timeslot_id);
-		   	$draw_time = explode(' To ', $timespan);
-		   	$data[]= array(
-		   			'timeslot'=>$timeslot->timeslot,
-		   			'credited'=>$credited,
-		   			'debited'=>$debited,
-		   			'commission'=>$commission,
-		   			'day_total'=>$day_total,
-		   			'final_total'=>$final_total,
-		   			'draw_time'=>date('d-m-y',strtotime($timeslot->timeslot)).'  '.date('h:i a',strtotime($draw_time['1'])),
-		   			'profit'=>$credited -($debited + $commission)
-		   		);
-		}
+			   	$timespan = $this->getTimeslotById($timeslot->timeslot_id);
+			   	$draw_time = explode(' To ', $timespan);
+			   	$data[]= array(
+			   			'timeslot'=>$timeslot->timeslot,
+			   			'credited'=>$credited,
+			   			'debited'=>$debited,
+			   			'commission'=>$commission,
+			   			'day_total'=>$day_total,
+			   			'final_total'=>$final_total,
+			   			'draw_time'=>date('d-m-y',strtotime($timeslot->timeslot)).'  '.date('h:i a',strtotime($draw_time['1'])),
+			   			'profit'=>$credited -($debited + $commission)
+			   		);
+			}
+		}	
 
 	  	return $data;
 	}
