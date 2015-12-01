@@ -3,14 +3,6 @@
 				  <div class="col-md-12">
 				    <div class="well margin-top-20">
 										<div class="row">
-											<div class="col-sm-3">
-												<select name="time_slot" id="time_slot">
-													<?php foreach ($time_slots as $time_slot) {  ?>
-													<?php if(strtotime($time_slot['display']) < strtotime(date('h:i a'))) {?>
-														<option  value="<?php echo $time_slot['value']; ?>"><?php echo $time_slot['display']; ?></option>
-													<?php } }?>
-												</select>
-											</div>
 											<div class="col-sm-2">
 												<a href="javascript:;" class="btn red">
 														Winning Number	<span id="lucky_number"><?php echo $lucky_number;  ?></span> 	
@@ -824,48 +816,8 @@
 									
 								</div>
 								</div>
-								</div>
+							</div>
 			
 								
 										
-					 	<script type="text/javascript" >
-		$(document).ready(function() {   
-			
-			//$('#mack').hide();
-   // initiate layout and plugins
-   Metronic.init(); // init metronic core components
-Layout.init(); // init current layout
-QuickSidebar.init(); // init quick sidebar
-Demo.init(); // init demo features
-   ///FormValidation.init();
-   //TableManaged.init();
-});
-
-
-     $('#time_slot').on('change',function(){
-		 
-		 	    var time_slot = $(this).val();
-		 	    time_slot = encodeURIComponent(time_slot);
-		 	    $('#mack').load('<?php echo base_url("/admin/summary?time="); ?>'+time_slot,function () { });
-		 	    //~ jQuery.ajax({
-				//~ type: "POST",
-				//~ url: "<?php echo base_url(); ?>" + "admin/Summary",
-				//~ dataType: 'json',
-				//~ data: {time: time_slot},
-				//~ success: function(res) {
-					 //~ 
-					  //~ $('#mack').html();
-					  //~ 
-				  //~ }
-				//~ });
-	   
-	
-	});
-
-
-
-
-
-</script>
-
-
+					 	
