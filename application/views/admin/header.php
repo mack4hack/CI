@@ -489,7 +489,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					<a href="<?php echo base_url()?>admin/add_amount" >
 					<i class="icon-paper-plane"></i>
 					<span class="title">
-					Add Amount</span>
+					Update Limit</span>
 					</a>
 				</li>
 				<li class="tooltips" data-container="body" data-placement="right" data-html="true" >

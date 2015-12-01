@@ -73,13 +73,24 @@
 															</div>
 														</div>
 													</div>
+                                                                                                        
+<div class="col-md-4">
+       
+                <div class="col-md-9">
+                   Demo Dealer <input type="checkbox"   name="demo"   /> 
+                </div>
+       
+</div>
+                                                                                                                         
+                                                                                                        
+                                                                                                        
 													<!--/span-->
 												</div>
 												<h3 class="form-section">Dealer Info</h3>
 												<div class="row">
 													<div class="col-md-6">
 														<div class="form-group">
-															<label class="control-label col-md-3">First Name</label>
+                                                                                                                                                                                                       <label class="control-label col-md-3 "    >First Name</label>
 															<div class="col-md-9">
 																<input type="text" name="fname" pattern="[a-zA-Z]+" data-required="1" class="form-control required" placeholder="Enter First Name">
 																
@@ -330,7 +341,7 @@
 	</div>
 	<!-- END CONTENT -->
 	
-</div>
+    
 <!-- END CONTAINER -->
 <!-- CODE FOR COUNTRY, STATE,CITY AUTO POPULATE -->
 <script>
@@ -387,8 +398,8 @@ function myFunction() {
 		var msg='Password match!';
 		document.getElementById("passmismatch").style.color = "green";
 		document.getElementById("pass1").style.borderColor = "green";
-        document.getElementById("pass2").style.borderColor = "green";
-        document.getElementById("passmismatch").innerHTML = msg;
+                                    document.getElementById("pass2").style.borderColor = "green";
+                                    document.getElementById("passmismatch").innerHTML = msg;
 		document.getElementById("submit").disabled = false;
 		
     }
@@ -423,44 +434,43 @@ Demo.init(); // init demo features
             $("#form_sample_1").submit(function (e){
              var temp = $("#temp").val();
 			   
-			   if(temp!='')
-			   {
-				   
-                e.preventDefault();
-                var url = '<?php echo base_url()?>admin/ajax_dealer_data_save';
-                var method = $(this).attr('method');
-                var data = $(this).serialize();
+                if(temp!='')
+                {
+
+                            e.preventDefault();
+                            var url = '<?php echo base_url()?>admin/ajax_dealer_data_save';
+                            var method = $(this).attr('method');
+                            var data = $(this).serialize();
 				   //alert("temp:"+data);
-			   $("#submit").html('Saving Data...');
-			    $.ajax({
-                   url:url,
-                   type:method,
-                   data:data,
-                   dataType:"JSON",
-                   success : function(data){
-	                   if(data.success == 'true')
-	                    {   //alert(data);
-							$("#submit").html('Save');
-							$("#alert-success").html(data.msg);
-	                        //$("#error").show('fast');
-	                        //$('#error').delay(5000).fadeOut('slow');
-							//location.reload(true);
-	                        $('#form_sample_1')[0].reset();
-	                    }
-	                    else
-	                    {	//alert(data);
-	                    	$("#submit").html('Save');
-							$("#alert-danger").html(data.msg);
-							$('#form_sample_1')[0].reset();
-	                    	//throw new Error('go');
-	                    } 
-                	}
-			   	})
-            });
-             
-            
-             
-        });
+	         $("#submit").html('Saving Data...');
+                           $.ajax({
+                                        url:url,
+                                        type:method,
+                                        data:data,
+                                        dataType:"JSON",
+                                        success : function(data){
+                                                if(data.success == 'true')
+                                                 {   //alert(data);
+                                                                             $("#submit").html('Save');
+                                                                             $("#alert-success").html(data.msg);
+                                                     //$("#error").show('fast');
+                                                     //$('#error').delay(5000).fadeOut('slow');
+                                                                             //location.reload(true);
+                                                     $('#form_sample_1')[0].reset();
+                                                 }
+                                                 else
+                                                 {	//alert(data);
+                                                     $("#submit").html('Save');
+                                                                             $("#alert-danger").html(data.msg);
+                                                                             $('#form_sample_1')[0].reset();
+                                                     //throw new Error('go');
+                                                 } 
+                                            
+                                          }  
+                             });
+                  }
+          });
+      });
 		//Code to check existing email id//
 			function email_check()
 			{
@@ -491,3 +501,5 @@ Demo.init(); // init demo features
                 });
 			}
         </script>
+        
+    

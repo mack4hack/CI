@@ -26,12 +26,15 @@ $current_timestamp = $date->getTimestamp();
 <!--											<div class="col-sm-3">
 												<div id="clockDisplay" class="clockStyle"></div>
 											</div>-->
-											<div class="col-sm-6">
-												<a id="countdownDisplay" class="btn red" style="font-size:16px;font-weight:bold;"  ></a>
+											<div class="col-sm-4">
+												<span class="btn red" style="font-size:16px;" >Time To Draw : <a id="countdownDisplay" class="btn red" style="font-size:16px;font-weight:bold;padding:0px 0px 2px 0px;"  ></a></span>
 											</div>
-											<div class="col-sm-6"   >
+											<div class="col-sm-4">
+												<span class="btn red" style="font-size:16px;" >Current Game : <?php echo  $show_time  ;  ?></span>
+											</div>
+											<div class="col-sm-4"   >
 												<a href="javascript:;" class="btn red"   style="float:right;" >
-														Last Result:	<span id="ash"   style="font-size:17px;font-weight:bold;"  ><?php echo $lucky_number;  ?></span> 	
+														Last Result  (<?php echo $last_time; ?>) :	<span id="ash"   style="font-size:17px;font-weight:bold;"  ><?php echo $lucky_number;  ?></span> 	
 
 <!--
 															<i class="fa fa-edit"></i>

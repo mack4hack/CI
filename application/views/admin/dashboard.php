@@ -45,7 +45,7 @@
 			</div>
 			<h3 class="page-title">
 			Dashboard 
-<!--                        <small>reports & statistics</small>-->
+                                                      <!--                        <small>reports & statistics</small>-->
 			</h3>
 			<!-- END PAGE HEADER-->
 			<!-- BEGIN DASHBOARD STATS -->
@@ -98,12 +98,12 @@
 	<!-- END CONTENT -->
 	<?php include'footer.php';?>
 	<script type="text/javascript" >
-		$(document).ready(function() {   
+$(document).ready(function() {   
    // initiate layout and plugins
    Metronic.init(); // init metronic core components
-Layout.init(); // init current layout
-QuickSidebar.init(); // init quick sidebar
-Demo.init(); // init demo features
+   Layout.init(); // init current layout 
+   QuickSidebar.init(); // init quick sidebar
+   Demo.init(); // init demo features
    //FormValidation.init();
    //TableManaged.init();
 });

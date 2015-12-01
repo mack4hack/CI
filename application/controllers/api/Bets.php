@@ -14,6 +14,7 @@
 		    // Ensure you have created the 'limits' table and enabled 'limits' within application/config/rest.php
 		    $this->load->database(); // load database
 		    $this->load->model('Bets_model'); // load model
+                                        $this->load->library('ion_auth');
 		}	
 
 		public function index_get()
@@ -95,15 +96,37 @@
 			{	                
 				$this->Bets_model->addplayerhistory($history);
 
-				$this->Bets_model->addAdminHistory($admin_history);
-				
-				$this->Bets_model->addDealerHistory($dealer_history);
-
 				$this->Bets_model->debit($debit);
-				
-				$this->Bets_model->credit($credit);
                                 
-                                                                        $this->Bets_model->credit_dealer($credit_dealer);
+                                                                           if(   !$this->ion_auth->in_group('demo' ,  $this->post('player_id') ))
+                                                                            {
+                                                                                        $this->Bets_model->addAdminHistory($admin_history);
+				
+                                                                                        $this->Bets_model->addDealerHistory($dealer_history);
+
+                                                                                        $this->Bets_model->credit($credit);
+
+                                                                                        $this->Bets_model->credit_dealer($credit_dealer);
+                                                                            }else{
+                                                                                
+                                                                                          $dealer_history = array(
+                                                                                                        'game_type'=>1,
+                                                                                                        'player_id'=>$this->post('player_id'),
+                                                                                                        'dealer_id'=>$this->getDealerId($this->post('player_id')),
+                                                                                                        'bet_amount'=>$jodi_data['bet_amount'],
+                                                                                                        'commission'=>'',
+                                                                                                        'timeslot' => date('Y-m-d H:i:s')
+                                                                                                        );
+                                                                                
+                                                                                       $this->Bets_model->addDealerHistory($dealer_history);
+
+                                                                                       $credit = array(
+                                                                                                'id'=>$dealer_id,
+                                                                                                'bet_amount'=>$jodi_data['bet_amount'] ,
+                                                                                                );
+                                                                                        $this->Bets_model->credit($credit);
+                                                                               }
+                                                                        
 				
 				$success = true; 
 				            
@@ -198,18 +221,38 @@
 				);
 
 			if($this->Bets_model->placebet($data))
-			{	                
-				$this->Bets_model->addplayerhistory($history);
-				
-				$this->Bets_model->addAdminHistory($admin_history);
-				
-				$this->Bets_model->addDealerHistory($dealer_history);
+			{	               
+                                                                        $this->Bets_model->addplayerhistory($history);
+				 $this->Bets_model->debit($debit);
+                                                                        if(   !$this->ion_auth->in_group('demo' ,  $this->post('player_id') ))
+                                                                            {
+                                                                                       $this->Bets_model->addAdminHistory($admin_history);
 
-				$this->Bets_model->debit($debit);
-				
-				$this->Bets_model->credit($credit);
-				
-                                                                        $this->Bets_model->credit_dealer($credit_dealer);
+                                                                                        $this->Bets_model->addDealerHistory($dealer_history);
+
+                                                                                        $this->Bets_model->credit($credit);
+
+                                                                                        $this->Bets_model->credit_dealer($credit_dealer);
+                                                                            }else{
+                                                                                
+                                                                                $dealer_history = array(
+                                                                                                        'game_type'=>2,
+                                                                                                        'player_id'=>$this->post('player_id'),
+                                                                                                        'dealer_id'=>$this->getDealerId($this->post('player_id')),
+                                                                                                        'bet_amount'=>$jodi_data['bet_amount'],
+                                                                                                        'commission'=>'',
+                                                                                                        'timeslot' => date('Y-m-d H:i:s')
+                                                                                                        );
+                                                                                
+                                                                                       $this->Bets_model->addDealerHistory($dealer_history);
+
+                                                                                       $credit = array(
+                                                                                                'id'=>$dealer_id,
+                                                                                                'bet_amount'=>$jodi_data['bet_amount'] ,
+                                                                                                );
+                                                                                        $this->Bets_model->credit($credit);
+                                                                                
+                                                                            }
 
 				 $success = true; 
 				            
@@ -305,16 +348,39 @@
 			 if($this->Bets_model->placebet($data))
 			 {	                
 				$this->Bets_model->addplayerhistory($history);
+                                                                        $this->Bets_model->debit($debit);
+                                                                         if(   !$this->ion_auth->in_group('demo' ,  $this->post('player_id') ))
+                                                                            {
+                                                                                        $this->Bets_model->addAdminHistory($admin_history);
 
-				$this->Bets_model->addAdminHistory($admin_history);
-				
-				$this->Bets_model->addDealerHistory($dealer_history);
+                                                                                        $this->Bets_model->addDealerHistory($dealer_history);
 
-				$this->Bets_model->debit($debit);
-				
-				$this->Bets_model->credit($credit);
-				
-                                                                         $this->Bets_model->credit_dealer($credit_dealer);
+                                                                                        $this->Bets_model->credit($credit);
+
+                                                                                         $this->Bets_model->credit_dealer($credit_dealer);
+                                                                            }else{
+                                                                                
+                                                                                $dealer_history = array(
+                                                                                                        'game_type'=>3,
+                                                                                                        'player_id'=>$this->post('player_id'),
+                                                                                                        'dealer_id'=>$this->getDealerId($this->post('player_id')),
+                                                                                                        'bet_amount'=>$jodi_data['bet_amount'],
+                                                                                                        'commission'=>'',
+                                                                                                        'timeslot' => date('Y-m-d H:i:s')
+                                                                                                        );
+                                                                                
+                                                                                       $this->Bets_model->addDealerHistory($dealer_history);
+
+                                                                                       $credit = array(
+                                                                                                'id'=>$dealer_id,
+                                                                                                'bet_amount'=>$jodi_data['bet_amount'] ,
+                                                                                                );
+                                                                                        $this->Bets_model->credit($credit);
+                                                                                
+                                                                            }
+                                                                         
+                                                                         
+                                                                         
                  $success = true; 
 				          
 			 }else{   
