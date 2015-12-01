@@ -37,8 +37,12 @@ class Admin extends CI_Controller {
       $minutes = $now['minutes'] - $now['minutes']%15;
 
       $rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
+      
       $start = strtotime('+15 minutes',strtotime($rounded));
-
+      $result['show_time']  =     date("h:i a",$start);
+      $result['last_time']  =  date("h:i a",strtotime($rounded));
+      
+      //echo $result['last_time'];die;
       $time_slots =array();
       for($i=0 ;$i<20 ;$i++){
         $ash = strtotime('+15 minutes',$start);
@@ -465,6 +469,16 @@ public function loadData()
           "group_id" => 3,
           
     );
+    
+     if($this->ion_auth->in_group('demo' , $_POST['dealer_id']))
+     {
+                 $user_group = array("user_id" => $player_id,
+                   "group_id" => 4,
+                  );         
+     }		
+             
+             
+    //check if dealer is demo if yes add player as demo
     $insert1 = $this->db->insert('users_groups',$user_group);
 
 	  //Code to store data in dealer player table//
@@ -552,7 +566,7 @@ public function loadData()
 	  $user_code = $dealer_city."".$paddedNum;
      //code
 	  //$user_code ="PUN000005";
-
+//echo "<pre>";print_r($user_code);die;
 	  $password = $_POST['password'];
 
 	  $data = array("first_name" => $_POST['fname'],
@@ -575,12 +589,19 @@ public function loadData()
 	  $insert = $this->db->insert('user_master',$data);
 
     $user_id = $this->db->insert_id();
-
     //save data in user_groups
     $user_group = array("user_id" => $user_id,
           "group_id" => 2,
           
     );
+    //add demo dealer
+    if(isset($_POST['demo'])  )
+    {
+         $user_group = array("user_id" => $user_id,
+          "group_id" => 4,
+          );  
+    }
+    
     $insert2 = $this->db->insert('users_groups',$user_group);
 
 
@@ -737,7 +758,13 @@ public function loadData()
 		        ); 
                 
     		$this->Bets_model->credit($credit);
-    		$this->Bets_model->debit($debit);   //debit payout from admin
+                                    //check id player is demo. if not do not  debit from admin
+                                     if(   !$this->ion_auth->in_group('demo' ,   $player->player_id ))
+                                        {
+                                                    $this->Bets_model->debit($debit);   //debit payout from admin
+                                        }		              
+                                     
+    		
     	}
 
     	$this->Admin_model->updatePlayerHistory($jodi);

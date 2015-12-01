@@ -67,17 +67,12 @@ CREATE TABLE `users_groups` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) unsigned NOT NULL,
   `group_id` mediumint(8) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_users_groups_users1_idx` (`user_id`),
-  KEY `fk_users_groups_groups1_idx` (`group_id`),
-  CONSTRAINT `uc_users_groups` UNIQUE (`user_id`, `group_id`),
-  CONSTRAINT `fk_users_groups_users1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-  CONSTRAINT `fk_users_groups_groups1` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
-     (1,1,1),
-     (2,1,2);
+     (1,1,1);
+     
 
 
 DROP TABLE IF EXISTS `login_attempts`;
