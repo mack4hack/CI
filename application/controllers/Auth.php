@@ -19,6 +19,8 @@ class Auth extends CI_Controller {
 	function index()
 	{
                                       $result['profit'] = $this->Admin_model->getMonthlyProfit(); 
+                                       $result['dealers'] = $this->Admin_model->getTotalUsers(2);
+                                       $result['players'] = $this->Admin_model->getTotalUsers(3);
 		if (!$this->ion_auth->logged_in())
 		{
 			// redirect them to the login page
