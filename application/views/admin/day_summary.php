@@ -20,14 +20,10 @@ $current_timestamp = $date->getTimestamp();
 										<div class="row">
 											<div class="col-sm-3">
 												<select name="time_slot" id="time_slot">
-													<?php foreach ($time_slots as $time_slot) { 
-														
-														$time = explode(' To ',$time_slot);
-														
-														if($time['1'] < date('Y-m-d H:i')){
-														?>
-														<option  value="<?php echo $time_slot; ?>"><?php echo $time_slot; ?></option>
-													<?php }} ?>
+													<?php foreach ($time_slots as $time_slot) {  ?>
+													<?php if(strtotime($time_slot['display']) < strtotime(date('h:i a'))) {?>
+														<option  value="<?php echo $time_slot['value']; ?>"><?php echo $time_slot['display']; ?></option>
+													<?php } }?>
 												</select>
 											</div>
 											<div class="col-sm-2">

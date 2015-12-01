@@ -746,7 +746,7 @@ public function loadData()
     {
           if(isset($_GET['time'])){
 			
-			   for($i=0*60;$i<=24*60;$i+=15){
+			   for($i=0*60;$i<24*60;$i+=15){
 			$hr = floor($i/60);
 			if($hr < 9)
 				$hr = '0'.$hr;
@@ -760,9 +760,11 @@ public function loadData()
             
             
   			$start = date('Y-m-d')." ". $hr . ":" . $min;
-  			
-  			$newTime = date("Y-m-d H:i",strtotime($start." +15 minutes"));
-  			$time_slots[] = $start." To ".$newTime;
+        $newTime = date("Y-m-d H:i",strtotime($start." +15 minutes"));
+        $display = date("h:i a",strtotime($start));
+
+        $time_slots[] = array('value' => $start." To ".$newTime,
+                              'display' => $display,);
 		}
 		
 		$result['time_slots'] = $time_slots;
@@ -794,7 +796,7 @@ public function loadData()
 		$result['lucky_number']=$this->Bets_model->getLuckyNumber();
 
 
-		for($i=0*60;$i<=24*60;$i+=15){
+		for($i=0*60;$i<24*60;$i+=15){
 			$hr = floor($i/60);
 			if($hr < 9)
 				$hr = '0'.$hr;
@@ -808,9 +810,11 @@ public function loadData()
             
             
   			$start = date('Y-m-d')." ". $hr . ":" . $min;
-  			
-  			$newTime = date("Y-m-d H:i",strtotime($start." +15 minutes"));
-  			$time_slots[] = $start." To ".$newTime;
+        $newTime = date("Y-m-d H:i",strtotime($start." +15 minutes"));
+  			$display = date("h:i a",strtotime($start));
+
+  			$time_slots[] = array('value' => $start." To ".$newTime,
+                              'display' => $display,);
 		}
 		
 		$result['time_slots'] = $time_slots;
