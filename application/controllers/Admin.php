@@ -1031,8 +1031,19 @@ public function loadData()
 
 	public function adminAccount()
 	{
-		$result['data']=$this->Admin_model->getAdminHistory();
-        $this->load->view('admin/admin_account',$result);
+    $from = date('Y-m-d');
+    $to = date('Y-m-d');
+    $result['data_daily']=$this->Admin_model->getAdminHistory($from,$to);
+      
+    $from =  date('Y-m-d');
+    $to   =   date('Y-m-d', strtotime("-1 week", strtotime($from)));
+    $result['data_weekly']=$this->Admin_model->getAdminHistory($from,$to);
+		
+    $from =  date('Y-m-d');
+    $to   =   date('Y-m-d', strtotime("-1 month", strtotime($from)));
+    $result['data_monthly']=$this->Admin_model->getAdminHistory($from,$to);
+
+    $this->load->view('admin/admin_account',$result);
 	}
 
 	public function dealerAccount()

@@ -115,13 +115,14 @@ function delete_dealer($id)
 		$this->db->update('player_history');		
 	}
 
-	function getAdminHistory()
+	function getAdminHistory($from = null , $to = null)
 	{
 		$this->db->select('timeslot');
 		$this->db->from('admin_history');
+		$this->db->where('timeslot >',$to);
+		$this->db->where('timeslot <=',$from);
 		$this->db->group_by('timeslot');
 		$query=$this->db->get();	
-
 		$timeslots = $query->result();
 		$data = array();
 		foreach ($timeslots as $timeslot)

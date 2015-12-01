@@ -137,3 +137,7 @@ delete FROM `cities` where state_id not in (SELECT id FROM `states` )  ;
 
 ALTER TABLE `admin_history` ADD `commission` INT( 11 ) NOT NULL AFTER `bet_amount` ;
 ALTER TABLE `dealer_history` ADD `commission` INT( 11 ) NOT NULL AFTER `bet_amount` ;
+
+ALTER TABLE `admin_history` ADD `timeslot_id` INT(11) NOT NULL ;
+ALTER TABLE `dealer_history` ADD `timeslot_id` INT(11) NOT NULL ;
+ALTER TABLE `player_history` ADD `timeslot_id` INT(11) NOT NULL AFTER `timeslot`;
