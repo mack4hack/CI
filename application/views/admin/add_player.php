@@ -273,7 +273,8 @@
 							<div class="caption">
 								<i class="fa fa-globe"></i>All Players
 							</div>
-							<input type="text" id="search_player"  class="col-sm-3"    placeholder ="Search Player"   style="color:black;float: right;margin-top:8px;"  name="search_player" >
+							<input type="text" id="search_player"  class="col-sm-3 "    placeholder ="Search Player"   style="color:black;float: right;margin-top:8px;"  name="search_player" >
+
 						</div>
 						<div class="portlet-body">
 							

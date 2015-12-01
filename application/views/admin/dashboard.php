@@ -86,6 +86,42 @@
 						</a>
 					</div>
 				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+					<div class="dashboard-stat green">
+						<div class="visual">
+							<i class="fa fa-users"></i>
+						</div>
+						<div class="details">
+							<div class="number">
+								<?php echo $dealers;   ?>
+							</div>
+							<div class="desc">
+								 Dealers
+							</div>
+						</div>
+						<a class="more" href="<?php echo base_url()?>admin/add_dealer">
+						View more <i class="m-icon-swapright m-icon-white"></i>
+						</a>
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+					<div class="dashboard-stat purple">
+						<div class="visual">
+							<i class="fa fa-users"></i>
+						</div>
+						<div class="details">
+							<div class="number">
+								<?php echo $players;   ?>
+							</div>
+							<div class="desc">
+								 Players
+							</div>
+						</div>
+						<a class="more" href="<?php echo base_url()?>admin/add_player">
+						View more <i class="m-icon-swapright m-icon-white"></i>
+						</a>
+					</div>
+				</div>
 				
 				
 			</div>

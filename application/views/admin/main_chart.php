@@ -914,7 +914,7 @@ $current_timestamp = $date->getTimestamp();
 											<input type="text" class="form-control" placeholder="Enter Result">
 										</div> -->
 										<div class="col-sm-1">
-											<a href="javascript:show_popup('my_popup')"><button type="button" class="btn btn-primary" id="execute">Execute</button></a>
+											<a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><button type="button" class="btn btn-primary" id="execute">Execute</button></a>
 										</div>
 									<?php }?>		
 											
@@ -951,20 +951,51 @@ $current_timestamp = $date->getTimestamp();
 			<!-- BEGIN PAGE CONTENT-->
 			
 	<!-- END CONTENT -->
-
-	<div id="my_popup" style="display:none;border:1px dotted gray;padding:.3em;background-color:white;position:relative;width:750px;height:500px;left:100px;top:100px">
-		<div align="right">
-			<a href="javascript:hide_popup('my_popup')">close</a>
+<div id="fade" class="black_overlay"></div>
+	<div id="light"  class="portlet box blue white_content"  style="width:750px;">
+                                   <div class="portlet-title">
+                                            <div class="caption">
+                                                Manual Numbers
+                                                <small>( Enter Numbers for upcomming timeslots )</small>
+                                            </div>
+                                           <div class="tools">
+                                               <a href = "javascript:void(0)"  style="color:white;"    onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">Close</a>
+                                            </div>
 		</div>
-		<h3>Manual Numbers</h3>
-		<p>Enter Numbers for upcomming timeslots</p>
-		<?php $i=1; foreach($time_slots as $timeslot) { ?>
-			<input type="text" value="<?php echo $timeslot;?>" disabled /><input id="manual" name="ash" type="text"/>
-		<?php } ?>
+                                    
+		
+                <div class="portlet-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            </thead>
+                                            <tbody>
+                                                <?php $i=1; foreach($time_slots as $timeslot) { ?>
+                                                <tr class="col-sm-6"  style="padding: 0px;">
+                                                    <td  style="padding: 0px;"><input type="text" value="<?php echo $timeslot;?>" disabled /><input id="manual" name="ash" type="text"/></td>
+                                                </tr>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    <div class="tools"  style="float: right;" >
+                                        <span  id="msg"  class="alert-success "></span>
+                                        <button id="manuals"  class="btn btn-primary" >Submit</button>
+		</div>
+                                    </div>
+                                             
+                           </div>
+                
+<!--                         <div class="portlet-body">
+		<?php //$i=1; foreach($time_slots as $timeslot) { ?>
+			<input type="text" value="<?php //echo $timeslot;?>" disabled /><input id="manual" name="ash" type="text"/>
+		<?php// } ?>
 		<div style="float:right">
 			<button id="manuals">Submit</button>
 			<button >close</button>
 		</div>
+                              </div>-->
+                        
+                        
 	</div>	
 </div>
 </div>
@@ -1109,7 +1140,7 @@ $('#manuals').click(function(){
 	var saveData = {};
 	var i =1 ;
 
-	$('#my_popup #manual').each(function(){
+	$('#light #manual').each(function(){
 
 	saveData[i] = $(this).val();
 	i++;
@@ -1120,7 +1151,11 @@ $('#manuals').click(function(){
 		  url: '<?php echo base_url("/admin/manualNumbers"); ?>',
 		  type: "POST",
 		  data: {numbers : saveData},
-		  dataType: "JSON"
+		  dataType: "JSON",
+                                        success:function(data){
+                                                     $('#msg').html(data.message);
+                                                     
+                                         }
 	});
 })
 
@@ -1156,21 +1191,51 @@ setInterval(function(){
 </script>
 
 <script type="text/javascript" >
-function show_popup(id) {
-	if (document.getElementById){ 
-		obj = document.getElementById(id); 
-		if (obj.style.display == "none") { 
-			obj.style.display = ""; 
-		} 
-	} 
-}
-function hide_popup(id){ 
-	if (document.getElementById){ 
-		obj = document.getElementById(id); 
-		if (obj.style.display == ""){ 
-			obj.style.display = "none"; 
-		} 
-	} 
-}
+//function show_popup(id) {
+//	if (document.getElementById){ 
+//		obj = document.getElementById(id); 
+//		if (obj.style.display == "none") { 
+//			obj.style.display = ""; 
+//		} 
+//		
+//		
+//		 
+//	} 
+//}
+//function hide_popup(id){ 
+//	if (document.getElementById){ 
+//		obj = document.getElementById(id); 
+//		if (obj.style.display == ""){ 
+//			obj.style.display = "none"; 
+//		} 
+//	} 
+//}
 </script>
-
+    <style>
+    .black_overlay{
+        display: none;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        z-index:1001;
+        -moz-opacity: 0.8;
+        opacity:.80;
+        filter: alpha(opacity=80);
+    }
+    .white_content {
+        display: none;
+        position: absolute;
+        bottom: 5%;
+        left: 25%;
+        width: 50%;
+        //height: 50%;
+        padding: 16px;
+        border: 16px solid orange;
+        background-color: white;
+        z-index:1002;
+        overflow: auto;
+    }
+</style>

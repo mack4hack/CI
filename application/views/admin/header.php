@@ -47,6 +47,49 @@ License: You must have a valid license purchased only from themeforest(the above
 <link id="style_color" href="<?php echo base_url()?>assets/admin/layout/css/themes/darkblue.css" rel="stylesheet" type="text/css"/>
 <link href="<?php echo base_url()?>assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
+
+ <!-- BEGIN CORE PLUGINS -->
+        <script src="../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+      
+        <script src="../assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+        <!-- END CORE PLUGINS -->
+        <!-- BEGIN PAGE LEVEL PLUGINS -->
+        <script src="../assets/global/plugins/moment.min.js" type="text/javascript"></script>
+      
+        <script src="../assets/global/plugins/morris/morris.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/morris/raphael-min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/amcharts/amcharts/amcharts.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/amcharts/amcharts/serial.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/amcharts/amcharts/pie.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/amcharts/amcharts/radar.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/amcharts/amcharts/themes/light.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/amcharts/amcharts/themes/patterns.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/amcharts/amcharts/themes/chalk.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/amcharts/ammap/ammap.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/amcharts/ammap/maps/js/worldLow.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/amcharts/amstockcharts/amstock.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/flot/jquery.flot.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/flot/jquery.flot.resize.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/jquery-easypiechart/jquery.easypiechart.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.world.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.europe.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.germany.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js" type="text/javascript"></script>
+
+
 <link rel="shortcut icon" href="favicon.ico"/>
 </head>
 <!-- END HEAD -->
@@ -459,42 +502,42 @@ License: You must have a valid license purchased only from themeforest(the above
 				<!-- BEGIN ANGULARJS LINK -->
 				<li class="tooltips" data-container="body" data-placement="right" data-html="true" >
 					<a href="<?php echo base_url() ; ?>admin/">
-					<i class="icon-paper-plane"></i>
+					<i class="icon-pie-chart"></i>
 					<span class="title">
 					Dashboard</span>
 					</a>
 				</li>
 				<li class="tooltips" data-container="body" data-placement="right" data-html="true" >
 					<a href="<?php echo base_url(); ?>admin/add_dealer">
-					<i class="icon-paper-plane"></i>
+					<i class="icon-user"></i>
 					<span class="title">
 					Add Dealer</span>
 					</a>
 				</li>
 				<li class="tooltips" data-container="body" data-placement="right" data-html="true" >
 					<a href="<?php echo base_url() ; ?>admin/add_player">
-					<i class="icon-paper-plane"></i>
+					<i class="icon-user"></i>
 					<span class="title">
 					Add Player</span>
 					</a>
 				</li>
 				<li class="tooltips" data-container="body" data-placement="right" data-html="true" >
 					<a href="<?php echo base_url()?>admin/info" >
-					<i class="icon-paper-plane"></i>
+					<i class="icon-bar-chart"></i>
 					<span class="title">
 					Info</span>
 					</a>
 				</li>
 				<li class="tooltips" data-container="body" data-placement="right" data-html="true" >
 					<a href="<?php echo base_url()?>admin/add_amount" >
-					<i class="icon-paper-plane"></i>
+					<i class="icon-wallet"></i>
 					<span class="title">
 					Update Limit</span>
 					</a>
 				</li>
 				<li class="tooltips" data-container="body" data-placement="right" data-html="true" >
 					<a href="<?php echo base_url()?>admin/block_player" >
-					<i class="icon-paper-plane"></i>
+					<i class="icon-dislike"></i>
 					<span class="title">
 					Block Player</span>
 					</a>

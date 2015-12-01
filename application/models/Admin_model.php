@@ -54,7 +54,11 @@ function delete_dealer($id)
 
 	function saveLuckyNumbers($data)
 	{
-		return $this->db->insert('lucky_numbers',$data);
+            
+                               foreach($data as $insert_data){
+                         	 $this->db->insert('lucky_numbers',$insert_data);
+                               }
+                               return  true;
 	}
 
 	function getLuckyPlayers($jodi)
@@ -292,6 +296,20 @@ function delete_dealer($id)
 			$profit  = $query->profit;                                    
 			
                                                       return $profit;
+         }
+         function getTotalUsers($role_id)
+         {
+             
+                  
+                  $this->db->select(' count( id ) as number');
+			$this->db->from('user_master');
+			$this->db->where('role_id',$role_id);
+                                                      $query=$this->db->get()->row();
+                                                      //echo $this->db->last_query();die;
+                        
+			$number  = $query->number;                                    
+			
+                                                      return $number;
          }
 
 }

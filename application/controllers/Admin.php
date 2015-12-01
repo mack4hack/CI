@@ -19,7 +19,11 @@ class Admin extends CI_Controller {
 	public function index()
     {            
                   $result['profit'] = $this->Admin_model->getMonthlyProfit();
-    	if (!$this->ion_auth->logged_in())
+                  $result['dealers'] = $this->Admin_model->getTotalUsers(2);
+                  $result['players'] = $this->Admin_model->getTotalUsers(3);
+    	
+                 
+                  if (!$this->ion_auth->logged_in())
 			redirect('auth/login', 'refresh');
 		else
     		$this->load->view('admin/dashboard',$result);
@@ -48,7 +52,7 @@ class Admin extends CI_Controller {
         $ash = strtotime('+15 minutes',$start);
         $ash =  date("H:i",$ash);
         $start =  date("H:i",$start);
-        $time_slots[] = $start." To ".$ash; 
+        $time_slots[] = $start; 
 
         $start = strtotime($ash);        
       }
@@ -1217,6 +1221,7 @@ public function loadData()
 	public function manualNumbers()
   {
     // print_r($_POST['numbers']); die;
+     $flag = false;
     $numbers = json_decode($_POST['numbers']);
     date_default_timezone_set("Asia/Calcutta");
     //  echo "<pre>";print_r($numbers);die;     
@@ -1226,8 +1231,14 @@ public function loadData()
 
           $rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
           $start = $rounded;
+          
+          $luck_numbers = array();
+          
+          
+          
         foreach($numbers as $number){
 
+          if(!empty($number)){  
           $this->db->select('draw_id');
           $this->db->order_by('id','desc');
           $this->db->limit(1);
@@ -1266,17 +1277,21 @@ public function loadData()
           $time =  date("Y-m-d H:i:s" ,$time) ;
          // $start = strtotime($start);
   
-          $luck_numbers = array(
+          $luck_numbers[] = array(
           'lucky_number' => $number,
           'draw_id' => $latest_id,
           'timeslot' => $time,
           'timeslot_id' => $timeslot_id
           );
-
-          if($this->Admin_model->saveLuckyNumbers($luck_numbers))
-            $flag = true;
-
+          
         }
+          
+        }
+        //echo "<pre>";print_r($luck_numbers);die;
+         if(!empty($luck_numbers)){
+               if($this->Admin_model->saveLuckyNumbers($luck_numbers))
+               $flag = true;
+           }
       if($flag)
       {
         $json = array(
