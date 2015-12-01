@@ -295,4 +295,24 @@ function delete_dealer($id)
                                                       return $profit;
          }
 
+
+     	function gettimeslotid()
+     	{
+     		date_default_timezone_set("Asia/Calcutta");
+		   	$now = getdate();
+		    $minutes = $now['minutes'] - $now['minutes']%15;
+
+		    $rounded = $now['hours'].":".$minutes;
+		      
+		      
+		    $endTime = date('H:i',strtotime("+15 minutes", strtotime($rounded)));
+	        $time_slots = $rounded." To ".$endTime; 
+
+         	$this->db->select('timeslot_id');
+	     	$this->db->from('timeslots');
+	      	$this->db->where('timeslot',$time_slots);
+	      	$query=$this->db->get()->row();
+	      	return $timeslot_id = $query->timeslot_id;
+     	}
+
 }

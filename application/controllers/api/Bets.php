@@ -15,6 +15,7 @@
 		    $this->load->database(); // load database
 		    $this->load->model('Bets_model'); // load model
                                         $this->load->library('ion_auth');
+                                        $this->load->model('Admin_model');
 		}	
 
 		public function index_get()
@@ -45,7 +46,8 @@
 				'second_digit'=>null,
 				'jodi_digit'=>null,
 				'payout'=>$payout,
-				'timeslot' => date('Y-m-d H:i:s')
+				'timeslot' => date('Y-m-d H:i:s'),
+				'timeslot_id' => $this->Admin_model->getTimeslotId()
 				);
 
                                                                //calclulate commison and dealer id
@@ -80,7 +82,8 @@
 				'player_id'=>$this->post('player_id'),
 				'bet_amount'=>$jodi_data['bet_amount'] ,
                                                                         'commission'=>$bet_amount_dealer ,
-				'timeslot' => date('Y-m-d H:i:s')
+				'timeslot' => date('Y-m-d H:i:s'),
+				'timeslot_id' => $this->Admin_model->getTimeslotId()
 				);
 
 			$dealer_history = array(
@@ -89,7 +92,8 @@
 				'dealer_id'=>$this->getDealerId($this->post('player_id')),
 				'bet_amount'=>$jodi_data['bet_amount'],
 				'commission'=>$bet_amount_dealer,
-				'timeslot' => date('Y-m-d H:i:s')
+				'timeslot' => date('Y-m-d H:i:s'),
+				'timeslot_id' => $this->Admin_model->getTimeslotId()
 				);
 
 			if($this->Bets_model->placebet($data))
@@ -115,7 +119,8 @@
                                                                                                         'dealer_id'=>$this->getDealerId($this->post('player_id')),
                                                                                                         'bet_amount'=>$jodi_data['bet_amount'],
                                                                                                         'commission'=>'',
-                                                                                                        'timeslot' => date('Y-m-d H:i:s')
+                                                                                                        'timeslot' => date('Y-m-d H:i:s'),
+																										'timeslot_id' => $this->Admin_model->getTimeslotId()
                                                                                                         );
                                                                                 
                                                                                        $this->Bets_model->addDealerHistory($dealer_history);
@@ -173,7 +178,8 @@
 				'second_digit'=>$jodi_data['digit'],
 				'jodi_digit'=>null,
 				'payout'=>$payout,
-				'timeslot' => date('Y-m-d H:i:s')
+				'timeslot' => date('Y-m-d H:i:s'),
+				'timeslot_id' => $this->Admin_model->getTimeslotId()
 				);
 			
 			                                       //calclulate commison and dealer id
@@ -208,7 +214,8 @@
 				'player_id'=>$this->post('player_id'),
 				'bet_amount'=>$jodi_data['bet_amount'],
                                                                         'commission'=> $bet_amount_dealer ,
-				'timeslot' => date('Y-m-d H:i:s')
+				'timeslot' => date('Y-m-d H:i:s'),
+				'timeslot_id' => $this->Admin_model->getTimeslotId()
 				);
 
 			$dealer_history = array(
@@ -217,7 +224,8 @@
 				'dealer_id'=>$this->getDealerId($this->post('player_id')),
 				'bet_amount'=>$jodi_data['bet_amount'],
 				'commission'=>$bet_amount_dealer,
-				'timeslot' => date('Y-m-d H:i:s')
+				'timeslot' => date('Y-m-d H:i:s'),
+				'timeslot_id' => $this->Admin_model->getTimeslotId()
 				);
 
 			if($this->Bets_model->placebet($data))
@@ -241,7 +249,9 @@
                                                                                                         'dealer_id'=>$this->getDealerId($this->post('player_id')),
                                                                                                         'bet_amount'=>$jodi_data['bet_amount'],
                                                                                                         'commission'=>'',
-                                                                                                        'timeslot' => date('Y-m-d H:i:s')
+                                                                                                        'timeslot' => date('Y-m-d H:i:s'),
+																										'timeslot_id' => $this->Admin_model->getTimeslotId()
+
                                                                                                         );
                                                                                 
                                                                                        $this->Bets_model->addDealerHistory($dealer_history);
@@ -301,7 +311,9 @@
 				'second_digit'=>null,
 				'jodi_digit'=>$jodi_data['digit'],
 				'payout'=>$payout,
-				'timeslot' => date('Y-m-d H:i:s')
+				'timeslot' => date('Y-m-d H:i:s'),
+				'timeslot_id' => $this->Admin_model->getTimeslotId()
+
 				);
                                                        //calclulate commison and dealer id
                                              $this->db->select('dealer_id');
@@ -333,7 +345,9 @@
 				'player_id'=>$this->post('player_id'),
 				'commission'=> $bet_amount_dealer ,
 				'bet_amount'=>$jodi_data['bet_amount'],
-				'timeslot' => date('Y-m-d H:i:s')
+				'timeslot' => date('Y-m-d H:i:s'),
+				'timeslot_id' => $this->Admin_model->getTimeslotId()
+
 				);
 
 			$dealer_history = array(
@@ -342,7 +356,9 @@
 				'dealer_id'=>$this->getDealerId($this->post('player_id')),
 				'bet_amount'=>$jodi_data['bet_amount'],
 				'commission'=>$bet_amount_dealer,
-				'timeslot' => date('Y-m-d H:i:s')
+				'timeslot' => date('Y-m-d H:i:s'),
+				'timeslot_id' => $this->Admin_model->getTimeslotId()
+
 				);
 
 			 if($this->Bets_model->placebet($data))
@@ -366,7 +382,9 @@
                                                                                                         'dealer_id'=>$this->getDealerId($this->post('player_id')),
                                                                                                         'bet_amount'=>$jodi_data['bet_amount'],
                                                                                                         'commission'=>'',
-                                                                                                        'timeslot' => date('Y-m-d H:i:s')
+                                                                                                        'timeslot' => date('Y-m-d H:i:s'),
+																										'timeslot_id' => $this->Admin_model->getTimeslotId()
+
                                                                                                         );
                                                                                 
                                                                                        $this->Bets_model->addDealerHistory($dealer_history);
