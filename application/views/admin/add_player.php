@@ -273,7 +273,7 @@
 							<div class="caption">
 								<i class="fa fa-globe"></i>All Players
 							</div>
-							
+							<input type="text" id="search_player"  class="col-sm-3"    placeholder ="Search Player"   style="color:black;float: right;margin-top:8px;"  name="search_player" >
 						</div>
 						<div class="portlet-body">
 							
@@ -526,4 +526,26 @@ Demo.init(); // init demo features
                     } 
                 });
 			}
-        </script>
+        
+                 
+                            
+                    // New selector
+                    jQuery.expr[':'].Contains = function(a, i, m) {
+                     return jQuery(a).text().toUpperCase()
+                         .indexOf(m[3].toUpperCase()) >= 0;
+                    };
+
+                    // Overwrites old selecor
+                    jQuery.expr[':'].contains = function(a, i, m) {
+                     return jQuery(a).text().toUpperCase()
+                         .indexOf(m[3].toUpperCase()) >= 0;
+                    };
+
+             
+             
+                 $('#search_player').keyup(function () { 
+                    $('#sample_1  tbody tr').hide();
+                         $("#sample_1  tbody tr:Contains('"+ $("#search_player").val() +"')  ").show();
+                 });
+ 
+                 </script>
