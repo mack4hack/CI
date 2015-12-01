@@ -30,11 +30,11 @@
 										<!-- BEGIN FORM-->
 											<div class="form-body">
 												<div class="row">
-													<div class="col-md-3"   style="width:20%;padding-right:0px;">
+													<div class="col-md-3"   style="width:20%;padding-right:0px; display:none;">
 														<div class="form-group">
 															
 															<div class="col-md-9">
-																<select name="country_id" class="form-control required" onchange="selectState(this.options[this.selectedIndex].value)">
+																<select name="country_id" class="form-control" onchange="selectState(this.options[this.selectedIndex].value)">
 								<option value="">Select country</option>
 													<?php foreach($list->result() as $country)
 																	{
@@ -198,6 +198,7 @@ QuickSidebar.init(); // init quick sidebar
 Demo.init(); // init demo features
    FormValidation.init();
   // TableManaged.init();
+  selectState(1);
   
          $("#form_sample_1").submit(function (e){
                 

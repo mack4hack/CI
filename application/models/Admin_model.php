@@ -119,13 +119,15 @@ function delete_dealer($id)
 		$this->db->update('player_history');		
 	}
 
-	function getAdminHistory()
+	function getAdminHistory($from = null , $to = null)
 	{
-		$this->db->select('timeslot');
+		$this->db->select('timeslot,timeslot_id');
 		$this->db->from('admin_history');
-		$this->db->group_by('timeslot');
-		$query=$this->db->get();	
-
+		$this->db->where('timeslot >=',$to);
+		$this->db->where('timeslot <=',$from);
+		$this->db->group_by('timeslot_id');
+		$query=$this->db->get();
+		 
 		$timeslots = $query->result();
 		$data = array();
 		foreach ($timeslots as $timeslot)
@@ -133,6 +135,7 @@ function delete_dealer($id)
 			$this->db->select('sum(bet_amount) as credited');
 			$this->db->from('admin_history');
 			$this->db->where('bet_amount >= 0');
+			$this->db->where('timeslot_id',$timeslot->timeslot_id);
 			$this->db->where('timeslot',$timeslot->timeslot);
 			$query=$this->db->get()->row();
 			$credited = $query->credited;
@@ -141,31 +144,46 @@ function delete_dealer($id)
 			$this->db->from('admin_history');
 			$this->db->where('bet_amount < 0');
 			$this->db->where('timeslot',$timeslot->timeslot);
+			$this->db->where('timeslot_id',$timeslot->timeslot_id);
 			$query=$this->db->get()->row();
 			$debited = $query->debited;
 
 			$this->db->select('total');
 			$this->db->from('admin_history');
 			$this->db->where('timeslot',$timeslot->timeslot);
+			$this->db->where('timeslot_id',$timeslot->timeslot_id);
 			$this->db->order_by("id", "desc"); 
 			$this->db->limit(1);
 			//$this->db->group_by('timeslot');
 		   	$query=$this->db->get()->row();
 		   	$day_total = $query->total;
 
-		   /*	$this->db->select('sum(total) as total');
-			$this->db->from('admin_history');
-			$this->db->group_by('timeslot');
+		    $this->db->select('sum(commission) as commission');
+			$this->db->from('dealer_history');
+			$this->db->where('timeslot',$timeslot->timeslot);
+			$this->db->where('timeslot_id',$timeslot->timeslot_id);
 		   	$query=$this->db->get()->row();
-		   	$total = $query->total;*/
+		   	$commission = $query->commission;
+
+		   	$this->db->select('total');
+			$this->db->from('admin_history');
+			$this->db->order_by("id", "desc"); 
+			$this->db->limit(1);
+		   	$query=$this->db->get()->row();
+		   	$final_total = $query->total;
 
 
+		   	$timespan = $this->getTimeslotById($timeslot->timeslot_id);
+		   	$draw_time = explode(' To ', $timespan);
 		   	$data[]= array(
 		   			'timeslot'=>$timeslot->timeslot,
 		   			'credited'=>$credited,
 		   			'debited'=>$debited,
+		   			'commission'=>$commission,
 		   			'day_total'=>$day_total,
-		   			'final_total'=>$day_total
+		   			'final_total'=>$final_total,
+		   			'draw_time'=>date('d-m-y',strtotime($timeslot->timeslot)).'  '.date('h:i a',strtotime($draw_time['1'])),
+		   			'profit'=>$credited -($debited + $commission)
 		   		);
 		}
 
@@ -311,5 +329,35 @@ function delete_dealer($id)
 			
                                                       return $number;
          }
+
+
+     	function gettimeslotid()
+     	{
+     		date_default_timezone_set("Asia/Calcutta");
+		   	$now = getdate();
+		    $minutes = $now['minutes'] - $now['minutes']%15;
+
+		    $rounded = $now['hours'].":".$minutes;
+		    $start = date('H:i', strtotime($rounded));
+		      
+		      
+		    $endTime = date('H:i',strtotime("+15 minutes", strtotime($start)));
+	        $time_slots = $start." To ".$endTime;
+
+         	$this->db->select('timeslot_id');
+	     	$this->db->from('timeslots');
+	      	$this->db->where('timeslot',$time_slots);
+	      	$query=$this->db->get()->row();
+	      	return $timeslot_id = $query->timeslot_id;
+     	}
+
+     	function getTimeslotById($id)
+     	{
+         	$this->db->select('timeslot');
+	     	$this->db->from('timeslots');
+	      	$this->db->where('timeslot_id',$id);
+	      	$query=$this->db->get()->row();
+	      	return $query->timeslot;
+     	}
 
 }
