@@ -1,4 +1,5 @@
 <?php include'header.php';?>
+<?php foreach($data_monthly as $dm){} ?>
 	<!-- BEGIN CONTENT -->
 	<div class="page-content-wrapper">
 		<div class="page-content">
@@ -25,7 +26,7 @@
 								<i class="fa fa-gift"></i>Summary
 							</div>
 							<div class="caption" style="float:right;">
-								Total Amount
+								Total Amount : <?php //echo $dm['']; ?>
 							</div>
 						</div>
 						<div class="portlet-body">
@@ -53,10 +54,7 @@
 										 Sr No
 									</th>
 									<th>
-										 Draw ID
-									</th>
-									<th>
-										 Draw Date Time
+										 Draw Time
 									</th>
 									<th>
 										 Credit
@@ -77,17 +75,17 @@
 								</tr>
 								</thead>
 								<tbody>
-                    <?php if(!empty($active_draw)  ) {
+                    <?php if(!empty($data_daily)  ) {
                                           $i =1;      
-                              foreach($active_draw as $draw){  ?>
+                              foreach($data_daily as $dd){  ?>
                                   
                                         <tr class="success">
 									<td><?php echo $i; ?></td>
-									<td><?php echo $draw['draw_id']; ?></td>
-									<td><?php echo $draw['timeslot']; ?></td>
-									<td><?php echo $draw['credit']; ?></td>
-									<td><?php echo $draw['debit']; ?></td>
-									<td><?php echo $draw['profit']; ?></td>
+									<td><?php echo explode('  ',$dd['draw_time'])['1']; ?></td>
+									<td><?php echo $dd['credited']; ?></td>
+									<td><?php echo $dd['debited']; ?></td>
+									<td><?php echo $dd['commission']; ?></td>
+									<td><?php echo $dd['profit']; ?></td>
 <!--									<td><?php //echo $draw['profit']; ?></td>-->
 									
 								</tr> 
@@ -111,10 +109,7 @@
 										 Sr No
 									</th>
 									<th>
-										 Draw ID
-									</th>
-									<th>
-										 Draw Date Time
+										 Draw Date & Time
 									</th>
 									<th>
 										 Credit
@@ -132,23 +127,25 @@
 								</tr>
 								</thead>
 								<tbody>
-								<?php if(!empty($active_player)  ) {
+								<?php if(!empty($data_weekly)  ) {
                                                                                                                                                   $i =1;      
-                                                                                                                                                                    foreach($active_player as $player){  ?>
+                                        foreach($data_weekly as $dw){  ?>
 
-                                                                                                                                                                 <tr class="success">
-                                                                                                                                                                            <td><?php echo $i; ?></td>
-                                                                                                                                                                            <td><?php echo $player['user_code']; ?></td>
-                                                                                                                                                                            <td><?php echo $player['name']; ?></td>
-                                                                                                                                                                            <td><?php echo $player['stake']; ?></td>
-                                                                                                                                                                    </tr> 
+                                     <tr class="success">
+                                        <td><?php echo $i; ?></td>
+                                        <td><?php echo $dw['draw_time']; ?></td>
+										<td><?php echo $dw['credited']; ?></td>
+										<td><?php echo $dw['debited']; ?></td>
+										<td><?php echo $dw['commission']; ?></td>
+										<td><?php echo $dw['profit']; ?></td>
+                                    </tr> 
 
-                                                                                                                                                                   <?php  $i++;  }                                                                                                                                       
+                                       <?php  $i++;  }                                                                                                                                       
 
 
-                                                                                                                                                          }else{ ?>
+                              }else{ ?>
 
-                                                                                                                                                              <tr class='active'><th style='text-align:center'; colspan='6'>No Records Found</th></tr>
+                                  <tr class='active'><th style='text-align:center'; colspan='6'>No Records Found</th></tr>
 
                                                                                                                                                          <?php  } ?>
 								</tbody>
@@ -162,10 +159,7 @@
 										 Sr No
 									</th>
 									<th>
-										 Draw ID
-									</th>
-									<th>
-										 Draw Date Time
+										 Draw Date & Time
 									</th>
 									<th>
 										 Credit
@@ -183,25 +177,27 @@
 								</tr>
 								</thead>
 								<tbody>
-								<?php if(!empty($active_dealer)  ) {
-                                                                                                                                                  $i =1;      
-                                                                                                                                                                    foreach($active_dealer as $player){  ?>
+								<?php if(!empty($data_monthly)  ) {
+		                          $i =1;      
+                                foreach($data_monthly as $dm){  ?>
 
-                                                                                                                                                                 <tr class="success">
-                                                                                                                                                                            <td><?php echo $i; ?></td>
-                                                                                                                                                                            <td><?php echo $player['user_code']; ?></td>
-                                                                                                                                                                            <td><?php echo $player['name']; ?></td>
-                                                                                                                                                                            <td><?php echo $player['stake']; ?></td>
-                                                                                                                                                                    </tr> 
+		                             <tr class="success">
+	                                        <td><?php echo $i; ?></td>
+	                                        <td><?php echo $dm['draw_time']; ?></td>
+											<td><?php echo $dm['credited']; ?></td>
+											<td><?php echo $dm['debited']; ?></td>
+											<td><?php echo $dm['commission']; ?></td>
+											<td><?php echo $dm['profit']; ?></td>
+		                                </tr> 
 
-                                                                                                                                                                   <?php  $i++;  }                                                                                                                                       
+		                               <?php  $i++;  }                                                                                                                                       
 
 
-                                                                                                                                                          }else{ ?>
+			                      }else{ ?>
 
-                                                                                                                                                              <tr class='active'><th style='text-align:center'; colspan='6'>No Records Found</th></tr>
+			                          <tr class='active'><th style='text-align:center'; colspan='6'>No Records Found</th></tr>
 
-                                                                                                                                                         <?php  } ?>
+                             <?php  } ?>
 								</tbody>
 								</table>	
 									</div>
