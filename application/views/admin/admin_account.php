@@ -26,7 +26,7 @@
 								<i class="fa fa-gift"></i>Summary
 							</div>
 							<div class="caption" style="float:right;">
-								Total Amount : <?php //echo $dm['']; ?>
+								Total Amount : <?php echo $dm['final_total']; ?>
 							</div>
 						</div>
 						<div class="portlet-body">

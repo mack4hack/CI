@@ -161,6 +161,14 @@ function delete_dealer($id)
 		   	$query=$this->db->get()->row();
 		   	$commission = $query->commission;
 
+		   	$this->db->select('total');
+			$this->db->from('admin_history');
+			$this->db->order_by("id", "desc"); 
+			$this->db->limit(1);
+		   	$query=$this->db->get()->row();
+		   	$final_total = $query->total;
+
+
 		   	$timespan = $this->getTimeslotById($timeslot->timeslot_id);
 		   	$draw_time = explode(' To ', $timespan);
 		   	$data[]= array(
@@ -169,7 +177,7 @@ function delete_dealer($id)
 		   			'debited'=>$debited,
 		   			'commission'=>$commission,
 		   			'day_total'=>$day_total,
-		   			'final_total'=>$day_total,
+		   			'final_total'=>$final_total,
 		   			'draw_time'=>date('d-m-y',strtotime($timeslot->timeslot)).'  '.date('h:i a',strtotime($draw_time['1'])),
 		   			'profit'=>$credited -($debited + $commission)
 		   		);

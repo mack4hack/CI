@@ -326,7 +326,7 @@ class Bets_model extends CI_Model {
 		$this->db->limit(1);
 		$query=$this->db->get()->row();
 		$old_total = $query->total;
-		$new_total = ($old_total + $data['bet_amount']);
+		$new_total = ($old_total + $data['bet_amount']) - $data['commission'];
 		$data['total'] = $new_total;
 
 		$this->db->insert('admin_history', $data);
@@ -348,7 +348,7 @@ class Bets_model extends CI_Model {
 		$this->db->limit(1);
 		$query=$this->db->get()->row();
 		$old_total = $query->total;
-		$new_total = ($old_total + $data['bet_amount']);
+		$new_total = ($old_total + $data['bet_amount']) - $data['commission'];
 		$data['total'] = $new_total;
 
 		$this->db->insert('dealer_history', $data);
