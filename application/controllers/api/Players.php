@@ -219,11 +219,14 @@
 				], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code			
 			}                
 			$user_id = $this->ion_auth->get_user_id();
+
+			$player = $this->userInfo($user_id);
+
 			date_default_timezone_set("Asia/Calcutta");
 			$this->response([
 				'status' => TRUE,
 				'message' => 'Login Successfully',
-				'data' => array('player_id'=>$user_id,'date'=>date('Y-m-d H:i:s'))
+				'data' => array('player_id'=>$user_id,'default_amount'=>$player->deposited_amount,'present_amount'=>$player->present_amount,'date'=>date('Y-m-d H:i:s'))
 			], REST_Controller::HTTP_OK); // NOT_FOUND (404) being the HTTP response code
 			            
 		}else{   
@@ -232,6 +235,27 @@
 				'message' => 'Login Failed'
 			], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
 		}
+	}
+
+	function userInfo($id)
+	{
+		$players = $this->Admin_model->get_players();
+		if (!empty($players))
+        {
+            foreach ($players as $key => $value)
+            {
+                if ( $value->id  == $id)
+                {
+                    
+                    $player = $value;
+                }
+            }
+        }
+
+        if (!empty($player))
+        {
+        	return $player;
+        }
 	}
 
 		
