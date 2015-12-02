@@ -1087,8 +1087,20 @@ public function loadData()
 	public function dealerAccountChart()
   {
     $dealer_id = $_GET['dealer'];
-    $result['data']=$this->Admin_model->getDealerHistoryById($dealer_id);
-        $this->load->view('admin/dealer_account_chart',$result);
+
+    $from = date('Y-m-d');
+    $to = date('Y-m-d');
+    $result['data_daily']=$this->Admin_model->getDealerHistoryById($dealer_id,$from,$to);
+      
+    $from =  date('Y-m-d');
+    $to   =   date('Y-m-d', strtotime("-1 week", strtotime($from)));
+    $result['data_weekly']=$this->Admin_model->getDealerHistoryById($dealer_id,$from,$to);
+    
+    $from =  date('Y-m-d');
+    $to   =   date('Y-m-d', strtotime("-1 month", strtotime($from)));
+    $result['data_monthly']=$this->Admin_model->getDealerHistoryById($dealer_id,$from,$to);
+
+    $this->load->view('admin/dealer_account_chart',$result);
   }
 
   public function ajaxNumberingChart()

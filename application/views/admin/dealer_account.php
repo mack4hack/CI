@@ -8,7 +8,10 @@
 	<!-- BEGIN CONTENT -->
 	<div class="page-content-wrapper">
 		<div class="page-content" >
-		
+				<h3 class="page-title">
+			Dealer Account
+			</h3>
+
 				<?php if($this->ion_auth->in_group('dealer'))
 				 { ?>
 					 <div class="row" style="display:none;">

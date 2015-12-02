@@ -1,58 +1,204 @@
+<?php foreach($data_monthly as $dm){} ?>
 				<div class="row">
-					<div class="col-md-12" >
-							<!-- BEGIN CHART PORTLET-->
-							    <div class="portlet light bordered">
-								   <div class="portlet-title">
-									<div class="caption">
-										<i class="icon-bar-chart font-green-haze"></i>
-										<span class="caption-subject bold uppercase font-green-haze">Dealer Account</span>
-									</div>
-									<div class="caption" style="float:right;">
-										<span class="caption-subject bold uppercase font-green-haze">Dealer : </span>
-										<span class="caption-subject bold uppercase font-green-haze" id="dealername"></span>
-									</div>
-								  </div>
-								
-								<div class="portlet-body">
-								 <table class="table table-bordered table-hover">
-								   <thead>
-								     <tr>
+				
+				<div class="col-md-12">
+					
+					<!-- BEGIN ACCORDION PORTLET-->
+					
+					<!-- END ACCORDION PORTLET-->
+					
+					
+					<div class="portlet box blue">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-gift"></i>Summary
+							</div>
+							<div class="caption" style="float:right;">
+								Total Amount : <?php echo isset($dm['final_total']) ? $dm['final_total'] : '' ?>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="tabbable-custom nav-justified">
+								<ul class="nav nav-tabs nav-justified">
+									<li class="active">
+										<a href="#tab_1_1_1" data-toggle="tab">
+										Daily </a>
+									</li>
+									<li>
+										<a href="#tab_1_1_2" data-toggle="tab">
+										Weekly </a>
+									</li>
+									<li>
+										<a href="#tab_1_1_3" data-toggle="tab">
+										Monthly </a>
+									</li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane active" id="tab_1_1_1">
+										<table class="table table-bordered table-hover">
+								<thead>
+								<tr>
 									<th>
-										 Date
+										 Sr No
 									</th>
 									<th>
-										 Credited
+										 Draw Time
 									</th>
 									<th>
-										 Debited
+										 Credit
+									</th>
+									<th>
+										 Debit
 									</th>
 									<th>
 										 Commission
 									</th>
 									<th>
-										 Total
+										 Profit
 									</th>
-								    </tr>
-								   </thead>
-								   <tbody>
-								   <?php if(!empty($data)) { ?>
-									   <tr class="active">
-									     	<?php foreach ($data as $d) { ?>
-									     	 	<td><?php echo $d['timeslot']; ?></td>
-									     	 	<td><?php echo $d['credited']; ?></td>
-									     	 	<td><?php echo $d['debited']; ?></td>
-									     	 	<td><?php echo $d['commission']; ?></td>
-									     	 	<td><?php echo $d['day_total']; ?></td>
-						     	 	 	</tr>
-								    <?php 	} }
-								    else echo "<tr class='active'><th style='text-align:center'; colspan='5'>No Records Found</th></tr>"; ?>
+<!--									<th>
+										 Profit Percentage
+									</th>-->
+									
+								</tr>
+								</thead>
+								<tbody>
+                    <?php if(!empty($data_daily)  ) {
+                                          $i =1;      
+                              foreach($data_daily as $dd){  ?>
+                                  
+                                        <tr class="success">
+									<td><?php echo $i; ?></td>
+									<td><?php echo explode('  ',$dd['draw_time'])['1']; ?></td>
+									<td><?php echo $dd['credited']; ?></td>
+									<td><?php echo $dd['debited']; ?></td>
+									<td><?php echo $dd['commission']; ?></td>
+									<td><?php echo $dd['profit']; ?></td>
+<!--									<td><?php //echo $draw['profit']; ?></td>-->
+									
+								</tr> 
+                                          
+                                    <?php  $i++;  }                                                                                                                                       
+
+
+                            }else{ ?>
+                                
+                                <tr class='active'><th style='text-align:center'; colspan='7'>No Records Found</th></tr>
+                                
+                                                                                           <?php  } ?>
 								</tbody>
-								</table>
+								</table>	
+									</div>
+									<div class="tab-pane" id="tab_1_1_2">
+										<table class="table table-bordered table-hover">
+								<thead>
+								<tr>
+									<th>
+										 Sr No
+									</th>
+									<th>
+										 Draw Date & Time
+									</th>
+									<th>
+										 Credit
+									</th>
+									<th>
+										 Debit
+									</th>
+									<th>
+										 Commission
+									</th>
+									<th>
+										 Profit
+									</th>
+									
+								</tr>
+								</thead>
+								<tbody>
+								<?php if(!empty($data_weekly)  ) {
+                                                                                                                                                  $i =1;      
+                                        foreach($data_weekly as $dw){  ?>
+
+                                     <tr class="success">
+                                        <td><?php echo $i; ?></td>
+                                        <td><?php echo $dw['draw_time']; ?></td>
+										<td><?php echo $dw['credited']; ?></td>
+										<td><?php echo $dw['debited']; ?></td>
+										<td><?php echo $dw['commission']; ?></td>
+										<td><?php echo $dw['profit']; ?></td>
+                                    </tr> 
+
+                                       <?php  $i++;  }                                                                                                                                       
+
+
+                              }else{ ?>
+
+                                  <tr class='active'><th style='text-align:center'; colspan='6'>No Records Found</th></tr>
+
+                                                                                                                                                         <?php  } ?>
+								</tbody>
+								</table>	
+									</div>
+									<div class="tab-pane" id="tab_1_1_3">
+										<table class="table table-bordered table-hover">
+								<thead>
+								<tr>
+									<th>
+										 Sr No
+									</th>
+									<th>
+										 Draw Date & Time
+									</th>
+									<th>
+										 Credit
+									</th>
+									<th>
+										 Debit
+									</th>
+									<th>
+										 Commission
+									</th>
+									<th>
+										 Profit
+									</th>
+									
+								</tr>
+								</thead>
+								<tbody>
+								<?php if(!empty($data_monthly)  ) {
+		                          $i =1;      
+                                foreach($data_monthly as $dm){  ?>
+
+		                             <tr class="success">
+	                                        <td><?php echo $i; ?></td>
+	                                        <td><?php echo $dm['draw_time']; ?></td>
+											<td><?php echo $dm['credited']; ?></td>
+											<td><?php echo $dm['debited']; ?></td>
+											<td><?php echo $dm['commission']; ?></td>
+											<td><?php echo $dm['profit']; ?></td>
+		                                </tr> 
+
+		                               <?php  $i++;  }                                                                                                                                       
+
+
+			                      }else{ ?>
+
+			                          <tr class='active'><th style='text-align:center'; colspan='6'>No Records Found</th></tr>
+
+                             <?php  } ?>
+								</tbody>
+								</table>	
+									</div>
 								</div>
 							</div>
-							<!-- END CHART PORTLET-->
+							
+						</div>
 					</div>
-					</div>
+				</div>
+			</div>
+			
+			<!-- END PAGE CONTAINER-->
+		</div>
 
 <script type="text/javascript">
 	$(document).ready(function(){
