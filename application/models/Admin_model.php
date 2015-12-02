@@ -147,21 +147,21 @@ function delete_dealer($id)
 				$this->db->from('admin_history');
 				$this->db->where('bet_amount >= 0');
 				$this->db->where('timeslot_id',$timeslot->timeslot_id);
-				$this->db->where('timeslot',$timeslot->timeslot);
+				$this->db->like('timeslot',$timeslot->timeslot);
 				$query=$this->db->get()->row();
 				$credited = $query->credited;
 
 				$this->db->select('sum(bet_amount) as debited');
 				$this->db->from('admin_history');
 				$this->db->where('bet_amount < 0');
-				$this->db->where('timeslot',$timeslot->timeslot);
+				$this->db->like('timeslot',$timeslot->timeslot);
 				$this->db->where('timeslot_id',$timeslot->timeslot_id);
 				$query=$this->db->get()->row();
 				$debited = $query->debited;
 
 				$this->db->select('total');
 				$this->db->from('admin_history');
-				$this->db->where('timeslot',$timeslot->timeslot);
+				$this->db->like('timeslot',$timeslot->timeslot);
 				$this->db->where('timeslot_id',$timeslot->timeslot_id);
 				$this->db->order_by("id", "desc"); 
 				$this->db->limit(1);
@@ -171,7 +171,7 @@ function delete_dealer($id)
 
 			    $this->db->select('sum(commission) as commission');
 				$this->db->from('dealer_history');
-				$this->db->where('timeslot',$timeslot->timeslot);
+				$this->db->like('timeslot',$timeslot->timeslot);
 				$this->db->where('timeslot_id',$timeslot->timeslot_id);
 			   	$query=$this->db->get()->row();
 			   	$commission = $query->commission;
