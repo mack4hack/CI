@@ -870,7 +870,7 @@ public function loadData()
   			$val_start = $hr . ":" . $min;
         $newTime = date("Y-m-d H:i",strtotime($start." +15 minutes"));
         $val_end = date("H:i",strtotime($start." +15 minutes"));
-  			$display = date("h:i a",strtotime($newTime));
+  			$display = date("h:i a",strtotime($val_start));
 
   			$time_slots[] = array('value' => $val_start." To ".$val_end,
                               'display' => $display,);
