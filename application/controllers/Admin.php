@@ -700,7 +700,7 @@ public function loadData()
                 }
             }
 
-    	$luck_numbers = array(
+    	$luck_numbers[] = array(
     		'lucky_number' => $jodi,
     		'draw_id' => $latest_id,
         'timeslot' => date('Y-m-d H:i:s'),
