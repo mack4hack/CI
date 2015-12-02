@@ -141,3 +141,8 @@ ALTER TABLE `dealer_history` ADD `commission` INT( 11 ) NOT NULL AFTER `bet_amou
 ALTER TABLE `admin_history` ADD `timeslot_id` INT(11) NOT NULL ;
 ALTER TABLE `dealer_history` ADD `timeslot_id` INT(11) NOT NULL ;
 ALTER TABLE `player_history` ADD `timeslot_id` INT(11) NOT NULL AFTER `timeslot`;
+
+
+
+
+ALTER TABLE `user_master` ADD `is_demo` INT( 11 ) NOT NULL DEFAULT '0';

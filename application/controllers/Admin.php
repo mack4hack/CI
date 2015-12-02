@@ -571,7 +571,21 @@ public function loadData()
      //code
 	  //$user_code ="PUN000005";
 //echo "<pre>";print_r($user_code);die;
-	  $password = $_POST['password'];
+                        //add demo dealer
+                        if(isset($_POST['demo'])  )   //add different user code for dealer
+                        {
+                            
+                                  $ar = array('role_id'=>'2','is_demo' =>'1');
+                                $ret1 = $this->db
+                             ->where($ar)
+                             ->count_all_results('user_master');
+                               // echo $this->db->last_query();
+                                $paddedNum1 = sprintf("%03d", $ret1+1);
+                             $user_code = "DEM".$paddedNum1;
+                        }
+          
+           
+                    $password = $_POST['password'];
 
 	  $data = array("first_name" => $_POST['fname'],
 					"last_name" => $_POST['lname'],
@@ -1249,25 +1263,7 @@ public function loadData()
           
         foreach($numbers as $number){
 
-          if(!empty($number)){  
-          $this->db->select('draw_id');
-          $this->db->order_by('id','desc');
-          $this->db->limit(1);
-          $query=$this->db->get('lucky_numbers')->row();        
-          if(!empty($query))
-          {
-               $latest_id  =    $query->draw_id;
-               if($latest_id == 99999)
-               {
-                   $latest_id = 0;
-               }
-               $latest_id = $latest_id +1 ;
-          }
-        
-          
-           
-
-          $start = strtotime('+15 minutes',strtotime($start));
+         $start = strtotime('+15 minutes',strtotime($start));
           $ash = strtotime('+15 minutes',$start);
           $ash =  date("H:i",$ash);
           $start =  date("H:i",$start);
@@ -1287,7 +1283,22 @@ public function loadData()
         
           $time =  date("Y-m-d H:i:s" ,$time) ;
          // $start = strtotime($start);
-  
+          if(!empty($number)){  
+         
+          $this->db->select('draw_id');
+          $this->db->order_by('id','desc');
+          $this->db->limit(1);
+          $query=$this->db->get('lucky_numbers')->row();        
+          if(!empty($query))
+          {
+               $latest_id  =    $query->draw_id;
+               if($latest_id == 99999)
+               {
+                   $latest_id = 0;
+               }
+               $latest_id = $latest_id +1 ;
+          }    
+              
           $luck_numbers[] = array(
           'lucky_number' => $number,
           'draw_id' => $latest_id,
