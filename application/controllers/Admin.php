@@ -1185,11 +1185,11 @@ public function loadData()
                         $result['number'] = $number;
                         for($i=0*60;$i<24*60;$i+=15){
                         $hr = floor($i/60);
-                        if($hr < 9)
+                        if($hr <= 9)
                                 $hr = '0'.$hr;
 
                         $min = ($i/60-floor($i/60))*60;
-                        if($min < 9)
+                        if($min <= 9)
                           $min = '0'.$min;
 
                           $start = $hr . ":" . $min;
