@@ -1112,14 +1112,17 @@ public function loadData()
 	{
     $from = date('Y-m-d');
     $to = date('Y-m-d');
+    $from =  date('Y-m-d', strtotime("1 day", strtotime($from)));
     $result['data_daily']=$this->Admin_model->getAdminHistory($from,$to);
       
     $from =  date('Y-m-d');
     $to   =   date('Y-m-d', strtotime("-1 week", strtotime($from)));
+    $from   =   date('Y-m-d', strtotime("1 day", strtotime($from)));
     $result['data_weekly']=$this->Admin_model->getAdminHistory($from,$to);
-		
+		//die;
     $from =  date('Y-m-d');
     $to   =   date('Y-m-d', strtotime("-1 month", strtotime($from)));
+    $from   =   date('Y-m-d', strtotime("1 day", strtotime($from)));
     $result['data_monthly']=$this->Admin_model->getAdminHistory($from,$to);
 
     $this->load->view('admin/admin_account',$result);
