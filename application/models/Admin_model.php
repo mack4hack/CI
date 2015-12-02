@@ -170,7 +170,7 @@ function delete_dealer($id)
 			   	$day_total = $query->total;
 
 			    $this->db->select('sum(commission) as commission');
-				$this->db->from('dealer_history');
+				$this->db->from('admin_history');
 				$this->db->like('timeslot',$timeslot->timeslot);
 				$this->db->where('timeslot_id',$timeslot->timeslot_id);
 			   	$query=$this->db->get()->row();
