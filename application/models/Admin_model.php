@@ -123,11 +123,11 @@ function delete_dealer($id)
 	{
 		$this->db->select('timeslot,timeslot_id');
 		$this->db->from('admin_history');
-		$this->db->where('timeslot >=',$to);
-		$this->db->where('timeslot <=',$from);
+		$where = "timeslot like '%".$from."%' or timeslot like '%".$to."%'"; 
+		$this->db->where($where);
 		$this->db->group_by('timeslot_id');
 		$query=$this->db->get();
-		 
+		
 		$timeslots = $query->result();
 		$data = array();
 
