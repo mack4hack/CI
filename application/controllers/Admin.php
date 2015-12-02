@@ -678,11 +678,11 @@ public function loadData()
             for($i=0*60;$i<24*60;$i+=15)
             {
               $hr = floor($i/60);
-              if($hr < 9)
+              if($hr <= 9)
               $hr = '0'.$hr;
 
               $min = ($i/60-floor($i/60))*60;
-              if($min < 9)
+              if($min <= 9)
               $min = '0'.$min;
 
               $start = $hr . ":" . $min;
@@ -781,12 +781,60 @@ public function loadData()
         $date = explode(' ',$time['0']);
 			  $start = $time['0'];
 			  $end = $date['0'].' '.$time['1'];
+
+        $result['first_digit_data']=$this->Bets_model->getfirstdigitchartAccToTime($start,$end);
+        $result['second_digit_data']=$this->Bets_model->getseconddigitchartAccToTime($start,$end);
+        $result['jodi_data']=$this->Bets_model->getjodichartAccToTime($start,$end);
+        
+
+        $bet_amount_jodi = 0;
+                       $payout_jodi = 0;
+                      if(!empty($result['jodi_data'])){
+                          
+                            foreach($result['jodi_data']->result() as $bets)
+                            {
+                                       $bet_amount_jodi   = $bet_amount_jodi + $bets->bet_amount;
+                                       $payout_jodi   = $bet_amount_jodi + $bets->payout;
+                            }
+                      }
+                      $bet_amount_first = 0;
+                       $payout_first = 0;
+                      if(!empty($result['first_digit_data'])){
+                          
+                            foreach($result['first_digit_data']->result() as $bets)
+                            {
+                                       $bet_amount_first   = $bet_amount_first + $bets->bet_amount;
+                                       $payout_first  = $bet_amount_first + $bets->payout;
+                            }
+                      }
+                       $bet_amount_second = 0;
+                       $payout_second = 0;
+                      if(!empty($result['second_digit_data'])){
+                          
+                            foreach($result['second_digit_data']->result() as $bets)
+                            {
+                                       $bet_amount_second   = $bet_amount_second + $bets->bet_amount;
+                                       $payout_second   = $bet_amount_second + $bets->payout;
+                            }
+                      }
+                      $bet_amount_and_payout = array(
+                            
+                              'bet_amount_jodi' => $bet_amount_jodi,
+                              'payout_jodi' => $payout_jodi,
+                              'bet_amount_first' => $bet_amount_first,
+                              'payout_first' => $payout_first,
+                              'bet_amount_second' => $bet_amount_second,
+                              'payout_second' => $payout_second,
+                      );
+                
+        $result['jodi_bets'] = $this->Bets_model->getNumberOfBetsByTime($start,$end,3)->num_rows();
+        $result['first_bets'] = $this->Bets_model->getNumberOfBetsByTime($start,$end,1)->num_rows();
+        $result['second_bets'] = $this->Bets_model->getNumberOfBetsByTime($start,$end,2)->num_rows();
+        $result['bets_and_payout']  = $bet_amount_and_payout;
+        $result['total_payout']=$this->Bets_model->getTotalPayoutAndBetsAccToTime($start,$end);
+        $result['lucky_number']=$this->Bets_model->getLuckyNumberAccToTime($start,$end);
 			  
-			    $result['first_digit_data']=$this->Bets_model->getfirstdigitchartAccToTime($start,$end);
-          $result['second_digit_data']=$this->Bets_model->getseconddigitchartAccToTime($start,$end);
-		      $result['jodi_data']=$this->Bets_model->getjodichartAccToTime($start,$end);
-		      $result['total_payout']=$this->Bets_model->getTotalPayoutAndBetsAccToTime($start,$end);
-		      $result['lucky_number']=$this->Bets_model->getLuckyNumberAccToTime($start,$end);
+			    
 		      //print_r($result);die;
 		      
           	  $this->load->view('admin/summary',$result);
@@ -807,11 +855,11 @@ public function loadData()
 
 		for($i=0*60;$i<24*60;$i+=15){
 			$hr = floor($i/60);
-			if($hr < 9)
+			if($hr <= 9)
 				$hr = '0'.$hr;
 			
 			$min = ($i/60-floor($i/60))*60;
-			if($min < 9)
+			if($min <= 9)
 				$min = '0'.$min;
 
     

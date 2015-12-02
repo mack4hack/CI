@@ -767,10 +767,10 @@ $current_timestamp = $date->getTimestamp();
 									  <div class="caption">
 										<i class="icon-bar-chart font-green-haze"></i>
 										<span class="caption-subject bold uppercase font-green-haze">Single Digit Second </span>
-                                                                                                                                                                                    <span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $second_bets;  ?> ) </span>
+                                        <span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $second_bets;  ?> ) </span>
 									  </div>
-                                                                                                                                                                     <div class="caption" style="float:right;">
-										
+		                                 <div class="caption" style="float:right;">
+
 										<span class="caption-subject bold uppercase font-green-haze"> Bet Amount</span>
 										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['bet_amount_second'];  ?> ) </span>
 										<span class="caption-subject bold uppercase font-green-haze"> Payout</span>

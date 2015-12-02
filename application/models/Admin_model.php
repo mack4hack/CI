@@ -357,7 +357,7 @@ function delete_dealer($id)
          }
 
 
-     	function gettimeslotid()
+     	function getTimeslotId()
      	{
      		date_default_timezone_set("Asia/Calcutta");
 		   	$now = getdate();
