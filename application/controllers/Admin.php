@@ -1193,10 +1193,11 @@ public function loadData()
                           $min = '0'.$min;
 
                           $start = $hr . ":" . $min;
-
+                          $startTime = date('h:i a',strtotime($start));
                           $newTime = date('h:i a',strtotime($start." +15 minutes"));
+                          
                           //$time_slots[] = $start." To ".$newTime;
-                          $time_slots[] = $newTime;
+                          $time_slots[] = $startTime;
                          
                           $time_slots1[] = array('start' => $start,'end' => $newTime, );
                           
