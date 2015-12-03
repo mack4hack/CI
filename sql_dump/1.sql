@@ -146,3 +146,8 @@ ALTER TABLE `player_history` ADD `timeslot_id` INT(11) NOT NULL AFTER `timeslot`
 
 
 ALTER TABLE `user_master` ADD `is_demo` INT( 11 ) NOT NULL DEFAULT '0';
+
+ALTER TABLE `user_master` ADD `sunday_amount` INT( 11 ) NOT NULL AFTER `present_amount` ;
+
+ALTER TABLE `user_master` ADD `is_restored` INT( 11 ) NOT NULL DEFAULT '0',
+ADD `restored_time` DATETIME NOT NULL ;

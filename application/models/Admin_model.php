@@ -399,5 +399,47 @@ function delete_dealer($id)
 	      	$query=$this->db->get()->row();
 	      	return $query->timeslot;
      	}
+        
+             public function restore_amount($users){
+                      
+                     $result['failed_users'] = array();
+                        foreach($users as $user){
+                                     $this->db->select("present_amount,deposited_amount,sunday_amount");
+                                     $this->db->from("user_master"); 
+                                     $this->db->where("id ",$user);
+                                     $query = $this->db->get()->row();
+                                    $present_amount = $query->present_amount;                 
+                                    $deposited_amount = $query->deposited_amount;                 
+                                    $sunday_amount = $query->sunday_amount;        
+                                    
+                                    if(!empty($sunday_amount)){
+                                        
+                                             if($sunday_amount > $deposited_amount){
+                                                 
+                                                     $amount = $sunday_amount - $deposited_amount;
+                                                     $present_amount = $present_amount - $amount ;
+                                                     
+                                                      $data = array(
+					
+				"present_amount" => $present_amount,
+				"is_restored" => 1,
+				"restored_time" => date("Y-m-d H:i:s"),
+				"sunday_amount" => 0,
+					
+                                                        );
+                                                        $this->db->where('id', $user);
+                                                        $this->db->update('user_master', $data);
+                                                     
+                                             }else{
+                                                  $result['failed_users'][] = $user;
+                                             }
+                                        
+                                    }else{
+                                        
+                                                   $result['failed_users'][] = $user;
+                                    }
+                         }
+                         return $result;
+             }
 
 }

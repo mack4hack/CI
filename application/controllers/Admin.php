@@ -928,20 +928,46 @@ public function loadData()
         
 	public function update_amount(){
 		  
-		   if(isset($_POST['add_amount']) &&  isset($_POST['user_id']) ){
+		   if(isset($_GET['amount']) &&  isset($_GET['user_id'])  &&  isset($_GET['add'])    ){
 			    
-			     $query = $this->db->query("select present_amount from user_master where id='".$_POST['user_id']."'");
-                 $row = $query->row_array();
-                 $amount =   $_POST['add_amount'] + $row['present_amount'];
- 			     $data = array("present_amount" => $amount, 
+			       $query = $this->db->query("select present_amount from user_master where id='".$_GET['user_id']."'");
+                                                             $row = $query->row_array();
+                                                             $amount =   $_GET['amount'] + $row['present_amount'];
+ 			       $data = array("present_amount" => $amount, 
 		                );
-					  $this->db->where('id', $_POST['user_id']);
+					  $this->db->where('id', $_GET['user_id']);
 					  $update = $this->db->update('user_master', $data);
 					  //echo $this->db->last_query();
 					  echo $update > 0 ?  1 : 0;
 			     
 			}
-	}	
+		   if(isset($_GET['amount']) &&  isset($_GET['user_id'])  &&  isset($_GET['withdraw'])    ){
+			    
+			      $query = $this->db->query("select present_amount from user_master where id='".$_GET['user_id']."'");
+                                                             $row = $query->row_array();
+                                                             $amount =    $row['present_amount'] - $_GET['amount'] ;
+ 			       $data = array("present_amount" => $amount, 
+		                );
+					  $this->db->where('id', $_GET['user_id']);
+					  $update = $this->db->update('user_master', $data);
+					  //echo $this->db->last_query();
+					  echo $update > 0 ?  1 : 0;
+			     
+			}
+	}
+        
+        public function restoreAccount(){
+                   $result ='';
+                   $users = json_decode($_POST['users']);
+                   if(!empty($users)){
+                       
+                         $result = $this->Admin_model->restore_amount($users);
+                   }
+                   
+              echo json_encode($result);
+        }
+        
+        
 	public function block_player(){
 		
 		$result['list'] = $this->Getlocation->getCountry();
