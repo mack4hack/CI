@@ -884,7 +884,7 @@ public function loadData()
   			$val_start = $hr . ":" . $min;
         $newTime = date("Y-m-d H:i",strtotime($start." +15 minutes"));
         $val_end = date("H:i",strtotime($start." +15 minutes"));
-  			$display = date("h:i a",strtotime($newTime));
+  			$display = date("h:i a",strtotime($val_start));
 
   			$time_slots[] = array('value' => $val_start." To ".$val_end,
                               'display' => $display,);
@@ -1126,14 +1126,17 @@ public function loadData()
 	{
     $from = date('Y-m-d');
     $to = date('Y-m-d');
+    $from =  date('Y-m-d', strtotime("1 day", strtotime($from)));
     $result['data_daily']=$this->Admin_model->getAdminHistory($from,$to);
       
     $from =  date('Y-m-d');
     $to   =   date('Y-m-d', strtotime("-1 week", strtotime($from)));
+    $from   =   date('Y-m-d', strtotime("1 day", strtotime($from)));
     $result['data_weekly']=$this->Admin_model->getAdminHistory($from,$to);
-		
+		//die;
     $from =  date('Y-m-d');
     $to   =   date('Y-m-d', strtotime("-1 month", strtotime($from)));
+    $from   =   date('Y-m-d', strtotime("1 day", strtotime($from)));
     $result['data_monthly']=$this->Admin_model->getAdminHistory($from,$to);
 
     $this->load->view('admin/admin_account',$result);
@@ -1199,18 +1202,19 @@ public function loadData()
                         $result['number'] = $number;
                         for($i=0*60;$i<24*60;$i+=15){
                         $hr = floor($i/60);
-                        if($hr < 9)
+                        if($hr <= 9)
                                 $hr = '0'.$hr;
 
                         $min = ($i/60-floor($i/60))*60;
-                        if($min < 9)
+                        if($min <= 9)
                           $min = '0'.$min;
 
                           $start = $hr . ":" . $min;
-
+                          $startTime = date('h:i a',strtotime($start));
                           $newTime = date('h:i a',strtotime($start." +15 minutes"));
+                          
                           //$time_slots[] = $start." To ".$newTime;
-                          $time_slots[] = $newTime;
+                          $time_slots[] = $startTime;
                          
                           $time_slots1[] = array('start' => $start,'end' => $newTime, );
                           
