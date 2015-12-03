@@ -451,5 +451,13 @@ function delete_dealer($id)
 	    $query=$this->db->get();
 	    return $query->result();
     }
+    function getGamePlayedLottery($player_id)
+    {
+      	$this->db->select('*');
+     	$this->db->from('player_history');
+	    $this->db->where('player_id',$player_id);
+	    $query=$this->db->get();
+	    return $query->num_rows();
+    }
 
 }

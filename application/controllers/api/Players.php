@@ -222,11 +222,13 @@
 
 			$player = $this->userInfo($user_id);
 
+			$gamePlayedLottery = $this->Admin_model->getGamePlayedLottery($user_id);
+
 			date_default_timezone_set("Asia/Calcutta");
 			$this->response([
 				'status' => TRUE,
 				'message' => 'Login Successfully',
-				'data' => array('player_id'=>$user_id,'default_amount'=>$player->deposited_amount,'present_amount'=>$player->present_amount,'date'=>date('Y-m-d H:i:s'))
+				'data' => array('player_id'=>$user_id,'default_amount'=>$player->deposited_amount,'present_amount'=>$player->present_amount,'date'=>date('Y-m-d H:i:s'),'lottery_game_played'=>$gamePlayedLottery)
 			], REST_Controller::HTTP_OK); // NOT_FOUND (404) being the HTTP response code
 			            
 		}else{   
