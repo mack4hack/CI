@@ -672,7 +672,7 @@ $current_timestamp = $date->getTimestamp();
 
 
                              <div class="row">
-<<<<<<< HEAD
+
                                                 <div class="col-md-12" >
                                                     <!-- BEGIN CHART PORTLET-->
                                                     <div class="portlet light bordered">

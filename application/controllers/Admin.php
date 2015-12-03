@@ -68,7 +68,7 @@ class Admin extends CI_Controller {
                                           foreach($result['jodi_data']->result() as $bets)
                                           {
                                                      $bet_amount_jodi   = $bet_amount_jodi + $bets->bet_amount;
-                                                     $payout_jodi   = $bet_amount_jodi + $bets->payout;
+                                                     $payout_jodi   = $payout_jodi + $bets->payout;
                                           }
                                     }
                                     $bet_amount_first = 0;
@@ -78,7 +78,7 @@ class Admin extends CI_Controller {
                                           foreach($result['first_digit_data']->result() as $bets)
                                           {
                                                      $bet_amount_first   = $bet_amount_first + $bets->bet_amount;
-                                                     $payout_first  = $bet_amount_first + $bets->payout;
+                                                     $payout_first  = $payout_first + $bets->payout;
                                           }
                                     }
                                      $bet_amount_second = 0;
@@ -88,7 +88,7 @@ class Admin extends CI_Controller {
                                           foreach($result['second_digit_data']->result() as $bets)
                                           {
                                                      $bet_amount_second   = $bet_amount_second + $bets->bet_amount;
-                                                     $payout_second   = $bet_amount_second + $bets->payout;
+                                                     $payout_second   = $payout_second  + $bets->payout;
                                           }
                                     }
                                     $bet_amount_and_payout = array(
@@ -133,7 +133,7 @@ class Admin extends CI_Controller {
     	                  $result['first_digit_data']=$this->Bets_model->getfirstdigitchart();
 		$result['second_digit_data']=$this->Bets_model->getseconddigitchart();
 		$result['jodi_data']=$this->Bets_model->getjodichart();
-                                  $result['jodi_bets'] = $this->Bets_model->getNumberOfBets(3)->num_rows();
+                                   $result['jodi_bets'] = $this->Bets_model->getNumberOfBets(3)->num_rows();
 	                  $result['first_bets'] = $this->Bets_model->getNumberOfBets(1)->num_rows();
 	                  $result['second_bets'] = $this->Bets_model->getNumberOfBets(2)->num_rows();
                           
@@ -148,7 +148,7 @@ class Admin extends CI_Controller {
                                           foreach($result['jodi_data']->result() as $bets)
                                           {
                                                      $bet_amount_jodi   = $bet_amount_jodi + $bets->bet_amount;
-                                                     $payout_jodi   = $bet_amount_jodi + $bets->payout;
+                                                     $payout_jodi   = $payout_jodi + $bets->payout;
                                           }
                                     }
                                     $bet_amount_first = 0;
@@ -158,7 +158,7 @@ class Admin extends CI_Controller {
                                           foreach($result['first_digit_data']->result() as $bets)
                                           {
                                                      $bet_amount_first   = $bet_amount_first + $bets->bet_amount;
-                                                     $payout_first  = $bet_amount_first + $bets->payout;
+                                                     $payout_first  = $payout_first + $bets->payout;
                                           }
                                     }
                                      $bet_amount_second = 0;
@@ -168,7 +168,7 @@ class Admin extends CI_Controller {
                                           foreach($result['second_digit_data']->result() as $bets)
                                           {
                                                      $bet_amount_second   = $bet_amount_second + $bets->bet_amount;
-                                                     $payout_second   = $bet_amount_second + $bets->payout;
+                                                     $payout_second   = $payout_second + $bets->payout;
                                           }
                                     }
                                     $bet_amount_and_payout = array(
