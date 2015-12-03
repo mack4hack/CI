@@ -675,6 +675,7 @@ public function loadData()
     	else{
     		$jodi = $number;
     	}
+                  $latest_id = 0;
                   $this->db->select('draw_id');
                   $this->db->order_by('id','desc');
                   $this->db->limit(1);
