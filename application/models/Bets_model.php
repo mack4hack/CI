@@ -422,6 +422,19 @@ class Bets_model extends CI_Model {
                                     return $query;
               
           }
+
+          public function getNumberOfBetsByTime($from, $to, $game_type)
+          {
+
+            $this->db->select('*');
+            $this->db->from('game_lottery');
+            $this->db->where('game_type',$game_type);
+            $this->db->where("timeslot >= '".$from."' and timeslot < '".$to."' ");
+            //$this->db->group_by('digit');
+            $query=$this->db->get();
+            return $query;
+              
+          }
 	
 
 }

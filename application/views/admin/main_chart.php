@@ -672,6 +672,7 @@ $current_timestamp = $date->getTimestamp();
 
 
                              <div class="row">
+<<<<<<< HEAD
                                                 <div class="col-md-12" >
                                                     <!-- BEGIN CHART PORTLET-->
                                                     <div class="portlet light bordered">
@@ -859,6 +860,7 @@ $current_timestamp = $date->getTimestamp();
                                                                                                                     }else{
                                                                                                                             echo "0";
                                                                                                                             }?>
+
 <!--
                                                                                                             <i class="fa fa-edit"></i>
 -->
