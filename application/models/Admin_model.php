@@ -34,10 +34,24 @@ function getAreaWiseDealers($country_id,$state_id,$city_id)
 function get_players()
 {
 	$this->db->where('role_id','3');
-   $query=$this->db->get('user_master');//employee is a table in the database
+                  $query=$this->db->get('user_master');//employee is a table in the database
     
 
        return $query->result();
+}
+
+
+function getPlayersAccToDealer($dealer_id)
+{
+	//SELECT * FROM `dealer_player` as dp inner join user_master as um on dp.player_id = um.id where um.role_id  = 3 and dp.dealer_id = 32
+                    $this->db->select('user_master.*');    
+                    $this->db->from('user_master');
+                    $this->db->join('dealer_player', 'user_master.id = dealer_player.player_id');
+                    $this->db->where('user_master.role_id',3);
+                    $this->db->where('dealer_player.dealer_id',$dealer_id);
+                    $query = $this->db->get();
+    
+                    return $query->result();
 }
 
 function delete_player($id)

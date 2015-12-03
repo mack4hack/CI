@@ -46,7 +46,7 @@
 														</div>
 													</div>
 													<!--/span-->
-													<div class="col-md-3" style="width:20%;padding-right:0px;">
+													<div class="col-sm-4" >
 														<div class="form-group has-error">
 															<div class="col-md-9">
 																<select name="state_id" class="form-control required" id="state_dropdown" onchange="selectCity(this.options[this.selectedIndex].value)">
@@ -55,7 +55,7 @@
 															</div>
 														</div>
 													</div>
-													<div class="col-md-3" style="width:20%;padding-right:0px;">
+													<div class="col-sm-4" >
 														<div class="form-group has-error">
 															<div class="col-md-9">
 																<select name="city_id" onchange="selectDealer(this.options[this.selectedIndex].value)" class="form-control required" id="city_dropdown">
@@ -64,30 +64,36 @@
 															</div>
 														</div>
 													</div>
-													<div class="col-md-3" style="width:20%;padding-right:0px;">
+													<div class="col-sm-4" >
 														<div class="form-group has-error">
 															<div class="col-md-9">
-																<select name="dealer_id" onchange="selectUser(this.options[this.selectedIndex].value)"  class="form-control required" id="dealer_dropdown">
-								<option value="">Select Dealer</option>
-							</select><span id="dealer_loader"></span>
+																<select name="dealer_id"   class="form-control required" id="dealer_dropdown">
+                                                                                                                                                                                                                                                                                                    <option value="">Select Dealer</option>
+                                                                                                                                                                                                                                                                                                </select><span id="dealer_loader"></span>
 															</div>
 														</div>
 													</div>
-													<div class="col-md-3" style="width:20%;padding-right:0px;">
-														<div class="form-group has-error">
-															<div class="col-md-9">
-																<select name="user_id"  class="form-control required" id="user_dropdown">
-								<option value="">Select User</option>
-							</select><span id="user_loader"></span>
-															</div>
-														</div>
-													</div>
+<!--                                                                                                                                                                                        <div class="col-md-3" style="width:20%;padding-right:0px;">
+                                                                                                                                                                                                <div class="form-group has-error">
+                                                                                                                                                                                                        <div class="col-md-9">
+                                                                                                                                                                                                                <select name="user_id"  class="form-control required" id="user_dropdown">
+                                                                                                                                                                                        <option value="">Select User</option>
+                                                                                                                                                                                        </select><span id="user_loader"></span>
+                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                </div>
+                                                                                                                                                                                        </div>-->
 													<!--/span-->
 												</div>
-													
+                                                                                           	
 												
 											</div>
-											<div class="form-actions">
+                                                                                <div class="form-actions">
+                                                                                   <div class="row">
+                                                                                    <div    id="players_list">
+                                                                                   </div>	
+                                                                                   </div>	
+                                                                                </div>	
+<!--											<div class="form-actions">
 												<div class="row">
 													<div class="col-md-6">
 														
@@ -105,7 +111,7 @@
 													<div class="col-md-6">
 													</div>
 												</div>
-											</div>
+											</div>-->
 										<!-- END FORM-->
 									</div>
 								</div>
@@ -150,14 +156,14 @@ function selectDealer(city_id){
    $("#dealer_dropdown").html("<option value=''>Select Dealer</option>");
   }
 }
-function selectUser(dealer_id){
-	//alert(dealer_id);
-  if(dealer_id!="-1"){
-   loadData('user',dealer_id);
-  }else{
-   $("#user_dropdown").html("<option value=''>Select User</option>");
-  }
-}
+//function selectUser(dealer_id){
+//	//alert(dealer_id);
+//  if(dealer_id!="-1"){
+//   loadData('user',dealer_id);
+//  }else{
+//   $("#user_dropdown").html("<option value=''>Select User</option>");
+//  }
+//}
 
 
 function loadData(loadType,loadId){
@@ -247,7 +253,14 @@ Demo.init(); // init demo features
   
 });
 
-
+    $('#dealer_dropdown').on('change',function(){
+    	var dealer_id = $(this).val();
+                 if(dealer_id != -1){
+    	$('#players_list').load('<?php echo base_url("/admin/ajaxPlayersList?dealer_id="); ?>'+dealer_id,function () {
+        // $(this).unwrap();
+                   });
+               }	
+    });
     
 
 

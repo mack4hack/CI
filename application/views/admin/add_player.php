@@ -549,4 +549,10 @@ Demo.init(); // init demo features
                          $("#sample_1  tbody tr:Contains('"+ $("#search_player").val() +"')  ").show();
                  });
  
+ 
+ 
+    
+
+ 
+ 
                  </script>

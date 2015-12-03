@@ -108,7 +108,7 @@ Demo.init(); // init demo features
         // $(this).unwrap();
                    });
                }	
-    })
+    });
     $('#loadingDiv')
     .hide()  // Hide it initially
     .ajaxStart(function() {

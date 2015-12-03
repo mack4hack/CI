@@ -912,8 +912,20 @@ public function loadData()
 	public function add_amount(){
 		
 		$result['list'] = $this->Getlocation->getCountry();
-	    $this->load->view('admin/add_amount',$result); 
-	}	
+	                   $this->load->view('admin/add_amount',$result); 
+	}
+        
+                    public function ajaxPlayersList(){
+                           $result['results'] = array();
+                            if(isset($_GET['dealer_id'])){
+                                $dealer_id =  $_GET['dealer_id'];
+                                 $result['results']  =  $this->Admin_model->getPlayersAccToDealer($dealer_id);
+                                
+                           }
+                           
+                           $this->load->view('admin/ajax_players',$result); 
+                    }
+        
 	public function update_amount(){
 		  
 		   if(isset($_POST['add_amount']) &&  isset($_POST['user_id']) ){
