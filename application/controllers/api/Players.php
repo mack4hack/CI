@@ -258,6 +258,30 @@
         }
 	}
 
+	function playerHistory_get()
+	{
+		if($_GET['player_id'])
+		{
+			$data = array();
+			$from = date('Y-m-d').' 00:00:00';
+			$to = date('Y-m-d').' 23:59:59';
+			$data = $this->Admin_model->getPlayerHistory($_GET['player_id'],$from,$to);
+			if(!empty($data))
+			{
+				$this->response([
+				'status' => TRUE,
+				'data' => $data
+				], REST_Controller::HTTP_OK);
+			}
+			else{   
+				$this->response([
+					'status' => FALSE,
+					'message' => 'No Data Found!!!'
+				], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+			}
+		}
+	}
+
 		
    
     

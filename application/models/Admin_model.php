@@ -441,5 +441,15 @@ function delete_dealer($id)
                          }
                          return $result;
              }
+		
+ 	function getPlayerHistory($player_id,$from,$to)
+    {
+      	$this->db->select('*');
+     	$this->db->from('player_history');
+	    $this->db->where('player_id',$player_id);
+	    $this->db->where("timeslot >= '".$from."' and timeslot < '".$to."' ");
+	    $query=$this->db->get();
+	    return $query->result();
+    }
 
 }

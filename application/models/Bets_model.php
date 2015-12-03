@@ -435,6 +435,5 @@ class Bets_model extends CI_Model {
             return $query;
               
           }
-	
 
 }
