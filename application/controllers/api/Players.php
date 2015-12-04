@@ -282,6 +282,12 @@
 				], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
 			}
 		}
+		else{   
+			$this->response([
+				'status' => FALSE,
+				'message' => 'Player Id required!!!'
+			], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+		}
 	}
 
 		
