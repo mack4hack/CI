@@ -499,6 +499,36 @@
 			}
 			
 		}
+                
+                
+                                 public function getServerTimings_get(){
+                                      date_default_timezone_set("Asia/Calcutta");
+                                        $now = getdate();
+                                        $minutes = $now['minutes'] - $now['minutes']%15;
+
+                                        $rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
+                                        $result['current'] = date("Y-m-d H:i:s a");  
+                                        $start = strtotime('+15 minutes',strtotime($rounded));
+                                        $result['start']  =  date("h:i a",strtotime($rounded));
+                                        $result['end']  =     date("h:i a",$start);
+                                         $result['lucky_number']=$this->Bets_model->getLuckyNumber();
+                                        
+                                           if(!empty($result))
+			{	                
+				
+				$this->response([
+					'status' => TRUE,
+					'data'   => $result
+					
+				], REST_Controller::HTTP_OK); // NOT_FOUND (404) being the HTTP response code
+				            
+			}else{   
+				$this->response([
+					'status' => FALSE,
+					'message' => 'No data found!'
+				], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+			}
+                                 }
 		
 	}
 		

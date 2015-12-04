@@ -173,7 +173,7 @@ class Bets_model extends CI_Model {
                                     $time = $time + (15 * 60);
                                     $date = date("Y-m-d H:i:s", $time);
 		
-		//echo $date;die;
+		//echo $rounded;die;
 	                  $this->db->select('lucky_number');
 	                  $this->db->from('lucky_numbers');
 	                  $this->db->where('timeslot <= ', $date);
