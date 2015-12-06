@@ -434,14 +434,31 @@ public function loadData()
 	  $ret = $this->db
        ->where($ar)
        ->count_all_results('user_master');
-	  
+ 	  
 	  $paddedNum = sprintf("%05d", $ret+1);
-	    
+                   
+
+                    
+          
+          
 	  $query = $this->db->query("select * from user_master where id='".$_POST['dealer_id']."'");
-      $row = $query->row_array(); 
+                    $row = $query->row_array(); 
 
-	  $user_code = $row['user_code']."".$paddedNum;
+	  
 
+                    if($this->ion_auth->in_group('demo' , $_POST['dealer_id']))
+                            {
+                                   $this->db->select('*');
+                                   $this->db->from('user_master');
+                                $this->db->where('role_id',3);
+                                $this->db->like('user_code',$row['user_code']);
+                                $ret1 = $this->db->get()->num_rows();
+
+                                $paddedNum = sprintf("%05d", $ret1 + 1);
+                            }
+          
+                 $user_code = $row['user_code']."".$paddedNum;
+          
 	  $password = $_POST['password'];
 
 	  $data = array("first_name" => $_POST['fname'], 
@@ -572,6 +589,7 @@ public function loadData()
 	  //$user_code ="PUN000005";
 //echo "<pre>";print_r($user_code);die;
                         //add demo dealer
+          $is_demo = 0;
                         if(isset($_POST['demo'])  )   //add different user code for dealer
                         {
                             
@@ -579,9 +597,11 @@ public function loadData()
                                 $ret1 = $this->db
                              ->where($ar)
                              ->count_all_results('user_master');
-                               // echo $this->db->last_query();
+                               
                                 $paddedNum1 = sprintf("%03d", $ret1+1);
+                                 
                              $user_code = "DEM".$paddedNum1;
+                             $is_demo = 1;
                         }
           
            
@@ -602,7 +622,8 @@ public function loadData()
 					"address_2" => $_POST['address2'],
 					"pincode" => $_POST['pincode'],
 					"activation_date" => date("Y-m-d"),
-					"active" => 1
+					"active" => 1,
+					"is_demo" => $is_demo,
 	  );
 	  $insert = $this->db->insert('user_master',$data);
 
