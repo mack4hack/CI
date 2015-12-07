@@ -910,10 +910,8 @@ public function loadData()
         $val_end = date("H:i",strtotime($start." +15 minutes"));
   			$display = date("h:i a",strtotime($val_end));
 
-        $startTime = date('h:i a',strtotime($start));
-
   			$time_slots[] = array('value' => $val_start." To ".$val_end,
-                              'display' => $startTime,);
+                              'display' => $display,);
 		}
 		
     for ($i=1; $i <=cal_days_in_month ( CAL_GREGORIAN, date('m') , date('y') ) ; $i++) { 
