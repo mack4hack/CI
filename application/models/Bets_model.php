@@ -198,7 +198,7 @@ class Bets_model extends CI_Model {
 	    $this->db->where("timeslot like '".$end."%' ");
 	    $query=$this->db->get()->row();
 
-	    echo $this->db->last_query(); die;
+	    //echo $this->db->last_query(); die;
 	    
 	    if(!empty($query)){
 	    if($query->lucky_number <=9 ){
