@@ -731,6 +731,8 @@ public function loadData()
             $c_time = date('H:i');
             $time_slot_id = 1;
             foreach ($time_slots as $key => $slots) {
+                if($slots['end'] == '00:00')
+                    $slots['end'] = '24:00';
                 if($c_time >= $slots['start'] && $c_time < $slots['end']){
                   $timeslot_id = $key+1;  
                 }
