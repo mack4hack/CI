@@ -67,7 +67,7 @@
 													<div class="col-md-4">
 														<div class="form-group has-error">
 															<div class="col-md-9">
-																<select name="city_id" class="form-control required" id="city_dropdown">
+                                                                                                                            <select name="city_id"   data-required="1" required="true"  class="form-control required"      id="city_dropdown">
 								<option value="">Select city</option>
 							</select><!--<span id="city_loader"></span>-->
 															</div>
@@ -430,6 +430,13 @@ Demo.init(); // init demo features
 </script>
 		 <script>
         $(document).ready(function (){
+            
+            $('#city_dropdown').on('change',function(){
+                    var a = $(this).find(":selected").text();
+                    $('input[name=city_name]').val(a);                                    
+                   });
+            
+            
 			//alert("in function");
             $("#form_sample_1").submit(function (e){
              var temp = $("#temp").val();

@@ -455,6 +455,14 @@ Demo.init(); // init demo features
 </script>
 		 <script>
         $(document).ready(function (){
+            
+            
+                $('#city_dropdown').on('change',function(){
+                    var a = $(this).find(":selected").text();
+                    $('input[name=city_name]').val(a);                                    
+                   });
+            
+            
 			//alert("in function");
             $("#form_sample_1").submit(function (e){
              var temp = $("#temp").val();

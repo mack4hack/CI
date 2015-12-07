@@ -579,8 +579,8 @@ public function loadData()
 	  //$ret = $dealer_city_count->row();
 	  $ar = array('role_id'=>'2','city_id'=>$cityid);
 	  $ret = $this->db
-       ->where($ar)
-       ->count_all_results('user_master');
+                             ->where($ar)
+                            ->count_all_results('user_master');
 	 // echo $this->db->last_query();
 	  $paddedNum = sprintf("%03d", $ret+1);
 	 
@@ -589,7 +589,7 @@ public function loadData()
 	  //$user_code ="PUN000005";
 //echo "<pre>";print_r($user_code);die;
                         //add demo dealer
-          $is_demo = 0;
+                      $is_demo = 0;
                         if(isset($_POST['demo'])  )   //add different user code for dealer
                         {
                             
@@ -830,7 +830,7 @@ public function loadData()
                             foreach($result['jodi_data']->result() as $bets)
                             {
                                        $bet_amount_jodi   = $bet_amount_jodi + $bets->bet_amount;
-                                       $payout_jodi   = $bet_amount_jodi + $bets->payout;
+                                       $payout_jodi   = $payout_jodi + $bets->payout;
                             }
                       }
                       $bet_amount_first = 0;
@@ -840,7 +840,7 @@ public function loadData()
                             foreach($result['first_digit_data']->result() as $bets)
                             {
                                        $bet_amount_first   = $bet_amount_first + $bets->bet_amount;
-                                       $payout_first  = $bet_amount_first + $bets->payout;
+                                       $payout_first  = $payout_first + $bets->payout;
                             }
                       }
                        $bet_amount_second = 0;
@@ -850,7 +850,7 @@ public function loadData()
                             foreach($result['second_digit_data']->result() as $bets)
                             {
                                        $bet_amount_second   = $bet_amount_second + $bets->bet_amount;
-                                       $payout_second   = $bet_amount_second + $bets->payout;
+                                       $payout_second   = $payout_second + $bets->payout;
                             }
                       }
                       $bet_amount_and_payout = array(
