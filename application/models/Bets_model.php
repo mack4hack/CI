@@ -1,439 +1,449 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
-
+<?php
+if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 //location: application/models/auth_model.php
 
-
-
-class Bets_model extends CI_Model {
-	
-	function __construct() {
-		parent::__construct();
-	}
-
-	function placebet($data)
-	{
-		return $this->db->insert('game_lottery', $data);
-	}
-
-	function getfirstdigitchart()
-	{
-		date_default_timezone_set("Asia/Calcutta");
-		$now = getdate();
-		$now['minutes'] = $now['minutes'] - 1;
-		$minutes = $now['minutes'] - $now['minutes']%15;
-		$rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
-		$max_time = date('Y-m-d H:i:s');
-		//echo $max_time;die;
-                                    $this->db->select('sum(bet_amount ) as bet_amount ,digit,sum(payout ) as payout');
-                                    $this->db->from('game_lottery');
-                                    $this->db->where('game_type',1);
-                                    $this->db->where("timeslot >= '".$rounded."' and timeslot < '".$max_time."' ");
-                                    $this->db->group_by('digit');
-                                    $query=$this->db->get();
-                                    return $query;
-	}
-	function getfirstdigitchartAccToTime($start,$end)
-	{
-	   $this->db->select('sum(bet_amount ) as bet_amount ,digit,sum(payout ) as payout');
-	   $this->db->from('game_lottery');
-	   $this->db->where('game_type',1);
-	   $this->db->where("timeslot >= '".$start."' and timeslot < '".$end."' ");
-	   $this->db->group_by('digit');
-	   $query=$this->db->get();
-	   return $query;
-	}
-	function getseconddigitchart()
-	{
-		date_default_timezone_set("Asia/Calcutta");
-		$now = getdate();
-		$now['minutes'] = $now['minutes'] - 1;
-		$minutes = $now['minutes'] - $now['minutes']%15;
-		$rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
-		$max_time = date('Y-m-d H:i:s');
-		
-	   $this->db->select('sum(bet_amount ) as bet_amount ,digit,sum(payout ) as payout');
-	   $this->db->from('game_lottery');
-	   $this->db->where('game_type',2);
-	   $this->db->where("timeslot >= '".$rounded."' and timeslot < '".$max_time."' ");
-	   $this->db->group_by('digit');
-	   $query=$this->db->get();
-	   return $query;
-	}
-	function getSeconddigitchartAccToTime($start,$end)
-	{
-	   $this->db->select('sum(bet_amount ) as bet_amount ,digit,sum(payout ) as payout');
-	   $this->db->from('game_lottery');
-	   $this->db->where('game_type',2);
-	   $this->db->where("timeslot >= '".$start."' and timeslot < '".$end."' ");
-	   $this->db->group_by('digit');
-	   $query=$this->db->get();
-	   return $query;
-	}
-	function getjodichart()
-	{
-		
-		date_default_timezone_set("Asia/Calcutta");
-		$now = getdate();
-		$now['minutes'] = $now['minutes'] - 1;
-		$minutes = $now['minutes'] - $now['minutes']%15;
-		$rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
-		$max_time = date('Y-m-d H:i:s');
-       
-                      $this->db->select('sum(bet_amount ) as bet_amount ,digit,sum(payout ) as payout');
-	    $this->db->from('game_lottery');
-	    $this->db->where('game_type',3);
-	    $this->db->where("timeslot >= '".$rounded."' and timeslot < '".$max_time."' ");
-	    $this->db->group_by('digit');
-	    $query=$this->db->get();
-	    
-	    return $query;
-	}
-	function getjodichartAccToTime($start,$end)
-	{
-	   $this->db->select('sum(bet_amount ) as bet_amount ,digit,sum(payout ) as payout');
-	   $this->db->from('game_lottery');
-	   $this->db->where('game_type',3);
-	   $this->db->where("timeslot >= '".$start."' and timeslot < '".$end."' ");
-	   $this->db->group_by('digit');
-	   $query=$this->db->get();
-	   return $query;
-	}
-	function getTotalPayoutAndBets()
-	{
-	    date_default_timezone_set("Asia/Calcutta");
-		$now = getdate();
-		$now['minutes'] = $now['minutes'] - 1;
-		$minutes = $now['minutes'] - $now['minutes']%15;
-		$rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
-		$max_time = date('Y-m-d H:i:s');
-		
-	   $this->db->select('sum(bet_amount ) as bet_amount,sum(payout ) as payout');
-	   $this->db->from('game_lottery');
-	   $this->db->where("timeslot >= '".$rounded."' and timeslot < '".$max_time."' ");
-	   //$this->db->where('game_type',3);
-	   //$this->db->group_by('digit');
-	   $query=$this->db->get()->row();
-	   return $query;
-	}
-	function getTotalPayoutAndBetsAccToTime($start,$end)
-	{
-		
-	   $this->db->select('sum(bet_amount ) as bet_amount,sum(payout ) as payout');
-	   $this->db->from('game_lottery');
-	   $this->db->where("timeslot >= '".$start."' and timeslot < '".$end."' ");
-	   //$this->db->where('game_type',3);
-	   //$this->db->group_by('digit');
-	   $query=$this->db->get()->row();
-	   return $query;
-	}
-
-	function addplayerhistory($data)
-	{
-		$this->db->insert('player_history', $data);
-	}
-
-	function debit($data)
-	{
-		$this->db->set('present_amount','present_amount-'.$data['bet_amount'],FALSE);
-		$this->db->where('id',$data['id']);
-		$this->db->update('user_master');
-	}
-	function debit_dealer($data)
-	{
-		$this->db->set('present_amount','present_amount-'.$data['bet_amount'],FALSE);
-		$this->db->where('id',$data['id']);
-		$this->db->update('user_master');
-	}
-
-	function credit($data)
-	{
-		$this->db->set('present_amount','present_amount+'.$data['bet_amount'],FALSE);
-		$this->db->where('id',$data['id']);
-		$this->db->update('user_master');
-	}
-	
-                  function credit_dealer($data)
-	{
-		$this->db->set('present_amount','present_amount+'.$data['bet_amount'],FALSE);
-		$this->db->where('id',$data['id']);
-		$this->db->update('user_master');
-	}
-	
-	function getLuckyNumber()
-	{
-		
-		date_default_timezone_set("Asia/Calcutta");
-		$now = getdate();
-		//$now['minutes'] = $now['minutes'] - 1;
-		$minutes = $now['minutes'] - $now['minutes']%15;
-		$rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
-		$time = strtotime($rounded);
-                                    $time = $time + (15 * 60);
-                                    $date = date("Y-m-d H:i:s", $time);
-		
-		//echo $rounded;die;
-	                  $this->db->select('lucky_number');
-	                  $this->db->from('lucky_numbers');
-	                  $this->db->where('timeslot <= ', $date);
-	                  $this->db->where('timeslot >= ', $rounded);
-	                  //$this->db->where("timeslot >= '".$date."' and timeslot < '".$rounded."' ");
-	                  $query=$this->db->get()->row();
-	                  //echo $this->db->last_query();die; 
-	                  if(!empty($query)){
-	                  if($query->lucky_number <=9 ){
-		   $query->lucky_number = "0".$query->lucky_number;
-		}
-		return $query->lucky_number;
-		}else{
-		  return "";	
-		}
-	}
-	function getLuckyNumberAccToTime($start,$end)
-	{
-		
-	    $this->db->select('lucky_number');
-	    $this->db->from('lucky_numbers');
-	    $this->db->where("timeslot like '".$end."%' ");
-	    $query=$this->db->get()->row();
-
-	    //echo $this->db->last_query(); die;
-	    
-	    if(!empty($query)){
-	    if($query->lucky_number <=9 ){
-		   $query->lucky_number = "0".$query->lucky_number;
-		}
-		return $query->lucky_number;
-		}else{
-		  return "";	
-		}
-	}
-	
-	function cancelbet($player_id,$digit,$game_type){
-	    $this->load->library('ion_auth');   
-                          
-            
-                      date_default_timezone_set("Asia/Calcutta");
-		$now = getdate();
-		$now['minutes'] = $now['minutes'] - 1;
-		$minutes = $now['minutes'] - $now['minutes']%15;
-		$rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
-		
-		$time = strtotime($rounded);
+class Bets_model extends CI_Model
+{
+    
+    function __construct() {
+        parent::__construct();
+    }
+    
+    function placebet($data) {
+        return $this->db->insert('game_lottery', $data);
+    }
+    
+    function getfirstdigitchart() {
+        date_default_timezone_set("Asia/Calcutta");
+        $now = getdate();
+        $now['minutes'] = $now['minutes'] - 1;
+        $minutes = $now['minutes'] - $now['minutes'] % 15;
+        $rounded = $now['year'] . "-" . $now['mon'] . "-" . $now['mday'] . " " . $now['hours'] . ":" . $minutes . ":00";
+        $max_time = date('Y-m-d H:i:s');
+        
+        //echo $max_time;die;
+        $this->db->select('sum(bet_amount ) as bet_amount ,digit,sum(payout ) as payout');
+        $this->db->from('game_lottery');
+        $this->db->where('game_type', 1);
+        $this->db->where("timeslot >= '" . $rounded . "' and timeslot < '" . $max_time . "' ");
+        $this->db->group_by('digit');
+        $query = $this->db->get();
+        return $query;
+    }
+    function getfirstdigitchartAccToTime($start, $end) {
+        $this->db->select('sum(bet_amount ) as bet_amount ,digit,sum(payout ) as payout');
+        $this->db->from('game_lottery');
+        $this->db->where('game_type', 1);
+        $this->db->where("timeslot >= '" . $start . "' and timeslot < '" . $end . "' ");
+        $this->db->group_by('digit');
+        $query = $this->db->get();
+        return $query;
+    }
+    function getseconddigitchart() {
+        date_default_timezone_set("Asia/Calcutta");
+        $now = getdate();
+        $now['minutes'] = $now['minutes'] - 1;
+        $minutes = $now['minutes'] - $now['minutes'] % 15;
+        $rounded = $now['year'] . "-" . $now['mon'] . "-" . $now['mday'] . " " . $now['hours'] . ":" . $minutes . ":00";
+        $max_time = date('Y-m-d H:i:s');
+        
+        $this->db->select('sum(bet_amount ) as bet_amount ,digit,sum(payout ) as payout');
+        $this->db->from('game_lottery');
+        $this->db->where('game_type', 2);
+        $this->db->where("timeslot >= '" . $rounded . "' and timeslot < '" . $max_time . "' ");
+        $this->db->group_by('digit');
+        $query = $this->db->get();
+        return $query;
+    }
+    function getSeconddigitchartAccToTime($start, $end) {
+        $this->db->select('sum(bet_amount ) as bet_amount ,digit,sum(payout ) as payout');
+        $this->db->from('game_lottery');
+        $this->db->where('game_type', 2);
+        $this->db->where("timeslot >= '" . $start . "' and timeslot < '" . $end . "' ");
+        $this->db->group_by('digit');
+        $query = $this->db->get();
+        return $query;
+    }
+    function getjodichart() {
+        
+        date_default_timezone_set("Asia/Calcutta");
+        $now = getdate();
+        $now['minutes'] = $now['minutes'] - 1;
+        $minutes = $now['minutes'] - $now['minutes'] % 15;
+        $rounded = $now['year'] . "-" . $now['mon'] . "-" . $now['mday'] . " " . $now['hours'] . ":" . $minutes . ":00";
+        $max_time = date('Y-m-d H:i:s');
+        
+        $this->db->select('sum(bet_amount ) as bet_amount ,digit,sum(payout ) as payout');
+        $this->db->from('game_lottery');
+        $this->db->where('game_type', 3);
+        $this->db->where("timeslot >= '" . $rounded . "' and timeslot < '" . $max_time . "' ");
+        $this->db->group_by('digit');
+        $query = $this->db->get();
+        
+        return $query;
+    }
+    function getjodichartAccToTime($start, $end) {
+        $this->db->select('sum(bet_amount ) as bet_amount ,digit,sum(payout ) as payout');
+        $this->db->from('game_lottery');
+        $this->db->where('game_type', 3);
+        $this->db->where("timeslot >= '" . $start . "' and timeslot < '" . $end . "' ");
+        $this->db->group_by('digit');
+        $query = $this->db->get();
+        return $query;
+    }
+    function getTotalPayoutAndBets() {
+        date_default_timezone_set("Asia/Calcutta");
+        $now = getdate();
+        $now['minutes'] = $now['minutes'] - 1;
+        $minutes = $now['minutes'] - $now['minutes'] % 15;
+        $rounded = $now['year'] . "-" . $now['mon'] . "-" . $now['mday'] . " " . $now['hours'] . ":" . $minutes . ":00";
+        $max_time = date('Y-m-d H:i:s');
+        
+        $this->db->select('sum(bet_amount ) as bet_amount,sum(payout ) as payout');
+        $this->db->from('game_lottery');
+        $this->db->where("timeslot >= '" . $rounded . "' and timeslot < '" . $max_time . "' ");
+        
+        //$this->db->where('game_type',3);
+        //$this->db->group_by('digit');
+        $query = $this->db->get()->row();
+        return $query;
+    }
+    function getTotalPayoutAndBetsAccToTime($start, $end, $lucky_number) {
+        $first = floor($lucky_number / 10);
+        $second = $lucky_number % 10;
+        
+        $this->db->select('sum(bet_amount ) as bet_amount,sum(payout ) as payout');
+        $this->db->from('game_lottery');
+        $this->db->where("timeslot >= '" . $start . "' and timeslot < '" . $end . "' ");
+        $where = '(digit="' . $first . '" or digit="' . $second . '" or digit="' . $lucky_number . '")';
+        $this->db->where($where);
+        
+        //  $this->db->where('where',$whr);
+        //$this->db->group_by('digit');
+        $query = $this->db->get()->row();
+        return $query;
+    }
+    
+    function addplayerhistory($data) {
+        $this->db->insert('player_history', $data);
+    }
+    
+    function debit($data) {
+        $this->db->set('present_amount', 'present_amount-' . $data['bet_amount'], FALSE);
+        $this->db->where('id', $data['id']);
+        $this->db->update('user_master');
+    }
+    function debit_dealer($data) {
+        $this->db->set('present_amount', 'present_amount-' . $data['bet_amount'], FALSE);
+        $this->db->where('id', $data['id']);
+        $this->db->update('user_master');
+    }
+    
+    function credit($data) {
+        $this->db->set('present_amount', 'present_amount+' . $data['bet_amount'], FALSE);
+        $this->db->where('id', $data['id']);
+        $this->db->update('user_master');
+    }
+    
+    function credit_dealer($data) {
+        $this->db->set('present_amount', 'present_amount+' . $data['bet_amount'], FALSE);
+        $this->db->where('id', $data['id']);
+        $this->db->update('user_master');
+    }
+    
+    function getLuckyNumber() {
+        
+        date_default_timezone_set("Asia/Calcutta");
+        $now = getdate();
+        
+        //$now['minutes'] = $now['minutes'] - 1;
+        $minutes = $now['minutes'] - $now['minutes'] % 15;
+        $rounded = $now['year'] . "-" . $now['mon'] . "-" . $now['mday'] . " " . $now['hours'] . ":" . $minutes . ":00";
+        $time = strtotime($rounded);
         $time = $time + (15 * 60);
-        $date = date("Y-m-d H:i:s", $time);	
-	    $this->db->select('bet_amount,id');
-	    $this->db->from('player_history');
-	    $this->db->where('player_id',$player_id);
-
-            if($game_type == 1){
-		   $this->db->where('first_digit',$digit);
-		   $this->db->where('game_type',1);
-		}else if($game_type ==2 ){
-		      $this->db->where('second_digit',$digit);
-		      $this->db->where('game_type',2);
-		}else{
-		    $this->db->where('jodi_digit',$digit);
-		    $this->db->where('game_type',3);
-		}
-                                    $this->db->where("timeslot >= '".$rounded."' and timeslot <= '".$date."' ");
-                                    $this->db->order_by('id','desc');
-                                    $this->db->limit(1);
-      
-                                    $query = $this->db->get()->row();
- 
-        if(!empty($query)){
-		        $bet_amount = $query->bet_amount;   //debit from admin and credit back to player
-		        $id = $query->id;  //delete the bet from history
-                        
-                        
-                                             //calclulate commison and dealer id
-                                             $this->db->select('dealer_id');
-	                           $this->db->from('dealer_player');
-	                           $this->db->where('player_id',$player_id);
-                                             $query1 = $this->db->get()->row();
-	                           $dealer_id = $query1->dealer_id;
-                                             
-                                             $bet_amount_dealer = $bet_amount * 0.05;
-                                   
-                                   
-                                             $debit = array(
-				'id'=>1,
-				'bet_amount'=>$bet_amount - $bet_amount_dealer,
-		        );
-		        $debit_dealer = array(
-				'id'=>$dealer_id,
-				'bet_amount'=> $bet_amount_dealer,
-		        );
-;
-		        $credit = array(
-				'id'=>$player_id,
-				'bet_amount'=>$bet_amount,
-	                           );
-		        
-                                            $this->credit($credit);
-                                            
-                                            if(   !$this->ion_auth->in_group('demo' ,  $player_id ))
-                                             {
-                                                     $this->debit($debit);
-		                 $this->debit_dealer($debit_dealer) ;   //debit dealers commision
-		        
-                                                    //delete admin history and dealer history
-                                                     $this->db->select('id');
-                                                     $this->db->from('admin_history');
-                                                     $this->db->where('player_id',$player_id);
-                                                     $this->db->order_by('id','desc');
-                                                     $this->db->limit(1);
-                                                     $query2 = $this->db->get()->row();
-                                                     $delete_id  =  $query2->id;
-                                                     $this->db->delete('admin_history', array('id' => $delete_id));
-                                             }else{
-                                                 
-                                                      $debit_dealer = array(
-				'id'=>$dealer_id,
-				'bet_amount'=> $bet_amount,
-                                                        );
-                                                      $this->debit_dealer($debit_dealer) ;   //debit dealers commision
-		         }
-                        
-                                          
-                                            $this->db->delete('player_history', array('id' => $id));
-                                            
-                                            $this->db->select('id');
-	                          $this->db->from('dealer_history');
-	                          $this->db->where('player_id',$player_id);
-	                          $this->db->order_by('id','desc');
-	                          $this->db->limit(1);
-                                            $query3 = $this->db->get()->row();
-                                            $delete_id1  =  $query3->id;
-                                            $this->db->delete('dealer_history', array('id' => $delete_id1));
-                        
-                          
-		        return true;
-		        	
-			}else{
-				return false;
-				}
+        $date = date("Y-m-d H:i:s", $time);
         
-	}
-
-	function addAdminHistory($data)
-	{
-		$this->db->select('total');
-		$this->db->from('admin_history');
-		$this->db->order_by("id", "desc"); 
-		$this->db->limit(1);
-		$query=$this->db->get()->row();
-		$old_total = $query->total;
-		$new_total = ($old_total + $data['bet_amount']) - $data['commission'];
-		$data['total'] = $new_total;
-
-		$this->db->insert('admin_history', $data);
-	}
-
-	function getDealerId($player_id)
-	{
-		$this->db->select('dealer_id');
-		$this->db->where('player_id',$player_id);
-		$query = $this->db->get('dealer_player')->row();
-		return $query->dealer_id;
-	}
-
-	function addDealerHistory($data)
-	{
-		$this->db->select('total');
-		$this->db->from('dealer_history');
-		$this->db->order_by("id", "desc"); 
-		$this->db->limit(1);
-		$query=$this->db->get()->row();
-		$old_total = $query->total;
-		$new_total = ($old_total + $data['bet_amount']) - $data['commission'];
-		$data['total'] = $new_total;
-
-		$this->db->insert('dealer_history', $data);
-	}
-	
-	function getLuckyNumberAccToMonth($month)
-	{
-		
-	    $this->db->select('lucky_number,timeslot,timeslot_id');
-	    $this->db->from('lucky_numbers');
-	    $this->db->where("timeslot like '".$month."%'");
-	    $query=$this->db->get();
-
-	    //echo $this->db->last_query(); die;
-	    	
-	    $data = $query->result();
-
-	    //print_r($data); die;
-	    $numbers = array();
-	    foreach ($data as $d) {
-	    		//$d->timeslot; die;
-	    		$date = explode(' ', $d->timeslot)[0];
-	    		$datearr= explode('-', $date);
-				$day = end($datearr);		
-	    		$numbers[] = array('lucky_number' => $d->lucky_number,'date' => $day,'timeslot_id' => $d->timeslot_id, );
-	    }
-
-	    if(!empty($query)){
-			return $numbers;
-		}else{
-		  return "";	
-		}
-	}
-
-	function getLuckyNumberByTimeSlot($time)
-	{
-		
-	    $this->db->select('lucky_number,timeslot');
-	    $this->db->from('lucky_numbers');
-	    $this->db->where("timeslot like '%".$time."%'");
-	    $query=$this->db->get();
-
-	    /*echo $this->db->last_query();
-	    echo '<br/>';*/
-	    	
-	   // $data = $query->result();
-
-	    if(!empty($query)){
-			return $query->result();
-		}else{
-		  return "";	
-		}
-	}
+        //echo $rounded;die;
+        $this->db->select('lucky_number');
+        $this->db->from('lucky_numbers');
+        $this->db->where('timeslot <= ', $date);
+        $this->db->where('timeslot >= ', $rounded);
         
+        //$this->db->where("timeslot >= '".$date."' and timeslot < '".$rounded."' ");
+        $query = $this->db->get()->row();
         
-          public function getNumberOfBets($game_type)
-          {
-              date_default_timezone_set("Asia/Calcutta");
-		$now = getdate();
-		$now['minutes'] = $now['minutes'] - 1;
-		$minutes = $now['minutes'] - $now['minutes']%15;
-		$rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
-		$max_time = date('Y-m-d H:i:s');
-		//echo $max_time;die;
-                                    $this->db->select('*');
-                                    $this->db->from('game_lottery');
-                                    $this->db->where('game_type',$game_type);
-                                    $this->db->where("timeslot >= '".$rounded."' and timeslot < '".$max_time."' ");
-                                    //$this->db->group_by('digit');
-                                    $query=$this->db->get();
-                                    return $query;
-              
-          }
-
-          public function getNumberOfBetsByTime($from, $to, $game_type)
-          {
-
-            $this->db->select('*');
-            $this->db->from('game_lottery');
-            $this->db->where('game_type',$game_type);
-            $this->db->where("timeslot >= '".$from."' and timeslot < '".$to."' ");
-            //$this->db->group_by('digit');
-            $query=$this->db->get();
-            return $query;
-              
-          }
-
+        //echo $this->db->last_query();die;
+        if (!empty($query)) {
+            if ($query->lucky_number <= 9) {
+                $query->lucky_number = "0" . $query->lucky_number;
+            }
+            return $query->lucky_number;
+        } 
+        else {
+            return "";
+        }
+    }
+    function getLuckyNumberAccToTime($start, $end) {
+        
+        $this->db->select('lucky_number');
+        $this->db->from('lucky_numbers');
+        $this->db->where("timeslot like '" . $end . "%' ");
+        $query = $this->db->get()->row();
+        
+        //echo $this->db->last_query(); die;
+        
+        if (!empty($query)) {
+            if ($query->lucky_number <= 9) {
+                $query->lucky_number = "0" . $query->lucky_number;
+            }
+            return $query->lucky_number;
+        } 
+        else {
+            return "";
+        }
+    }
+    
+    function cancelbet($player_id, $digit, $game_type) {
+        $this->load->library('ion_auth');
+        
+        date_default_timezone_set("Asia/Calcutta");
+        $now = getdate();
+        $now['minutes'] = $now['minutes'] - 1;
+        $minutes = $now['minutes'] - $now['minutes'] % 15;
+        $rounded = $now['year'] . "-" . $now['mon'] . "-" . $now['mday'] . " " . $now['hours'] . ":" . $minutes . ":00";
+        
+        $time = strtotime($rounded);
+        $time = $time + (15 * 60);
+        $date = date("Y-m-d H:i:s", $time);
+        $this->db->select('bet_amount,id');
+        $this->db->from('player_history');
+        $this->db->where('player_id', $player_id);
+        
+        if ($game_type == 1) {
+            $this->db->where('first_digit', $digit);
+            $this->db->where('game_type', 1);
+        } 
+        else if ($game_type == 2) {
+            $this->db->where('second_digit', $digit);
+            $this->db->where('game_type', 2);
+        } 
+        else {
+            $this->db->where('jodi_digit', $digit);
+            $this->db->where('game_type', 3);
+        }
+        $this->db->where("timeslot >= '" . $rounded . "' and timeslot <= '" . $date . "' ");
+        $this->db->order_by('id', 'desc');
+        $this->db->limit(1);
+        
+        $query = $this->db->get()->row();
+        
+        if (!empty($query)) {
+            $bet_amount = $query->bet_amount;
+             //debit from admin and credit back to player
+            $id = $query->id;
+             //delete the bet from history
+            
+            //calclulate commison and dealer id
+            $this->db->select('dealer_id');
+            $this->db->from('dealer_player');
+            $this->db->where('player_id', $player_id);
+            $query1 = $this->db->get()->row();
+            $dealer_id = $query1->dealer_id;
+            
+            $bet_amount_dealer = $bet_amount * 0.05;
+            
+            $debit = array('id' => 1, 'bet_amount' => $bet_amount - $bet_amount_dealer,);
+            $debit_dealer = array('id' => $dealer_id, 'bet_amount' => $bet_amount_dealer,);;
+            $credit = array('id' => $player_id, 'bet_amount' => $bet_amount,);
+            
+            $this->credit($credit);
+            
+            if (!$this->ion_auth->in_group('demo', $player_id)) {
+                $this->debit($debit);
+                $this->debit_dealer($debit_dealer);
+                 //debit dealers commision
+                
+                //delete admin history and dealer history
+                $this->db->select('id');
+                $this->db->from('admin_history');
+                $this->db->where('player_id', $player_id);
+                $this->db->order_by('id', 'desc');
+                $this->db->limit(1);
+                $query2 = $this->db->get()->row();
+                $delete_id = $query2->id;
+                $this->db->delete('admin_history', array('id' => $delete_id));
+            } 
+            else {
+                
+                $debit_dealer = array('id' => $dealer_id, 'bet_amount' => $bet_amount,);
+                $this->debit_dealer($debit_dealer);
+                 //debit dealers commision
+                
+            }
+            
+            $this->db->delete('player_history', array('id' => $id));
+            
+            $this->db->select('id');
+            $this->db->from('dealer_history');
+            $this->db->where('player_id', $player_id);
+            $this->db->order_by('id', 'desc');
+            $this->db->limit(1);
+            $query3 = $this->db->get()->row();
+            $delete_id1 = $query3->id;
+            $this->db->delete('dealer_history', array('id' => $delete_id1));
+            
+            return true;
+        } 
+        else {
+            return false;
+        }
+    }
+    
+    function addAdminHistory($data) {
+        $this->db->select('total');
+        $this->db->from('admin_history');
+        $this->db->order_by("id", "desc");
+        $this->db->limit(1);
+        $query = $this->db->get()->row();
+        $old_total = $query->total;
+        $new_total = ($old_total + $data['bet_amount']) - $data['commission'];
+        $data['total'] = $new_total;
+        
+        $this->db->insert('admin_history', $data);
+    }
+    
+    function getDealerId($player_id) {
+        $this->db->select('dealer_id');
+        $this->db->where('player_id', $player_id);
+        $query = $this->db->get('dealer_player')->row();
+        return $query->dealer_id;
+    }
+    
+    function addDealerHistory($data) {
+        $this->db->select('total');
+        $this->db->from('dealer_history');
+        $this->db->order_by("id", "desc");
+        $this->db->limit(1);
+        $query = $this->db->get()->row();
+        $old_total = $query->total;
+        $new_total = ($old_total + $data['bet_amount']) - $data['commission'];
+        $data['total'] = $new_total;
+        
+        $this->db->insert('dealer_history', $data);
+    }
+    
+    function getLuckyNumberAccToMonth($month) {
+        
+        $this->db->select('lucky_number,timeslot,timeslot_id');
+        $this->db->from('lucky_numbers');
+        $this->db->where("timeslot like '" . $month . "%'");
+        $query = $this->db->get();
+        
+        //echo $this->db->last_query(); die;
+        
+        $data = $query->result();
+        
+        //print_r($data); die;
+        $numbers = array();
+        foreach ($data as $d) {
+            
+            //$d->timeslot; die;
+            $date = explode(' ', $d->timeslot) [0];
+            $datearr = explode('-', $date);
+            $day = end($datearr);
+            $numbers[] = array('lucky_number' => $d->lucky_number, 'date' => $day, 'timeslot_id' => $d->timeslot_id,);
+        }
+        
+        if (!empty($query)) {
+            return $numbers;
+        } 
+        else {
+            return "";
+        }
+    }
+    
+    function getLuckyNumberByTimeSlot($time) {
+        
+        $this->db->select('lucky_number,timeslot');
+        $this->db->from('lucky_numbers');
+        $this->db->where("timeslot like '%" . $time . "%'");
+        $query = $this->db->get();
+        
+        /*echo $this->db->last_query();
+         echo '<br/>';*/
+        
+        // $data = $query->result();
+        
+        if (!empty($query)) {
+            return $query->result();
+        } 
+        else {
+            return "";
+        }
+    }
+    
+    public function getNumberOfBets($game_type) {
+        date_default_timezone_set("Asia/Calcutta");
+        $now = getdate();
+        $now['minutes'] = $now['minutes'] - 1;
+        $minutes = $now['minutes'] - $now['minutes'] % 15;
+        $rounded = $now['year'] . "-" . $now['mon'] . "-" . $now['mday'] . " " . $now['hours'] . ":" . $minutes . ":00";
+        $max_time = date('Y-m-d H:i:s');
+        
+        //echo $max_time;die;
+        $this->db->select('*');
+        $this->db->from('game_lottery');
+        $this->db->where('game_type', $game_type);
+        $this->db->where("timeslot >= '" . $rounded . "' and timeslot < '" . $max_time . "' ");
+        
+        //$this->db->group_by('digit');
+        $query = $this->db->get();
+        return $query;
+    }
+    
+    public function getNumberOfBetsByTime($from, $to, $game_type) {
+        
+        $this->db->select('*');
+        $this->db->from('game_lottery');
+        $this->db->where('game_type', $game_type);
+        $this->db->where("timeslot >= '" . $from . "' and timeslot < '" . $to . "' ");
+        
+        //$this->db->group_by('digit');
+        $query = $this->db->get();
+        return $query;
+    }
+    function getActualJodiPayoutAccToTime($start, $end, $lucky_number) {
+        $first = floor($lucky_number / 10);
+        $second = $lucky_number % 10;
+        
+        $this->db->select('sum(payout) as payout');
+        $this->db->from('game_lottery');
+        $this->db->where("timeslot >= '" . $start . "' and timeslot < '" . $end . "' ");
+        $this->db->where('digit', $lucky_number);
+        $query = $this->db->get()->row();
+        return $query->payout;
+    }
+    function getActualFirstPayoutAccToTime($start, $end, $lucky_number) {
+        $first = floor($lucky_number / 10);
+        $second = $lucky_number % 10;
+        
+        $this->db->select('sum(payout) as payout');
+        $this->db->from('game_lottery');
+        $this->db->where("timeslot >= '" . $start . "' and timeslot < '" . $end . "' ");
+        $this->db->where('digit', $first);
+        $query = $this->db->get()->row();
+        return $query->payout;
+    }
+    function getActualsecondPayoutAccToTime($start, $end, $lucky_number) {
+        $first = floor($lucky_number / 10);
+        $second = $lucky_number % 10;
+        
+        $this->db->select('sum(payout) as payout');
+        $this->db->from('game_lottery');
+        $this->db->where("timeslot >= '" . $start . "' and timeslot < '" . $end . "' ");
+        $this->db->where('digit', $second);
+        $query = $this->db->get()->row();
+        return $query->payout;
+    }
 }
