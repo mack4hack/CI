@@ -1194,4 +1194,34 @@ class Admin extends CI_Controller
             echo json_encode($json);
         }
     }
+    public function playerAccount() {
+        $result['players'] = $this->Admin_model->get_players();
+        
+        //$result['data']=$this->Admin_model->getDealerHistory();
+        $this->load->view('admin/player_account', $result);
+    }
+    
+    public function playerAccountChart() {
+        $player_id = $_GET['player'];
+        
+        $from = date('Y-m-d');
+        $to = date('Y-m-d');
+        $result['data_daily'] = $this->Admin_model->getPlayerHistoryById($player_id, $from, $to);
+        
+        //echo "<pre>";
+       // print_r($result);
+
+        $from = date('Y-m-d');
+        $to = date('Y-m-d', strtotime("-1 week", strtotime($from)));
+        $result['data_weekly'] = $this->Admin_model->getPlayerHistoryById($player_id, $from, $to);
+        
+        //echo "<pre>";
+      // print_r($result);
+
+        $from = date('Y-m-d');
+        $to = date('Y-m-d', strtotime("-1 month", strtotime($from)));
+        $result['data_monthly'] = $this->Admin_model->getPlayerHistoryById($player_id, $from, $to);
+        
+        $this->load->view('admin/player_account_chart', $result);
+    }
 }

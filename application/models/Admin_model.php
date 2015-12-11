@@ -459,5 +459,81 @@ function delete_dealer($id)
 	    $query=$this->db->get();
 	    return $query->num_rows();
     }
+    function getPlayerHistoryById($player_id,$from = null , $to = null)
+	{
+		$this->db->select('timeslot,timeslot_id');
+		$this->db->from('player_history');
+		$this->db->where('player_id',$player_id);
+		$this->db->like('timeslot',$to);
+		$this->db->or_like('timeslot',$from);
+		$this->db->group_by('timeslot_id');
+		$query=$this->db->get();	
+		$timeslots = $query->result();
+
+		//echo $this->db->last_query();
+
+		$data = array();
+
+		$this->db->select('present_amount');
+		$this->db->from('user_master');
+		$this->db->where('id',$player_id);
+		$this->db->order_by("id", "desc"); 
+		$this->db->limit(1);
+	   	$query=$this->db->get()->row();
+	   	$final_total = $query->present_amount;
+
+	   	if(!empty($timeslots))
+		{
+			foreach ($timeslots as $timeslot)
+			{
+				$this->db->select('sum(bet_amount) as credited');
+				$this->db->from('player_history');
+				$this->db->where('bet_amount >= 0');
+				$this->db->where('timeslot',$timeslot->timeslot);
+				$this->db->where('timeslot_id',$timeslot->timeslot_id);
+				$this->db->where('player_id',$player_id);
+				$query=$this->db->get()->row();
+				$credited = $query->credited;
+
+				$this->db->select('sum(bet_amount) as debited');
+				$this->db->from('player_history');
+				$this->db->where('bet_amount < 0');
+				$this->db->where('timeslot',$timeslot->timeslot);
+				$this->db->where('timeslot_id',$timeslot->timeslot_id);
+				$this->db->where('player_id',$player_id);
+				$query=$this->db->get()->row();
+				$debited = $query->debited;
+
+				/*$this->db->select('total');
+				$this->db->from('player_history');
+				$this->db->where('timeslot',$timeslot->timeslot);
+				$this->db->where('timeslot_id',$timeslot->timeslot_id);
+				$this->db->where('player_id',$player_id);
+				$this->db->order_by("id", "desc"); 
+				$this->db->limit(1);
+				//$this->db->group_by('timeslot');
+			   	$query=$this->db->get()->row();
+			   	$day_total = $query->total;*/
+			   	$day_total =0 ;
+
+			   	
+
+			   	$timespan = $this->getTimeslotById($timeslot->timeslot_id);
+			   	$draw_time = explode(' To ', $timespan);	
+
+			   	$data[]= array(
+			   			'timeslot'=>$timeslot->timeslot,
+			   			'credited'=>$credited,
+			   			'debited'=>$debited,
+			   			'day_total'=>$day_total,
+			   			'final_total'=>$final_total,
+			   			'draw_time'=>date('d-m-y',strtotime($timeslot->timeslot)).'  '.date('h:i a',strtotime($draw_time['1'])),
+			   			'profit'=>$credited -$debited
+			   		);
+			}
+		}	
+
+	  	return $data;
+	}
 
 }
