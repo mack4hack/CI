@@ -564,7 +564,7 @@ function delete_dealer($id)
 				$where = "player_id = $player->player_id and (timeslot BETWEEN '$to' AND '$from')";
 				$this->db->where($where);
 				$query=$this->db->get()->row();
-				echo $bet_amount = $query->bet_amount;
+				$bet_amount = $query->bet_amount;
 
 			}
 			//die;

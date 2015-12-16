@@ -1009,8 +1009,8 @@ class Admin extends CI_Controller
         $to = date('Y-m-d', strtotime("-1 week", strtotime($from)));
         $result['data_weekly'] = $this->Admin_model->getPlayerHistoryByDealer($dealer_id, $from, $to);
 
-        print_r($result);
-        die;
+        //print_r($result);
+        //die;
 
         $from = date('Y-m-d');
         $to = date('Y-m-d', strtotime("-1 month", strtotime($from)));
