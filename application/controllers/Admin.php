@@ -1224,4 +1224,34 @@ class Admin extends CI_Controller
         
         $this->load->view('admin/player_account_chart', $result);
     }
+    
+    
+     public function top_bowler() {
+        
+        $this->load->view('admin/top_bowler');
+    }
+    
+    public function top_batsman() {
+        
+        $this->load->view('admin/top_batsman');
+     }
+    public function first_ball() {
+        
+        $this->load->view('admin/first_ball');
+     }
+    public function first_wicket_method() {
+        
+        $this->load->view('admin/first_wicket_method');
+     }
+    public function first_over_runs() {
+        
+        $this->load->view('admin/first_over_runs');
+     }
+    public function to_make_fifty() {
+        
+        $this->load->view('admin/to_make_fifty');
+     }
+    
+    
+    
 }
