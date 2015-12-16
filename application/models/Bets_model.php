@@ -431,6 +431,7 @@ class Bets_model extends CI_Model
         $this->db->from('game_lottery');
         $this->db->where("timeslot >= '" . $start . "' and timeslot < '" . $end . "' ");
         $this->db->where('digit', $lucky_number);
+        $this->db->where('game_type', '3');
         $query = $this->db->get()->row();
         return $query->payout;
     }
@@ -442,6 +443,7 @@ class Bets_model extends CI_Model
         $this->db->from('game_lottery');
         $this->db->where("timeslot >= '" . $start . "' and timeslot < '" . $end . "' ");
         $this->db->where('digit', $first);
+        $this->db->where('game_type', '1');
         $query = $this->db->get()->row();
         return $query->payout;
     }
@@ -453,6 +455,7 @@ class Bets_model extends CI_Model
         $this->db->from('game_lottery');
         $this->db->where("timeslot >= '" . $start . "' and timeslot < '" . $end . "' ");
         $this->db->where('digit', $second);
+        $this->db->where('game_type', '2');
         $query = $this->db->get()->row();
         return $query->payout;
     }
