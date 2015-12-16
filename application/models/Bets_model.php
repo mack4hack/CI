@@ -116,7 +116,7 @@ class Bets_model extends CI_Model
         $this->db->select('sum(bet_amount ) as bet_amount,sum(payout ) as payout');
         $this->db->from('game_lottery');
         $this->db->where("timeslot >= '" . $start . "' and timeslot < '" . $end . "' ");
-        $where = '(digit="' . $first . '" or digit="' . $second . '" or digit="' . $lucky_number . '")';
+        $where = '((digit="' . $first . '" and game_type=1) or (digit="' . $second . '" and game_type=2) or digit="' . $lucky_number . '")';
         $this->db->where($where);
         
         //  $this->db->where('where',$whr);
