@@ -264,9 +264,10 @@ function delete_dealer($id)
 	{
 		$this->db->select('timeslot,timeslot_id');
 		$this->db->from('dealer_history');
-		$this->db->where('dealer_id',$dealer_id);
-		$this->db->where('timeslot >=',$to);
-		$this->db->where('timeslot <=',$from);
+		$where = "dealer_id = $dealer_id and (timeslot BETWEEN '$to' AND '$from')";
+		$this->db->where($where);
+		//$this->db->and_like('timeslot',$to);
+		//$this->db->or_like('timeslot',$from);
 		$this->db->group_by('timeslot_id');
 		$query=$this->db->get();	
 		$timeslots = $query->result();
@@ -301,16 +302,19 @@ function delete_dealer($id)
 				$query=$this->db->get()->row();
 				$debited = $query->debited;
 
-				$this->db->select('total');
+				/*$this->db->select('total');
 				$this->db->from('dealer_history');
 				$this->db->where('timeslot',$timeslot->timeslot);
 				$this->db->where('timeslot_id',$timeslot->timeslot_id);
 				$this->db->where('dealer_id',$dealer_id);
 				$this->db->order_by("id", "desc"); 
 				$this->db->limit(1);
-				//$this->db->group_by('timeslot');
+				// $this->db->group_by('timeslot');
 			   	$query=$this->db->get()->row();
-			   	$day_total = $query->total;
+			   	echo($this->db->last_query());
+			   	$day_total = 0;
+			   	if($query)
+			   		$day_total = $query->total;*/
 
 			   	$this->db->select('sum(commission) as commission');
 				$this->db->from('dealer_history');
@@ -326,11 +330,12 @@ function delete_dealer($id)
 			   			'timeslot'=>$timeslot->timeslot,
 			   			'credited'=>$credited,
 			   			'debited'=>$debited,
-			   			'day_total'=>$day_total,
+			   			//'day_total'=>$day_total,
 			   			'final_total'=>$final_total,
 			   			'commission'=>$commission,
 			   			'draw_time'=>date('d-m-y',strtotime($timeslot->timeslot)).'  '.date('h:i a',strtotime($draw_time['1'])),
-			   			'profit'=>$credited -($debited + $commission)
+			   			'profit'=>$credited -($debited + $commission),
+			   			'week' => date('d-m-y',strtotime($to)).' To '.date('d-m-y',strtotime($from))
 			   		);
 			}
 		}	
@@ -534,6 +539,36 @@ function delete_dealer($id)
 		}	
 
 	  	return $data;
+	}
+	function getPlayerHistoryByDealer($dealer_id, $from, $to)
+	{
+		if(isset($dealer_id)){
+			$this->db->select('player_id');
+			$this->db->from('dealer_player');
+			$this->db->where('dealer_id',$dealer_id);
+			$query=$this->db->get();
+
+			//echo($this->db->last_query());
+
+			$players = $query->result(); 
+
+			foreach ($players as $player) {
+				$this->db->select('user_code');
+				$this->db->from('user_master');
+				$this->db->where('id',$player->player_id);
+				$query=$this->db->get()->row();
+				$user_code = $query->user_code; 
+
+				$this->db->select('sum(bet_amount) as bet_amount');
+				$this->db->from('player_history');
+				$where = "player_id = $player->player_id and (timeslot BETWEEN '$to' AND '$from')";
+				$this->db->where($where);
+				$query=$this->db->get()->row();
+				echo $bet_amount = $query->bet_amount;
+
+			}
+			//die;
+		}	
 	}
 
 }

@@ -92,24 +92,28 @@
 									<div class="tab-pane" id="tab_1_1_2">
 										<table class="table table-bordered table-hover">
 								<thead>
+								<tr><th colspan="6" align="center">Week:
+										<?php if(!empty($data_weekly)  ) {
+                                        foreach($data_weekly as $dw){ echo $dw['week']; break;}}?>
+                                    </th></tr>
 								<tr>
 									<th>
 										 Sr No
 									</th>
 									<th>
-										 Draw Date & Time
+										 Player Code
 									</th>
 									<th>
-										 Credit
+										 Bet Amount
 									</th>
 									<th>
-										 Debit
+										 Wining Amount
 									</th>
 									<th>
 										 Commission
 									</th>
 									<th>
-										 Profit
+										 Balance
 									</th>
 									
 								</tr>
