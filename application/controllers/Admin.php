@@ -724,6 +724,7 @@ class Admin extends CI_Controller
             $result['second_bets'] = $this->Bets_model->getNumberOfBetsByTime($start, $end, 2)->num_rows();
             $result['bets_and_payout'] = $bet_amount_and_payout;
             $result['total_payout'] = $this->Bets_model->getTotalPayoutAndBetsAccToTime($start, $end,$result['lucky_number']);
+            $result['total_bets'] = $this->Bets_model->getTotalBetsAccToTime($start, $end,$result['lucky_number']);
             
             
             //print_r($result);die;

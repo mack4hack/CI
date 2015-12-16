@@ -124,6 +124,21 @@ class Bets_model extends CI_Model
         $query = $this->db->get()->row();
         return $query;
     }
+    function getTotalBetsAccToTime($start, $end, $lucky_number) {
+        $first = floor($lucky_number / 10);
+        $second = $lucky_number % 10;
+        
+        $this->db->select('sum(bet_amount ) as bet_amount');
+        $this->db->from('game_lottery');
+        $this->db->where("timeslot >= '" . $start . "' and timeslot < '" . $end . "' ");
+        $where = '(digit="' . $first . '" or digit="' . $second . '"  or digit="' . $lucky_number . '")';
+        $this->db->where($where);
+        
+        //  $this->db->where('where',$whr);
+        //$this->db->group_by('digit');
+        $query = $this->db->get()->row();
+        return $query;
+    }
     
     function addplayerhistory($data) {
         $this->db->insert('player_history', $data);
