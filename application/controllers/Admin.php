@@ -156,6 +156,31 @@ class Admin extends CI_Controller
         $result['lucky_number'] = $this->Bets_model->getLuckyNumber();
         echo $result['lucky_number'];
     }
+    public function getcurrent() {
+       date_default_timezone_set("Asia/Calcutta");
+        $now = getdate();
+        $minutes = $now['minutes'] - $now['minutes'] % 15;
+        
+        $rounded = $now['year'] . "-" . $now['mon'] . "-" . $now['mday'] . " " . $now['hours'] . ":" . $minutes . ":00";
+        
+        $start = strtotime('+15 minutes', strtotime($rounded));
+        $result['show_time'] = date("h:i a", $start);
+        
+         echo $result['show_time'];
+          
+      }
+    public function getlast() {
+       date_default_timezone_set("Asia/Calcutta");
+        $now = getdate();
+        $minutes = $now['minutes'] - $now['minutes'] % 15;
+        
+        $rounded = $now['year'] . "-" . $now['mon'] . "-" . $now['mday'] . " " . $now['hours'] . ":" . $minutes . ":00";
+        
+        $start = strtotime('+15 minutes', strtotime($rounded));
+        $result['show_time'] = date("h:i a", $start);
+        $result['last_time'] = date("h:i a", strtotime($rounded));
+        echo $result['last_time'];
+      }
     
     public function info() {
         $info = array();

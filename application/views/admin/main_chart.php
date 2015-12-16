@@ -30,11 +30,11 @@ $current_timestamp = $date->getTimestamp();
                                                                                             <span class="btn red" style="font-size:16px;" >Time To Draw : <a id="countdownDisplay" class="btn red" style="font-size:16px;font-weight:bold;padding:0px 0px 2px 0px;"  ></a></span>
                                                                                     </div>
                                                                                     <div class="col-sm-4">
-                                                                                            <span class="btn red" style="font-size:16px;" >Current Game : <?php echo  $show_time  ;  ?></span>
+                                                                                            <span class="btn red" style="font-size:16px;" >Current Game :<span id="show_time"> <?php echo  $show_time  ;  ?></span></span>
                                                                                     </div>
                                                                                     <div class="col-sm-4"   >
                                                                                             <a href="javascript:;" class="btn red"   style="float:right;" >
-                                                                                                            Last Result  (<?php echo $last_time; ?>) :	<span id="ash"   style="font-size:17px;font-weight:bold;"  ><?php echo $lucky_number;  ?></span> 	
+                                                                                                            Last Result  (<span id="last_time"><?php echo $last_time; ?></span>) :	<span id="ash"   style="font-size:17px;font-weight:bold;"  ><?php echo $lucky_number;  ?></span> 	
 
 <!--
                                                                                                                     <i class="fa fa-edit"></i>
@@ -63,8 +63,8 @@ $current_timestamp = $date->getTimestamp();
 
                                                                             <span class="caption-subject bold uppercase font-green-haze"> Bet Amount</span>
                                                                             <span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['bet_amount_jodi'];  ?> ) </span>
-                                                                            <span class="caption-subject bold uppercase font-green-haze"> Payout</span>
-                                                                            <span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['payout_jodi'];  ?> ) </span>
+<!--                                                                            <span class="caption-subject bold uppercase font-green-haze"> Payout</span>
+                                                                            <span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['payout_jodi'];  ?> ) </span>-->
                                                                     </div>
                                                               </div>
 
@@ -687,8 +687,8 @@ $current_timestamp = $date->getTimestamp();
 
                                                                             <span class="caption-subject bold uppercase font-green-haze"> Bet Amount</span>
                                                                             <span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['bet_amount_first'];  ?> ) </span>
-                                                                            <span class="caption-subject bold uppercase font-green-haze"> Payout</span>
-                                                                            <span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['payout_first'];  ?> ) </span>
+<!--                                                                            <span class="caption-subject bold uppercase font-green-haze"> Payout</span>
+                                                                            <span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['payout_first'];  ?> ) </span>-->
                                                                     </div>
 
 
@@ -774,8 +774,8 @@ $current_timestamp = $date->getTimestamp();
 
                                                                             <span class="caption-subject bold uppercase font-green-haze"> Bet Amount</span>
                                                                             <span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['bet_amount_second'];  ?> ) </span>
-                                                                            <span class="caption-subject bold uppercase font-green-haze"> Payout</span>
-                                                                            <span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['payout_second'];  ?> ) </span>
+<!--                                                                            <span class="caption-subject bold uppercase font-green-haze"> Payout</span>
+                                                                            <span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['payout_second'];  ?> ) </span>-->
                                                                     </div>
 
 
@@ -886,7 +886,7 @@ $current_timestamp = $date->getTimestamp();
                                                                                     </div>
                                                             </div>
                                                             <BR>-->
-                                                            <div class="row">
+<!--                                                            <div class="row">
                                                                                     <div class="col-sm-3">
                                                                                             <b>Total Payouts</b>
                                                                                     </div>
@@ -897,16 +897,16 @@ $current_timestamp = $date->getTimestamp();
                                                                                                                     }else{
                                                                                                                             echo "0";
                                                                                                                             }?>
-<!--
+
                                                                                                             <i class="fa fa-edit"></i>
--->
+
                                                                                                                     </a>
                                                                                     </div>
-                                                                                    <!--<div class="col-sm-4">
+                                                                                    <div class="col-sm-4">
                                                                                             <button type="button" class="btn btn-primary">Primary</button>
-                                                                                    </div>-->
+                                                                                    </div>
 
-                                                            </div>
+                                                            </div>-->
                             </div>				
                                                             <BR>
     <?php } ?> 	<!-- group users-->
@@ -1190,6 +1190,29 @@ function loadresult(){
 setInterval(function(){
 loadresult() ;// this will run after every 5 seconds
 }, 5000);
+function loadcurrent(){
+
+    $.get('<?php echo base_url("/admin/getcurrent"); ?>',function(data) {
+               $('#show_time').text(data);
+            });
+}
+
+//loadlink(); // This will run on page load
+setInterval(function(){
+loadcurrent() ;// this will run after every 5 seconds
+}, 5000);
+function loadlast(){
+
+    $.get('<?php echo base_url("/admin/getlast"); ?>',function(data) {
+               $('#last_time').text(data);
+            });
+}
+
+//loadlink(); // This will run on page load
+setInterval(function(){
+loadlast() ;// this will run after every 5 seconds
+}, 5000);
+
 </script>
 
 <script type="text/javascript" >

@@ -419,14 +419,31 @@ function delete_dealer($id)
                                     
                                     if(!empty($sunday_amount)){
                                         
-                                             if($sunday_amount > $deposited_amount){
+//                                             if($sunday_amount > $deposited_amount){
+//                                                 
+//                                                     $amount = $sunday_amount - $deposited_amount;
+//                                                     $present_amount = $present_amount - $amount ;
+//                                                     
+//                                                      $data = array(
+//					
+//				"present_amount" => $present_amount,
+//				"is_restored" => 1,
+//				"restored_time" => date("Y-m-d H:i:s"),
+//				"sunday_amount" => 0,
+//					
+//                                                        );
+//                                                        $this->db->where('id', $user);
+//                                                        $this->db->update('user_master', $data);
+//                                                     
+//                                             }else{
+//                                                  $result['failed_users'][] = $user;
+//                                             }
                                                  
-                                                     $amount = $sunday_amount - $deposited_amount;
-                                                     $present_amount = $present_amount - $amount ;
-                                                     
-                                                      $data = array(
+                                        $amount = $present_amount - $sunday_amount;
+                                        $amount = $amount + $deposited_amount;
+                                         $data = array(
 					
-				"present_amount" => $present_amount,
+				"present_amount" => $amount,
 				"is_restored" => 1,
 				"restored_time" => date("Y-m-d H:i:s"),
 				"sunday_amount" => 0,
@@ -434,10 +451,8 @@ function delete_dealer($id)
                                                         );
                                                         $this->db->where('id', $user);
                                                         $this->db->update('user_master', $data);
-                                                     
-                                             }else{
-                                                  $result['failed_users'][] = $user;
-                                             }
+                                        
+                                        
                                         
                                     }else{
                                         

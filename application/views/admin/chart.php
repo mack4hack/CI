@@ -15,8 +15,8 @@
 										
 										<span class="caption-subject bold uppercase font-green-haze"> Bet Amount</span>
 										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['bet_amount_jodi'];  ?> ) </span>
-										<span class="caption-subject bold uppercase font-green-haze"> Payout</span>
-										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['payout_jodi'];  ?> ) </span>
+<!--										<span class="caption-subject bold uppercase font-green-haze"> Payout</span>
+										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['payout_jodi'];  ?> ) </span>-->
 									</div>
 								  </div>
 								
@@ -638,8 +638,8 @@
 										
 										<span class="caption-subject bold uppercase font-green-haze"> Bet Amount</span>
 										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['bet_amount_first'];  ?> ) </span>
-										<span class="caption-subject bold uppercase font-green-haze"> Payout</span>
-										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['payout_first'];  ?> ) </span>
+<!--										<span class="caption-subject bold uppercase font-green-haze"> Payout</span>
+										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['payout_first'];  ?> ) </span>-->
 									</div>
 								</div>
 								
@@ -723,8 +723,8 @@
 										
 										<span class="caption-subject bold uppercase font-green-haze"> Bet Amount</span>
 										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['bet_amount_second'];  ?> ) </span>
-										<span class="caption-subject bold uppercase font-green-haze"> Payout</span>
-										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['payout_second'];  ?> ) </span>
+<!--										<span class="caption-subject bold uppercase font-green-haze"> Payout</span>
+										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['payout_second'];  ?> ) </span>-->
 									</div>
 									 </div>
 										<table class="table table-bordered table-hover">
@@ -829,7 +829,7 @@
 											</div>
 								</div>
 								<BR>-->
-								<div class="row">
+<!--								<div class="row">
 											<div class="col-sm-3">
 												<b>Total Payouts</b>
 											</div>
@@ -840,15 +840,15 @@
 															}else{
 																echo "0";
 																}?>
-<!--
+
 														<i class="fa fa-edit"></i>
--->
+
 															</a>
 											</div>
-											<!--<div class="col-sm-4">
+											<div class="col-sm-4">
 												<button type="button" class="btn btn-primary">Primary</button>
-											</div>-->
+											</div>
 											
-								</div>
+								</div>-->
 
 			
