@@ -24,6 +24,19 @@ class Bets extends REST_Controller
     }
     
     public function PlaceBetFirst_post() {
+      
+        $success = false;
+        $total_amount = 0;
+         foreach ($this->post('data') as $jodi_data) {
+             $total_amount  = $total_amount + $jodi_data['bet_amount'];
+         }
+            $this->db->select('present_amount');
+            $this->db->from('user_master');
+            $this->db->where('id', $this->post('player_id'));
+            $query1 = $this->db->get()->row();
+            $current_amount =   $query1->present_amount;
+            
+       if($total_amount <= $current_amount){
         foreach ($this->post('data') as $jodi_data) {
             
             $payout = ($jodi_data['bet_amount'] * 8.5);
@@ -80,7 +93,8 @@ class Bets extends REST_Controller
                 $success = false;
             }
         }
-        if ($success) {
+       
+          if ($success) {
             $this->response(['status' => TRUE, 'message' => 'Bets Placed Successfully'], REST_Controller::HTTP_OK);
              // NOT_FOUND (404) being the HTTP response code
             
@@ -90,9 +104,30 @@ class Bets extends REST_Controller
             $this->response(['status' => FALSE, 'message' => 'Bets Cannot Be Placed!'], REST_Controller::HTTP_NOT_FOUND);
              // NOT_FOUND (404) being the HTTP response code
             
+        } 
+        
+       }else {
+            $this->response(['status' => FALSE, 'message' => 'insufficient amount!'], REST_Controller::HTTP_NOT_FOUND);
+             // NOT_FOUND (404) being the HTTP response code
+            
         }
+       
     }
     public function PlaceBetSecond_post() {
+        
+        
+        $success = false;
+        $total_amount = 0;
+         foreach ($this->post('data') as $jodi_data) {
+             $total_amount  = $total_amount + $jodi_data['bet_amount'];
+         }
+            $this->db->select('present_amount');
+            $this->db->from('user_master');
+            $this->db->where('id', $this->post('player_id'));
+            $query1 = $this->db->get()->row();
+            $current_amount =   $query1->present_amount;
+            
+       if($total_amount <= $current_amount){
         foreach ($this->post('data') as $jodi_data) {
             
             $payout = ($jodi_data['bet_amount'] * 8.5);
@@ -156,12 +191,26 @@ class Bets extends REST_Controller
         else {
             $this->response(['status' => FALSE, 'message' => 'Bets Cannot Be Placed!'], REST_Controller::HTTP_NOT_FOUND);
              // NOT_FOUND (404) being the HTTP response code
-            
-        }
+         }
+       }else{
+            $this->response(['status' => FALSE, 'message' => 'insufficient amount!'], REST_Controller::HTTP_NOT_FOUND);
+       }
     }
     public function PlaceBetJodi_post() {
         
         //print_r($this->post('player_id'));die;
+         $success = false;
+        $total_amount = 0;
+         foreach ($this->post('data') as $jodi_data) {
+             $total_amount  = $total_amount + $jodi_data['bet_amount'];
+         }
+            $this->db->select('present_amount');
+            $this->db->from('user_master');
+            $this->db->where('id', $this->post('player_id'));
+            $query1 = $this->db->get()->row();
+            $current_amount =   $query1->present_amount;
+            
+       if($total_amount <= $current_amount){
         foreach ($this->post('data') as $jodi_data) {
             
             $payout = ($jodi_data['bet_amount'] * 85);
@@ -225,8 +274,10 @@ class Bets extends REST_Controller
         else {
             $this->response(['status' => FALSE, 'message' => 'Bets Cannot Be Placed!'], REST_Controller::HTTP_NOT_FOUND);
              // NOT_FOUND (404) being the HTTP response code
-            
         }
+      }else{
+            $this->response(['status' => FALSE, 'message' => 'insufficient amount!'], REST_Controller::HTTP_NOT_FOUND);
+       }
     }
     public function LuckyNumber_get() {
         
