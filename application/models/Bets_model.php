@@ -141,7 +141,22 @@ class Bets_model extends CI_Model
     }
     
     function addplayerhistory($data) {
-        $this->db->insert('player_history', $data);
+             
+             date_default_timezone_set("Asia/Calcutta");
+             $now = getdate();
+             $now['minutes'] = $now['minutes'] - 1;
+             $minutes = $now['minutes'] - $now['minutes'] % 15;
+             $rounded = $now['year'] . "-" . $now['mon'] . "-" . $now['mday'] . " " . $now['hours'] . ":" . $minutes . ":00";
+             $time = strtotime($rounded);
+             $time = $time + (15 * 60);
+             $date = date("Y-m-d H:i:s", $time);
+             
+             $this->db->set('is_canceled', 0, FALSE);
+             $this->db->where('player_id',$data['player_id']);
+             $this->db->where("timeslot >= '" . $rounded . "' and timeslot <= '" . $date . "' ");
+             $this->db->update('player_history');        
+             
+             $this->db->insert('player_history', $data);
     }
     
     function debit($data) {
@@ -219,7 +234,7 @@ class Bets_model extends CI_Model
         }
     }
     
-    function cancelbet($player_id, $digit, $game_type) {
+    function cancelbet($player_id) {
         $this->load->library('ion_auth');
         
         date_default_timezone_set("Asia/Calcutta");
@@ -231,33 +246,31 @@ class Bets_model extends CI_Model
         $time = strtotime($rounded);
         $time = $time + (15 * 60);
         $date = date("Y-m-d H:i:s", $time);
-        $this->db->select('bet_amount,id');
+        
+        $this->db->select('*');
+        $this->db->from('player_history');
+        $this->db->where('player_id', $player_id);
+        $this->db->where('is_canceled', 1);
+        $this->db->where("timeslot >= '" . $rounded . "' and timeslot <= '" . $date . "' ");
+        $canceled = $this->db->get()->row();
+        if(empty($canceled)){         
+        
+        
+        $this->db->select('sum(bet_amount) as bet_amount,id,transaction_id');
         $this->db->from('player_history');
         $this->db->where('player_id', $player_id);
         
-        if ($game_type == 1) {
-            $this->db->where('first_digit', $digit);
-            $this->db->where('game_type', 1);
-        } 
-        else if ($game_type == 2) {
-            $this->db->where('second_digit', $digit);
-            $this->db->where('game_type', 2);
-        } 
-        else {
-            $this->db->where('jodi_digit', $digit);
-            $this->db->where('game_type', 3);
-        }
         $this->db->where("timeslot >= '" . $rounded . "' and timeslot <= '" . $date . "' ");
         $this->db->order_by('id', 'desc');
-        $this->db->limit(1);
+        $this->db->group_by('transaction_id');
+        
         
         $query = $this->db->get()->row();
+        $transaction_id = $query->transaction_id;
+        //echo "<pre>";print_r($query->transaction_id);die;
         
         if (!empty($query)) {
             $bet_amount = $query->bet_amount;
-             //debit from admin and credit back to player
-            $id = $query->id;
-             //delete the bet from history
             
             //calclulate commison and dealer id
             $this->db->select('dealer_id');
@@ -280,14 +293,14 @@ class Bets_model extends CI_Model
                  //debit dealers commision
                 
                 //delete admin history and dealer history
-                $this->db->select('id');
-                $this->db->from('admin_history');
-                $this->db->where('player_id', $player_id);
-                $this->db->order_by('id', 'desc');
-                $this->db->limit(1);
-                $query2 = $this->db->get()->row();
-                $delete_id = $query2->id;
-                $this->db->delete('admin_history', array('id' => $delete_id));
+//                $this->db->select('id');
+//                $this->db->from('admin_history');
+//                $this->db->where('player_id', $player_id);
+//                $this->db->order_by('id', 'desc');
+//                $this->db->limit(1);
+//                $query2 = $this->db->get()->row();
+//                $delete_id = $query2->id;
+                $this->db->delete('admin_history', array('transaction_id' => $transaction_id));
             } 
             else {
                 
@@ -297,20 +310,20 @@ class Bets_model extends CI_Model
                 
             }
             
-            $this->db->delete('player_history', array('id' => $id));
-            
-            $this->db->select('id');
-            $this->db->from('dealer_history');
-            $this->db->where('player_id', $player_id);
-            $this->db->order_by('id', 'desc');
-            $this->db->limit(1);
-            $query3 = $this->db->get()->row();
-            $delete_id1 = $query3->id;
-            $this->db->delete('dealer_history', array('id' => $delete_id1));
-            
+            $this->db->delete('player_history', array('transaction_id' => $transaction_id));
+            $this->db->delete('dealer_history', array('transaction_id' => $transaction_id));
+            //set is_canceled 1  so that user cannot cancel bet
+             $this->db->set('is_canceled', 1, FALSE);
+             $this->db->where('player_id',$player_id);
+             $this->db->where("timeslot >= '" . $rounded . "' and timeslot <= '" . $date . "' ");
+             $this->db->update('player_history');        
             return true;
         } 
         else {
+            return false;
+        }
+        
+        }else {
             return false;
         }
     }

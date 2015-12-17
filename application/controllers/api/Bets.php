@@ -25,8 +25,20 @@ class Bets extends REST_Controller
     
     public function PlaceBetFirst_post() {
       
-        $success = false;
-        $total_amount = 0;
+            $this->db->select('max(game_id) as game_id');
+            $this->db->from('game_lottery');
+            $query1 = $this->db->get()->row();
+            $last =   $query1->game_id;
+              
+            $this->db->select('user_code');
+            $this->db->from('user_master');
+            $this->db->where('id', $this->post('player_id'));
+            $query1 = $this->db->get()->row();
+            $transaction_id =   $query1->user_code."L".$last;
+            
+        
+         $success = false;
+         $total_amount = 0;
          foreach ($this->post('data') as $jodi_data) {
              $total_amount  = $total_amount + $jodi_data['bet_amount'];
          }
@@ -41,9 +53,9 @@ class Bets extends REST_Controller
             
             $payout = ($jodi_data['bet_amount'] * 8.5);
             
-            $data = array('game_type' => 1, 'player_id' => $this->post('player_id'), 'digit' => $jodi_data['digit'], 'bet_amount' => $jodi_data['bet_amount'], 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s'));
+            $data = array('game_type' => 1, 'player_id' => $this->post('player_id'), 'digit' => $jodi_data['digit'], 'bet_amount' => $jodi_data['bet_amount'], 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s'),'transaction_id' =>$transaction_id   );
             
-            $history = array('game_type' => 1, 'player_id' => $this->post('player_id'), 'bet_amount' => $jodi_data['bet_amount'], 'first_digit' => $jodi_data['digit'], 'second_digit' => null, 'jodi_digit' => null, 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId());
+            $history = array('game_type' => 1, 'player_id' => $this->post('player_id'), 'bet_amount' => $jodi_data['bet_amount'], 'first_digit' => $jodi_data['digit'], 'second_digit' => null, 'jodi_digit' => null, 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId() ,'transaction_id' =>$transaction_id   )  ;
             
             //calclulate commison and dealer id
             $this->db->select('dealer_id');
@@ -59,9 +71,9 @@ class Bets extends REST_Controller
             $credit_dealer = array('id' => $dealer_id, 'bet_amount' => $bet_amount_dealer,);
             $credit = array('id' => 1, 'bet_amount' => $jodi_data['bet_amount'] - $bet_amount_dealer,);
             
-            $admin_history = array('game_type' => 1, 'player_id' => $this->post('player_id'), 'bet_amount' => $jodi_data['bet_amount'], 'commission' => $bet_amount_dealer, 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId());
+            $admin_history = array('game_type' => 1, 'player_id' => $this->post('player_id'), 'bet_amount' => $jodi_data['bet_amount'], 'commission' => $bet_amount_dealer, 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId() ,'transaction_id' =>$transaction_id   )   ;
             
-            $dealer_history = array('game_type' => 1, 'player_id' => $this->post('player_id'), 'dealer_id' => $this->getDealerId($this->post('player_id')), 'bet_amount' => $jodi_data['bet_amount'], 'commission' => $bet_amount_dealer, 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId());
+            $dealer_history = array('game_type' => 1, 'player_id' => $this->post('player_id'), 'dealer_id' => $this->getDealerId($this->post('player_id')), 'bet_amount' => $jodi_data['bet_amount'], 'commission' => $bet_amount_dealer, 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId() ,'transaction_id' =>$transaction_id   );
             
             if ($this->Bets_model->placebet($data)) {
                 $this->Bets_model->addplayerhistory($history);
@@ -79,7 +91,7 @@ class Bets extends REST_Controller
                 } 
                 else {
                     
-                    $dealer_history = array('game_type' => 1, 'player_id' => $this->post('player_id'), 'dealer_id' => $this->getDealerId($this->post('player_id')), 'bet_amount' => $jodi_data['bet_amount'], 'commission' => '', 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId());
+                    $dealer_history = array('game_type' => 1, 'player_id' => $this->post('player_id'), 'dealer_id' => $this->getDealerId($this->post('player_id')), 'bet_amount' => $jodi_data['bet_amount'], 'commission' => '', 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId()  ,'transaction_id' =>$transaction_id  );
                     
                     $this->Bets_model->addDealerHistory($dealer_history);
                     
@@ -115,7 +127,16 @@ class Bets extends REST_Controller
     }
     public function PlaceBetSecond_post() {
         
-        
+         $this->db->select('max(game_id) as game_id');
+            $this->db->from('game_lottery');
+            $query1 = $this->db->get()->row();
+            $last =   $query1->game_id;
+              
+            $this->db->select('user_code');
+            $this->db->from('user_master');
+            $this->db->where('id', $this->post('player_id'));
+            $query1 = $this->db->get()->row();
+            $transaction_id =   $query1->user_code."L".$last;
         $success = false;
         $total_amount = 0;
          foreach ($this->post('data') as $jodi_data) {
@@ -132,9 +153,9 @@ class Bets extends REST_Controller
             
             $payout = ($jodi_data['bet_amount'] * 8.5);
             
-            $data = array('game_type' => 2, 'player_id' => $this->post('player_id'), 'digit' => $jodi_data['digit'], 'bet_amount' => $jodi_data['bet_amount'], 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s'));
+            $data = array('game_type' => 2, 'player_id' => $this->post('player_id'), 'digit' => $jodi_data['digit'], 'bet_amount' => $jodi_data['bet_amount'], 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s') ,'transaction_id' =>$transaction_id   );
             
-            $history = array('game_type' => 2, 'player_id' => $this->post('player_id'), 'bet_amount' => $jodi_data['bet_amount'], 'first_digit' => null, 'second_digit' => $jodi_data['digit'], 'jodi_digit' => null, 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId());
+            $history = array('game_type' => 2, 'player_id' => $this->post('player_id'), 'bet_amount' => $jodi_data['bet_amount'], 'first_digit' => null, 'second_digit' => $jodi_data['digit'], 'jodi_digit' => null, 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId() ,'transaction_id' =>$transaction_id  );
             
             //calclulate commison and dealer id
             $this->db->select('dealer_id');
@@ -150,9 +171,9 @@ class Bets extends REST_Controller
             $credit_dealer = array('id' => $dealer_id, 'bet_amount' => $bet_amount_dealer,);
             $credit = array('id' => 1, 'bet_amount' => $jodi_data['bet_amount'] - $bet_amount_dealer,);
             
-            $admin_history = array('game_type' => 2, 'player_id' => $this->post('player_id'), 'bet_amount' => $jodi_data['bet_amount'], 'commission' => $bet_amount_dealer, 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId());
+            $admin_history = array('game_type' => 2, 'player_id' => $this->post('player_id'), 'bet_amount' => $jodi_data['bet_amount'], 'commission' => $bet_amount_dealer, 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId() ,'transaction_id' =>$transaction_id  );
             
-            $dealer_history = array('game_type' => 2, 'player_id' => $this->post('player_id'), 'dealer_id' => $this->getDealerId($this->post('player_id')), 'bet_amount' => $jodi_data['bet_amount'], 'commission' => $bet_amount_dealer, 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId());
+            $dealer_history = array('game_type' => 2, 'player_id' => $this->post('player_id'), 'dealer_id' => $this->getDealerId($this->post('player_id')), 'bet_amount' => $jodi_data['bet_amount'], 'commission' => $bet_amount_dealer, 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId() ,'transaction_id' =>$transaction_id  );
             
             if ($this->Bets_model->placebet($data)) {
                 $this->Bets_model->addplayerhistory($history);
@@ -168,7 +189,7 @@ class Bets extends REST_Controller
                 } 
                 else {
                     
-                    $dealer_history = array('game_type' => 2, 'player_id' => $this->post('player_id'), 'dealer_id' => $this->getDealerId($this->post('player_id')), 'bet_amount' => $jodi_data['bet_amount'], 'commission' => '', 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId());
+                    $dealer_history = array('game_type' => 2, 'player_id' => $this->post('player_id'), 'dealer_id' => $this->getDealerId($this->post('player_id')), 'bet_amount' => $jodi_data['bet_amount'], 'commission' => '', 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId() ,'transaction_id' =>$transaction_id  );
                     
                     $this->Bets_model->addDealerHistory($dealer_history);
                     
@@ -197,7 +218,16 @@ class Bets extends REST_Controller
        }
     }
     public function PlaceBetJodi_post() {
-        
+         $this->db->select('max(game_id) as game_id');
+            $this->db->from('game_lottery');
+            $query1 = $this->db->get()->row();
+            $last =   $query1->game_id;
+              
+            $this->db->select('user_code');
+            $this->db->from('user_master');
+            $this->db->where('id', $this->post('player_id'));
+            $query1 = $this->db->get()->row();
+            $transaction_id =   $query1->user_code."L".$last;
         //print_r($this->post('player_id'));die;
          $success = false;
         $total_amount = 0;
@@ -215,9 +245,9 @@ class Bets extends REST_Controller
             
             $payout = ($jodi_data['bet_amount'] * 85);
             
-            $data = array('game_type' => 3, 'player_id' => $this->post('player_id'), 'digit' => $jodi_data['digit'], 'bet_amount' => $jodi_data['bet_amount'], 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s'));
+            $data = array('game_type' => 3, 'player_id' => $this->post('player_id'), 'digit' => $jodi_data['digit'], 'bet_amount' => $jodi_data['bet_amount'], 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s') ,'transaction_id' =>$transaction_id  );
             
-            $history = array('game_type' => 3, 'player_id' => $this->post('player_id'), 'bet_amount' => $jodi_data['bet_amount'], 'first_digit' => null, 'second_digit' => null, 'jodi_digit' => $jodi_data['digit'], 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId());
+            $history = array('game_type' => 3, 'player_id' => $this->post('player_id'), 'bet_amount' => $jodi_data['bet_amount'], 'first_digit' => null, 'second_digit' => null, 'jodi_digit' => $jodi_data['digit'], 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId() ,'transaction_id' =>$transaction_id  );
             
             //calclulate commison and dealer id
             $this->db->select('dealer_id');
@@ -233,9 +263,9 @@ class Bets extends REST_Controller
             $credit_dealer = array('id' => $dealer_id, 'bet_amount' => $bet_amount_dealer,);
             $credit = array('id' => 1, 'bet_amount' => $jodi_data['bet_amount'] - $bet_amount_dealer,);
             
-            $admin_history = array('game_type' => 3, 'player_id' => $this->post('player_id'), 'commission' => $bet_amount_dealer, 'bet_amount' => $jodi_data['bet_amount'], 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId());
+            $admin_history = array('game_type' => 3, 'player_id' => $this->post('player_id'), 'commission' => $bet_amount_dealer, 'bet_amount' => $jodi_data['bet_amount'], 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId() ,'transaction_id' =>$transaction_id  );
             
-            $dealer_history = array('game_type' => 3, 'player_id' => $this->post('player_id'), 'dealer_id' => $this->getDealerId($this->post('player_id')), 'bet_amount' => $jodi_data['bet_amount'], 'commission' => $bet_amount_dealer, 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId());
+            $dealer_history = array('game_type' => 3, 'player_id' => $this->post('player_id'), 'dealer_id' => $this->getDealerId($this->post('player_id')), 'bet_amount' => $jodi_data['bet_amount'], 'commission' => $bet_amount_dealer, 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId() ,'transaction_id' =>$transaction_id  );
             
             if ($this->Bets_model->placebet($data)) {
                 $this->Bets_model->addplayerhistory($history);
@@ -251,7 +281,7 @@ class Bets extends REST_Controller
                 } 
                 else {
                     
-                    $dealer_history = array('game_type' => 3, 'player_id' => $this->post('player_id'), 'dealer_id' => $this->getDealerId($this->post('player_id')), 'bet_amount' => $jodi_data['bet_amount'], 'commission' => '', 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId());
+                    $dealer_history = array('game_type' => 3, 'player_id' => $this->post('player_id'), 'dealer_id' => $this->getDealerId($this->post('player_id')), 'bet_amount' => $jodi_data['bet_amount'], 'commission' => '', 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId() ,'transaction_id' =>$transaction_id  );
                     
                     $this->Bets_model->addDealerHistory($dealer_history);
                     
@@ -298,10 +328,10 @@ class Bets extends REST_Controller
     }
     public function CancelBet_post() {
         $player_id = $this->post('player_id');
-        $digit = $this->post('digit');
-        $game_type = $this->post('game_type');
+        //$digit = $this->post('digit');
+        //$game_type = $this->post('game_type');
         
-        if ($this->Bets_model->cancelbet($player_id, $digit, $game_type)) {
+        if ($this->Bets_model->cancelbet($player_id)) {
             
             $this->response(['status' => TRUE, 'message' => 'Bets Cancelled Successfully'], REST_Controller::HTTP_OK);
              // NOT_FOUND (404) being the HTTP response code
