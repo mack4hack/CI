@@ -707,4 +707,73 @@ function delete_dealer($id)
 	  	return $data;
 	}
 
+	function getAccounts($from,$to)
+	{
+		$this->db->select('user_code,id');
+     	$this->db->from('user_master');
+	    $this->db->where('role_id','2');
+	    $query=$this->db->get();
+	    $dealers =  $query->result();
+
+	    $i=1;
+	    foreach ($dealers as $dealer) {
+	    	
+	    	$this->db->select('sum(bet_amount) as credited');
+			$this->db->from('dealer_history');
+			$this->db->where('bet_amount >= 0');
+			$where = 'dealer_id = "'.$dealer->id.'" AND (timeslot BETWEEN "'.$to.'" AND  "'.$from.'")';
+			$this->db->where($where);
+			$query=$this->db->get()->row();
+			$credited = 0;
+			  //echo($this->db->last_query());  die;
+			if($query){
+				$credited = $query->credited;
+			}
+
+			$this->db->select('sum(commission) as commission');
+			$this->db->from('dealer_history');
+			$this->db->where('bet_amount >= 0');
+			$where = 'dealer_id = "'.$dealer->id.'" AND (timeslot BETWEEN "'.$to.'" AND  "'.$from.'")';
+			$this->db->where($where);
+			$query=$this->db->get()->row();
+			$commission = 0;
+			//echo($this->db->last_query()); 
+			if($query){
+				$commission = $query->commission;
+			}
+
+			$this->db->select('sum(total) as total');
+			$this->db->from('dealer_history');
+			$this->db->where('bet_amount >= 0');
+			$where = '(timeslot BETWEEN "'.$to.'" AND  "'.$from.'")';
+			$this->db->where($where);
+			$query=$this->db->get()->row();
+			$total = 0;
+			// echo($this->db->last_query()); die;
+			if($query){
+				$total = $query->total;
+			}	
+
+			$data[]= array(
+			   			'sr_no' => $i,
+			   			'user_code'=>$dealer->user_code,
+			   			'credited'=>$credited,
+			   			//'debited'=>$debited,
+			   			'commission'=>$commission,
+			   			'total'=>$total,
+			   			'week' => date('d-m-Y',strtotime($to)) .' To '.date('d-m-Y',strtotime($from)),
+			   			'month' => date('M-Y'),
+			   			//'final_total'=>$final_total,
+			   			//'draw_time'=>  $timeslot['timeslot'], // date('d-m-y',strtotime($timeslot['timeslot'])).'  '.date('h:i a',strtotime($draw_time['1'])),
+			   			//'balance'=>$credited -($debited + $commission)
+			   		);
+			$i++;
+	    }
+
+	    //print_r($data);
+	    //die;
+
+	    return $data;
+	}
+
 }
