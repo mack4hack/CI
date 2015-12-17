@@ -48,6 +48,8 @@ function getPlayersAccToDealer($dealer_id)
                     $this->db->from('user_master');
                     $this->db->join('dealer_player', 'user_master.id = dealer_player.player_id');
                     $this->db->where('user_master.role_id',3);
+                    $this->db->where('is_blocked',0);
+                    //$this->db->where('is_active',1);
                     $this->db->where('dealer_player.dealer_id',$dealer_id);
                     $query = $this->db->get();
     

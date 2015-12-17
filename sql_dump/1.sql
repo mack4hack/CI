@@ -151,3 +151,11 @@ ALTER TABLE `user_master` ADD `sunday_amount` INT( 11 ) NOT NULL AFTER `present_
 
 ALTER TABLE `user_master` ADD `is_restored` INT( 11 ) NOT NULL DEFAULT '0',
 ADD `restored_time` DATETIME NOT NULL ;
+
+
+
+ALTER TABLE `game_lottery` ADD `transaction_id` VARCHAR( 255 ) NOT NULL ;
+ALTER TABLE `player_history` ADD `transaction_id` VARCHAR( 255 ) NOT NULL ;
+ALTER TABLE `dealer_history` ADD `transaction_id` VARCHAR( 255 ) NOT NULL ;
+ALTER TABLE `admin_history` ADD `transaction_id` VARCHAR( 255 ) NOT NULL ;
+ALTER TABLE `player_history` ADD `is_canceled` BOOLEAN NOT NULL DEFAULT FALSE ;
