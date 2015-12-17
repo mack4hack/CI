@@ -5,7 +5,7 @@
 										<div class="row">
 											<div class="col-sm-2">
 												<a href="javascript:;" class="btn red">
-														Winning Number	<span id="lucky_number"><?php echo $lucky_number;  ?></span> 	
+														Winning Number :	<span id="lucky_number"><?php echo $lucky_number;  ?></span> 	
 
 <!--
 															<i class="fa fa-edit"></i>
@@ -17,7 +17,7 @@
 								
 											<div class="col-sm-2">
 												<a href="javascript:;" class="btn red">
-														Total Bets All:  <span id="bet_amount"><?php if(!empty($total_bets->bet_amount)){
+														Total Bets All :  <span id="bet_amount"><?php if(!empty($total_bets->bet_amount)){
 															echo $total_bets->bet_amount;
 															}else{
 																echo "0";
@@ -30,8 +30,26 @@
 								
 											<div class="col-sm-2">
 												<a href="javascript:;" class="btn red">
-													Total Payout:		<span id="payout"><?php if(!empty($total_payout->payout)){
+													Total Payout :		<span id="payout"><?php if(!empty($total_payout->payout)){
 															echo $total_payout->payout;
+															}else{
+																echo "0";
+																}?></span>
+                    							</a>
+											</div>
+											<div class="col-sm-2">
+												<a href="javascript:;" class="btn red">
+													Commission :		<span id="payout"><?php if(!empty($total_payout->payout)){
+															//echo $total_payout->payout;
+															}else{
+																echo "0";
+																}?></span>
+                    							</a>
+											</div>
+											<div class="col-sm-2">
+												<a href="javascript:;" class="btn red">
+													Balance :		<span id="payout"><?php if(!empty($total_payout->payout)){
+															//echo $total_payout->payout;
 															}else{
 																echo "0";
 																}?></span>

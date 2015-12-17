@@ -1282,6 +1282,23 @@ class Admin extends CI_Controller
         $this->load->view('admin/to_make_fifty');
      }
     
+    public function daySummarySlots() {
+        if (isset($_GET['date'])) {
+            
+            //$time = explode(' To ', $_GET['time']);
+            $date = $_GET['date'];
+            $from = date('Y-m-d');
+            $to = date('Y-m-d');
+            $from = date('Y-m-d', strtotime("1 day", strtotime($from)));
+           
+            $result['data_daily'] = $this->Admin_model->getDailyHistory($from, $to);
+
+            
+            
+            $this->load->view('admin/day_summary_slots', $result);
+        }
+    }
+
     
     public function restore_account_cron() {
        $this->Admin_model->restore_account();
