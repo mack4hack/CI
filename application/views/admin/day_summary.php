@@ -18,8 +18,11 @@ $current_timestamp = $date->getTimestamp();
 								<span>Select Date</span>
 								<select name="date" id="date">
 									<?php foreach ($dates as $date) {  ?>
+										<?php if($date['value'] == date('Y-m-d')) { ?>
+											<option  value="<?php echo $date['value']; ?>" selected><?php echo $date['display']; ?></option>	
+									<?php	} else { ?>
 										<option  value="<?php echo $date['value']; ?>"><?php echo $date['display']; ?></option>
-									<?php } ?>
+									<?php  } } ?>
 								</select>
 							</div>
 							<div class="col-sm-2">
@@ -81,12 +84,17 @@ QuickSidebar.init(); // init quick sidebar
 Demo.init(); // init demo features
    ///FormValidation.init();
    //TableManaged.init();
-    getChart();	 
+  //  getChart();	 
+    getSlots();	 
 });
 
 
      $('#time_slot').on('change',function(){
 		 getChart();	    
+	});
+
+    $('#date').on('change',function(){
+		 getSlots();	    
 	});
 
     function getChart()
@@ -96,6 +104,15 @@ Demo.init(); // init demo features
  	    time_slot = date+' '+time;
  	    time_slot = encodeURIComponent(time_slot);
  	    $('#mack').load('<?php echo base_url("/admin/summary?time="); ?>'+time_slot,function () { });
+    }
+
+    function getSlots()
+    {
+    	//var time = $('#time_slot').val();
+ 	    var date = $('#date').val();
+ 	    //time_slot = date+' '+time;
+ 	    date = encodeURIComponent(date);
+ 	    $('#mack').load('<?php echo base_url("/admin/daysummaryslots?date="); ?>'+date,function () { });
     } 
 
 
