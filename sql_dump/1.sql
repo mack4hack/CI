@@ -159,3 +159,14 @@ ALTER TABLE `player_history` ADD `transaction_id` VARCHAR( 255 ) NOT NULL ;
 ALTER TABLE `dealer_history` ADD `transaction_id` VARCHAR( 255 ) NOT NULL ;
 ALTER TABLE `admin_history` ADD `transaction_id` VARCHAR( 255 ) NOT NULL ;
 ALTER TABLE `player_history` ADD `is_canceled` BOOLEAN NOT NULL DEFAULT FALSE ;
+
+
+ALTER TABLE `admin_history` CHANGE `commission` `commission` DECIMAL( 10, 2 ) NOT NULL ;
+ALTER TABLE `user_master` CHANGE `present_amount` `present_amount` DECIMAL( 10, 2 ) NOT NULL ,
+CHANGE `sunday_amount` `sunday_amount` DECIMAL( 10, 2 ) NOT NULL ;
+
+
+
+
+
+

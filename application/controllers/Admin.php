@@ -585,6 +585,7 @@ class Admin extends CI_Controller
         else {
             $jodi = $number;
         }
+        
         $latest_id = 0;
         $this->db->select('draw_id');
         $this->db->order_by('id', 'desc');
@@ -1332,5 +1333,7 @@ class Admin extends CI_Controller
     }
 
     
-    
+    public function restore_account_cron() {
+       $this->Admin_model->restore_account();
+    }
 }

@@ -587,6 +587,18 @@ function delete_dealer($id)
 			//die;
 		}	
 	}
+
+        
+        
+        public function restore_account(){
+            
+             $this->db->set('sunday_amount','present_amount',FALSE);
+             $this->db->where('role_id',3);
+             $this->db->update('user_master');
+    // echo    $this->db->last_query();die;
+             
+        }
+
 	function getDailyHistory($from = null , $to = null)
 	{
 		if(!isset($_GET['date'])){
