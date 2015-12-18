@@ -27,7 +27,10 @@ class Admin extends CI_Controller
     
     public function add_dealer() {
         $result['list'] = $this->Getlocation->getCountry();
-        $this->load->view('admin/add_dealer', $result);
+       
+         if (!$this->ion_auth->logged_in()) redirect('auth/login', 'refresh');
+        else $this->load->view('admin/add_dealer', $result);
+        
     }
     public function lot_chart() {
         date_default_timezone_set("Asia/Calcutta");
@@ -94,7 +97,10 @@ class Admin extends CI_Controller
         $result['lucky_number'] = $this->Bets_model->getLuckyNumber();
         $result['time_slots'] = $time_slots;
         
-        $this->load->view('admin/main_chart', $result);
+        
+         if (!$this->ion_auth->logged_in()) redirect('auth/login', 'refresh');
+        else $this->load->view('admin/main_chart', $result);
+        
     }
     public function edit() {
         $this->db->where('id', $this->uri->segment(3));
@@ -106,7 +112,9 @@ class Admin extends CI_Controller
     }
     public function add_player() {
         $result['list'] = $this->Getlocation->getCountry();
-        $this->load->view('admin/add_player', $result);
+         if (!$this->ion_auth->logged_in()) redirect('auth/login', 'refresh');
+        else $this->load->view('admin/add_player', $result);
+        
     }
     
     public function chart() {
@@ -346,7 +354,11 @@ class Admin extends CI_Controller
         //$info['active_player'] =  '';
         //echo "<pre>";print_r($info['active_player']);die;
         //code ends here
-        $this->load->view('admin/info', $info);
+        
+         if (!$this->ion_auth->logged_in()) redirect('auth/login', 'refresh');
+        else $this->load->view('admin/info', $info);
+        
+        //$this->load->view('admin/info', $info);
     }
     public function aasort(&$array, $key) {
         $sorter = array();
@@ -772,14 +784,17 @@ class Admin extends CI_Controller
         //echo date('Y-m-d H:i');
         
         //print_r($time_slots); die;
-        
-        $this->load->view('admin/day_summary', $result);
+         if (!$this->ion_auth->logged_in()) redirect('auth/login', 'refresh');
+        else $this->load->view('admin/day_summary', $result);
+        //$this->load->view('admin/day_summary', $result);
     }
     
     public function add_amount() {
         
         $result['list'] = $this->Getlocation->getCountry();
-        $this->load->view('admin/add_amount', $result);
+         if (!$this->ion_auth->logged_in()) redirect('auth/login', 'refresh');
+        else $this->load->view('admin/add_amount', $result);
+        
     }
     
     public function ajaxPlayersList() {
@@ -834,7 +849,9 @@ class Admin extends CI_Controller
     public function block_player() {
         
         $result['list'] = $this->Getlocation->getCountry();
-        $this->load->view('admin/block_player', $result);
+         if (!$this->ion_auth->logged_in()) redirect('auth/login', 'refresh');
+        else $this->load->view('admin/block_player', $result);
+        //$this->load->view('admin/block_player', $result);
     }
     public function ajax_block_player() {
         
@@ -967,7 +984,9 @@ class Admin extends CI_Controller
         //die;
         
         // echo "<pre>";print_r($result['data']);die;
-        $this->load->view('admin/numbering', $result);
+        if (!$this->ion_auth->logged_in()) redirect('auth/login', 'refresh');
+        else $this->load->view('admin/numbering', $result);
+       // $this->load->view('admin/numbering', $result);
     }
     
     /**
@@ -1015,14 +1034,18 @@ class Admin extends CI_Controller
         $from = date('Y-m-d', strtotime("1 day", strtotime($from)));
         $result['data_monthly'] = $this->Admin_model->getAdminHistory($from, $to);
         
-        $this->load->view('admin/admin_account', $result);
+        if (!$this->ion_auth->logged_in()) redirect('auth/login', 'refresh');
+        else $this->load->view('admin/admin_account', $result);
+        //$this->load->view('admin/admin_account', $result);
     }
     
     public function dealerAccount() {
         $result['dealers'] = $this->Admin_model->get_dealers();
         
         //$result['data']=$this->Admin_model->getDealerHistory();
-        $this->load->view('admin/dealer_account', $result);
+        if (!$this->ion_auth->logged_in()) redirect('auth/login', 'refresh');
+        else $this->load->view('admin/dealer_account', $result);
+       // $this->load->view('admin/dealer_account', $result);
     }
     
     public function dealerAccountChart() {
@@ -1228,7 +1251,9 @@ class Admin extends CI_Controller
         $result['players'] = $this->Admin_model->get_players();
         
         //$result['data']=$this->Admin_model->getDealerHistory();
-        $this->load->view('admin/player_account', $result);
+        if (!$this->ion_auth->logged_in()) redirect('auth/login', 'refresh');
+        else $this->load->view('admin/player_account', $result);
+        //$this->load->view('admin/player_account', $result);
     }
     
     public function playerAccountChart() {
