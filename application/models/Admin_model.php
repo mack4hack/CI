@@ -787,5 +787,73 @@ function delete_dealer($id)
 
 	    return $data;
 	}
+	function getAccountsDealer($from,$to)
+	{
+		$this->db->select('user_code,id');
+     	$this->db->from('user_master');
+	    $this->db->where('role_id','3');
+	    $query=$this->db->get();
+	    $players =  $query->result();
+
+	    $i=1;
+	    foreach ($players as $player) {
+	    	
+	    	$this->db->select('sum(bet_amount) as bet_amount');
+			$this->db->from('player_history');
+			$this->db->where('bet_amount >= 0');
+			$where = 'player_id = "'.$player->id.'" AND (timeslot BETWEEN "'.$to.'" AND  "'.$from.'")';
+			$this->db->where($where);
+			$query=$this->db->get()->row();
+			$bet_amount = 0;
+			  //echo($this->db->last_query());  die;
+			if($query){
+				$bet_amount = $query->bet_amount;
+			}
+
+			/*$this->db->select('sum(commission) as commission');
+			$this->db->from('dealer_history');
+			$this->db->where('bet_amount >= 0');
+			$where = 'dealer_id = "'.$dealer->id.'" AND (timeslot BETWEEN "'.$to.'" AND  "'.$from.'")';
+			$this->db->where($where);
+			$query=$this->db->get()->row();
+			$commission = 0;
+			//echo($this->db->last_query()); 
+			if($query){
+				$commission = $query->commission;
+			}*/
+
+			$this->db->select('sum(total) as total');
+			$this->db->from('dealer_history');
+			$this->db->where('bet_amount >= 0');
+			$where = '(timeslot BETWEEN "'.$to.'" AND  "'.$from.'")';
+			$this->db->where($where);
+			$query=$this->db->get()->row();
+			$total = 0;
+			// echo($this->db->last_query()); die;
+			if($query){
+				$total = $query->total;
+			}	
+
+			$data[]= array(
+			   			'sr_no' => $i,
+			   			'user_code'=>$player->user_code,
+			   			'bet_amount'=>$bet_amount,
+			   			'debited'=>$debited,
+			   			//'commission'=>$commission,
+			   			'total'=>$total,
+			   			'week' => date('d-m-Y',strtotime($to)) .' To '.date('d-m-Y',strtotime($from)),
+			   			'month' => date('M-Y'),
+			   			//'final_total'=>$final_total,
+			   			//'draw_time'=>  $timeslot['timeslot'], // date('d-m-y',strtotime($timeslot['timeslot'])).'  '.date('h:i a',strtotime($draw_time['1'])),
+			   			//'balance'=>$credited -($debited + $commission)
+			   		);
+			$i++;
+	    }
+
+	   // print_r($data);
+	   // die;
+
+	    return $data;
+	}
 
 }
