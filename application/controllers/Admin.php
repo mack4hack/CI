@@ -1357,13 +1357,13 @@ class Admin extends CI_Controller
             $to = date('Y-m-d', strtotime("+1 day", strtotime($from)));
             $to = date('Y-m-d', strtotime("-1 week", strtotime($to)));
             //$to = date('Y-m-d', strtotime("1 day", strtotime($from)));
-            //$result['data_weekly'] = $this->Admin_model->getAccountsDealer($from, $to);
+            $result['data_weekly'] = $this->Admin_model->getAccountsDealer($from, $to);
             
             //die;
             $from = date('Y-m-d');
             $to = date('Y-m-d', strtotime("-1 month", strtotime($from)));
             $from = date('Y-m-d', strtotime("1 day", strtotime($from)));
-            //$result['data_monthly'] = $this->Admin_model->getAccountsDealer($from, $to);
+            $result['data_monthly'] = $this->Admin_model->getAccountsDealer($from, $to);
 
             $this->load->view('admin/accounts_dealer', $result);
         }

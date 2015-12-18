@@ -52,7 +52,7 @@
                                                     Dealer Code
                                                 </th>
                                                 <th>
-                                                    Credit
+                                                    Bet Amount
                                                 </th>
                                                 <th>
                                                     Debit
@@ -71,10 +71,10 @@
                                             <tr class="success">
                                                 <td><?php echo $dd['sr_no']; ?></td>
                                                 <td><?php echo $dd['user_code']; ?></td>
-                                                <td><?php echo $dd['credited']; ?></td>
-                                                <td><?php //echo $dd['credit']; ?></td>
+                                                <td><?php echo $dd['bet_amount']; ?></td>
+                                                <td><?php echo $dd['payout']; ?></td>
                                                 <td><?php echo $dd['commission']; ?></td>
-                                                <td><?php //echo $dd['balance']; ?></td>
+                                                <td><?php echo $dd['balance']; ?></td>
                                             <!--<td><?php //echo $draw['profit']; ?></td>-->
                                             </tr>
                                             <?php    } ?>
@@ -98,7 +98,7 @@
                                                     Dealer Code
                                                 </th>
                                                 <th>
-                                                    Credit
+                                                    Bet Amount
                                                 </th>
                                                 <th>
                                                     Debit
@@ -114,13 +114,13 @@
                                         <tbody>
                                             <?php if(!empty($data_weekly)  ) {
                                             foreach($data_weekly as $dw){  ?>
-                                            <tr class="success">
+                                             <tr class="success">
                                                 <td><?php echo $dw['sr_no']; ?></td>
                                                 <td><?php echo $dw['user_code']; ?></td>
-                                                <td><?php echo $dw['credited']; ?></td>
-                                                <td><?php //echo $dd['credit']; ?></td>
+                                                <td><?php echo $dw['bet_amount']; ?></td>
+                                                <td><?php echo $dw['payout']; ?></td>
                                                 <td><?php echo $dw['commission']; ?></td>
-                                                <td><?php //echo $dd['balance']; ?></td>
+                                                <td><?php echo $dw['balance']; ?></td>
                                             <!--<td><?php //echo $draw['profit']; ?></td>-->
                                             </tr>
                                             <?php    } ?>
@@ -144,7 +144,7 @@
                                                     Dealer Code
                                                 </th>
                                                 <th>
-                                                    Credit
+                                                    Bet Amount
                                                 </th>
                                                 <th>
                                                     Debit
@@ -160,13 +160,13 @@
                                         <tbody>
                                             <?php if(!empty($data_monthly)  ) {
                                             foreach($data_monthly as $dm){  ?>
-                                            <tr class="success">
+                                             <tr class="success">
                                                 <td><?php echo $dm['sr_no']; ?></td>
                                                 <td><?php echo $dm['user_code']; ?></td>
-                                                <td><?php echo $dm['credited']; ?></td>
-                                                <td><?php //echo $dd['credit']; ?></td>
+                                                <td><?php echo $dm['bet_amount']; ?></td>
+                                                <td><?php echo $dm['payout']; ?></td>
                                                 <td><?php echo $dm['commission']; ?></td>
-                                                <td><?php //echo $dd['balance']; ?></td>
+                                                <td><?php echo $dm['balance']; ?></td>
                                             <!--<td><?php //echo $draw['profit']; ?></td>-->
                                             </tr>
                                              <?php    } ?>
