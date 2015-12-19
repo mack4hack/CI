@@ -885,28 +885,48 @@ function delete_dealer($id)
 	    return $data;
 	}
 
-	function getAccountsPlayer($from,$to)
+	function getAccountsPlayer()
 	{
+			$player_id = $_GET['player_id'];
 		//if(isset($_GET['dealer_id'])){
-			$this->db->select('timeslot,id');
+			/*$this->db->select('timeslot,player_id');
 	     	$this->db->from('player_history');
-	     	$where = '(timeslot BETWEEN "'.$to.'" AND  "'.$from.'")';
+	     	$where = 'player_id = "'.$player_id.'" AND (timeslot BETWEEN "'.$to.'" AND  "'.$from.'")';
 		    $this->db->where($where);
 		    //$this->db->where('dealer_id','13');
 		    $query=$this->db->get();
-		    // echo($this->db->last_query());  die;
-		    $players =  $query->result();
+		    echo($this->db->last_query());  die;
+		    $players =  $query->result();*/
 
 		    $i=1;
-		    foreach ($players as $player) {
+
+		    $day = date('w', strtotime('-1 day'));
+			 $week_first_day = date('Y-m-d', strtotime('-'.$day.' days'));
+			 $week_second_day = date('Y-m-d', strtotime('-'.(9-$day).' days'));
+			 $week_third_day = date('Y-m-d', strtotime('-'.(8-$day).' days'));
+			 $week_fourth_day = date('Y-m-d', strtotime('-'.(7-$day).' days'));
+			 $week_fifth_day = date('Y-m-d', strtotime('-'.(6-$day).' days'));
+			 $week_sixth_day = date('Y-m-d', strtotime('-'.(5-$day).' days'));
+			 $week_seventh_day = date('Y-m-d', strtotime('+'.(6-$day).' days'));
+			//die;
+
+			$week_days = array($week_first_day,$week_second_day,$week_third_day,
+								$week_fourth_day,$week_fifth_day,$week_sixth_day,$week_seventh_day,);
+
+//			echo "<pre>";
+//			print_r($week_days); die;
+
+		    foreach ($week_days as $day) {
 		    	
-		    	$to = $to.' 00:00:00'; 
-		    	$from = $from.' 23:59:59'; 
+
+		    	///$day = $to.' 00:00:00'; 
+		    	//$from = $from.' 23:59:59'; 
 
 		    	$this->db->select('sum(bet_amount) as bet_amount');
-				$this->db->from('dealer_history');
-				$this->db->where('bet_amount >= 0');
-				$where = 'player_id = "'.$player->id.'" AND (timeslot BETWEEN "'.$to.'" AND  "'.$from.'")';
+				$this->db->from('player_history');
+				// $this->db->where('bet_amount >= 0');
+				//$where = 'player_id = "'.$player->player_id.'" AND (timeslot BETWEEN "'.$to.'" AND  "'.$from.'")';
+				$where = 'player_id = "'.$player_id.'" AND timeslot LIKE "%'.$day.'%"';
 				$this->db->where($where);
 				$query=$this->db->get()->row();
 				$bet_amount = 0;
@@ -915,19 +935,19 @@ function delete_dealer($id)
 					$bet_amount = $query->bet_amount;
 				}
 
-				$this->db->select('sum(commission) as commission');
-				$this->db->from('dealer_history');
-				$this->db->where('bet_amount >= 0');
-				$where = 'player_id = "'.$player->id.'" AND (timeslot BETWEEN "'.$to.'" AND  "'.$from.'")';
+				$this->db->select('sum(payout) as payout');
+				$this->db->from('player_history');
+				$this->db->where('result','1');
+				$where = 'player_id = "'.$player_id.'" AND timeslot LIKE "%'.$day.'%"';
 				$this->db->where($where);
 				$query=$this->db->get()->row();
-				$commission = 0;
-				//echo($this->db->last_query()); 
+				$payout = 0;
+				// echo($this->db->last_query()); die;
 				if($query){
-					$commission = $query->commission;
+					$payout = $query->payout;
 				}
 
-				$this->db->select('sum(payout) as payout');
+				/*$this->db->select('sum(payout) as payout');
 				$this->db->from('player_history');
 				$this->db->where('result','1');
 				$where = 'player_id = "'.$player->id.'" AND (timeslot BETWEEN "'.$to.'" AND  "'.$from.'")';
@@ -937,19 +957,19 @@ function delete_dealer($id)
 				// echo($this->db->last_query()); die;
 				if($query){
 					$payout = $query->payout;
-				}	
+				}*/	
 
-				$balance = $bet_amount - $payout - $commission;
+				$balance = $bet_amount - $payout;
 
 				$data[]= array(
 				   			'sr_no' => $i,
-				   			'user_code'=>$player->user_code,
+				   			'date'=>$day,
 				   			'bet_amount'=>$bet_amount,
 				   			'payout'=>$payout,
-				   			'commission'=>$commission,
+				   			//'commission'=>$commission,
 				   			//'total'=>$total,
-				   			'week' => date('d-m-Y',strtotime($to)) .' To '.date('d-m-Y',strtotime($from)),
-				   			'month' => date('M-Y'),
+				   			//'week' => date('d-m-Y',strtotime($to)) .' To '.date('d-m-Y',strtotime($from)),
+				   			//'month' => date('M-Y'),
 				   			'balance'=>$balance,
 				   			//'draw_time'=>  $timeslot['timeslot'], // date('d-m-y',strtotime($timeslot['timeslot'])).'  '.date('h:i a',strtotime($draw_time['1'])),
 				   			//'balance'=>$credited -($debited + $commission)
@@ -957,7 +977,7 @@ function delete_dealer($id)
 				$i++;
 		    }
 		//}
-	   // print_r($data);
+	    //print_r($data);
 	   // die;
 
 	    return $data;

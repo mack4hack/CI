@@ -57,10 +57,10 @@
                                             foreach($data_weekly as $dw){  ?>
                                             <tr class="success">
                                                 <td><?php echo $dw['sr_no']; ?></td>
-                                                <td><?php echo $dw['user_code']; ?></td>
+                                                <td><?php echo $dw['date']; ?></td>
                                                 <td><?php echo $dw['bet_amount']; ?></td>
                                                 <td><?php echo $dw['payout']; ?></td>
-                                                <td><?php echo $dw['commission']; ?></td>
+                                                <td><?php //echo $dw['commission']; ?></td>
                                                 <td><?php echo $dw['balance']; ?></td>
                                             <!--<td><?php //echo $draw['profit']; ?></td>-->
                                             </tr>

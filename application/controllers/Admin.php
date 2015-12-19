@@ -1432,7 +1432,7 @@ class Admin extends CI_Controller
                 $to = date('Y-m-d', strtotime("+1 day", strtotime($from)));
                 $to = date('Y-m-d', strtotime("-1 week", strtotime($to)));
                 //$to = date('Y-m-d', strtotime("1 day", strtotime($from)));
-                $result['data_weekly'] = $this->Admin_model->getAccountsPlayer($from, $monday);
+                $result['data_weekly'] = $this->Admin_model->getAccountsPlayer();
                 
                 //die;
                 $from = date('Y-m-d');
