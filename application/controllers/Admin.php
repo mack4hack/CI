@@ -1339,12 +1339,14 @@ class Admin extends CI_Controller
            // echo "<pre>";
            // print_r($result); die;        
                 
+            $monday = date( 'Y-m-d', strtotime( 'monday this week' ) );
+            $sunday = date( 'Y-m-d', strtotime( 'sunday this week' ) );
 
             $from = date('Y-m-d');
             $to = date('Y-m-d', strtotime("+1 day", strtotime($from)));
             $to = date('Y-m-d', strtotime("-1 week", strtotime($to)));
             //$to = date('Y-m-d', strtotime("1 day", strtotime($from)));
-            $result['data_weekly'] = $this->Admin_model->getAccounts($from, $to);
+            $result['data_weekly'] = $this->Admin_model->getAccounts($from, $monday);
             
             //die;
             $from = date('Y-m-d');
@@ -1377,12 +1379,25 @@ class Admin extends CI_Controller
            // echo "<pre>";
            // print_r($result); die;        
                 
+            $monday = date( 'Y-m-d', strtotime( 'monday this week' ) );
+            $sunday = date( 'Y-m-d', strtotime( 'sunday this week' ) );
+
+            $first_day =date( 'Y-m-d', strtotime( 'first day of this month' ) );
+            $last_day =date( 'Y-m-d', strtotime( 'last day of this month' ) );
+
+            $first_week_last = date('Y-m-d', strtotime("+7 day", strtotime($first_day)));
+
+            $first_week = $first_day .' TO '.$first_week_last;
+
+            $second_week_last = date('Y-m-d', strtotime("+7 day", strtotime($first_week_last)));
+
+            //echo $second_week = $first_week_last .' TO '.$second_week_last; die;
 
             $from = date('Y-m-d');
             $to = date('Y-m-d', strtotime("+1 day", strtotime($from)));
             $to = date('Y-m-d', strtotime("-1 week", strtotime($to)));
             //$to = date('Y-m-d', strtotime("1 day", strtotime($from)));
-            $result['data_weekly'] = $this->Admin_model->getAccountsDealer($from, $to);
+            $result['data_weekly'] = $this->Admin_model->getAccountsDealer($from, $monday);
             
             //die;
             $from = date('Y-m-d');
@@ -1391,6 +1406,42 @@ class Admin extends CI_Controller
             $result['data_monthly'] = $this->Admin_model->getAccountsDealer($from, $to);
 
             $this->load->view('admin/accounts_dealer', $result);
+        }
+        
+    }
+
+    public function accountsPlayer()
+    {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('auth/login', 'refresh');
+        }    
+        else{
+            //if(isset($_GET['week'])){
+                //$from = date('Y-m-d');
+                $to = date('Y-m-d');
+                $from = date('Y-m-d');
+               // $result['data_daily'] = $this->Admin_model->getAccountsPlayer($from, $to);
+                
+               // echo "<pre>";
+               // print_r($result); die;        
+                    
+                $monday = date( 'Y-m-d', strtotime( 'monday this week' ) );
+                $sunday = date( 'Y-m-d', strtotime( 'sunday this week' ) );
+
+                $from = date('Y-m-d');
+                $to = date('Y-m-d', strtotime("+1 day", strtotime($from)));
+                $to = date('Y-m-d', strtotime("-1 week", strtotime($to)));
+                //$to = date('Y-m-d', strtotime("1 day", strtotime($from)));
+                $result['data_weekly'] = $this->Admin_model->getAccountsPlayer($from, $monday);
+                
+                //die;
+                $from = date('Y-m-d');
+                $to = date('Y-m-d', strtotime("-1 month", strtotime($from)));
+                $from = date('Y-m-d', strtotime("1 day", strtotime($from)));
+                //$result['data_monthly'] = $this->Admin_model->getAccountsPlayer($from, $to);
+
+                $this->load->view('admin/accounts_player', $result);
+            //}    
         }
         
     }

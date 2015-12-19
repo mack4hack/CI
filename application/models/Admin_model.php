@@ -885,4 +885,82 @@ function delete_dealer($id)
 	    return $data;
 	}
 
+	function getAccountsPlayer($from,$to)
+	{
+		//if(isset($_GET['dealer_id'])){
+			$this->db->select('timeslot,id');
+	     	$this->db->from('player_history');
+	     	$where = '(timeslot BETWEEN "'.$to.'" AND  "'.$from.'")';
+		    $this->db->where($where);
+		    //$this->db->where('dealer_id','13');
+		    $query=$this->db->get();
+		    // echo($this->db->last_query());  die;
+		    $players =  $query->result();
+
+		    $i=1;
+		    foreach ($players as $player) {
+		    	
+		    	$to = $to.' 00:00:00'; 
+		    	$from = $from.' 23:59:59'; 
+
+		    	$this->db->select('sum(bet_amount) as bet_amount');
+				$this->db->from('dealer_history');
+				$this->db->where('bet_amount >= 0');
+				$where = 'player_id = "'.$player->id.'" AND (timeslot BETWEEN "'.$to.'" AND  "'.$from.'")';
+				$this->db->where($where);
+				$query=$this->db->get()->row();
+				$bet_amount = 0;
+				 // echo($this->db->last_query());  die;
+				if($query){
+					$bet_amount = $query->bet_amount;
+				}
+
+				$this->db->select('sum(commission) as commission');
+				$this->db->from('dealer_history');
+				$this->db->where('bet_amount >= 0');
+				$where = 'player_id = "'.$player->id.'" AND (timeslot BETWEEN "'.$to.'" AND  "'.$from.'")';
+				$this->db->where($where);
+				$query=$this->db->get()->row();
+				$commission = 0;
+				//echo($this->db->last_query()); 
+				if($query){
+					$commission = $query->commission;
+				}
+
+				$this->db->select('sum(payout) as payout');
+				$this->db->from('player_history');
+				$this->db->where('result','1');
+				$where = 'player_id = "'.$player->id.'" AND (timeslot BETWEEN "'.$to.'" AND  "'.$from.'")';
+				$this->db->where($where);
+				$query=$this->db->get()->row();
+				$payout = 0;
+				// echo($this->db->last_query()); die;
+				if($query){
+					$payout = $query->payout;
+				}	
+
+				$balance = $bet_amount - $payout - $commission;
+
+				$data[]= array(
+				   			'sr_no' => $i,
+				   			'user_code'=>$player->user_code,
+				   			'bet_amount'=>$bet_amount,
+				   			'payout'=>$payout,
+				   			'commission'=>$commission,
+				   			//'total'=>$total,
+				   			'week' => date('d-m-Y',strtotime($to)) .' To '.date('d-m-Y',strtotime($from)),
+				   			'month' => date('M-Y'),
+				   			'balance'=>$balance,
+				   			//'draw_time'=>  $timeslot['timeslot'], // date('d-m-y',strtotime($timeslot['timeslot'])).'  '.date('h:i a',strtotime($draw_time['1'])),
+				   			//'balance'=>$credited -($debited + $commission)
+				   		);
+				$i++;
+		    }
+		//}
+	   // print_r($data);
+	   // die;
+
+	    return $data;
+	}
+
 }

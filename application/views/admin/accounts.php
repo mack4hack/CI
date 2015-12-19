@@ -4,7 +4,7 @@
     <div class="page-content">
         <!-- BEGIN PAGE HEADER-->
         <h3 class="page-title">
-        Accounts
+        Dealer wise Account
         </h3>
         <!-- END PAGE HEADER-->
         <!-- BEGIN PAGE CONTENT-->
@@ -52,7 +52,7 @@
                                                     Dealer Code
                                                 </th>
                                                 <th>
-                                                    Bet Amount
+                                                    Bet Chips
                                                 </th>
                                                 <th>
                                                     Debit
@@ -98,7 +98,7 @@
                                                     Dealer Code
                                                 </th>
                                                 <th>
-                                                    Bet Amount
+                                                    Bet Chips
                                                 </th>
                                                 <th>
                                                     Debit
@@ -144,7 +144,7 @@
                                                     Dealer Code
                                                 </th>
                                                 <th>
-                                                    Bet Amount
+                                                    Bet Chips
                                                 </th>
                                                 <th>
                                                     Debit
