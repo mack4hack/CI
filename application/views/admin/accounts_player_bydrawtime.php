@@ -36,7 +36,7 @@
                                                     Sr No
                                                 </th>
                                                 <th>
-                                                    Date
+                                                    Transaction No.
                                                 </th>
                                                 <th>
                                                     Total Chips
@@ -44,30 +44,26 @@
                                                 <th>
                                                     Total Payout
                                                 </th>
-                                                <th>
-                                                    Commission
-                                                </th>
-                                                <th>
+                                                <!-- <th>
                                                     Balance
-                                                </th>
+                                                </th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php if(!empty($data_weekly)  ) {
-                                            foreach($data_weekly as $dw){  ?>
+                                            foreach($data_weekly as $dw){ $transaction_id = $dw['transaction_id']; ?>
                                             <tr class="success">
                                                 <td><?php echo $dw['sr_no']; ?></td>
-                                                <td><?php echo $dw['date']; ?></td>
+                                                <td><a href="<?php echo base_url("/admin/accountsplayerbytransactionid?transaction_id=$transaction_id") ?>"> <?php echo $dw['transaction_id']; ?></a></td>
                                                 <td><?php echo $dw['bet_amount']; ?></td>
                                                 <td><?php echo $dw['payout']; ?></td>
-                                                <td><?php echo $dw['commission']; ?></td>
-                                                <td><?php echo $dw['balance']; ?></td>
+                                                <!-- <td><?php echo $dw['balance']; ?></td> -->
                                             <!--<td><?php //echo $draw['profit']; ?></td>-->
                                             </tr>
                                             <?php    } ?>
-                                            <tr><td>Total</td><td></td><td><?php echo $dw['total_bet']; ?></td><td><?php echo $dw['total_wins']; ?></td><td><?php echo $dw['total_commission']; ?></td><td><?php echo $dw['total_balance']; ?></td></tr>
+                                            <tr><td>Total</td><td></td><td><?php echo $dw['total_bet']; ?></td><td><?php echo $dw['total_wins']; ?></td></tr>
                                         <?php    }else{ ?>
-                                            <tr class='active'><th style='text-align:center'; colspan='6'>No Records Found</th></tr>
+                                            <tr class='active'><th style='text-align:center'; colspan='4'>No Records Found</th></tr>
                                             <?php  } ?>
                                         </tbody>
                                     </table>

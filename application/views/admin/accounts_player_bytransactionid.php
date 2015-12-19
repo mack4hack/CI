@@ -15,7 +15,7 @@
                 <div class="portlet box blue">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-gift"></i>Player Code : <?php  echo $_GET['player_id']; ?>
+                            <i class="fa fa-gift"></i>Transaction No : <?php  echo $_GET['transaction_id']; ?>
                         </div>
                         <div class="tools">
                             <a href="javascript:;" class="collapse">
@@ -36,7 +36,7 @@
                                                     Sr No
                                                 </th>
                                                 <th>
-                                                    Date
+                                                    Transaction No.
                                                 </th>
                                                 <th>
                                                     Total Chips
@@ -44,12 +44,9 @@
                                                 <th>
                                                     Total Payout
                                                 </th>
-                                                <th>
-                                                    Commission
-                                                </th>
-                                                <th>
+                                                <!-- <th>
                                                     Balance
-                                                </th>
+                                                </th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -57,17 +54,16 @@
                                             foreach($data_weekly as $dw){  ?>
                                             <tr class="success">
                                                 <td><?php echo $dw['sr_no']; ?></td>
-                                                <td><?php echo $dw['date']; ?></td>
+                                                <td><?php echo $dw['transaction_id']; ?></td>
                                                 <td><?php echo $dw['bet_amount']; ?></td>
                                                 <td><?php echo $dw['payout']; ?></td>
-                                                <td><?php echo $dw['commission']; ?></td>
-                                                <td><?php echo $dw['balance']; ?></td>
+                                                <!-- <td><?php echo $dw['balance']; ?></td> -->
                                             <!--<td><?php //echo $draw['profit']; ?></td>-->
                                             </tr>
                                             <?php    } ?>
-                                            <tr><td>Total</td><td></td><td><?php echo $dw['total_bet']; ?></td><td><?php echo $dw['total_wins']; ?></td><td><?php echo $dw['total_commission']; ?></td><td><?php echo $dw['total_balance']; ?></td></tr>
+                                            <tr><td>Total</td><td></td><td><?php echo $dw['total_bet']; ?></td><td><?php echo $dw['total_wins']; ?></td></tr>
                                         <?php    }else{ ?>
-                                            <tr class='active'><th style='text-align:center'; colspan='6'>No Records Found</th></tr>
+                                            <tr class='active'><th style='text-align:center'; colspan='4'>No Records Found</th></tr>
                                             <?php  } ?>
                                         </tbody>
                                     </table>

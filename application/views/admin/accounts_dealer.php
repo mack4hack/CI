@@ -78,7 +78,7 @@
                                             <!--<td><?php //echo $draw['profit']; ?></td>-->
                                             </tr>
                                             <?php    } ?>
-                                            <tr><td colspan="6">Total</td></tr>
+                                            <tr><td>Total</td><td></td><td><?php echo $dd['total_bet']; ?></td><td><?php echo $dd['total_wins']; ?></td><td><?php echo $dd['total_commission']; ?></td><td><?php echo $dd['total_balance']; ?></td></tr>
                                         <?php    }else{ ?>
                                             <tr class='active'><th style='text-align:center'; colspan='6'>No Records Found</th></tr>
                                             <?php  } ?>
@@ -124,7 +124,7 @@
                                             <!--<td><?php //echo $draw['profit']; ?></td>-->
                                             </tr>
                                             <?php    } ?>
-                                            <tr><td colspan="6">Total</td></tr>
+                                            <tr><td>Total</td><td></td><td><?php echo $dw['total_bet']; ?></td><td><?php echo $dw['total_wins']; ?></td><td><?php echo $dw['total_commission']; ?></td><td><?php echo $dw['total_balance']; ?></td></tr>
                                         <?php    }else{ ?>
                                             <tr class='active'><th style='text-align:center'; colspan='6'>No Records Found</th></tr>
                                             <?php  } ?>
@@ -170,7 +170,7 @@
                                             <!--<td><?php //echo $draw['profit']; ?></td>-->
                                             </tr>
                                              <?php    } ?>
-                                            <tr><td colspan="6">Total</td></tr>
+                                            <tr><td>Total</td><td></td><td><?php echo $dm['total_bet']; ?></td><td><?php echo $dm['total_wins']; ?></td><td><?php echo $dm['total_commission']; ?></td><td><?php echo $dm['total_balance']; ?></td></tr>
                                         <?php    }else{ ?>
                                             <tr class='active'><th style='text-align:center'; colspan='6'>No Records Found</th></tr>
                                             <?php  } ?>
