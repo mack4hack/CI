@@ -15,7 +15,7 @@
                 <div class="portlet box blue">
                     <div class="portlet-title">
                         <div class="caption">
-                            <i class="fa fa-gift"></i>Player Code : <?php  echo $_GET['player_id']; ?>
+                            <i class="fa fa-gift"></i>Player Code : <?php foreach($data_weekly as $dw){ $player_id = $dw['user_code']; break; }  echo $player_id; ?>
                         </div>
                         <div class="tools">
                             <a href="javascript:;" class="collapse">

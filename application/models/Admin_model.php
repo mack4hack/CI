@@ -922,14 +922,11 @@ function delete_dealer($id)
 	{
 			$player_id = $_GET['player_id'];
 			//if(isset($_GET['dealer_id'])){
-			/*$this->db->select('timeslot,player_id');
-	     	$this->db->from('player_history');
-	     	$where = 'player_id = "'.$player_id.'" AND (timeslot BETWEEN "'.$to.'" AND  "'.$from.'")';
-		    $this->db->where($where);
-		    //$this->db->where('dealer_id','13');
-		    $query=$this->db->get();
-		    echo($this->db->last_query());  die;
-		    $players =  $query->result();*/
+			$this->db->select('user_code');
+	     	$this->db->from('user_master');
+		    $this->db->where('id',$player_id);
+		    $query=$this->db->get()->row();;
+		    $user_code =  $query->user_code;
 
 		    $i=1;
 
@@ -1006,6 +1003,7 @@ function delete_dealer($id)
 				$total_commission = $total_commission + $commission;
 				$data[]= array(
 				   			'sr_no' => $i,
+				   			'user_code' => $user_code,
 				   			'date'=>$day,
 				   			'bet_amount'=>$bet_amount,
 				   			'payout'=>$payout,
@@ -1034,6 +1032,12 @@ function delete_dealer($id)
 			
 		$data = array();
 		
+		$this->db->select('user_code');
+     	$this->db->from('user_master');
+	    $this->db->where('id',$player_id);
+	    $query=$this->db->get()->row();;
+	    $user_code =  $query->user_code;
+
 	   	$timeslot_id = 1; 
 	   	for ($i = 0 * 60; $i < 24 * 60; $i+= 15) {
             $hr = floor($i / 60);
@@ -1093,6 +1097,7 @@ function delete_dealer($id)
 
 			   	$data[]= array(
 			   			'sr_no' => $i,
+			   			'user_code' => $user_code,
 			   			'bet_amount'=>$chips,
 			   			'payout'=>$win,
 			   			'balance'=>$balance,
@@ -1128,6 +1133,12 @@ function delete_dealer($id)
 
         //echo "<pre>";
 	    //	print_r($timeslots); die;
+
+	    $this->db->select('user_code');
+     	$this->db->from('user_master');
+	    $this->db->where('id',$player_id);
+	    $query=$this->db->get()->row();;
+	    $user_code =  $query->user_code;
 
         $total_bet = 0 ;
 		$total_wins = 0;
@@ -1170,6 +1181,7 @@ function delete_dealer($id)
 
 			   	$data[]= array(
 			   			'sr_no' => $i,
+			   			'user_code' => $user_code,
 			   			'bet_amount'=>$chips,
 			   			'payout'=>$win,
 			   			'transaction_id'=>$record->transaction_id,
