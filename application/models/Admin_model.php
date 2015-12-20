@@ -920,7 +920,9 @@ function delete_dealer($id)
 
 		    $i=1;
 
-		    $day = date('w', strtotime('-1 day'));
+		    date_default_timezone_set("Asia/Calcutta");
+
+		     $day = date('w', strtotime('-1 day'));
 			 $week_first_day = date('Y-m-d', strtotime('-'.$day.' days'));
 			 $week_second_day = date('Y-m-d', strtotime('-'.(11-$day).' days'));
 			 $week_third_day = date('Y-m-d', strtotime('-'.(10-$day).' days'));
