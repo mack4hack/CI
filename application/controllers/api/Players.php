@@ -19,6 +19,7 @@
 		    $this->methods['player_delete']['limit'] = 50; // 50 requests per hour per user/key
 		    $this->load->database(); // load database
 		    $this->load->model('Admin_model'); // load model
+		    $this->load->model('bets_model'); // load model
 		    $this->load->library('ion_auth');
 		}	
 
@@ -297,7 +298,7 @@
 		{
 			$player_id = $_GET['player_id'];
                                                       $date = $_GET['date'];
-                                                      $result['data_weekly'] = $this->Admin_model->getAccountsPlayerByDate($player_id,$date);
+                                                      $result['data_weekly'] = $this->bets_model->getAccountsPlayerByDate($player_id,$date);
 			if(!empty($result))
 			{
 				$this->response([
@@ -331,7 +332,7 @@
 			$player_id = $_GET['player_id'];
                                                       $date = $_GET['date'];
                                                       $draw_time = $_GET['draw_time'];
-                                                      $result['data_weekly'] = $this->Admin_model->getAccountsPlayerByDrawTime($player_id,$date,$draw_time);
+                                                      $result['data_weekly'] = $this->bets_model->getAccountsPlayerByDrawTime($player_id,$date,$draw_time);
 			if(!empty($result))
 			{
 				$this->response([
@@ -367,7 +368,7 @@
                 if(isset($_GET['transaction_id']))
 		{
 			$transaction_id = $_GET['transaction_id'];
-                                                      $result['data_weekly'] = $this->Admin_model->getAccountsPlayerByTransactionId($transaction_id);
+                                                      $result['data_weekly'] = $this->bets_model->getAccountsPlayerByTransactionId($transaction_id);
 			if(!empty($result))
 			{
 				$this->response([
