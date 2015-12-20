@@ -113,10 +113,10 @@
                                         </thead>
                                         <tbody>
                                             <?php if(!empty($data_weekly)  ) {
-                                            foreach($data_weekly as $dw){  ?>
+                                            foreach($data_weekly as $dw){ $dealer_id = $dw['dealer_id']; ?>
                                              <tr class="success">
                                                 <td><?php echo $dw['sr_no']; ?></td>
-                                                <td><?php echo $dw['user_code']; ?></td>
+                                                <td><a href="<?php echo base_url("/admin/accountsdealer?dealer_id=$dealer_id") ?>"><?php echo $dw['user_code']; ?></td>
                                                 <td><?php echo $dw['bet_amount']; ?></td>
                                                 <td><?php echo $dw['payout']; ?></td>
                                                 <td><?php echo $dw['commission']; ?></td>
@@ -159,10 +159,10 @@
                                         </thead>
                                         <tbody>
                                             <?php if(!empty($data_monthly)  ) {
-                                            foreach($data_monthly as $dm){  ?>
+                                            foreach($data_monthly as $dm){ $dealer_id = $dm['dealer_id']; ?>
                                              <tr class="success">
                                                 <td><?php echo $dm['sr_no']; ?></td>
-                                                <td><?php echo $dm['user_code']; ?></td>
+                                                <td><a href="<?php echo base_url("/admin/accountsdealer?dealer_id=$dealer_id") ?>"><?php echo $dm['user_code']; ?></td>
                                                 <td><?php echo $dm['bet_amount']; ?></td>
                                                 <td><?php echo $dm['payout']; ?></td>
                                                 <td><?php echo $dm['commission']; ?></td>
