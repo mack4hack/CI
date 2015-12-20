@@ -4,7 +4,7 @@
     <div class="page-content">
         <!-- BEGIN PAGE HEADER-->
         <h3 class="page-title">
-        Player Account Of Week
+        Player Account Of A Day
         </h3>
         <!-- END PAGE HEADER-->
         <!-- BEGIN PAGE CONTENT-->

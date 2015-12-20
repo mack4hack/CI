@@ -4,7 +4,7 @@
     <div class="page-content">
         <!-- BEGIN PAGE HEADER-->
         <h3 class="page-title">
-        Accounts
+        Players wise Account
         </h3>
         <!-- END PAGE HEADER-->
         <!-- BEGIN PAGE CONTENT-->

@@ -1047,7 +1047,7 @@ function delete_dealer($id)
             $newTime = date("h:i a", strtotime($start . " +15 minutes"));
             
             //$time_slots[] = $start." To ".$newTime;
-            if(strtotime($newTime) < strtotime(date('h:i a')))
+            //if(strtotime($newTime) < strtotime(date('h:i a')))
             	$timeslots[] = array('timeslot_id' => $timeslot_id, 'timeslot' => $newTime,);
             $timeslot_id++;
         }
