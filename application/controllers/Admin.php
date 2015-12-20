@@ -1371,10 +1371,11 @@ class Admin extends CI_Controller
         }    
         else{
 
+            $dealer_id = $_GET['dealer_id'];
             //$from = date('Y-m-d');
             $to = date('Y-m-d');
             $from = date('Y-m-d');
-            $result['data_daily'] = $this->Admin_model->getAccountsDealer($from, $to);
+            $result['data_daily'] = $this->Admin_model->getAccountsDealer($from, $to, $dealer_id);
             
            // echo "<pre>";
            // print_r($result); die;        
@@ -1397,13 +1398,18 @@ class Admin extends CI_Controller
             $to = date('Y-m-d', strtotime("+1 day", strtotime($from)));
             $to = date('Y-m-d', strtotime("-1 week", strtotime($to)));
             //$to = date('Y-m-d', strtotime("1 day", strtotime($from)));
-            $result['data_weekly'] = $this->Admin_model->getAccountsDealer($from, $monday);
+
+             if(strtotime($monday) > strtotime($from)){
+                $monday = date( 'Y-m-d', strtotime( '-6 day' ) );
+            }
+
+            $result['data_weekly'] = $this->Admin_model->getAccountsDealer($from, $monday, $dealer_id);
             
             //die;
             $from = date('Y-m-d');
             $to = date('Y-m-d', strtotime("-1 month", strtotime($from)));
             $from = date('Y-m-d', strtotime("1 day", strtotime($from)));
-            $result['data_monthly'] = $this->Admin_model->getAccountsDealer($from, $to);
+            $result['data_monthly'] = $this->Admin_model->getAccountsDealer($from, $to, $dealer_id);
 
             $this->load->view('admin/accounts_dealer', $result);
         }

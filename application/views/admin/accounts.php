@@ -67,10 +67,10 @@
                                         </thead>
                                         <tbody>
                                             <?php if(!empty($data_daily)  ) {
-                                            foreach($data_daily as $dd){  ?>
+                                            foreach($data_daily as $dd){ $dealer_id = $dd['dealer_id'];  ?>
                                             <tr class="success">
                                                 <td><?php echo $dd['sr_no']; ?></td>
-                                                <td><?php echo $dd['user_code']; ?></td>
+                                                <td><a href="<?php echo base_url("/admin/accountsdealer?dealer_id=$dealer_id") ?>"><?php echo $dd['user_code']; ?></td>
                                                 <td><?php echo $dd['bet_amount']; ?></td>
                                                 <td><?php echo $dd['payout']; ?></td>
                                                 <td><?php echo $dd['commission']; ?></td>

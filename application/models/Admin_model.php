@@ -791,6 +791,7 @@ function delete_dealer($id)
 			$data[]= array(
 			   			'sr_no' => $i,
 			   			'user_code'=>$dealer->user_code,
+			   			'dealer_id'=>$dealer->id,
 			   			'bet_amount'=>$bet_amount,
 			   			'payout'=>$payout,
 			   			'commission'=>$commission,
@@ -809,14 +810,16 @@ function delete_dealer($id)
 
 	    return $data;
 	}
-	function getAccountsDealer($from,$to)
+	function getAccountsDealer($from,$to , $dealer_id)
 	{
 		//if(isset($_GET['dealer_id'])){
-			$this->db->select('user_code,id');
+			$this->db->select('user_code,user_master.id');
 	     	$this->db->from('user_master');
 		    $this->db->where('role_id','3');
-		    //$this->db->where('dealer_id','13');
+		    $this->db->where('dealer_id',$dealer_id);
+		    $this->db->join('dealer_player', 'dealer_player.player_id = user_master.id');
 		    $query=$this->db->get();
+		     // echo($this->db->last_query());  die;
 		    $players =  $query->result();
 
 		    $i=1;
@@ -825,6 +828,8 @@ function delete_dealer($id)
 			$total_wins = 0;
 			$total_balance = 0;
 			$total_commission = 0;
+
+			$data = array();
 
 		    foreach ($players as $player) {
 		    	
@@ -876,6 +881,7 @@ function delete_dealer($id)
 				$data[]= array(
 				   			'sr_no' => $i,
 				   			'user_code'=>$player->user_code,
+				   			'player_id'=>$player->id,
 				   			'bet_amount'=>$bet_amount,
 				   			'payout'=>$payout,
 				   			'commission'=>$commission,
@@ -916,19 +922,19 @@ function delete_dealer($id)
 
 		    $day = date('w', strtotime('-1 day'));
 			 $week_first_day = date('Y-m-d', strtotime('-'.$day.' days'));
-			 $week_second_day = date('Y-m-d', strtotime('-'.(9-$day).' days'));
-			 $week_third_day = date('Y-m-d', strtotime('-'.(8-$day).' days'));
-			 $week_fourth_day = date('Y-m-d', strtotime('-'.(7-$day).' days'));
-			 $week_fifth_day = date('Y-m-d', strtotime('-'.(6-$day).' days'));
-			 $week_sixth_day = date('Y-m-d', strtotime('-'.(5-$day).' days'));
+			 $week_second_day = date('Y-m-d', strtotime('-'.(11-$day).' days'));
+			 $week_third_day = date('Y-m-d', strtotime('-'.(10-$day).' days'));
+			 $week_fourth_day = date('Y-m-d', strtotime('-'.(9-$day).' days'));
+			 $week_fifth_day = date('Y-m-d', strtotime('-'.(8-$day).' days'));
+			 $week_sixth_day = date('Y-m-d', strtotime('-'.(7-$day).' days'));
 			 $week_seventh_day = date('Y-m-d', strtotime('+'.(6-$day).' days'));
 			//die;
 
 			$week_days = array($week_first_day,$week_second_day,$week_third_day,
 								$week_fourth_day,$week_fifth_day,$week_sixth_day,$week_seventh_day,);
 
-			//	echo "<pre>";
-			//	print_r($week_days); die;
+				/*echo "<pre>";
+				print_r($week_days); die;*/
 			$total_bet = 0 ;
 			$total_wins = 0;
 			$total_balance = 0;
