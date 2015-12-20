@@ -291,7 +291,111 @@
 	}
 
 		
-   
+                     function accountsPlayerByDate_get()
+                        {
+                                    if(isset($_GET['player_id'])  && isset($_GET['date']))
+		{
+			$player_id = $_GET['player_id'];
+                                                      $date = $_GET['date'];
+                                                      $result['data_weekly'] = $this->Admin_model->getAccountsPlayerByDate($player_id,$date);
+			if(!empty($result))
+			{
+				$this->response([
+				'status' => TRUE,
+				'data' => $result
+				], REST_Controller::HTTP_OK);
+			}
+			else{   
+				$this->response([
+					'status' => FALSE,
+					'message' => 'No Data Found!!!'
+				], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+			}
+		}
+		else{   
+			$this->response([
+				'status' => FALSE,
+				'message' => 'Player Id and Date required!!!'
+			], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+		}
+                                    
+
+                        
+                        }
+
+             function accountsPlayerByDrawTime_get()
+            {
+
+                         if(isset($_GET['player_id'])  && isset($_GET['date']) && isset($_GET['draw_time']))
+		{
+			$player_id = $_GET['player_id'];
+                                                      $date = $_GET['date'];
+                                                      $draw_time = $_GET['draw_time'];
+                                                      $result['data_weekly'] = $this->Admin_model->getAccountsPlayerByDrawTime($player_id,$date,$draw_time);
+			if(!empty($result))
+			{
+				$this->response([
+				'status' => TRUE,
+				'data' => $result
+				], REST_Controller::HTTP_OK);
+			}
+			else{   
+				$this->response([
+					'status' => FALSE,
+					'message' => 'No Data Found!!!'
+				], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+			}
+		}
+		else{   
+			$this->response([
+				'status' => FALSE,
+				'message' => 'Player Id and Date required!!!'
+			], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+		}
+                                    
+                        
+
+                        
+
+                       
+
+            }
+
+       function accountsPlayerByTransactionId_get()
+      {
+        
+                if(isset($_GET['transaction_id']))
+		{
+			$transaction_id = $_GET['transaction_id'];
+                                                      $result['data_weekly'] = $this->Admin_model->getAccountsPlayerByTransactionId($transaction_id);
+			if(!empty($result))
+			{
+				$this->response([
+				'status' => TRUE,
+				'data' => $result
+				], REST_Controller::HTTP_OK);
+			}
+			else{   
+				$this->response([
+					'status' => FALSE,
+					'message' => 'No Data Found!!!'
+				], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+			}
+		}
+		else{   
+			$this->response([
+				'status' => FALSE,
+				'message' => 'Player Id and Date required!!!'
+			], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+		}           
+                
+               
+                
+                
+        
+        }
+        
+    
     
    
     
