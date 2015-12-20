@@ -400,7 +400,8 @@ function delete_dealer($id)
 
      	function getTimeslotById($id)
      	{
-         	$this->db->select('timeslot');
+         	                  
+                                    $this->db->select('timeslot');
 	     	$this->db->from('timeslots');
 	      	$this->db->where('timeslot_id',$id);
 	      	$query=$this->db->get()->row();
