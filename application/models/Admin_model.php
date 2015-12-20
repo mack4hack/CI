@@ -729,6 +729,11 @@ function delete_dealer($id)
 	    $dealers =  $query->result();
 
 	    $i=1;
+	    $total_bet = 0 ;
+		$total_wins = 0;
+		$total_balance = 0;
+		$total_commission = 0;
+
 	    foreach ($dealers as $dealer) {
 	    	
 	    	$this->db->select('sum(bet_amount) as bet_amount');
@@ -787,6 +792,10 @@ function delete_dealer($id)
 
 
 			$balance = $bet_amount - $payout - $commission;
+			$total_bet = $total_bet+$bet_amount;
+			$total_wins = $total_wins+$payout;
+			$total_balance = $total_balance+$balance;
+			$total_commission = $total_commission + $commission;
 
 			$data[]= array(
 			   			'sr_no' => $i,
@@ -799,6 +808,10 @@ function delete_dealer($id)
 			   			'week' => date('d-m-Y',strtotime($to)) .' To '.date('d-m-Y',strtotime($from)),
 			   			'month' => date('M-Y'),
 			   			'balance'=>$balance,
+			   			'total_bet'=>$total_bet,
+			   			'total_wins'=>$total_wins,
+			   			'total_balance'=>$total_balance,
+			   			'total_commission'=>$total_commission,
 			   			//'draw_time'=>  $timeslot['timeslot'], // date('d-m-y',strtotime($timeslot['timeslot'])).'  '.date('h:i a',strtotime($draw_time['1'])),
 			   			//'balance'=>$credited -($debited + $commission)
 			   		);
