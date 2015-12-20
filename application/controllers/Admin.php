@@ -1346,6 +1346,11 @@ class Admin extends CI_Controller
             $to = date('Y-m-d', strtotime("+1 day", strtotime($from)));
             $to = date('Y-m-d', strtotime("-1 week", strtotime($to)));
             //$to = date('Y-m-d', strtotime("1 day", strtotime($from)));
+
+            if(strtotime($monday) > strtotime($from)){
+                $monday = date( 'Y-m-d', strtotime( '-6 day' ) );
+            }
+            
             $result['data_weekly'] = $this->Admin_model->getAccounts($from, $monday);
             
             //die;
@@ -1399,7 +1404,7 @@ class Admin extends CI_Controller
             $to = date('Y-m-d', strtotime("-1 week", strtotime($to)));
             //$to = date('Y-m-d', strtotime("1 day", strtotime($from)));
 
-             if(strtotime($monday) > strtotime($from)){
+            if(strtotime($monday) > strtotime($from)){
                 $monday = date( 'Y-m-d', strtotime( '-6 day' ) );
             }
 
