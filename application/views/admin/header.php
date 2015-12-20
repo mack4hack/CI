@@ -542,6 +542,13 @@ License: You must have a valid license purchased only from themeforest(the above
 					Block Player</span>
 					</a>
 				</li>
+				<li class="tooltips" data-container="body" data-placement="right" data-html="true" >
+					<a href="<?php echo base_url()?>admin/accounts" >
+					<i class="icon-bar-chart"></i>
+					<span class="title">
+					Accounts</span>
+					</a>
+				</li>
 				<!-- END ANGULARJS LINK -->
 				</ul>
 			<!-- END SIDEBAR MENU -->
