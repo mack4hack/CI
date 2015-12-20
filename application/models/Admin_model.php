@@ -1238,7 +1238,65 @@ function delete_dealer($id)
 				//echo $this->db->last_query(); die;
 				$win = $query->win;
 
-				
+				$this->db->select('first_digit');
+				$this->db->from('player_history');
+				$this->db->where('transaction_id',$record->transaction_id);
+				$this->db->where('game_type','1');
+				$query=$this->db->get()->row();
+				$first_digit ='';
+				if($query)
+					$first_digit = $query->first_digit;
+
+				$this->db->select('bet_amount');
+				$this->db->from('player_history');
+				$this->db->where('game_type','1');
+				$this->db->where('transaction_id',$record->transaction_id);
+				$query=$this->db->get()->row();
+				$bet_amount_first ='';
+				if($query)
+					$bet_amount_first = $query->bet_amount;
+
+				$this->db->select('payout');
+				$this->db->from('player_history');
+				$this->db->where('game_type','1');
+				$this->db->where('transaction_id',$record->transaction_id);
+				$this->db->where('result','1');
+				$query=$this->db->get()->row();
+				$win_amount_first = '';
+				if($query)
+					$win_amount_first = $query->payout;
+
+				$this->db->select('second_digit');
+				$this->db->from('player_history');
+				$this->db->where('game_type','2');
+				$this->db->where('transaction_id',$record->transaction_id);
+				$query=$this->db->get()->row();
+				$second_digit = '';
+				if($query)
+					$second_digit = $query->second_digit;
+
+				$this->db->select('bet_amount');
+				$this->db->from('player_history');
+				$this->db->where('game_type','2');
+				$this->db->where('transaction_id',$record->transaction_id);
+				$query=$this->db->get()->row();
+				$bet_amount_second ='';
+				if($query)
+					$bet_amount_second = $query->bet_amount;
+	    		// echo($this->db->last_query());  //die;
+
+
+				$this->db->select('payout');
+				$this->db->from('player_history');
+				$this->db->where('game_type','2');
+				$this->db->where('transaction_id',$record->transaction_id);
+				$this->db->where('result','1');
+				$query=$this->db->get()->row();
+				$win_amount_second ='';
+				if($query)
+					$win_amount_second = $query->payout;
+
+
 			   	$balance = $chips - $win;
 			   	$total_bet = $total_bet + $chips ;
 				$total_wins = $total_wins + $win;
@@ -1251,6 +1309,12 @@ function delete_dealer($id)
 			   			'transaction_id'=>$record->transaction_id,
 			   			'total_bet'=>$total_bet,
 			   			'total_wins'=>$total_wins,
+			   			'first_digit'=>$first_digit,
+			   			'bet_amount_first' =>$bet_amount_first,
+			   			'win_amount_first' =>$win_amount_first,
+			   			'second_digit'=>$second_digit,
+			   			'bet_amount_second' =>$bet_amount_second,
+			   			'win_amount_second' =>$win_amount_second,
 			   			//'total_balance'=>$total_balance,
 			   			//'draw_time'=>$timeslot['timeslot'],
 			   		);

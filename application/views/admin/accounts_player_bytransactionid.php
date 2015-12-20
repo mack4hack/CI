@@ -67,6 +67,176 @@
                                             <?php  } ?>
                                         </tbody>
                                     </table>
+                                    <div class="row">
+                                        <div class="col-md-12" >
+                                        <div class="portlet light bordered">
+                                        <div class="portlet-title">
+                                        <div class="caption">
+                                        <i class="icon-bar-chart font-green-haze"></i>
+                                        <span class="caption-subject bold uppercase font-green-haze">Single Digit First </span>
+                                        <!-- <span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $second_bets;  ?> ) </span> -->
+                                        </div>
+                                        <div class="caption" style="float:right;">
+
+                                        <!-- <span class="caption-subject bold uppercase font-green-haze"> Bet Amount</span> -->
+                                        <!-- <span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['bet_amount_second'];  ?> ) </span> -->
+                                        <!--                                                                            <span class="caption-subject bold uppercase font-green-haze"> Payout</span>
+                                        <span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['payout_second'];  ?> ) </span>-->
+                                        </div>
+
+
+                                        </div>
+                                        <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                        <th>
+                                        Digit
+                                        </th>
+                                        <?php for($i = 0 ;$i <= 9;$i++){ ?>
+
+                                        <th><?php echo $i ;?></th>
+                                        <?php   }?>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="active">
+                                        <td>
+                                        Total Chips
+                                        </td>
+                                        <?php for($i = 0 ; $i <= 9 ; $i++){ 
+                                        $count = false; 
+                                        foreach ($data_weekly as $dw ) { 
+                                        if($i == $dw['first_digit'] ){ 
+                                        $count = true; ?>
+                                        <td><?php echo $dw['bet_amount_first']; ?></td>
+
+                                        <?php } 
+
+                                        }
+                                        if($count == false){ ?>
+
+                                        <th></th>
+
+                                        <?php }
+
+                                        }  ?>
+
+                                        </tr>
+                                        <tr class="success">
+                                        <td>
+                                        Total Payouts
+                                        </td>
+                                        <?php for($i = 0 ; $i <= 9 ; $i++){ 
+                                        $count = false; 
+                                        foreach ($data_weekly as $dw ) { 
+                                        if($i == $dw['first_digit'] ){ 
+                                        $count = true; ?>
+                                        <td><?php echo $dw['win_amount_first']; ?></td>
+
+                                        <?php } 
+
+                                        }
+                                        if($count == false){ ?>
+
+                                        <th></th>
+
+                                        <?php }
+
+                                        }  ?>
+
+                                        </tr>
+                                        </tbody>
+                                        </table>    
+
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12" >
+                                        <div class="portlet light bordered">
+                                        <div class="portlet-title">
+                                        <div class="caption">
+                                        <i class="icon-bar-chart font-green-haze"></i>
+                                        <span class="caption-subject bold uppercase font-green-haze">Single Digit Second </span>
+                                        <!-- <span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $second_bets;  ?> ) </span> -->
+                                        </div>
+                                        <div class="caption" style="float:right;">
+
+                                        <!-- <span class="caption-subject bold uppercase font-green-haze"> Bet Amount</span> -->
+                                        <!-- <span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['bet_amount_second'];  ?> ) </span> -->
+                                        <!--                                                                            <span class="caption-subject bold uppercase font-green-haze"> Payout</span>
+                                        <span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['payout_second'];  ?> ) </span>-->
+                                        </div>
+
+
+                                        </div>
+                                        <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                        <th>
+                                        Digit
+                                        </th>
+                                        <?php for($i = 0 ;$i <= 9;$i++){ ?>
+
+                                        <th><?php echo $i ;?></th>
+                                        <?php   }?>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="active">
+                                        <td>
+                                        Total Chips
+                                        </td>
+                                        <?php for($i = 0 ; $i <= 9 ; $i++){ 
+                                        $count = false; 
+                                        foreach ($data_weekly as $dw ) { 
+                                        if($i == $dw['second_digit'] ){ 
+                                        $count = true; ?>
+                                        <td><?php echo $dw['bet_amount_second']; ?></td>
+
+                                        <?php } 
+
+                                        }
+                                        if($count == false){ ?>
+
+                                        <th></th>
+
+                                        <?php }
+
+                                        }  ?>
+
+                                        </tr>
+                                        <tr class="success">
+                                        <td>
+                                        Total Payouts
+                                        </td>
+                                        <?php for($i = 0 ; $i <= 9 ; $i++){ 
+                                        $count = false; 
+                                        foreach ($data_weekly as $dw ) { 
+                                        if($i == $dw['second_digit'] ){ 
+                                        $count = true; ?>
+                                        <td><?php echo $dw['win_amount_second']; ?></td>
+
+                                        <?php } 
+
+                                        }
+                                        if($count == false){ ?>
+
+                                        <th></th>
+
+                                        <?php }
+
+                                        }  ?>
+
+                                        </tr>
+                                        </tbody>
+                                        </table>    
+
+                                        </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
