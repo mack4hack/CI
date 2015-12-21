@@ -420,7 +420,7 @@ function delete_dealer($id)
                                     $deposited_amount = $query->deposited_amount;                 
                                     $sunday_amount = $query->sunday_amount;        
                                     
-                                    if(!empty($sunday_amount)){
+                                    if( $sunday_amount != 0.00){
                                         
 //                                             if($sunday_amount > $deposited_amount){
 //                                                 
