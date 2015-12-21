@@ -51,10 +51,12 @@
                                         </thead>
                                         <tbody>
                                             <?php if(!empty($data_weekly)  ) {
+                                                $draw_time = $_GET['draw_time']; 
+                                                $date = $_GET['date']; 
                                             foreach($data_weekly as $dw){ $transaction_id = $dw['transaction_id']; ?>
                                             <tr class="success">
                                                 <td><?php echo $dw['sr_no']; ?></td>
-                                                <td><a href="<?php echo base_url("/admin/accountsplayerbytransactionid?transaction_id=$transaction_id") ?>"> <?php echo $dw['transaction_id']; ?></a></td>
+                                                <td><a href="<?php echo base_url("/admin/accountsplayerbytransactionid?transaction_id=$transaction_id&date=$date&draw_time=$draw_time") ?>"> <?php echo $dw['transaction_id']; ?></a></td>
                                                 <td><?php echo $dw['bet_amount']; ?></td>
                                                 <td><?php echo $dw['payout']; ?></td>
                                                 <!-- <td><?php echo $dw['balance']; ?></td> -->

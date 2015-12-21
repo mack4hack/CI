@@ -1486,11 +1486,11 @@ class Admin extends CI_Controller
         else{
             //if(isset($_GET['week'])){
                 //$player_id = $_GET['player_id'];
-                //$date = $_GET['date'];
-                //$draw_time = $_GET['draw_time'];
+                $date = $_GET['date'];
+                $draw_time = $_GET['draw_time'];
                 $transaction_id = $_GET['transaction_id'];
                
-                $result['data_weekly'] = $this->Admin_model->getAccountsPlayerByTransactionId($transaction_id);
+                $result['data_weekly'] = $this->Admin_model->getAccountsPlayerByTransactionId($transaction_id,$date,$draw_time);
                 
                 $this->load->view('admin/accounts_player_bytransactionid', $result);
             //}    

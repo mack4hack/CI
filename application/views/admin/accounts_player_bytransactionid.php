@@ -16,6 +16,10 @@
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="fa fa-gift"></i>Transaction No : <?php  echo $_GET['transaction_id']; ?>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            Draw Time : <?php if(!empty($data_weekly)) { foreach($data_weekly as $key => $dw){ echo $dw[0]['drawtime']; break;} }?>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            Lucky Number : <?php if(!empty($data_weekly)) { foreach($data_weekly as $key => $dw){ echo $dw[0]['lucky_number']; break;} }?>
                         </div>
                         <div class="tools">
                             <a href="javascript:;" class="collapse">
@@ -51,17 +55,17 @@
                                         </thead>
                                         <tbody>
                                             <?php if(!empty($data_weekly)  ) {
-                                            foreach($data_weekly as $dw){  ?>
+                                            foreach($data_weekly as $key => $dw){ ?>
                                             <tr class="success">
-                                                <td><?php echo $dw['sr_no']; ?></td>
-                                                <td><?php echo $dw['transaction_id']; ?></td>
-                                                <td><?php echo $dw['bet_amount']; ?></td>
-                                                <td><?php echo $dw['payout']; ?></td>
+                                                <td><?php echo 1; ?></td>
+                                                <td><?php echo $key; ?></td>
+                                                <td><?php echo $dw[0]['total_bet']; ?></td>
+                                                <td><?php echo $dw[0]['total_wins']; ?></td>
                                                 <!-- <td><?php echo $dw['balance']; ?></td> -->
                                             <!--<td><?php //echo $draw['profit']; ?></td>-->
                                             </tr>
                                             <?php    } ?>
-                                            <tr><td>Total</td><td></td><td><?php echo $dw['total_bet']; ?></td><td><?php echo $dw['total_wins']; ?></td></tr>
+                                            <tr><td>Total</td><td></td><td><?php echo $dw[0]['total_bet']; ?></td><td><?php echo $dw[0]['total_wins']; ?></td></tr>
                                         <?php    }else{ ?>
                                             <tr class='active'><th style='text-align:center'; colspan='4'>No Records Found</th></tr>
                                             <?php  } ?>
@@ -107,12 +111,12 @@
                                         <?php for($i = 0 ; $i <= 9 ; $i++){ 
                                         $count = false; 
                                         foreach ($data_weekly as $dw ) { 
-                                        if($i == $dw['first_digit'] ){ 
-                                        $count = true; ?>
-                                        <td><?php echo $dw['bet_amount_first']; ?></td>
-
-                                        <?php } 
-
+                                            foreach ($dw as $d) {
+                                                if($i == $d['first_digit'] ){ 
+                                                $count = true; ?>
+                                                <td><?php echo $d['chips']; ?></td>
+                                                <?php } 
+                                            }
                                         }
                                         if($count == false){ ?>
 
@@ -130,12 +134,12 @@
                                         <?php for($i = 0 ; $i <= 9 ; $i++){ 
                                         $count = false; 
                                         foreach ($data_weekly as $dw ) { 
-                                        if($i == $dw['first_digit'] ){ 
-                                        $count = true; ?>
-                                        <td><?php echo $dw['win_amount_first']; ?></td>
-
-                                        <?php } 
-
+                                            foreach ($dw as $d) {
+                                                if($i == $d['first_digit'] ){ 
+                                                $count = true; ?>
+                                                <td><?php echo $d['win']; ?></td>
+                                                <?php } 
+                                            }
                                         }
                                         if($count == false){ ?>
 
@@ -192,11 +196,12 @@
                                         <?php for($i = 0 ; $i <= 9 ; $i++){ 
                                         $count = false; 
                                         foreach ($data_weekly as $dw ) { 
-                                        if($i == $dw['second_digit'] ){ 
-                                        $count = true; ?>
-                                        <td><?php echo $dw['bet_amount_second']; ?></td>
-
-                                        <?php } 
+                                            foreach ($dw as $d) {
+                                                if($i == $d['second_digit'] ){ 
+                                                $count = true; ?>
+                                                <td><?php echo $d['chips']; ?></td>
+                                                <?php }
+                                            }     
 
                                         }
                                         if($count == false){ ?>
@@ -214,13 +219,13 @@
                                         </td>
                                         <?php for($i = 0 ; $i <= 9 ; $i++){ 
                                         $count = false; 
-                                        foreach ($data_weekly as $dw ) { 
-                                        if($i == $dw['second_digit'] ){ 
-                                        $count = true; ?>
-                                        <td><?php echo $dw['win_amount_second']; ?></td>
-
-                                        <?php } 
-
+                                        foreach ($data_weekly as $dw ) {
+                                            foreach ($dw as $d) { 
+                                                if($i == $d['second_digit'] ){ 
+                                                $count = true; ?>
+                                                <td><?php echo $d['win']; ?></td>
+                                                <?php } 
+                                           }     
                                         }
                                         if($count == false){ ?>
 
