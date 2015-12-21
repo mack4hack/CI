@@ -942,8 +942,16 @@ function delete_dealer($id)
 			 $week_seventh_day = date('Y-m-d', strtotime('+'.(6-$day).' days'));
 			//die;
 
-			$week_days = array($week_first_day,$week_second_day,$week_third_day,
-								$week_fourth_day,$week_fifth_day,$week_sixth_day,$week_seventh_day,);
+			$mon = date( 'Y-m-d', strtotime( 'monday this week' ) );
+			$tue = date( 'Y-m-d', strtotime( 'tuesday this week' ) );
+			$wed = date( 'Y-m-d', strtotime( 'wednesday this week' ) );
+			$thr = date( 'Y-m-d', strtotime( 'thursday this week' ) );
+			$fri = date( 'Y-m-d', strtotime( 'friday this week' ) );
+            $sat = date( 'Y-m-d', strtotime( 'saturday this week' ) );
+            $sun = date( 'Y-m-d', strtotime( 'sunday this week' ) );
+
+			$week_days = array($mon,$tue,$wed,
+								$thr,$fri,$sat,$sun,);
 
 				/*echo "<pre>";
 				print_r($week_days); die;*/
