@@ -6,10 +6,6 @@ $current_timestamp = $date->getTimestamp();
 	<!-- BEGIN CONTENT -->
 	<div class="page-content-wrapper">
 		<div class="page-content" >
-			
-			
-			
-
 			<div class="row">
 				  <div class="col-md-12">
 				    <div class="well margin-top-20">
@@ -39,13 +35,6 @@ $current_timestamp = $date->getTimestamp();
 			</div>				
 
             <div id="mack"></div>				
-								
-										
-					 
-
-
-
-
 			<!-- END PAGE HEADER-->
 			<!-- BEGIN PAGE CONTENT-->
 			
@@ -114,8 +103,4 @@ Demo.init(); // init demo features
  	    date = encodeURIComponent(date);
  	    $('#mack').load('<?php echo base_url("/admin/daysummaryslots?date="); ?>'+date,function () { });
     } 
-
-
-
-
 </script>
