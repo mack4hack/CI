@@ -25,6 +25,10 @@ class Bets extends REST_Controller
     
     public function PlaceBetFirst_post() {
       
+         
+           if( date("H:i:s") < "23:45:00"){
+        
+        
             $this->db->select('max(game_id) as game_id');
             $this->db->from('game_lottery');
             $query1 = $this->db->get()->row();
@@ -123,10 +127,16 @@ class Bets extends REST_Controller
              // NOT_FOUND (404) being the HTTP response code
             
         }
+      
+        }else {
+            $this->response(['status' => FALSE, 'message' => 'Bets closed,will resume after 12'], REST_Controller::HTTP_NOT_FOUND);
+             // NOT_FOUND (404) being the HTTP response code
+            
+        }
        
     }
     public function PlaceBetSecond_post() {
-        
+            if( date("H:i:s") < "23:45:00"){
          $this->db->select('max(game_id) as game_id');
             $this->db->from('game_lottery');
             $query1 = $this->db->get()->row();
@@ -216,8 +226,16 @@ class Bets extends REST_Controller
        }else{
             $this->response(['status' => FALSE, 'message' => 'insufficient amount!'], REST_Controller::HTTP_NOT_FOUND);
        }
+       }else {
+            $this->response(['status' => FALSE, 'message' => 'Bets closed, will resume after 12'], REST_Controller::HTTP_NOT_FOUND);
+             // NOT_FOUND (404) being the HTTP response code
+            
+        }
+       
     }
     public function PlaceBetJodi_post() {
+            if( date("H:i:s") < "23:45:00"){
+        
          $this->db->select('max(game_id) as game_id');
             $this->db->from('game_lottery');
             $query1 = $this->db->get()->row();
@@ -308,6 +326,12 @@ class Bets extends REST_Controller
       }else{
             $this->response(['status' => FALSE, 'message' => 'insufficient amount!'], REST_Controller::HTTP_NOT_FOUND);
        }
+       }else {
+            $this->response(['status' => FALSE, 'message' => 'Bets closed,will resume after 12'], REST_Controller::HTTP_NOT_FOUND);
+             // NOT_FOUND (404) being the HTTP response code
+            
+        }
+       
     }
     public function LuckyNumber_get() {
         
