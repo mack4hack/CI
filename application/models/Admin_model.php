@@ -443,10 +443,10 @@ function delete_dealer($id)
 //                                             }
                                                  
                                         $amount = $present_amount - $sunday_amount;
-                                        $amount = $amount + $deposited_amount;
+                                        $amount1 = $amount + $deposited_amount;
                                          $data = array(
 					
-				"present_amount" => $amount,
+				"present_amount" => $amount1,
 				"is_restored" => 1,
 				"restored_time" => date("Y-m-d H:i:s"),
 				"sunday_amount" => 0,
