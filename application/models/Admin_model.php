@@ -443,10 +443,10 @@ function delete_dealer($id)
 //                                             }
                                                  
                                         $amount = $present_amount - $sunday_amount;
-                                        $amount = $amount + $deposited_amount;
+                                        $amount1 = $amount + $deposited_amount;
                                          $data = array(
 					
-				"present_amount" => $amount,
+				"present_amount" => $amount1,
 				"is_restored" => 1,
 				"restored_time" => date("Y-m-d H:i:s"),
 				"sunday_amount" => 0,
@@ -596,8 +596,7 @@ function delete_dealer($id)
              $this->db->set('sunday_amount','present_amount',FALSE);
              $this->db->where('role_id',3);
              $this->db->update('user_master');
-    // echo    $this->db->last_query();die;
-             
+             // echo    $this->db->last_query();die;
         }
 
 	function getDailyHistory($from = null , $to = null)
