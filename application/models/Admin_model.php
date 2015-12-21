@@ -930,17 +930,6 @@ function delete_dealer($id)
 
 		    $i=1;
 
-
-		     $day = date('w', strtotime('-1 day'));
-			 $week_first_day = date('Y-m-d', strtotime('-'.$day.' days'));
-			 $week_second_day = date('Y-m-d', strtotime('-'.(11-$day).' days'));
-			 $week_third_day = date('Y-m-d', strtotime('-'.(10-$day).' days'));
-			 $week_fourth_day = date('Y-m-d', strtotime('-'.(9-$day).' days'));
-			 $week_fifth_day = date('Y-m-d', strtotime('-'.(8-$day).' days'));
-			 $week_sixth_day = date('Y-m-d', strtotime('-'.(7-$day).' days'));
-			 $week_seventh_day = date('Y-m-d', strtotime('+'.(6-$day).' days'));
-			//die;
-
 			$mon = date( 'Y-m-d', strtotime( 'monday this week' ) );
 			$tue = date( 'Y-m-d', strtotime( 'tuesday this week' ) );
 			$wed = date( 'Y-m-d', strtotime( 'wednesday this week' ) );
