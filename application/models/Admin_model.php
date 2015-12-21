@@ -1207,13 +1207,14 @@ function delete_dealer($id)
      	$this->db->from('player_history');
      	//$where = 'player_id = "'.$player_id.'" AND timeslot LIKE "%'.$day.'%" AND timeslot_id="'.$timeslot_id.'"';
 	    $this->db->where('transaction_id',$transaction_id);
-	    //$this->db->where('dealer_id','13');
+	    //$this->db->group_by('transaction_id');
 	    $query=$this->db->get();
 	    //echo($this->db->last_query());  die;
 	    $records =  $query->result();
 
-        // echo "<pre>";
-    	// print_r($result); die;
+       /* echo "<pre>";
+    	print_r($records); die;
+*/
 
         $total_bet = 0 ;
 		$total_wins = 0;
@@ -1226,10 +1227,10 @@ function delete_dealer($id)
 			foreach ($records as $record)
 			{
 				//print_r($timeslot); die;
-				$this->db->select('sum(bet_amount) as chips');
+				$this->db->select('bet_amount as chips');
 				$this->db->from('player_history');
 				// $this->db->where('timeslot_id',$record->timeslot_id);
-				// $this->db->where('player_id',$player_id);
+				//$this->db->where('id',$record->id);
 				$this->db->where('transaction_id',$record->transaction_id);
 				//$this->db->like('timeslot',$day);
 				//$this->db->like('timeslot',$timeslot->timeslot);
@@ -1237,11 +1238,12 @@ function delete_dealer($id)
 				// echo $this->db->last_query(); die;
 				$chips = $query->chips;
 
-				$this->db->select('sum(payout) as win');
+				$this->db->select('payout as win');
 				$this->db->from('player_history');
 				$this->db->where('result','1');
 				//$this->db->where('timeslot_id',$record->timeslot_id);
 				//$this->db->where('player_id',$player_id);
+				//$this->db->where('id',$record->id);
 				$this->db->where('transaction_id',$record->transaction_id);
 				// $this->db->like('timeslot',$day);
 				$query=$this->db->get()->row();
@@ -1332,9 +1334,9 @@ function delete_dealer($id)
 			}
 		}	
 
-		//echo "<pre>";
-		//print_r($data);
-	   //	die;
+		/*echo "<pre>";
+		print_r($data);
+	   	die;*/
 	  	return $data;
 	}
 
