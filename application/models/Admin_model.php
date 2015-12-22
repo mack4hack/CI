@@ -599,10 +599,10 @@ function delete_dealer($id)
              // echo    $this->db->last_query();die;
         }
 
-	function getDailyHistory($from = null , $to = null)
+	function getDailyHistory($day)
 	{
-		if(!isset($_GET['date'])){
-			$day = $_GET['date'];
+		if(isset($day)){
+			$day = $day;
 		}
 		else{
 			$day = date('Y-m-d');

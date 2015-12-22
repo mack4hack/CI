@@ -1316,7 +1316,7 @@ class Admin extends CI_Controller
             $to = date('Y-m-d');
             $from = date('Y-m-d', strtotime("1 day", strtotime($from)));
            
-            $result['data_daily'] = $this->Admin_model->getDailyHistory($from, $to);
+            $result['data_daily'] = $this->Admin_model->getDailyHistory($date);
 
             
             
