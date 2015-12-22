@@ -776,7 +776,7 @@
                                             $count = true; ?>
                                             <td><?php echo $d['win']; ?></td>
                                             <?php } 
-                                        } 
+                                        }  
                                     }
                                     if($count == false){ ?>
 
