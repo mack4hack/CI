@@ -614,10 +614,11 @@ class Bets_model extends CI_Model
 				//print_r($timeslot); die;
 				$this->db->select('sum(bet_amount) as chips');
 				$this->db->from('player_history');
-				$this->db->where('timeslot_id',$record->timeslot_id);
+				// $this->db->where('id',$record->id);
 				$this->db->where('player_id',$player_id);
 				$this->db->where('transaction_id',$record->transaction_id);
 				$this->db->like('timeslot',$day);
+				$this->db->group_by('transaction_id');
 				//$this->db->like('timeslot',$timeslot->timeslot);
 				$query=$this->db->get()->row();
 				// echo $this->db->last_query(); die;
@@ -626,7 +627,7 @@ class Bets_model extends CI_Model
 				$this->db->select('sum(payout) as win');
 				$this->db->from('player_history');
 				$this->db->where('result','1');
-				$this->db->where('timeslot_id',$record->timeslot_id);
+				// $this->db->where('id',$record->id);
 				$this->db->where('player_id',$player_id);
 				$this->db->where('transaction_id',$record->transaction_id);
 				$this->db->like('timeslot',$day);
