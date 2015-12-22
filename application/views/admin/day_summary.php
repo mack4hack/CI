@@ -14,7 +14,7 @@ $current_timestamp = $date->getTimestamp();
 								<span>Select Date</span>
 								<select name="date" id="date">
 									<?php foreach ($dates as $date) {  ?>
-										<?php if($date['value'] == date('Y-m-d')) { ?>
+										<?php if($date['value'] == date('Y-m-d')) {  ?>
 											<option  value="<?php echo $date['value']; ?>" selected><?php echo $date['display']; ?></option>	
 									<?php	} else { ?>
 										<option  value="<?php echo $date['value']; ?>"><?php echo $date['display']; ?></option>
