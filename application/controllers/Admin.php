@@ -808,7 +808,7 @@ class Admin extends CI_Controller
     }
     
     public function update_amount() {
-        
+        $json = array();
         if (isset($_GET['amount']) && isset($_GET['user_id']) && isset($_GET['add'])) {
             
             $query = $this->db->query("select present_amount from user_master where id='" . $_GET['user_id'] . "'");
@@ -816,24 +816,41 @@ class Admin extends CI_Controller
             $amount = $_GET['amount'] + $row['present_amount'];
             $data = array("present_amount" => $amount,);
             $this->db->where('id', $_GET['user_id']);
-            $update = $this->db->update('user_master', $data);
+            if($this->db->update('user_master', $data)){
+                $json['success'] = "Amount added successfully";
+            }else{
+                $json['error'] = "failed to add amount";
+            }
             
             //echo $this->db->last_query();
-            echo $update > 0 ? 1 : 0;
+            //echo $update > 0 ? 1 : 0;
         }
         if (isset($_GET['amount']) && isset($_GET['user_id']) && isset($_GET['withdraw'])) {
             
             $query = $this->db->query("select present_amount from user_master where id='" . $_GET['user_id'] . "'");
             $row = $query->row_array();
+            
+            if($row['present_amount'] >= $_GET['amount']){
+            
             $amount = $row['present_amount'] - $_GET['amount'];
             $data = array("present_amount" => $amount,);
             $this->db->where('id', $_GET['user_id']);
-            $update = $this->db->update('user_master', $data);
+            if($this->db->update('user_master', $data)){
+                $json['success'] = "Amount withdrawn successfully";
+            }else{
+                $json['error'] = "failed to withdraw amount";
+            }
             
             //echo $this->db->last_query();
-            echo $update > 0 ? 1 : 0;
+            //secho $update > 0 ? 1 : 0;
+             }else{
+            $json['error'] = "Withdraw amount is greater than cuurent amount";
+             }
         }
-    }
+    
+                    echo json_encode($json);
+        
+       }
     
     public function restoreAccount() {
         $result = '';

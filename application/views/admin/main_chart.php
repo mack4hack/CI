@@ -940,8 +940,8 @@ $current_timestamp = $date->getTimestamp();
 
                                                                             <?php }?>
 
-                                                                                    <a href="<?php echo base_url()?>admin/dealeraccount" class="btn red">
-                                                                                    Dealer Accounts	</a>						
+                                                                                    <a href="<?php echo base_url()?>admin/accounts" class="btn red">
+                                                                                     Accounts	</a>						
                                                                     </div>
                                                             </div>			
 
