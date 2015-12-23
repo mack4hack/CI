@@ -32,7 +32,7 @@
 								<tbody>
                     <?php if(!empty($data_daily)  ) {
                                           $i =1;      
-                              foreach($data_daily as $dd){ $time = $dd['day'].$dd['timeslot_range']; ?>
+                              foreach($data_daily as $dd){ $time = $dd['timeslot_range']; ?>
                                   
                                 <tr class="success">
 									<td><?php echo $i; ?></td>
