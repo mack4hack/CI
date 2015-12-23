@@ -1514,4 +1514,24 @@ class Admin extends CI_Controller
         }
         
     }
+    
+      public function total_accounts()
+    {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('auth/login', 'refresh');
+        }    
+        else{
+
+
+            $from = date('Y-m-d');
+            $to = date('Y-m-d', strtotime("-1 month", strtotime($from)));
+            $from = date('Y-m-d', strtotime("1 day", strtotime($from)));
+            //change this function for both games
+            $result['data_monthly'] = $this->Admin_model->getAccounts($from, $to);
+
+            $this->load->view('admin/total_accounts', $result);
+        }
+        
+    }
+    
 }

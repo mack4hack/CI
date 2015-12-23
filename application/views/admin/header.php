@@ -543,7 +543,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					</a>
 				</li>
 				<li class="tooltips" data-container="body" data-placement="right" data-html="true" >
-					<a href="<?php echo base_url()?>admin/accounts" >
+					<a href="<?php echo base_url()?>admin/total_accounts" >
 					<i class="icon-bar-chart"></i>
 					<span class="title">
 					Accounts</span>
