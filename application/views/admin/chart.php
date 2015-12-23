@@ -17,7 +17,7 @@
 										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['bet_amount_jodi'];  ?> ) </span>
 <!--										<span class="caption-subject bold uppercase font-green-haze"> Payout</span>
 										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['payout_jodi'];  ?> ) </span>-->
-									</div>
+									</div> 
 								  </div>
 								
 								<div class="portlet-body" id="mack">
