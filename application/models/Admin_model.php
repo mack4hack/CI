@@ -455,11 +455,12 @@ function delete_dealer($id)
                                                         $this->db->where('id', $user);
                                                         $this->db->update('user_master', $data);
                                         
-                                        
+                                                         $result['success'] = "Restored Successfully!";
                                         
                                     }else{
                                         
                                                    $result['failed_users'][] = $user;
+                                                   //$result['failed_users'][] = $user;
                                     }
                          }
                          return $result;

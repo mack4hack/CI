@@ -7,7 +7,7 @@
 								<i class="fa fa-globe"></i>All Players
 							</div>
                                                                                                                           <div class="myclass"    style="float: right;margin-top:8px;color:black;" >
-                                                                                                                               <input type="button"  name="restore_default" id="restore_default" value="Restore Default"   style="padding:2px;float:right;"  /> 
+                                                                                                                               <input type="button"  name="restore_default" id="restore_default" value="Restore Default" class="btn"  style="padding:2px;float:right;"  /> 
 							 <input type="text" id="search_player"  class="col-sm-6 "    placeholder ="Search Player"     name="search_player" >
 
                                                                                                                             </div>
@@ -146,39 +146,83 @@ $('.group-checkable').on('click',function(){
   var b = $(this).parent().siblings().children('input[name=withdraw_amount]').val();
   var c = $(this).parent().siblings().children('input[name=user_id]').val();
     if(a !=''){
-        
-          $.ajax({
+        if (confirm("Are you sure to add amount?")) {
+        $.ajax({
 				  url: '<?php echo base_url()?>admin/update_amount?add=true&amount='+a+'&user_id='+c,
 				   type: 'get',		
 				   dataType: 'json',
 				
 				    success: function(json) {
-				        			
+                                                                                           if(json.success){
+                                                                                            $('.alert-success').html(json.success);
+                                                                                            $('.alert-success').show();
+                                                                                            setTimeout(function() {
+                                                                                                    $(".alert-success").hide('blind', {}, 500)
+                                                                                                }, 3000);
+				        	  var dealer_id = $('#dealer_dropdown').val();
+                                                                                             if(dealer_id != -1){
+                                                                                             $('#players_list').load('<?php echo base_url("/admin/ajaxPlayersList?dealer_id="); ?>'+dealer_id,function () {
+                                                                                               // $(this).unwrap();
+                                                                                                 });
+                                                                                              }
+                                                                                           }else{
+                                                                                                 $('.alert-danger').html(json.error);
+                                                                                                 $('.alert-danger').show();
+                                                                                                 setTimeout(function() {
+                                                                                                    $(".alert-danger").hide('blind', {}, 500)
+                                                                                                }, 3000);
+                                                                                           }
+                                                                                             
 				                                                                             
 				      },			
 				
           });
+         }
+    return false;
+          
     }
      if(b !=''){
-        
+        if (confirm("Are you sure to withdraw amount?")) {
           $.ajax({
 				   url: '<?php echo base_url()?>admin/update_amount?withdraw=true&amount='+b+'&user_id='+c,
 				   type: 'get',		
 				   dataType: 'json',
 				
 				    success: function(json) {
-				        			
-				                                                                             
+				        		         if(json.success){
+                                                                                            $('.alert-success').html(json.success);
+                                                                                            $('.alert-success').show();
+                                                                                            setTimeout(function() {
+                                                                                                    $(".alert-success").hide('blind', {}, 500)
+                                                                                                }, 3000);
+				        	  var dealer_id = $('#dealer_dropdown').val();
+                                                                                             if(dealer_id != -1){
+                                                                                             $('#players_list').load('<?php echo base_url("/admin/ajaxPlayersList?dealer_id="); ?>'+dealer_id,function () {
+                                                                                               // $(this).unwrap();
+                                                                                                 });
+                                                                                              }
+                                                                                           }else{
+                                                                                                 $('.alert-danger').html(json.error);
+                                                                                                 $('.alert-danger').show();
+                                                                                                 setTimeout(function() {
+                                                                                                    $(".alert-danger").hide('blind', {}, 500)
+                                                                                                }, 3000);
+                                                                                           }
+                                                                                           
+                                                                                           
 				      },			
 				
           });
+          }
+          return false;
      }
   
    
         });
 
 $('#restore_default').on('click',function(){
- var saveData = {};
+ 
+   var saveData = {};
     var i =1 ;
  
        $('#sample_1 tbody').find('input[type="checkbox"]:checked').each(function () {
@@ -189,21 +233,49 @@ $('#restore_default').on('click',function(){
    });
        saveData = JSON.stringify(saveData);
     //   console.log(saveData);
-          $.ajax({
+        if (confirm("Are you sure to restore selected accounts?")) { 
+           $.ajax({
               url: '<?php echo base_url("/admin/restoreAccount"); ?>',
               type: "POST",
               data: {users : saveData},
               dataType: "JSON",
                                     success:function(data){
-                                                 $('.alert-success').show();
-                                              //   $('#alert-success').text("Restored Successfully");
+                                        if(data.success){
+                                                  $('.alert-success').html(data.success);
+                                                  $('.alert-success').show();
+                                                  setTimeout(function() {
+                                                     $(".alert-success").hide('blind', {}, 500)
+                                                  }, 3000);
+                                                 var dealer_id = $('#dealer_dropdown').val();
+                                                                                                if(dealer_id != -1){
+                                                                                      $('#players_list').load('<?php echo base_url("/admin/ajaxPlayersList?dealer_id="); ?>'+dealer_id,function () {
+                                                                                      // $(this).unwrap();
+                                                                                                 });
+                                                                                             }
 
+                                                   }else{
+                                                            $('.alert-danger').html('failed to restore');
+                                                           $('.alert-danger').show();
+                                                           setTimeout(function() {
+                                                              $(".alert-danger").hide('blind', {}, 500)
+                                                           }, 3000);
+                                                   }
+                                                   
                                                 }
                });
-       
+        }
+        return false;
+        
        
        
 });
   
 
 </script>
+
+<style type="text/css">
+    
+     .btn:hover{
+        background-color: #2e8ece;
+    }
+</style>

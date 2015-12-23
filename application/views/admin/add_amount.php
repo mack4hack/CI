@@ -205,64 +205,54 @@ Demo.init(); // init demo features
    FormValidation.init();
   // TableManaged.init();
   selectState(1);
-  
-         $("#form_sample_1").submit(function (e){
-             var temp = $("#add_amount").val();
-             var user_id = $("#user_dropdown").val();
-			   
-			   if(temp!=''  && user_id != '')
-			   {
-				   
-                e.preventDefault();
-                var url = '<?php echo base_url()?>admin/update_amount';
-                var method = $(this).attr('method');
-                var data = $(this).serialize();
-				   //alert("temp:"+data);
-			    $("#submit").html('Adding amount');
-			    $.ajax({
-                   url:url,
-                   type:method,
-                   data:data
-                }).done(function(data){
-				  //var returnedData = JSON.parse(data);
-				  //location.reload(true);
-                   if(data =='0')
-                    {   //alert(data);
-						$("#submit").html('Add Amount');
-                        $("#error").show('fast');
-                        $('#error').delay(5000).fadeOut('slow');
-						
-                        //$('#form_sample_1')[0].reset();
-                    }
-                    else
-                    {	 //alert(data);
-						 $('#error').delay(5000).fadeOut('slow');
-						 $('#form_sample_1')[0].reset();
-                         throw new Error('go');
-                    } 
-                });
-			   }
-            });
-  
-  
-  
-  
-  
-  
-  
-  
 });
 
     $('#dealer_dropdown').on('change',function(){
     	var dealer_id = $(this).val();
-                 if(dealer_id != -1){
+                  if(dealer_id != -1){
     	$('#players_list').load('<?php echo base_url("/admin/ajaxPlayersList?dealer_id="); ?>'+dealer_id,function () {
         // $(this).unwrap();
                    });
                }	
     });
     
-
+//       $("#form_sample_1").submit(function (e){
+//             var temp = $("#add_amount").val();
+//             var user_id = $("#user_dropdown").val();
+//			   
+//			   if(temp!=''  && user_id != '')
+//			   {
+//				   
+//                e.preventDefault();
+//                var url = '<?php echo base_url()?>admin/update_amount';
+//                var method = $(this).attr('method');
+//                var data = $(this).serialize();
+//				   //alert("temp:"+data);
+//			    $("#submit").html('Adding amount');
+//			    $.ajax({
+//                   url:url,
+//                   type:method,
+//                   data:data
+//                }).done(function(data){
+//				  //var returnedData = JSON.parse(data);
+//				  //location.reload(true);
+//                   if(data =='0')
+//                    {   //alert(data);
+//						$("#submit").html('Add Amount');
+//                        $("#error").show('fast');
+//                        $('#error').delay(5000).fadeOut('slow');
+//						
+//                        //$('#form_sample_1')[0].reset();
+//                    }
+//                    else
+//                    {	 //alert(data);
+//						 $('#error').delay(5000).fadeOut('slow');
+//						 $('#form_sample_1')[0].reset();
+//                         throw new Error('go');
+//                    } 
+//                });
+//			   }
+//            });
 
 </script>
 
