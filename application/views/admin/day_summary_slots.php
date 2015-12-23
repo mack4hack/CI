@@ -2,7 +2,6 @@
 <script type="text/javascript">
 	$('.table #slots').each(function(){
 		$(this).click(function(){
-			console.log($(this).find('a').attr('value'));
 			time_slot = $(this).find('a').attr('value');
 			time_slot = encodeURIComponent(time_slot);
  	    	$('#mack').load('<?php echo base_url("/admin/summary?time="); ?>'+time_slot,function () { });
