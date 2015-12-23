@@ -622,7 +622,9 @@ function delete_dealer($id)
             $val_end = date("H:i", strtotime($start . " +15 minutes"));
             $display = date("h:i a", strtotime($val_end));
             
-            $timeslots[] = array('date'=>$day,'timeslot'=>$display,'timeslot_id'=>$timeslot_id,);  #array('value' => $val_start . " To " . $val_end, 'display' => $display,);
+            $timeslot_range = $start.' To '.$val_end;
+
+            $timeslots[] = array('date'=>$day,'timeslot'=>$display,'timeslot_id'=>$timeslot_id,'timeslot_range'=>$timeslot_range);  #array('value' => $val_start . " To " . $val_end, 'display' => $display,);
             $timeslot_id++;
         }
 
@@ -711,7 +713,9 @@ function delete_dealer($id)
 			   			'day_total'=>$day_total,
 			   			'final_total'=>$final_total,
 			   			'draw_time'=>  $timeslot['timeslot'], // date('d-m-y',strtotime($timeslot['timeslot'])).'  '.date('h:i a',strtotime($draw_time['1'])),
-			   			'profit'=>$credited -($debited + $commission)
+			   			'profit'=>$credited -($debited + $commission),
+			   			'day'=>$day,
+			   			'timeslot_range'=>$timeslot['timeslot_range'],
 			   		);
 			}
 		}	

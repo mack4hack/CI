@@ -32,11 +32,11 @@
 								<tbody>
                     <?php if(!empty($data_daily)  ) {
                                           $i =1;      
-                              foreach($data_daily as $dd){  ?>
+                              foreach($data_daily as $dd){ $time = $dd['day'].$dd['timeslot_range']; ?>
                                   
                                 <tr class="success">
 									<td><?php echo $i; ?></td>
-									<td><a href="<?php echo base_url("/admin/summary?time=");?>" ><?php echo $dd['draw_time']; ?></a></td>
+									<td><a href="<?php echo base_url("/admin/summary?time=$time"); ?>" ><?php echo $dd['draw_time']; ?></a></td>
 									<td><?php echo $dd['credited']; ?></td>
 									<td><?php echo $dd['debited']; ?></td>
 									<td><?php echo $dd['commission']; ?></td>
