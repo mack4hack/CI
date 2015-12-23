@@ -825,6 +825,9 @@ class Admin extends CI_Controller
             
             $query = $this->db->query("select present_amount from user_master where id='" . $_GET['user_id'] . "'");
             $row = $query->row_array();
+            
+            if($row['present_amount'] >= $_GET['amount']){
+            
             $amount = $row['present_amount'] - $_GET['amount'];
             $data = array("present_amount" => $amount,);
             $this->db->where('id', $_GET['user_id']);
@@ -832,6 +835,9 @@ class Admin extends CI_Controller
             
             //echo $this->db->last_query();
             echo $update > 0 ? 1 : 0;
+             }else{
+            echo 0;
+             }
         }
     }
     

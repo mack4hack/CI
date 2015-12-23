@@ -38,7 +38,8 @@ class Bets extends REST_Controller
             $this->db->from('user_master');
             $this->db->where('id', $this->post('player_id'));
             $query1 = $this->db->get()->row();
-            $transaction_id =   $query1->user_code."L".$last;
+            //$transaction_id =   $query1->user_code."L".$last;
+            $transaction_id =   "L".$last;
             
         
          $success = false;
@@ -146,7 +147,8 @@ class Bets extends REST_Controller
             $this->db->from('user_master');
             $this->db->where('id', $this->post('player_id'));
             $query1 = $this->db->get()->row();
-            $transaction_id =   $query1->user_code."L".$last;
+         //   $transaction_id =   $query1->user_code."L".$last;
+              $transaction_id =   "L".$last;
         $success = false;
         $total_amount = 0;
          foreach ($this->post('data') as $jodi_data) {
@@ -245,7 +247,8 @@ class Bets extends REST_Controller
             $this->db->from('user_master');
             $this->db->where('id', $this->post('player_id'));
             $query1 = $this->db->get()->row();
-            $transaction_id =   $query1->user_code."L".$last;
+           // $transaction_id =   $query1->user_code."L".$last;
+              $transaction_id =   "L".$last;
         //print_r($this->post('player_id'));die;
          $success = false;
         $total_amount = 0;
