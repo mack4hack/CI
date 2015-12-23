@@ -1137,10 +1137,10 @@ function delete_dealer($id)
 	    $query=$this->db->get()->row();;
 	    $user_code =  $query->user_code;
 
-        $total_bet = 0 ;
-		$total_wins = 0;
-		$total_balance = 0;
-		$total_commission = 0;
+        $total_bet = number_format(0,2);
+		$total_wins = number_format(0,2);
+		$total_balance =number_format(0,2);
+		$total_commission = number_format(0,2);
 
 
 		if(!empty($records))
@@ -1158,7 +1158,9 @@ function delete_dealer($id)
 				//$this->db->like('timeslot',$timeslot->timeslot);
 				$query=$this->db->get()->row();
 				// echo $this->db->last_query(); die;
-				$chips = $query->chips;
+				$chips = number_format(0,2);
+				if($query)
+					$chips = number_format($query->chips,2);
 
 				$this->db->select('sum(payout) as win');
 				$this->db->from('player_history');
@@ -1169,10 +1171,11 @@ function delete_dealer($id)
 				$this->db->like('timeslot',$day);
 				$query=$this->db->get()->row();
 				//echo $this->db->last_query(); die;
-				$win = $query->win;
-
+				$win=number_format(0,2);
+				if($win)
+					$win = number_format($query->win,2);
 				
-			   	$balance = $chips - $win;
+			   	$balance = $chips - $win; 
 			   	$total_bet = $total_bet + $chips ;
 				$total_wins = $total_wins + $win;
 				$total_balance = $total_balance + $balance;
@@ -1340,7 +1343,9 @@ function delete_dealer($id)
 			$this->db->where('id',$transaction->id);
 			$query=$this->db->get()->row();
 			// echo $this->db->last_query(); die;
-			$chips = $query->chips;
+			$chips = '';
+			if($query)
+				$chips = $query->chips;
 
 			$this->db->select('payout as win');
 			$this->db->from('player_history');
@@ -1352,7 +1357,7 @@ function delete_dealer($id)
 			$query=$this->db->get()->row();
 			// echo $this->db->last_query(); die;
 			if($query)
-			$win = $query->win;
+				$win = number_format($query->win,2);
 
 
 			$this->db->select('sum(bet_amount) as total_bet');
@@ -1360,7 +1365,9 @@ function delete_dealer($id)
 			$this->db->where('transaction_id',$transaction->transaction_id);
 			$query=$this->db->get()->row();
 			// echo $this->db->last_query(); die;
-			$total_bet = $query->total_bet;
+			$total_bet = '';
+			if($query)
+				$total_bet = number_format($query->total_bet,2);
 
 			$this->db->select('sum(payout) as total_wins');
 			$this->db->from('player_history');
@@ -1368,7 +1375,9 @@ function delete_dealer($id)
 			$this->db->where('transaction_id',$transaction->transaction_id);
 			$query=$this->db->get()->row();
 			//echo $this->db->last_query(); die;
-			$total_wins = $query->total_wins;
+			$total_wins ='';
+			if($query)
+				$total_wins = number_format($query->total_wins,2);
 
 
 			$this->db->select('first_digit,second_digit,jodi_digit');
@@ -1386,8 +1395,21 @@ function delete_dealer($id)
 			$this->db->like('timeslot',$date);
 			$query=$this->db->get()->row();
 			// echo $this->db->last_query(); die;
-			$lucky_number = $query->lucky_number;
-			$timeslot = $query->timeslot;
+			$lucky_number ='';
+			$timeslot='';
+			if($query){
+				$lucky_number = $query->lucky_number;
+				$timeslot = $query->timeslot;
+			}
+
+			$this->db->select('timeslot');
+			$this->db->from('player_history');
+			$this->db->where('transaction_id',$transaction->transaction_id);
+			$query=$this->db->get()->row();
+			//echo $this->db->last_query(); die;
+			if($query)
+				$trans_time = date('d-m-Y h:i:s a',strtotime($query->timeslot));
+
 			$drawtime = date('h:i: a', strtotime(explode(" ", $timeslot)[1]));
 
 			$data[$transaction->transaction_id][] = array('id'=>$transaction->id,
@@ -1401,6 +1423,7 @@ function delete_dealer($id)
 			   				'win'=>$win,
 			   				'lucky_number'=>$lucky_number,
 			   				'drawtime'=>$drawtime,
+			   				'trans_time'=>$trans_time,
 
 							);
 

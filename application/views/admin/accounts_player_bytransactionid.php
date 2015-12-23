@@ -16,16 +16,12 @@
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="fa fa-gift"></i>Transaction No : <?php  echo $_GET['transaction_id']; ?>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;
                             Draw Time : <?php if(!empty($data_weekly)) { foreach($data_weekly as $key => $dw){ echo $dw[0]['drawtime']; break;} }?>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;
                             Lucky Number : <?php if(!empty($data_weekly)) { foreach($data_weekly as $key => $dw){ echo $dw[0]['lucky_number']; break;} }?>
-                        </div>
-                        <div class="tools">
-                            <a href="javascript:;" class="collapse">
-                            </a>
-                            <a href="#portlet-config" data-toggle="modal" class="config">
-                            </a>
+                            &nbsp;&nbsp;
+                            Trans. Time : <?php if(!empty($data_weekly)) { foreach($data_weekly as $key => $dw){ echo $dw[0]['trans_time']; break;} }?>
                         </div>
                     </div>
                     <div class="portlet-body">
