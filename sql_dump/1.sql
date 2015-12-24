@@ -172,7 +172,7 @@ ALTER TABLE `admin_history` CHANGE `total` `total` DECIMAL(10,2) NOT NULL;
 ALTER TABLE `dealer_history` CHANGE `bet_amount` `bet_amount` DECIMAL(10,2) NOT NULL;
 ALTER TABLE `dealer_history` CHANGE `commission` `commission` DECIMAL(10,2) NOT NULL;
 ALTER TABLE `dealer_history` CHANGE `total` `total` DECIMAL(10,2) NOT NULL;
-ALTER TABLE `game_lottery` CHANGE `bet` `bet` DECIMAL(10,2) NOT NULL, CHANGE `bet_amount` `bet_amount` DECIMAL(10,2) NOT NULL, CHANGE `payout` `payout` DECIMAL(10,2) NOT NULL;
+ALTER TABLE `game_lottery`  CHANGE `bet_amount` `bet_amount` DECIMAL(10,2) NOT NULL, CHANGE `payout` `payout` DECIMAL(10,2) NOT NULL;
 
 
 
