@@ -1399,9 +1399,11 @@ function delete_dealer($id)
 			// echo $this->db->last_query(); die;
 			$lucky_number ='';
 			$timeslot='';
+			$drawtime ='';
 			if($query){
 				$lucky_number = $query->lucky_number;
 				$timeslot = $query->timeslot;
+				$drawtime = date('h:i: a', strtotime(explode(" ", $timeslot)[1]));
 			}
 
 			$this->db->select('timeslot');
@@ -1412,7 +1414,7 @@ function delete_dealer($id)
 			if($query)
 				$trans_time = date('d-m-Y h:i:s a',strtotime($query->timeslot));
 
-			$drawtime = date('h:i: a', strtotime(explode(" ", $timeslot)[1]));
+			
 
 			$data[$transaction->transaction_id][] = array('id'=>$transaction->id,
 							'first_digit'=>(isset($first_digit)) ? $first_digit : 999,
