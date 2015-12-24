@@ -607,7 +607,7 @@ function delete_dealer($id)
 		else{
 			$day = date('Y-m-d');
 		}
-		
+
 		$timeslot_id = 1; 
 		for ($i = 0 * 60; $i < 24 * 60; $i+= 15) {
             $hr = floor($i / 60);
@@ -623,10 +623,11 @@ function delete_dealer($id)
             $display = date("h:i a", strtotime($val_end));
             
             $timeslot_range = $start.' To '.$val_end;
+
             $timeslots[] = array('date'=>$day,'timeslot'=>$display,'timeslot_id'=>$timeslot_id,'timeslot_range'=>$timeslot_range);  #array('value' => $val_start . " To " . $val_end, 'display' => $display,);
             $timeslot_id++;
         }
-		
+
 		/*$this->db->select('timeslot,timeslot_id');
 		$this->db->from('admin_history');
 		$this->db->where('timeslot <',$from);
@@ -636,9 +637,10 @@ function delete_dealer($id)
 		
 		$timeslots = $query->result();*/
 		$data = array();
+
 		//echo "<pre>";
 		//print_r($timeslots);
-		
+
 		$this->db->select('total');
 		$this->db->from('admin_history');
 		$this->db->order_by("id", "desc"); 
@@ -648,7 +650,9 @@ function delete_dealer($id)
 	   	if($query){
 		   	$final_total = $query->total;
 	   	}
-		
+
+
+
 		if(!empty($timeslots))
 		{	
 			foreach ($timeslots as $timeslot)
@@ -660,19 +664,22 @@ function delete_dealer($id)
 				$this->db->like('timeslot',$timeslot['date']);
 				$query=$this->db->get()->row();
 				$credited = 0;
+
 				//echo($this->db->last_query());
+
 				if($query){
-					$credited = $query->credited;
+					$credited = number_format($query->credited, 2);
+
 				}	
-				
-				$this->db->select('sum(bet_amount) as debited');
-				$this->db->from('admin_history');
-				$this->db->where('bet_amount < 0');
+
+				$this->db->select('sum(payout) as debited');
+				$this->db->from('player_history');
+				$this->db->where('result','1');
 				$this->db->like('timeslot',$timeslot['date']);
 				$this->db->where('timeslot_id',$timeslot['timeslot_id']);
 				$query=$this->db->get()->row();
-				$debited = $query->debited;
-				
+				$debited =  number_format($query->debited, 2);
+
 				$this->db->select('total');
 				$this->db->from('admin_history');
 				$this->db->like('timeslot',$timeslot['timeslot']);
@@ -684,16 +691,18 @@ function delete_dealer($id)
 			   	$day_total = 0;
 			   	if($query)
 			   	{
-				   	$day_total = $query->total;
+				   	$day_total = number_format($query->total,2);
 			   	}
-			    
+
 			    $this->db->select('sum(commission) as commission');
 				$this->db->from('admin_history');
 				$this->db->like('timeslot',$timeslot['date']);
 				$this->db->where('timeslot_id',$timeslot['timeslot_id']);
 			   	$query=$this->db->get()->row();
-			   	$commission = $query->commission;
+			   	$commission = number_format($query->commission,2);
+
 			   	//echo($this->db->last_query());
+
 			   	//$timespan = $this->getTimeslotById($timeslot->timeslot_id);
 			   	//$draw_time = explode(' To ', $timespan);
 			   	$draw_time = '';
@@ -705,12 +714,13 @@ function delete_dealer($id)
 			   			'day_total'=>$day_total,
 			   			'final_total'=>$final_total,
 			   			'draw_time'=>  $timeslot['timeslot'], // date('d-m-y',strtotime($timeslot['timeslot'])).'  '.date('h:i a',strtotime($draw_time['1'])),
-			   			'profit'=>$credited -($debited + $commission),
+			   			'profit'=>number_format($credited -($debited + $commission),2),
 			   			'day'=>$day,
 			   			'timeslot_range'=>$timeslot['timeslot_range'],
 			   		);
 			}
 		}	
+
 	  	return $data;
 	}
 
