@@ -1533,5 +1533,15 @@ class Admin extends CI_Controller
         }
         
     }
+      public function ajaxListDealers()
+    {
+         
+            $this->load->view('admin/ajax_list_dealers','');
+    }
+    public function ajaxListPlayers()
+    {
+         
+            $this->load->view('admin/ajax_list_players','');
+    }
     
 }
