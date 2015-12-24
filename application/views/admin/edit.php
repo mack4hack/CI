@@ -141,7 +141,7 @@ foreach($edit_data->result() as $data){}
 														<div class="form-group">
 															<label class="control-label col-md-3">City</label>
 															<div class="col-md-9">
-																<input type="text" name="city_name"  placeholder="Ex-Pune" class="form-control required">
+																<input type="text" name="city_name"  value="<?php echo $data->city;?>"  placeholder="Ex-Pune" class="form-control required">
 															</div>
 														</div>
 													</div>
@@ -271,10 +271,10 @@ Demo.init(); // init demo features
                     }
                     else
                     {	//alert(data);
-						$('#error').delay(5000).fadeOut('slow');
-						$('#form_sample_1')[0].reset();
-						setTimeout("location.href='<?php echo base_url()?>admin'", 5000);
-                    throw new Error('go');
+						//$('#error').delay(5000).fadeOut('slow');
+						//$('#form_sample_1')[0].reset();
+						window.location=window.location;
+                    //throw new Error('go');
                     } 
                 });
 			   }

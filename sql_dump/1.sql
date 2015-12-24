@@ -174,7 +174,7 @@ ALTER TABLE `dealer_history` CHANGE `commission` `commission` DECIMAL(10,2) NOT 
 ALTER TABLE `dealer_history` CHANGE `total` `total` DECIMAL(10,2) NOT NULL;
 ALTER TABLE `game_lottery`  CHANGE `bet_amount` `bet_amount` DECIMAL(10,2) NOT NULL, CHANGE `payout` `payout` DECIMAL(10,2) NOT NULL;
 
-
+ALTER TABLE `user_master` ADD `city` VARCHAR( 32 ) NOT NULL AFTER `city_id` ;
 
 
 
