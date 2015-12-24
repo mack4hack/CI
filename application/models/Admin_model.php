@@ -812,11 +812,11 @@ function delete_dealer($id)
 			   			'total'=>$total,
 			   			'week' => date('d-m-Y',strtotime($to)) .' To '.date('d-m-Y',strtotime($from)),
 			   			'month' => date('M-Y'),
-			   			'balance'=>$balance,
-			   			'total_bet'=>$total_bet,
-			   			'total_wins'=>$total_wins,
-			   			'total_balance'=>$total_balance,
-			   			'total_commission'=>$total_commission,
+			   			'balance'=>number_format($balance,2),
+			   			'total_bet'=>number_format($total_bet,2),
+			   			'total_wins'=>number_format($total_wins,2),
+			   			'total_balance'=>number_format($total_balance,2),
+			   			'total_commission'=>number_format($total_commission,2)
 			   			//'draw_time'=>  $timeslot['timeslot'], // date('d-m-y',strtotime($timeslot['timeslot'])).'  '.date('h:i a',strtotime($draw_time['1'])),
 			   			//'balance'=>$credited -($debited + $commission)
 			   		);
@@ -903,14 +903,14 @@ function delete_dealer($id)
 				   			'bet_amount'=>$bet_amount,
 				   			'payout'=>$payout,
 				   			'commission'=>$commission,
-				   			'total_bet'=>$total_bet,
-				   			'total_wins'=>$total_wins,
-				   			'total_balance'=>$total_balance,
-				   			'total_commission'=>$total_commission,
+				   			'total_bet'=>number_format($total_bet,2),
+				   			'total_wins'=>number_format($total_wins,2),
+				   			'total_balance'=>number_format($total_balance,2),
+				   			'total_commission'=>number_format($total_commission,2),
 				   			//'total'=>$total,
 				   			'week' => date('d-m-Y',strtotime($to)) .' To '.date('d-m-Y',strtotime($from)),
 				   			'month' => date('M-Y'),
-				   			'balance'=>$balance,
+				   			'balance'=>number_format($balance,2),
 				   			//'draw_time'=>  $timeslot['timeslot'], // date('d-m-y',strtotime($timeslot['timeslot'])).'  '.date('h:i a',strtotime($draw_time['1'])),
 				   			//'balance'=>$credited -($debited + $commission)
 				   		);
@@ -1009,14 +1009,14 @@ function delete_dealer($id)
 				   			'date'=>$day,
 				   			'bet_amount'=>$bet_amount,
 				   			'payout'=>$payout,
-				   			'commission'=>$commission,
-				   			'total_bet'=>$total_bet,
-				   			'total_wins'=>$total_wins,
-				   			'total_balance'=>$total_balance,
-				   			'total_commission'=>$total_commission,
+				   			'commission'=>number_format($commission,2),
+				   			'total_bet'=>number_format($total_bet,2),
+				   			'total_wins'=>number_format($total_wins,2),
+				   			'total_balance'=>number_format($total_balance,2),
+				   			'total_commission'=>number_format($total_commission,2),
 				   			//'week' => date('d-m-Y',strtotime($to)) .' To '.date('d-m-Y',strtotime($from)),
 				   			//'month' => date('M-Y'),
-				   			'balance'=>$balance,
+				   			'balance'=>number_format($balance,2),
 				   			//'draw_time'=>  $timeslot['timeslot'], // date('d-m-y',strtotime($timeslot['timeslot'])).'  '.date('h:i a',strtotime($draw_time['1'])),
 				   			//'balance'=>$credited -($debited + $commission)
 				   		);
@@ -1102,10 +1102,10 @@ function delete_dealer($id)
 			   			'user_code' => $user_code,
 			   			'bet_amount'=>$chips,
 			   			'payout'=>$win,
-			   			'balance'=>$balance,
-			   			'total_bet'=>$total_bet,
-			   			'total_wins'=>$total_wins,
-			   			'total_balance'=>$total_balance,
+			   			'balance'=>number_format($balance,2),
+			   			'total_bet'=>number_format($total_bet,2),
+			   			'total_wins'=>number_format($total_wins,2),
+			   			'total_balance'=>number_format($total_balance,2),
 			   			'draw_time'=>$timeslot['timeslot'],
 			   			'timeslot_id'=>$timeslot['timeslot_id'],
 			   		);
@@ -1188,8 +1188,8 @@ function delete_dealer($id)
 			   			'bet_amount'=>$chips,
 			   			'payout'=>$win,
 			   			'transaction_id'=>$record->transaction_id,
-			   			'total_bet'=>$total_bet,
-			   			'total_wins'=>$total_wins,
+			   			'total_bet'=>number_format($total_bet,2),
+			   			'total_wins'=>number_format($total_wins,2),
 			   			//'total_balance'=>$total_balance,
 			   			//'draw_time'=>$timeslot['timeslot'],
 			   		);
@@ -1399,9 +1399,11 @@ function delete_dealer($id)
 			// echo $this->db->last_query(); die;
 			$lucky_number ='';
 			$timeslot='';
+			$drawtime ='';
 			if($query){
 				$lucky_number = $query->lucky_number;
 				$timeslot = $query->timeslot;
+				$drawtime = date('h:i: a', strtotime(explode(" ", $timeslot)[1]));
 			}
 
 			$this->db->select('timeslot');
@@ -1412,7 +1414,7 @@ function delete_dealer($id)
 			if($query)
 				$trans_time = date('d-m-Y h:i:s a',strtotime($query->timeslot));
 
-			$drawtime = date('h:i: a', strtotime(explode(" ", $timeslot)[1]));
+			
 
 			$data[$transaction->transaction_id][] = array('id'=>$transaction->id,
 							'first_digit'=>(isset($first_digit)) ? $first_digit : 999,
@@ -1422,7 +1424,6 @@ function delete_dealer($id)
 							'total_bet'=>$total_bet,
 			   				'total_wins'=>$total_wins,
 			   				'chips'=>$chips,
-			   				'win'=>$win,
 			   				'lucky_number'=>$lucky_number,
 			   				'drawtime'=>$drawtime,
 			   				'trans_time'=>$trans_time,
