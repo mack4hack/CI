@@ -60,7 +60,7 @@ class Bets extends REST_Controller
             
             $commission = $jodi_data['bet_amount'] * 0.05;
 
-            $data = array('game_type' => 1, 'player_id' => $this->post('player_id'), 'digit' => $jodi_data['digit'], 'bet_amount' => $jodi_data['bet_amount'], 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s'),'transaction_id' =>$transaction_id,'commission' =>$$commission   );
+            $data = array('game_type' => 1, 'player_id' => $this->post('player_id'), 'digit' => $jodi_data['digit'], 'bet_amount' => $jodi_data['bet_amount'], 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s'),'transaction_id' =>$transaction_id,'commission' =>$commission   );
             
             $history = array('game_type' => 1, 'player_id' => $this->post('player_id'), 'bet_amount' => $jodi_data['bet_amount'], 'first_digit' => $jodi_data['digit'], 'second_digit' => null, 'jodi_digit' => null, 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId() ,'transaction_id' =>$transaction_id   )  ;
             
