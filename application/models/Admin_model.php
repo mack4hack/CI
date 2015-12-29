@@ -409,17 +409,20 @@ function delete_dealer($id)
      	}
         
              public function restore_amount($users){
-                      
+                     
                      $result['failed_users'] = array();
+                     $result['error'] = '';
+                     $result['success'] = '';
                         foreach($users as $user){
                                      $this->db->select("present_amount,deposited_amount,sunday_amount");
                                      $this->db->from("user_master"); 
-                                     $this->db->where("id ",$user);
+                                     $this->db->where("id",$user);
                                      $query = $this->db->get()->row();
                                     $present_amount = $query->present_amount;                 
                                     $deposited_amount = $query->deposited_amount;                 
                                     $sunday_amount = $query->sunday_amount;        
-                                    
+                                    //echo "<pre>";
+                                      //                                  print_r($query) ;die;
                                     if( $sunday_amount != 0.00){
                                         
 //                                             if($sunday_amount > $deposited_amount){
@@ -444,7 +447,8 @@ function delete_dealer($id)
                                                  
                                         $amount = $present_amount - $sunday_amount;
                                         $amount1 = $amount + $deposited_amount;
-                                         $data = array(
+                                      //echo $amount."--".$amount1;die;
+                                        $data = array(
 					
 				"present_amount" => $amount1,
 				"is_restored" => 1,
@@ -452,14 +456,17 @@ function delete_dealer($id)
 				"sunday_amount" => 0,
 					
                                                         );
+                                        
+                                              //echo "<pre>";print_r($data);die;
                                                         $this->db->where('id', $user);
                                                         $this->db->update('user_master', $data);
-                                        
+                                                        $result['success'] = "Amount restored successfully";
                                         
                                         
                                     }else{
                                         
                                                    $result['failed_users'][] = $user;
+                                                   $result['error'] = "Amount restored successfully";
                                     }
                          }
                          return $result;
@@ -596,7 +603,7 @@ function delete_dealer($id)
              $this->db->set('sunday_amount','present_amount',FALSE);
              $this->db->where('role_id',3);
              $this->db->update('user_master');
-             // echo    $this->db->last_query();die;
+             //echo    $this->db->last_query();die;
         }
 
 	function getDailyHistory($day)
