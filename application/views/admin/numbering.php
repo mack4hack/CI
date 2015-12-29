@@ -3,29 +3,13 @@
 	<div class="page-content-wrapper">
 		<div class="page-content" >
 		
-		<div class="row">
-		  <div class="col-md-12">
-		    <div class="well margin-top-20">
-				<div class="row">
-					<div class="col-sm-3">
-						<strong>Select Month : </strong>
-						<select name="month" id="month">
-						<option value="">--Select Month--</option>
-						<?php foreach ($months as $month) { ?>
-							<option value="<?php echo $month['no'];?>"><?php echo $month['name'];?></option>
-						<?php } ?>
-						</select>
-					</div>
-				</div>
-			</div>
-          </div>
-        </div>
-                    <div id="loadingDiv" style="padding: 5% 0 0 30%;" ><img src="<?php echo base_url();  ?>images/ajax-loader.gif" />  </div>
+		
+<!--                    <div id="loadingDiv" style="padding: 5% 0 0 30%;" ><img src="<?php echo base_url();  ?>images/ajax-loader.gif" />  </div>-->
             <div id="mack">
-				<div class="row">
+					<div class="row">
 					<div class="col-md-12" >
 							<!-- BEGIN CHART PORTLET-->
-							    <div class="portlet light bordered">
+							    <div class="portlet light bordered ">
 								
 								   <div class="portlet-title">
 									<div class="caption">
@@ -33,9 +17,9 @@
 										<span class="caption-subject bold uppercase font-green-haze">Monthly Numbering Chart</span>
 									</div>
 								  </div>
-								<!-- 
+								<?php //echo "<pre>";print_r($data);die;?>
 								<div class="portlet-body">
-								 <table class="table table-bordered table-hover">
+								 <table class="table table-bordered table-hover ">
 								   <?php foreach($data as $key =>$value ) { 
                                                                                                                                                         if($key == 0) {  ?> 
                                                                                                                                                          <thead>   <tr>
@@ -63,7 +47,7 @@
                                                                     
                                                                                                                                                 
                                                                                                                                                    </table>
-								</div> -->
+								</div>
 							</div>
 							<!-- END CHART PORTLET-->
 					</div>
@@ -101,22 +85,33 @@ Demo.init(); // init demo features
 });
 
     //$( "#mack" ).empty();
-    $('#month').on('change',function(){
-    	var month = $(this).val();
-                 if(month !=''){
-    	$('#mack').load('<?php echo base_url("/admin/ajaxnumberingchart?month="); ?>'+month,function () {
-        // $(this).unwrap();
-                   });
-               }	
-    });
-    $('#loadingDiv')
-    .hide()  // Hide it initially
-    .ajaxStart(function() {
-        $(this).show();
-    })
-    .ajaxStop(function() {
-        $(this).hide();
-    })
-;
+    
+    	
+                 
+//    	$('#mack').load('<?php echo base_url("/admin/ajaxnumberingchart"); ?>',function () {
+//                      
+//                   });
+//              	
+//    
+//    $('#loadingDiv')
+//    .hide()  // Hide it initially
+//    .ajaxStart(function() {
+//        $(this).show();
+//    })
+//    .ajaxStop(function() {
+//        $(this).hide();
+//    });
+
+
+
 
 </script>
+<style type="text/css">
+  .portlet.light .portlet-body {
+    max-height: 500px;
+    overflow: scroll;
+    padding-top: 8px;
+}
+</style>
+
+

@@ -882,126 +882,107 @@ class Admin extends CI_Controller
     }
     
     public function Numbering_chart() {
-        
-        $number = 31;
-        
-        //  if(isset($_GET['month']))
-        //  {
-        
-        $result['months'] = array(
-        array('no' => date("Y-m"), 'name' => date("F Y")), array('no' => date("Y-m", strtotime("-1 Months")), 'name' => date("F Y", strtotime("-1 Months"))));
-        
-        /*$var  = explode('-', $_GET['month']);
-                           $year = $var[0];
-                           $month = $var[1];
-                                    $number = cal_days_in_month(CAL_GREGORIAN, $month, $year);
-                                   
-                       
-                                    
-                                        $result['lucky_numbers']=$this->Bets_model->getLuckyNumberAccToMonth($_GET['month']);*/
-        
-        //print_r($result['lucky_numbers']); die;
-        
-        //$result['time_slots'] = $time_slots;
-        
-        /*$result['number'] = $number;
-                        for($i=0*60;$i<24*60;$i+=15){
-                        $hr = floor($i/60);
-                        if($hr < 9)
-                                $hr = '0'.$hr;
-        
-                        $min = ($i/60-floor($i/60))*60;
-                        if($min < 9)
-                          $min = '0'.$min;
-        
-                          $start = $hr . ":" . $min;
-        
-                          $newTime = date('H:i',strtotime($start." +15 minutes"));
-                          $time_slots[] = $start." To ".$newTime;
-                         
-                          $time_slots1[] = array('start' => $start,'end' => $newTime, );
-                          
-                        }         
-                                    
-                       $result['data'] =array();
-                               
-                       for($i=0 ; $i<=96; $i++){
-         
-                        //   for($j=0 ; $j <= $number; $j++){
-                                     
-           if($i == 0){
-               for($j=0 ; $j <= $number; $j++){
-                if($j==0){
-                  $result['data'][$i][$j] = array(
-        
-                     'digit' => "Time slot",
-        
-                 );
-                }else{
-                $result['data'][$i][$j] = array(
-        
-                       'digit' => $j,
-        
-                 );
-                }
-                   }
-           }
-           if($i > 0){
-               for($j=0 ; $j <= $number; $j++){
-                 
-                if($j==0){
-                  
-                  foreach ($time_slots as $k => $v){
-                                                                                                                                                 
-                       if( $k == $i-1){
-                         $digit =  $v;
-                       }
-                     }
-                  
-                  $result['data'][$i][$j] = array(
-        
-                     'digit' => $digit,
-        
-                 );
-                }else{
+          $result['lucky_numbers'] = $this->Bets_model->getLuckyNumberAccToMonth();
+            
+            
+            $result['number'] = 60;
+            for ($i = 0 * 60; $i < 24 * 60; $i+= 15) {
+                $hr = floor($i / 60);
+                if ($hr <= 9) $hr = '0' . $hr;
                 
-                  foreach($result['lucky_numbers'] as $lucky){
-                     if($lucky['date'] == $j && $lucky['timeslot_id'] == $i){
-                       
-                        $digit = $lucky['lucky_number'];  
-                             $result['data'][$i][$j] = array(
-        
-                           'digit' => $digit,
-        
-                        );break;
-        
-                     }else{
-                       
-                      $result['data'][$i][$j] = array(
-        
-                           'digit' => '',
-        
-                        );
-        
-                       }
-                  
-                     
-                  }
-                  // echo "<pre>";print_r($result['data']); 
-                                          
+                $min = ($i / 60 - floor($i / 60)) * 60;
+                if ($min <= 9) $min = '0' . $min;
+                
+                $start = $hr . ":" . $min;
+                $startTime = date('h:i a', strtotime($start));
+                $newTime = date('h:i a', strtotime($start . " +15 minutes"));
+                
+                //$time_slots[] = $start." To ".$newTime;
+                $time_slots[] = $startTime;
+                
+                $time_slots1[] = array('start' => $start, 'end' => $newTime,);
+            }
+            
+            $days = array();
+            date_default_timezone_set("Asia/Calcutta");
+            $now = getdate();
+            $now['minutes'] = $now['minutes'] - 1;
+            $minutes = $now['minutes'] - $now['minutes'] % 15;
+            if($minutes<=9){
+                $minutes = "0".$minutes;
+            }
+            $current_month = $now['year'] . "-" . $now['mon'] . "-" . $now['mday'];
+            $pre_date = date('Y-m-d', strtotime('-60 days', strtotime($current_month)));
+            for($a=1;$a<=60;$a++){
+                $date =   date('Y-m-d', strtotime('+'.$a.' days', strtotime($pre_date)));
+                $date1 =   date('d-m', strtotime('+'.$a.' days', strtotime($pre_date)));
+                $days1[$a] = $date1;    
+                $days[$a] = $date;    
+            }
+            
+            //echo "<pre>";print_r($time_slots);die;
+            //echo "<pre>";print_r($result['lucky_numbers']);die;
+            $result['data'] = array();
+            
+            for ($i = 0; $i <= 96; $i++) {
+                
+                //   for($j=0 ; $j <= $number; $j++){
+                
+                if ($i == 0) {
+                    for ($j = 0; $j <= 60; $j++) {
+                        if ($j == 0) {
+                            $result['data'][$i][$j] = array(
+                            'digit' => "Time slot",);
+                        } 
+                        else {
+                            $result['data'][$i][$j] = array(
+                           'digit' => $days1[$j],);
+                        }
+                    }
                 }
-                   }
-           }
-                          //    }  
-                           }*/
-        
-        //   }
-        
-        //die;
-        
-        // echo "<pre>";print_r($result['data']);die;
-        if (!$this->ion_auth->logged_in()) redirect('auth/login', 'refresh');
-        else $this->load->view('admin/numbering', $result);
+                if ($i > 0) {
+                    for ($j = 0; $j <= 60; $j++) {
+                        
+                        if ($j == 0) {
+                            
+                            foreach ($time_slots as $k => $v) {
+                                
+                                if ($k == $i - 1) {
+                                    $digit = $v;
+                                }
+                            }
+                            
+                            $result['data'][$i][$j] = array(
+                            'digit' => $digit,);
+                        } 
+                        else {
+                            
+                            foreach ($result['lucky_numbers'] as $lucky) {
+                                if ($lucky['date'] == $days[$j] && $lucky['timeslot_id'] == $i) {
+                                    
+                                    $digit = $lucky['lucky_number'];
+                                    if ($digit < 10) {
+                                        $digit = "0" . $digit;
+                                    }
+                                    $result['data'][$i][$j] = array(
+                                    'digit' => $digit,);
+                                    break;
+                                } 
+                                else {
+                                    
+                                    $result['data'][$i][$j] = array(
+                                    'digit' => '',);
+                                }
+                            }
+                        }
+                    }
+                }
+                
+
+                
+            }
+    if (!$this->ion_auth->logged_in()) redirect('auth/login', 'refresh');
+        else $this->load->view('admin/numbering',$result);
        // $this->load->view('admin/numbering', $result);
     }
     
@@ -1086,24 +1067,24 @@ class Admin extends CI_Controller
     }
     
     public function ajaxNumberingChart() {
-        $number = 31;
-        if (isset($_GET['month'])) {
+     //   $number = 31;
+   //     if (isset($_GET['month'])) {
             
-            $result['months'] = array(
-            array('no' => date("Y-m"), 'name' => date("F Y")), array('no' => date("Y-m", strtotime("-1 Months")), 'name' => date("F Y", strtotime("-1 Months"))));
+            //$result['months'] = array(
+            //array('no' => date("Y-m"), 'name' => date("F Y")), array('no' => date("Y-m", strtotime("-1 Months")), 'name' => date("F Y", strtotime("-1 Months"))));
             
-            $var = explode('-', $_GET['month']);
-            $year = $var[0];
-            $month = $var[1];
-            $number = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+            //$var = explode('-', $_GET['month']);
+            //$year = $var[0];
+            //$month = $var[1];
+            //$number = cal_days_in_month(CAL_GREGORIAN, $month, $year);
             
-            $result['lucky_numbers'] = $this->Bets_model->getLuckyNumberAccToMonth($_GET['month']);
+            $result['lucky_numbers'] = $this->Bets_model->getLuckyNumberAccToMonth();
             
             //print_r($result['lucky_numbers']); die;
             
             //$result['time_slots'] = $time_slots;
             
-            $result['number'] = $number;
+            $result['number'] = 60;
             for ($i = 0 * 60; $i < 24 * 60; $i+= 15) {
                 $hr = floor($i / 60);
                 if ($hr <= 9) $hr = '0' . $hr;
@@ -1121,6 +1102,23 @@ class Admin extends CI_Controller
                 $time_slots1[] = array('start' => $start, 'end' => $newTime,);
             }
             
+            $days = array();
+            date_default_timezone_set("Asia/Calcutta");
+            $now = getdate();
+            $now['minutes'] = $now['minutes'] - 1;
+            $minutes = $now['minutes'] - $now['minutes'] % 15;
+            if($minutes<=9){
+                $minutes = "0".$minutes;
+            }
+            $current_month = $now['year'] . "-" . $now['mon'] . "-" . $now['mday'];
+            $pre_date = date('Y-m-d', strtotime('-60 days', strtotime($current_month)));
+            for($a=1;$a<=60;$a++){
+                $date =   date('Y-m-d', strtotime('+'.$a.' days', strtotime($pre_date)));
+                $days[$a] = $date;    
+            }
+            
+            //echo "<pre>";print_r($time_slots);die;
+            //echo "<pre>";print_r($result['lucky_numbers']);die;
             $result['data'] = array();
             
             for ($i = 0; $i <= 96; $i++) {
@@ -1128,19 +1126,19 @@ class Admin extends CI_Controller
                 //   for($j=0 ; $j <= $number; $j++){
                 
                 if ($i == 0) {
-                    for ($j = 0; $j <= $number; $j++) {
+                    for ($j = 0; $j <= 60; $j++) {
                         if ($j == 0) {
                             $result['data'][$i][$j] = array(
                             'digit' => "Time slot",);
                         } 
                         else {
                             $result['data'][$i][$j] = array(
-                            'digit' => $j,);
+                            'digit' => $days[$j],);
                         }
                     }
                 }
                 if ($i > 0) {
-                    for ($j = 0; $j <= $number; $j++) {
+                    for ($j = 0; $j <= 60; $j++) {
                         
                         if ($j == 0) {
                             
@@ -1157,7 +1155,7 @@ class Admin extends CI_Controller
                         else {
                             
                             foreach ($result['lucky_numbers'] as $lucky) {
-                                if ($lucky['date'] == $j && $lucky['timeslot_id'] == $i) {
+                                if ($lucky['date'] == $days[$j] && $lucky['timeslot_id'] == $i) {
                                     
                                     $digit = $lucky['lucky_number'];
                                     if ($digit < 10) {
@@ -1184,7 +1182,7 @@ class Admin extends CI_Controller
                 //    }
                 
             }
-        }
+       
         
         //die;
 //      /  echo "<pre>";print_r($result);die;

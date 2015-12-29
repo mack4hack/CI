@@ -10,7 +10,7 @@
 										<span class="caption-subject bold uppercase font-green-haze">Monthly Numbering Chart</span>
 									</div>
 								  </div>
-								
+								<?php //echo "<pre>";print_r($data);die;?>
 								<div class="portlet-body">
 								 <table class="table table-bordered table-hover">
 								   <?php foreach($data as $key =>$value ) { 
