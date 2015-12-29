@@ -629,7 +629,7 @@ function delete_dealer($id)
             $val_end = date("H:i", strtotime($start . " +15 minutes"));
             $display = date("h:i a", strtotime($val_end));
             
-            $timeslot_range = $start.' To '.$val_end;
+            $timeslot_range = $day.' '.$val_start.' To '.$val_end;
 
             $timeslots[] = array('date'=>$day,'timeslot'=>$display,'timeslot_id'=>$timeslot_id,'timeslot_range'=>$timeslot_range);  #array('value' => $val_start . " To " . $val_end, 'display' => $display,);
             $timeslot_id++;

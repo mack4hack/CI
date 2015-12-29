@@ -176,6 +176,8 @@ ALTER TABLE `game_lottery`  CHANGE `bet_amount` `bet_amount` DECIMAL(10,2) NOT N
 
 ALTER TABLE `user_master` ADD `city` VARCHAR( 32 ) NOT NULL AFTER `city_id` ;
 
+ALTER TABLE `game_lottery` ADD `commission` DECIMAL(10,2) NOT NULL ;
+
 
 
 

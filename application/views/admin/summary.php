@@ -39,7 +39,7 @@
 											</div>
 											<div class="col-sm-2">
 												<a href="javascript:;" class="btn red">
-													Commission :		<span id="payout"><?php if(!empty($total_payout->payout)){
+													Commission :		<span id="payout"><?php if(!empty($total_payout->commission)){
 															//echo $total_payout->payout;
 															}else{
 																echo "0";

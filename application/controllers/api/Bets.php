@@ -58,7 +58,9 @@ class Bets extends REST_Controller
             
             $payout = ($jodi_data['bet_amount'] * 8.5);
             
-            $data = array('game_type' => 1, 'player_id' => $this->post('player_id'), 'digit' => $jodi_data['digit'], 'bet_amount' => $jodi_data['bet_amount'], 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s'),'transaction_id' =>$transaction_id   );
+            $commission = $jodi_data['bet_amount'] * 0.05;
+
+            $data = array('game_type' => 1, 'player_id' => $this->post('player_id'), 'digit' => $jodi_data['digit'], 'bet_amount' => $jodi_data['bet_amount'], 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s'),'transaction_id' =>$transaction_id,'commission' =>$commission   );
             
             $history = array('game_type' => 1, 'player_id' => $this->post('player_id'), 'bet_amount' => $jodi_data['bet_amount'], 'first_digit' => $jodi_data['digit'], 'second_digit' => null, 'jodi_digit' => null, 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId() ,'transaction_id' =>$transaction_id   )  ;
             
@@ -164,8 +166,10 @@ class Bets extends REST_Controller
         foreach ($this->post('data') as $jodi_data) {
             
             $payout = ($jodi_data['bet_amount'] * 8.5);
+
+            $commission = $jodi_data['bet_amount'] * 0.05;
             
-            $data = array('game_type' => 2, 'player_id' => $this->post('player_id'), 'digit' => $jodi_data['digit'], 'bet_amount' => $jodi_data['bet_amount'], 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s') ,'transaction_id' =>$transaction_id   );
+            $data = array('game_type' => 2, 'player_id' => $this->post('player_id'), 'digit' => $jodi_data['digit'], 'bet_amount' => $jodi_data['bet_amount'], 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s') ,'transaction_id' =>$transaction_id,'commission' =>$commission   );
             
             $history = array('game_type' => 2, 'player_id' => $this->post('player_id'), 'bet_amount' => $jodi_data['bet_amount'], 'first_digit' => null, 'second_digit' => $jodi_data['digit'], 'jodi_digit' => null, 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId() ,'transaction_id' =>$transaction_id  );
             
@@ -265,8 +269,10 @@ class Bets extends REST_Controller
         foreach ($this->post('data') as $jodi_data) {
             
             $payout = ($jodi_data['bet_amount'] * 85);
+
+            $commission = $jodi_data['bet_amount'] * 0.05;
             
-            $data = array('game_type' => 3, 'player_id' => $this->post('player_id'), 'digit' => $jodi_data['digit'], 'bet_amount' => $jodi_data['bet_amount'], 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s') ,'transaction_id' =>$transaction_id  );
+            $data = array('game_type' => 3, 'player_id' => $this->post('player_id'), 'digit' => $jodi_data['digit'], 'bet_amount' => $jodi_data['bet_amount'], 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s') ,'transaction_id' =>$transaction_id,'commission' =>$commission  );
             
             $history = array('game_type' => 3, 'player_id' => $this->post('player_id'), 'bet_amount' => $jodi_data['bet_amount'], 'first_digit' => null, 'second_digit' => null, 'jodi_digit' => $jodi_data['digit'], 'payout' => $payout, 'timeslot' => date('Y-m-d H:i:s'), 'timeslot_id' => $this->Admin_model->getTimeslotId() ,'transaction_id' =>$transaction_id  );
             
