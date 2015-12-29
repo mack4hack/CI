@@ -409,17 +409,20 @@ function delete_dealer($id)
      	}
         
              public function restore_amount($users){
-                      
+                     
                      $result['failed_users'] = array();
+                     $result['error'] = '';
+                     $result['success'] = '';
                         foreach($users as $user){
                                      $this->db->select("present_amount,deposited_amount,sunday_amount");
                                      $this->db->from("user_master"); 
-                                     $this->db->where("id ",$user);
+                                     $this->db->where("id",$user);
                                      $query = $this->db->get()->row();
                                     $present_amount = $query->present_amount;                 
                                     $deposited_amount = $query->deposited_amount;                 
                                     $sunday_amount = $query->sunday_amount;        
-                                    
+                                    //echo "<pre>";
+                                      //                                  print_r($query) ;die;
                                     if( $sunday_amount != 0.00){
                                         
 //                                             if($sunday_amount > $deposited_amount){
@@ -444,7 +447,8 @@ function delete_dealer($id)
                                                  
                                         $amount = $present_amount - $sunday_amount;
                                         $amount1 = $amount + $deposited_amount;
-                                         $data = array(
+                                      //echo $amount."--".$amount1;die;
+                                        $data = array(
 					
 				"present_amount" => $amount1,
 				"is_restored" => 1,
@@ -452,14 +456,17 @@ function delete_dealer($id)
 				"sunday_amount" => 0,
 					
                                                         );
+                                        
+                                              //echo "<pre>";print_r($data);die;
                                                         $this->db->where('id', $user);
                                                         $this->db->update('user_master', $data);
-                                        
+                                                        $result['success'] = "Amount restored successfully";
                                         
                                         
                                     }else{
                                         
                                                    $result['failed_users'][] = $user;
+                                                   $result['error'] = "Amount restored successfully";
                                     }
                          }
                          return $result;
@@ -596,7 +603,7 @@ function delete_dealer($id)
              $this->db->set('sunday_amount','present_amount',FALSE);
              $this->db->where('role_id',3);
              $this->db->update('user_master');
-             // echo    $this->db->last_query();die;
+             //echo    $this->db->last_query();die;
         }
 
 	function getDailyHistory($day)
@@ -622,7 +629,7 @@ function delete_dealer($id)
             $val_end = date("H:i", strtotime($start . " +15 minutes"));
             $display = date("h:i a", strtotime($val_end));
             
-            $timeslot_range = $start.' To '.$val_end;
+            $timeslot_range = $day.' '.$val_start.' To '.$val_end;
 
             $timeslots[] = array('date'=>$day,'timeslot'=>$display,'timeslot_id'=>$timeslot_id,'timeslot_range'=>$timeslot_range);  #array('value' => $val_start . " To " . $val_end, 'display' => $display,);
             $timeslot_id++;
@@ -668,7 +675,7 @@ function delete_dealer($id)
 				//echo($this->db->last_query());
 
 				if($query){
-					$credited = number_format($query->credited, 2);
+					$credited = $query->credited;
 
 				}	
 
@@ -678,7 +685,7 @@ function delete_dealer($id)
 				$this->db->like('timeslot',$timeslot['date']);
 				$this->db->where('timeslot_id',$timeslot['timeslot_id']);
 				$query=$this->db->get()->row();
-				$debited =  number_format($query->debited, 2);
+				$debited =  $query->debited;
 
 				$this->db->select('total');
 				$this->db->from('admin_history');
@@ -691,7 +698,7 @@ function delete_dealer($id)
 			   	$day_total = 0;
 			   	if($query)
 			   	{
-				   	$day_total = number_format($query->total,2);
+				   	$day_total = $query->total;
 			   	}
 
 			    $this->db->select('sum(commission) as commission');
@@ -699,12 +706,13 @@ function delete_dealer($id)
 				$this->db->like('timeslot',$timeslot['date']);
 				$this->db->where('timeslot_id',$timeslot['timeslot_id']);
 			   	$query=$this->db->get()->row();
-			   	$commission = number_format($query->commission,2);
+			   	$commission = $query->commission;
 
 			   	//echo($this->db->last_query());
 
 			   	//$timespan = $this->getTimeslotById($timeslot->timeslot_id);
 			   	//$draw_time = explode(' To ', $timespan);
+			   	$profit = $credited -($debited + $commission); 
 			   	$draw_time = '';
 			   	$data[]= array(
 			   			'timeslot'=>$timeslot['timeslot'],
@@ -714,7 +722,7 @@ function delete_dealer($id)
 			   			'day_total'=>$day_total,
 			   			'final_total'=>$final_total,
 			   			'draw_time'=>  $timeslot['timeslot'], // date('d-m-y',strtotime($timeslot['timeslot'])).'  '.date('h:i a',strtotime($draw_time['1'])),
-			   			'profit'=>number_format($credited -($debited + $commission),2),
+			   			'profit'=> $profit,
 			   			'day'=>$day,
 			   			'timeslot_range'=>$timeslot['timeslot_range'],
 			   		);

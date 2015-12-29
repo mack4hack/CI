@@ -259,6 +259,12 @@ $('#restore_default').on('click',function(){
                                                            setTimeout(function() {
                                                               $(".alert-danger").hide('blind', {}, 500)
                                                            }, 3000);
+                                                            var dealer_id = $('#dealer_dropdown').val();
+                                                                                                if(dealer_id != -1){
+                                                                                      $('#players_list').load('<?php echo base_url("/admin/ajaxPlayersList?dealer_id="); ?>'+dealer_id,function () {
+                                                                                      // $(this).unwrap();
+                                                                                                 });
+                                                                                             }
                                                    }
                                                    
                                                 }

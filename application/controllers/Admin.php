@@ -856,7 +856,6 @@ class Admin extends CI_Controller
         $result = '';
         $users = json_decode($_POST['users']);
         if (!empty($users)) {
-            
             $result = $this->Admin_model->restore_amount($users);
         }
         
@@ -1188,7 +1187,7 @@ class Admin extends CI_Controller
         }
         
         //die;
-        
+//      /  echo "<pre>";print_r($result);die;
         // echo "<pre>";print_r($result['data']);die;
         $this->load->view('admin/ajax_numbering_chart', $result);
     }
