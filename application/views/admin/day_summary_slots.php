@@ -24,10 +24,10 @@
 										 Draw Time
 									</th>
 									<th>
-										 Credit
+										 Bet Chips
 									</th>
 									<th>
-										 Debit
+										 Wins
 									</th>
 									<th>
 										 Commission
