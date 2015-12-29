@@ -1368,10 +1368,10 @@ class Admin extends CI_Controller
             $result['data_weekly'] = $this->Admin_model->getAccounts($from, $monday);
             
             //die;
-            $this_week = date( 'Y-m-d', strtotime( 'monday this week' ) ).' TO '.date('Y-m-d'); 
-            $prev_first_week = date( 'Y-m-d', strtotime( '-2  Monday' ) ).' TO '.date( 'Y-m-d', strtotime( '-1  Sunday' ) );
-            $prev_second_week = date( 'Y-m-d', strtotime( '-3  Monday' ) ).' TO '.date( 'Y-m-d', strtotime( '-2  Sunday' ) ); 
-            $prev_third_week = date( 'Y-m-d', strtotime( '-4  Monday' ) ).' TO '.date( 'Y-m-d', strtotime( '-3  Sunday' ) ); 
+            $this_week = date( 'd-m-Y', strtotime( 'monday this week' ) ).' TO '.date('d-m-Y'); 
+            $prev_first_week = date( 'd-m-Y', strtotime( '-2  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-1  Sunday' ) );
+            $prev_second_week = date( 'd-m-Y', strtotime( '-3  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-2  Sunday' ) ); 
+            $prev_third_week = date( 'd-m-Y', strtotime( '-4  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-3  Sunday' ) ); 
 
 
             $from = date('Y-m-d');
@@ -1551,7 +1551,9 @@ class Admin extends CI_Controller
     {
         $weekarr = explode('TO', $_GET['week']);
         $from = $weekarr[0];
+        $from = date('Y-m-d',strtotime($from));
         $to = $weekarr[1];
+        $to = date('Y-m-d',strtotime($to));
         $result['data_weekly'] = $this->Admin_model->getAccounts($to, $from);
         $this->load->view('admin/accounts_weekly', $result);
     }
