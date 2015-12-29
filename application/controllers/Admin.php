@@ -1370,16 +1370,17 @@ class Admin extends CI_Controller
             $result['data_weekly'] = $this->Admin_model->getAccounts($from, $monday);
             
             //die;
-            /*echo $this_week = $mon = date( 'Y-m-d', strtotime( 'monday this week' ) ).' TO '.$today = date('Y-m-d'); 
-            echo $prev_first_week = date( 'Y-m-d', strtotime( '-2  Monday' ) ).' TO '.date( 'Y-m-d', strtotime( '-1  Sunday' ) );
-            echo $prev_second_week = date( 'Y-m-d', strtotime( '-3  Monday' ) ).' TO '.date( 'Y-m-d', strtotime( '-2  Sunday' ) ); 
-            echo $prev_third_week = date( 'Y-m-d', strtotime( '-4  Monday' ) ).' TO '.date( 'Y-m-d', strtotime( '-3  Sunday' ) );  die;*/
+            $this_week = date( 'Y-m-d', strtotime( 'monday this week' ) ).' TO '.date('Y-m-d'); 
+            $prev_first_week = date( 'Y-m-d', strtotime( '-2  Monday' ) ).' TO '.date( 'Y-m-d', strtotime( '-1  Sunday' ) );
+            $prev_second_week = date( 'Y-m-d', strtotime( '-3  Monday' ) ).' TO '.date( 'Y-m-d', strtotime( '-2  Sunday' ) ); 
+            $prev_third_week = date( 'Y-m-d', strtotime( '-4  Monday' ) ).' TO '.date( 'Y-m-d', strtotime( '-3  Sunday' ) ); 
 
 
             $from = date('Y-m-d');
             $to = date('Y-m-d', strtotime("-1 month", strtotime($from)));
             $from = date('Y-m-d', strtotime("1 day", strtotime($from)));
-            $result['data_monthly'] = $this->Admin_model->getAccounts($from, $to);
+            //$result['data_monthly'] = $this->Admin_model->getAccounts($from, $to);
+            $result['data_monthly'] = array($prev_third_week,$prev_second_week,$prev_first_week,$this_week);
 
             $this->load->view('admin/accounts', $result);
         }
@@ -1547,6 +1548,14 @@ class Admin extends CI_Controller
     {
          
             $this->load->view('admin/ajax_list_players','');
+    }
+    public function accountsWeekly()
+    {
+        $weekarr = explode('TO', $_GET['week']);
+        $from = $weekarr[0];
+        $to = $weekarr[1];
+        $result['data_weekly'] = $this->Admin_model->getAccounts($to, $from);
+        $this->load->view('admin/accounts_weekly', $result);
     }
     
 }
