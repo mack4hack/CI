@@ -885,7 +885,7 @@ class Admin extends CI_Controller
           $result['lucky_numbers'] = $this->Bets_model->getLuckyNumberAccToMonth();
             
             
-            $result['number'] = 60;
+            $result['number'] = 62;
             for ($i = 0 * 60; $i < 24 * 60; $i+= 15) {
                 $hr = floor($i / 60);
                 if ($hr <= 9) $hr = '0' . $hr;
@@ -913,7 +913,7 @@ class Admin extends CI_Controller
             }
             $current_month = $now['year'] . "-" . $now['mon'] . "-" . $now['mday'];
             $pre_date = date('Y-m-d', strtotime('-60 days', strtotime($current_month)));
-            for($a=1;$a<=60;$a++){
+            for($a=1;$a<=62;$a++){
                 $date =   date('Y-m-d', strtotime('+'.$a.' days', strtotime($pre_date)));
                 $date1 =   date('d-m', strtotime('+'.$a.' days', strtotime($pre_date)));
                 $days1[$a] = $date1;    
@@ -929,7 +929,7 @@ class Admin extends CI_Controller
                 //   for($j=0 ; $j <= $number; $j++){
                 
                 if ($i == 0) {
-                    for ($j = 0; $j <= 60; $j++) {
+                    for ($j = 0; $j <= 62; $j++) {
                         if ($j == 0) {
                             $result['data'][$i][$j] = array(
                             'digit' => "Time slot",);
@@ -941,7 +941,7 @@ class Admin extends CI_Controller
                     }
                 }
                 if ($i > 0) {
-                    for ($j = 0; $j <= 60; $j++) {
+                    for ($j = 0; $j <= 62; $j++) {
                         
                         if ($j == 0) {
                             
