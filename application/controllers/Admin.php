@@ -1431,11 +1431,17 @@ class Admin extends CI_Controller
 
             $result['data_weekly'] = $this->Admin_model->getAccountsDealer($from, $monday, $dealer_id);
             
-            //die;
+            $this_week = date( 'd-m-Y', strtotime( 'monday this week' ) ).' TO '.date('d-m-Y'); 
+            $prev_first_week = date( 'd-m-Y', strtotime( '-1  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-1  Sunday' ) );
+            $prev_second_week = date( 'd-m-Y', strtotime( '-2  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-2  Sunday' ) ); 
+            $prev_third_week = date( 'd-m-Y', strtotime( '-3  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-3  Sunday' ) ); 
+
+
             $from = date('Y-m-d');
             $to = date('Y-m-d', strtotime("-1 month", strtotime($from)));
             $from = date('Y-m-d', strtotime("1 day", strtotime($from)));
-            $result['data_monthly'] = $this->Admin_model->getAccountsDealer($from, $to, $dealer_id);
+            //$result['data_monthly'] = $this->Admin_model->getAccounts($from, $to);
+            $result['data_monthly'] = array($prev_third_week,$prev_second_week,$prev_first_week,$this_week);
 
             $this->load->view('admin/accounts_dealer', $result);
         }
@@ -1556,6 +1562,16 @@ class Admin extends CI_Controller
         $to = date('Y-m-d',strtotime($to));
         $result['data_weekly'] = $this->Admin_model->getAccounts($to, $from);
         $this->load->view('admin/accounts_weekly', $result);
+    }
+    public function dealerAccountsWeekly()
+    {
+        $weekarr = explode('TO', $_GET['week']);
+        $from = $weekarr[0];
+        $from = date('Y-m-d',strtotime($from));
+        $to = $weekarr[1];
+        $to = date('Y-m-d',strtotime($to));
+        $result['data_weekly'] = $this->Admin_model->getAccountsDealer($to, $from,83);
+        $this->load->view('admin/dealer_accounts_weekly', $result);
     }
     
 }

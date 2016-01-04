@@ -134,48 +134,31 @@
                                 <div class="tab-pane" id="tab_1_1_3">
                                     <table class="table table-bordered table-hover">
                                         <thead>
-                                        	<tr><th colspan="6">Month : <?php if(!empty($data_monthly)  ) {
-                                            foreach($data_monthly as $dm){ echo $dm['month']; break;}} ?></th></tr>
                                             <tr>
                                                 <th>
                                                     Sr No
                                                 </th>
                                                 <th>
-                                                    Player Code
-                                                </th>
-                                                <th>
-                                                    Bet Chips
-                                                </th>
-                                                <th>
-                                                    Wining Payout
-                                                </th>
-                                                <th>
-                                                    Commission
-                                                </th>
-                                                <th>
-                                                    Balance
+                                                    Week
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php if(!empty($data_monthly)  ) {
-                                            foreach($data_monthly as $dm){ $player_id = $dm['player_id']; ?>
-                                            <tr class="success">
-                                                <td><?php echo $dm['sr_no']; ?></td>
-                                                <td><a href="<?php echo base_url("/admin/accountsplayer?player_id=$player_id") ?>"><?php echo $dm['user_code']; ?></a></td>
-                                                <td><?php echo $dm['bet_amount']; ?></td>
-                                                <td><?php echo $dm['payout']; ?></td>
-                                                <td><?php echo $dm['commission']; ?></td>
-                                                <td><?php echo $dm['balance']; ?></td>
-                                            <!--<td><?php //echo $draw['profit']; ?></td>-->
+                                                $i=1;
+                                            foreach($data_monthly as $dm){  ?>
+                                             <tr class="success">
+                                                <td><?php echo $i; ?></td>
+                                                <td id="week"><a value="<?php echo $dm; ?>"><?php echo $dm; ?></td>
                                             </tr>
-                                             <?php    } ?>
-                                            <tr><td>Total</td><td></td><td><?php echo $dm['total_bet']; ?></td><td><?php echo $dm['total_wins']; ?></td><td><?php echo $dm['total_commission']; ?></td><td><?php echo $dm['total_balance']; ?></td></tr>
+                                             <?php  $i++;  } ?>
                                         <?php    }else{ ?>
                                             <tr class='active'><th style='text-align:center'; colspan='6'>No Records Found</th></tr>
                                             <?php  } ?>
                                         </tbody>
                                     </table>
+                                    <div id="mack">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -201,6 +184,20 @@ QuickSidebar.init(); // init quick sidebar
 Demo.init(); // init demo features
 });
 </script>
+
+<script type="text/javascript">
+    
+    $('.table #week').each(function(){
+        $(this).click(function(){
+            week = $(this).find('a').attr('value');
+            week = encodeURIComponent(week);
+            $('#mack').load('<?php echo base_url("/admin/dealeraccountsweekly?week="); ?>'+week,function () { });
+            return false;
+        });
+    });
+
+</script>
+
 <style type="text/css">
 @media print {
     .print {
