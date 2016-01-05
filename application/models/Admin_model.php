@@ -1445,4 +1445,109 @@ function delete_dealer($id)
 	  	return $data;
 	}
 
+	function getAccountsPlayerByWeek($player_id)
+	{
+		// $player_id = $_GET['player_id'];
+			//if(isset($_GET['dealer_id'])){
+			$this->db->select('user_code');
+	     	$this->db->from('user_master');
+		    $this->db->where('id',$player_id);
+		    $query=$this->db->get()->row();;
+		    $user_code =  $query->user_code;
+
+		    $i=1;
+
+			$mon = date( 'Y-m-d', strtotime( 'monday this week' ) );
+			$tue = date( 'Y-m-d', strtotime( 'tuesday this week' ) );
+			$wed = date( 'Y-m-d', strtotime( 'wednesday this week' ) );
+			$thr = date( 'Y-m-d', strtotime( 'thursday this week' ) );
+			$fri = date( 'Y-m-d', strtotime( 'friday this week' ) );
+            $sat = date( 'Y-m-d', strtotime( 'saturday this week' ) );
+            $sun = date( 'Y-m-d', strtotime( 'sunday this week' ) );
+
+			$week_days = array($mon,$tue,$wed,
+								$thr,$fri,$sat,$sun,);
+
+				/*echo "<pre>";
+				print_r($week_days); die;*/
+			$total_bet = 0 ;
+			$total_wins = 0;
+			$total_balance = 0;
+			$total_commission = 0;
+
+		    foreach ($week_days as $day) {
+		    	
+
+		    	///$day = $to.' 00:00:00'; 
+		    	//$from = $from.' 23:59:59'; 
+
+		    	$this->db->select('sum(bet_amount) as bet_amount');
+				$this->db->from('player_history');
+				// $this->db->where('bet_amount >= 0');
+				//$where = 'player_id = "'.$player->player_id.'" AND (timeslot BETWEEN "'.$to.'" AND  "'.$from.'")';
+				$where = 'player_id = "'.$player_id.'" AND timeslot LIKE "%'.$day.'%"';
+				$this->db->where($where);
+				$query=$this->db->get()->row();
+				$bet_amount = 0;
+				 // echo($this->db->last_query());  die;
+				if($query){
+					$bet_amount = $query->bet_amount;
+				}
+
+				$this->db->select('sum(payout) as payout');
+				$this->db->from('player_history');
+				$this->db->where('result','1');
+				$where = 'player_id = "'.$player_id.'" AND timeslot LIKE "%'.$day.'%"';
+				$this->db->where($where);
+				$query=$this->db->get()->row();
+				$payout = 0;
+				// echo($this->db->last_query()); die;
+				if($query){
+					$payout = $query->payout;
+				}
+
+				/*$this->db->select('sum(payout) as payout');
+				$this->db->from('player_history');
+				$this->db->where('result','1');
+				$where = 'player_id = "'.$player->id.'" AND (timeslot BETWEEN "'.$to.'" AND  "'.$from.'")';
+				$this->db->where($where);
+				$query=$this->db->get()->row();
+				$payout = 0;
+				// echo($this->db->last_query()); die;
+				if($query){
+					$payout = $query->payout;
+				}*/	
+
+				$commission = $bet_amount*.05;
+				$balance = $bet_amount - $payout - $commission;
+
+				$total_bet = $total_bet+$bet_amount;
+				$total_wins = $total_wins+$payout;
+				$total_balance = $total_balance+$balance;
+				$total_commission = $total_commission + $commission;
+				$data[]= array(
+				   			'sr_no' => $i,
+				   			'user_code' => $user_code,
+				   			'date'=>$day,
+				   			'bet_amount'=>$bet_amount,
+				   			'payout'=>$payout,
+				   			'commission'=>number_format($commission,2),
+				   			'total_bet'=>number_format($total_bet,2),
+				   			'total_wins'=>number_format($total_wins,2),
+				   			'total_balance'=>number_format($total_balance,2),
+				   			'total_commission'=>number_format($total_commission,2),
+				   			//'week' => date('d-m-Y',strtotime($to)) .' To '.date('d-m-Y',strtotime($from)),
+				   			//'month' => date('M-Y'),
+				   			'balance'=>number_format($balance,2),
+				   			//'draw_time'=>  $timeslot['timeslot'], // date('d-m-y',strtotime($timeslot['timeslot'])).'  '.date('h:i a',strtotime($draw_time['1'])),
+				   			//'balance'=>$credited -($debited + $commission)
+				   		);
+				$i++;
+		    }
+		//}
+	   /* print_r($data);
+	   die;*/
+
+	    return $data;
+	}
 }
