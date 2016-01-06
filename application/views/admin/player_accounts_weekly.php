@@ -29,7 +29,7 @@
         ?>
         <tr class="success">
             <td><?php echo $dw['sr_no']; ?></td>
-            <td><a href="<?php echo base_url("/admin/accountsplayerbydate?date=$date&player_id=$player_id") ?>"><?php echo $dw['date']; ?></td>
+            <td id="week_player_day"><a date="<?php echo $date;?>" value="<?php echo $player_id ?>"><?php echo $dw['date']; ?></td>
             <td><?php echo $dw['bet_amount']; ?></td>
             <td><?php echo $dw['payout']; ?></td>
             <td><?php echo $dw['commission']; ?></td>
@@ -43,3 +43,21 @@
         <?php  } ?>
     </tbody>
 </table>
+<div id="mack4"></div>
+
+<script type="text/javascript">
+    
+    $('.table #week_player_day').each(function(){
+        //dealer_id = $('#dealer_id').val();
+        $(this).click(function(){
+            date = $(this).find('a').attr('date');
+            //week = '';
+            player_id = $(this).find('a').attr('value');
+            //user_code = $(this).find('a').text();
+            //week = encodeURIComponent(week);
+            $('#mack4').load('<?php echo base_url("/admin/accountsPlayerWeeklyByDate?date='+date+'&player_id="); ?>'+player_id,function () { });
+            return false;
+        });
+    });
+
+</script>

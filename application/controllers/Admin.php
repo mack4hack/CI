@@ -1589,5 +1589,25 @@ class Admin extends CI_Controller
         $result['data_weekly'] = $this->Admin_model->getAccountsPlayerByWeek($player_id,$to,$from);
         $this->load->view('admin/player_accounts_weekly', $result);
     }
+
+    public function accountsPlayerWeeklyByDate()
+    {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('auth/login', 'refresh');
+        }    
+        else{
+            //if(isset($_GET['week'])){
+                $player_id = $_GET['player_id'];
+                $date = $_GET['date'];
+                
+                $date = date('Y-m-d',strtotime($date));
+
+                $result['data_weekly'] = $this->Admin_model->getAccountsPlayerByDate($player_id,$date);
+                
+                $this->load->view('admin/accounts_player_weekly_bydate', $result);
+            //}    
+        }
+        
+    }
     
 }
