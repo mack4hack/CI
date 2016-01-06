@@ -1565,13 +1565,28 @@ class Admin extends CI_Controller
     }
     public function dealerAccountsWeekly()
     {
-        $weekarr = explode('TO', $_GET['week']);
+        $weekarr = explode('To', $_GET['week']);
         $from = $weekarr[0];
         $from = date('Y-m-d',strtotime($from));
         $to = $weekarr[1];
         $to = date('Y-m-d',strtotime($to));
-        $result['data_weekly'] = $this->Admin_model->getAccountsDealer($to, $from,83);
+        $dealer_id = $_GET['dealer_id'];
+        $result['data_weekly'] = $this->Admin_model->getAccountsDealer($to, $from,$dealer_id);
         $this->load->view('admin/dealer_accounts_weekly', $result);
+    }
+
+    public function playerAccountsWeekly()
+    {
+        //$weekarr = explode('To', $_GET['week']);
+        //$from = $weekarr[0];
+        //$from = date('Y-m-d',strtotime($from));
+        $from = '';
+        //$to = $weekarr[1];
+        //$to = date('Y-m-d',strtotime($to));
+        $to = '';
+        $player_id = $_GET['player_id'];
+        $result['data_weekly'] = $this->Admin_model->getAccountsPlayerByWeek($player_id);
+        $this->load->view('admin/player_accounts_weekly', $result);
     }
     
 }

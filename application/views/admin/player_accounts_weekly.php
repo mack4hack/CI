@@ -1,18 +1,18 @@
 <table class="table table-bordered table-hover">
     <thead>
-        <tr><th colspan="6">Dealer Code : <?php echo $_GET['user_code']; ?></th></tr>
+        <tr><th colspan="6">Player Code : <?php echo $_GET['user_code']; ?></th></tr>
         <tr>
             <th>
                 Sr No
             </th>
             <th>
-                Player Code
+                Date
             </th>
             <th>
-                Bet Chips
+                Total Chips
             </th>
             <th>
-                Debit
+                Total Payout
             </th>
             <th>
                 Commission
@@ -24,10 +24,12 @@
     </thead>
     <tbody>
         <?php if(!empty($data_weekly)  ) {
-        foreach($data_weekly as $dw){ $player_id = $dw['player_id']; ?>
-         <tr class="success">
+                $player_id = $_GET['player_id'];
+        foreach($data_weekly as $dw){  $date = $dw['date'];
+        ?>
+        <tr class="success">
             <td><?php echo $dw['sr_no']; ?></td>
-            <td id="week_player"><a attr="<?php echo $player_id ?>" value="<?php echo $player_id ?>"><?php echo $dw['user_code']; ?></td>
+            <td><a href="<?php echo base_url("/admin/accountsplayerbydate?date=$date&player_id=$player_id") ?>"><?php echo $dw['date']; ?></td>
             <td><?php echo $dw['bet_amount']; ?></td>
             <td><?php echo $dw['payout']; ?></td>
             <td><?php echo $dw['commission']; ?></td>
@@ -41,21 +43,3 @@
         <?php  } ?>
     </tbody>
 </table>
-<div id="mack3"></div>
-
-<script type="text/javascript">
-    
-    $('.table #week_player').each(function(){
-        dealer_id = $('#dealer_id').val();
-        $(this).click(function(){
-            // week = $(this).find('a').attr('value');
-            week = '';
-            player_id = $(this).find('a').attr('attr');
-            user_code = $(this).find('a').text();
-            week = encodeURIComponent(week);
-            $('#mack3').load('<?php echo base_url("/admin/playeraccountsweekly?user_code='+user_code+'&player_id="); ?>'+player_id,function () { });
-            return false;
-        });
-    });
-
-</script>
