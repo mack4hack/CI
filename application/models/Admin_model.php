@@ -1457,7 +1457,7 @@ function delete_dealer($id)
 	  	return $data;
 	}
 
-	function getAccountsPlayerByWeek($player_id)
+	function getAccountsPlayerByWeek($player_id,$to, $from)
 	{
 		// $player_id = $_GET['player_id'];
 			//if(isset($_GET['dealer_id'])){
@@ -1469,19 +1469,19 @@ function delete_dealer($id)
 
 		    $i=1;
 
-			$mon = date( 'Y-m-d', strtotime( 'monday this week' ) );
-			$tue = date( 'Y-m-d', strtotime( 'tuesday this week' ) );
-			$wed = date( 'Y-m-d', strtotime( 'wednesday this week' ) );
-			$thr = date( 'Y-m-d', strtotime( 'thursday this week' ) );
-			$fri = date( 'Y-m-d', strtotime( 'friday this week' ) );
-            $sat = date( 'Y-m-d', strtotime( 'saturday this week' ) );
-            $sun = date( 'Y-m-d', strtotime( 'sunday this week' ) );
+			$mon = $from; 
+			$tue = date( 'Y-m-d', strtotime( '+ 1 day', strtotime($mon) ) );
+			$wed = date( 'Y-m-d', strtotime( '+ 1 day', strtotime($tue )) );
+			$thr = date( 'Y-m-d', strtotime( '+ 1 day', strtotime($wed ) ));
+			$fri = date( 'Y-m-d', strtotime( '+ 1 day', strtotime($thr ) ));
+            $sat = date( 'Y-m-d', strtotime( '+ 1 day', strtotime($fri ) ));
+            $sun = $to;
 
 			$week_days = array($mon,$tue,$wed,
 								$thr,$fri,$sat,$sun,);
 
-				/*echo "<pre>";
-				print_r($week_days); die;*/
+				// echo "<pre>";
+				// print_r($week_days); die;
 			$total_bet = 0 ;
 			$total_wins = 0;
 			$total_balance = 0;
@@ -1540,7 +1540,7 @@ function delete_dealer($id)
 				$data[]= array(
 				   			'sr_no' => $i,
 				   			'user_code' => $user_code,
-				   			'date'=>$day,
+				   			'date'=>date('d-m-Y',strtotime($day)),
 				   			'bet_amount'=>$bet_amount,
 				   			'payout'=>$payout,
 				   			'commission'=>number_format($commission,2),
