@@ -542,13 +542,46 @@ License: You must have a valid license purchased only from themeforest(the above
 					Block Player</span>
 					</a>
 				</li>
-				<li class="tooltips" data-container="body" data-placement="right" data-html="true" >
+<!--				<li class="tooltips" data-container="body" data-placement="right" data-html="true" >
 					<a href="<?php echo base_url()?>admin/total_accounts" >
 					<i class="icon-bar-chart"></i>
 					<span class="title">
 					Accounts</span>
 					</a>
-				</li>
+				</li>-->
+                                
+                                                                       <li class="tooltips" data-container="body" data-placement="right" data-html="true" >
+                            <a class="nav-link nav-toggle" href="javascript:;">
+                                <i class="icon-bar-chart"></i>
+                                <span class="title">Accounts</span>
+                                <span class="selected"></span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu" style="display: none;">
+                                <li class="nav-item start active open">
+                                    <a class="nav-link " href="#">
+                                        <i class="icon-bar-chart"></i>
+                                        <span class="title">Cricket</span>
+                                        
+                                    </a>
+                                </li>
+                                <li class="nav-item start ">
+                                    <a class="nav-link " href="<?php echo base_url()?>admin/accounts">
+                                        <i class="icon-bulb"></i>
+                                        <span class="title">Lottery</span>
+                                        
+                                    </a>
+                                </li>
+                                <li class="nav-item start ">
+                                    <a class="nav-link " href="<?php echo base_url()?>admin/total_accounts">
+                                        <i class="icon-graph"></i>
+                                        <span class="title">Combined</span>
+                                        
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                                
 				<!-- END ANGULARJS LINK -->
 				</ul>
 			<!-- END SIDEBAR MENU -->

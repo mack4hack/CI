@@ -95,6 +95,18 @@ function delete_dealer($id)
 		 //     $minutes = $now['minutes'] - $rmin;
 		 // }
 
+                                    if($now['mday']<=9){
+                                        $now['mday'] = "0".$now['mday'];
+                                    }
+                                    if($now['mon']<=9){
+                                        $now['mon'] = "0".$now['mon'];
+                                    }
+                                    if($now['hours']<=9){
+                                        $now['hours'] = "0".$now['hours'];
+                                    }
+                                    if($minutes<=9){
+                                        $minutes = "0".$minutes;
+                                    }
 		$rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
 		//echo $rounded;
     	$max_time = date('Y-m-d H:i:s');

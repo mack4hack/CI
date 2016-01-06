@@ -672,7 +672,7 @@ class Admin extends CI_Controller
     
     public function lucky_draw($jodi) {
         $players = $this->Admin_model->getLuckyPlayers($jodi);
-        
+     //   echo "<pre>";print_r($players);die;
         foreach ($players as $player) {
             $credit = array('id' => $player->player_id, 'bet_amount' => $player->payout,);
             $debit = array('id' => 1, 'bet_amount' => $player->payout,);
