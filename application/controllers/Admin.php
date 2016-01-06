@@ -641,6 +641,20 @@ class Admin extends CI_Controller
         $now = getdate();
         $minutes = $now['minutes'] - $now['minutes'] % 15;
         
+        
+                                    if($now['mday']<=9){
+                                        $now['mday'] = "0".$now['mday'];
+                                    }
+                                    if($now['mon']<=9){
+                                        $now['mon'] = "0".$now['mon'];
+                                    }
+                                    if($now['hours']<=9){
+                                        $now['hours'] = "0".$now['hours'];
+                                    }
+                                    if($minutes<=9){
+                                        $minutes = "0".$minutes;
+                                    }
+        
         $start = $now['year'] . "-" . $now['mon'] . "-" . $now['mday'] . " " . $now['hours'] . ":" . $minutes . ":01";
         $end = strtotime('+15 minutes', strtotime($start));
         $ends = date('Y-m-d H:i:s', $end);
@@ -652,11 +666,14 @@ class Admin extends CI_Controller
         $this->db->where('timeslot >=', $start);
         $this->db->where('timeslot <', $ends);
         $query = $this->db->get()->row();
-        
-        if (!empty($query->lucky_number)) {
+       
+       
+        if (!empty($query)) {
             
             $jodi = $query->lucky_number;
-            
+            if ($jodi < 10) {
+               $jodi = '0'.$jodi;
+             }   
             $json = array('status' => TRUE, 'message' => 'Lucky Number Alredy Present');
             
             echo json_encode($json);
