@@ -25,7 +25,7 @@
         foreach($data_weekly as $dw){ $transaction_id = $dw['transaction_id']; ?>
         <tr class="success">
             <td><?php echo $dw['sr_no']; ?></td>
-            <td><a href="<?php echo base_url("/admin/accountsplayerbytransactionid?transaction_id=$transaction_id&date=$date&draw_time=$draw_time") ?>"> <?php echo $dw['transaction_id']; ?></a></td>
+            <td id="week_player_trans"><a date="<?php echo $date; ?>" drawtime="<?php echo $draw_time ?>"><?php echo $dw['transaction_id']; ?></a></td>
             <td><?php echo $dw['bet_amount']; ?></td>
             <td><?php echo $dw['payout']; ?></td>
             <!-- <td><?php echo $dw['balance']; ?></td> -->
@@ -38,3 +38,21 @@
         <?php  } ?>
     </tbody>
 </table>
+<div id="mack6"></div>
+
+<script type="text/javascript">
+    
+    $('.table #week_player_trans').each(function(){
+        //dealer_id = $('#dealer_id').val();
+        $(this).click(function(){
+            transaction_id = $(this).find('a').text();
+            //week = '';
+            date = $(this).find('a').attr('date');
+            draw_time = $(this).find('a').attr('drawtime');
+            //week = encodeURIComponent(week);
+            $('#mack6').load('<?php echo base_url("/admin/accountsplayerweeklybytransactionid?date='+date+'&draw_time='+draw_time+'&transaction_id="); ?>'+transaction_id,function () { });
+            return false;
+        });
+    });
+
+</script>

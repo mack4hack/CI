@@ -5,7 +5,7 @@
                 Sr No
             </th>
             <th>
-                Date
+                TimeSlot
             </th>
             <th>
                 Total Chips

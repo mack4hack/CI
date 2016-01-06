@@ -1628,5 +1628,25 @@ class Admin extends CI_Controller
         }
         
     }
+
+    public function accountsPlayerWeeklyByTransactionId()
+    {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('auth/login', 'refresh');
+        }    
+        else{
+            //if(isset($_GET['week'])){
+                //$player_id = $_GET['player_id'];
+                $date = $_GET['date'];
+                $draw_time = $_GET['draw_time'];
+                $transaction_id = $_GET['transaction_id'];
+               
+                $result['data_weekly'] = $this->Admin_model->getAccountsPlayerWeeklyByTransactionId($transaction_id,$date,$draw_time);
+                
+                $this->load->view('admin/accounts_player_weekly_bytransactionid', $result);
+            //}    
+        }
+        
+    }
     
 }
