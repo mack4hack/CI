@@ -1,12 +1,11 @@
 <table class="table table-bordered table-hover">
     <thead>
-        <tr><th colspan="6">Player Code : <?php echo $_GET['user_code']; ?></th></tr>
         <tr>
             <th>
                 Sr No
             </th>
             <th>
-                Date
+                TimeSlot
             </th>
             <th>
                 Total Chips
@@ -15,47 +14,44 @@
                 Total Payout
             </th>
             <th>
-                Commission
-            </th>
-            <th>
                 Balance
             </th>
         </tr>
     </thead>
     <tbody>
         <?php if(!empty($data_weekly)  ) {
-                $player_id = $_GET['player_id'];
-        foreach($data_weekly as $dw){  $date = $dw['date'];
-        ?>
+        $date = $_GET['date']; 
+        $date = date('Y-m-d',strtotime($date));
+        $player_id = $_GET['player_id'];
+        foreach($data_weekly as $dw){ $timeslot_id = $dw['timeslot_id'];   ?>
         <tr class="success">
             <td><?php echo $dw['sr_no']; ?></td>
-            <td id="week_player_day"><a date="<?php echo $date;?>" value="<?php echo $player_id ?>"><?php echo $dw['date']; ?></td>
+            <td id="week_player_draw"><a drawtime="<?php echo $timeslot_id;?>" date="<?php echo $date?>" value="<?php echo $player_id ?>"><?php echo $dw['draw_time']; ?></a></td>
             <td><?php echo $dw['bet_amount']; ?></td>
             <td><?php echo $dw['payout']; ?></td>
-            <td><?php echo $dw['commission']; ?></td>
             <td><?php echo $dw['balance']; ?></td>
         <!--<td><?php //echo $draw['profit']; ?></td>-->
         </tr>
         <?php    } ?>
-        <tr><td>Total</td><td></td><td><?php echo $dw['total_bet']; ?></td><td><?php echo $dw['total_wins']; ?></td><td><?php echo $dw['total_commission']; ?></td><td><?php echo $dw['total_balance']; ?></td></tr>
+        <tr><td>Total</td><td></td><td><?php echo $dw['total_bet']; ?></td><td><?php echo $dw['total_wins']; ?></td><td><?php echo $dw['total_balance']; ?></td></tr>
     <?php    }else{ ?>
-        <tr class='active'><th style='text-align:center'; colspan='6'>No Records Found</th></tr>
+        <tr class='active'><th style='text-align:center'; colspan='5'>No Records Found</th></tr>
         <?php  } ?>
     </tbody>
 </table>
-<div id="mack4"></div>
+<div id="mack5"></div>
 
 <script type="text/javascript">
     
-    $('.table #week_player_day').each(function(){
+    $('.table #week_player_draw').each(function(){
         //dealer_id = $('#dealer_id').val();
         $(this).click(function(){
             date = $(this).find('a').attr('date');
             //week = '';
             player_id = $(this).find('a').attr('value');
-            //user_code = $(this).find('a').text();
+            draw_time = $(this).find('a').attr('drawtime');
             //week = encodeURIComponent(week);
-            $('#mack4').load('<?php echo base_url("/admin/accountsPlayerWeeklyByDate?date='+date+'&player_id="); ?>'+player_id,function () { });
+            $('#mack5').load('<?php echo base_url("/admin/accountsplayerweeklybydrawtime?date='+date+'&draw_time='+draw_time+'&player_id="); ?>'+player_id,function () { });
             return false;
         });
     });

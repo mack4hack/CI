@@ -24,10 +24,10 @@
     </thead>
     <tbody>
         <?php if(!empty($data_weekly)  ) {
-        foreach($data_weekly as $dw){ $player_id = $dw['player_id']; ?>
+        foreach($data_weekly as $dw){ $player_id = $dw['player_id']; $week =$dw['week'];   ?>
          <tr class="success">
             <td><?php echo $dw['sr_no']; ?></td>
-            <td id="week_player"><a attr="<?php echo $player_id ?>" value="<?php echo $player_id ?>"><?php echo $dw['user_code']; ?></td>
+            <td id="week_player"><a week="<?php echo $week; ?>"  value="<?php echo $player_id ?>"><?php echo $dw['user_code']; ?></td>
             <td><?php echo $dw['bet_amount']; ?></td>
             <td><?php echo $dw['payout']; ?></td>
             <td><?php echo $dw['commission']; ?></td>
@@ -48,12 +48,12 @@
     $('.table #week_player').each(function(){
         dealer_id = $('#dealer_id').val();
         $(this).click(function(){
-            // week = $(this).find('a').attr('value');
-            week = '';
-            player_id = $(this).find('a').attr('attr');
+            week = $(this).find('a').attr('week');
+            //week = '';
+            player_id = $(this).find('a').attr('value');
             user_code = $(this).find('a').text();
             week = encodeURIComponent(week);
-            $('#mack3').load('<?php echo base_url("/admin/playeraccountsweekly?user_code='+user_code+'&player_id="); ?>'+player_id,function () { });
+            $('#mack3').load('<?php echo base_url("/admin/playeraccountsweekly?user_code='+user_code+'&week='+week+'&player_id="); ?>'+player_id,function () { });
             return false;
         });
     });

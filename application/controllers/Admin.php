@@ -1594,16 +1594,76 @@ class Admin extends CI_Controller
 
     public function playerAccountsWeekly()
     {
-        //$weekarr = explode('To', $_GET['week']);
-        //$from = $weekarr[0];
-        //$from = date('Y-m-d',strtotime($from));
-        $from = '';
-        //$to = $weekarr[1];
-        //$to = date('Y-m-d',strtotime($to));
-        $to = '';
+        $weekarr = explode('To', $_GET['week']);
+        $from = $weekarr[0];
+        $from = date('Y-m-d',strtotime($from));
+        //$from = '';
+        $to = $weekarr[1];
+        $to = date('Y-m-d',strtotime($to));
+        //$to = '';
         $player_id = $_GET['player_id'];
-        $result['data_weekly'] = $this->Admin_model->getAccountsPlayerByWeek($player_id);
+        $week = $_GET['week'];
+        $result['data_weekly'] = $this->Admin_model->getAccountsPlayerByWeek($player_id,$to,$from);
         $this->load->view('admin/player_accounts_weekly', $result);
+    }
+
+    public function accountsPlayerWeeklyByDate()
+    {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('auth/login', 'refresh');
+        }    
+        else{
+            //if(isset($_GET['week'])){
+                $player_id = $_GET['player_id'];
+                $date = $_GET['date'];
+                
+                $date = date('Y-m-d',strtotime($date));
+
+                $result['data_weekly'] = $this->Admin_model->getAccountsPlayerByDate($player_id,$date);
+                
+                $this->load->view('admin/accounts_player_weekly_bydate', $result);
+            //}    
+        }
+        
+    }
+
+    public function accountsPlayerWeeklyByDrawTime()
+    {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('auth/login', 'refresh');
+        }    
+        else{
+            //if(isset($_GET['week'])){
+                $player_id = $_GET['player_id'];
+                $date = $_GET['date'];
+                $draw_time = $_GET['draw_time'];
+               
+                $result['data_weekly'] = $this->Admin_model->getAccountsPlayerWeeklyByDrawTime($player_id,$date,$draw_time);
+                
+                $this->load->view('admin/accounts_player_weekly_bydrawtime', $result);
+            //}    
+        }
+        
+    }
+
+    public function accountsPlayerWeeklyByTransactionId()
+    {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('auth/login', 'refresh');
+        }    
+        else{
+            //if(isset($_GET['week'])){
+                //$player_id = $_GET['player_id'];
+                $date = $_GET['date'];
+                $draw_time = $_GET['draw_time'];
+                $transaction_id = $_GET['transaction_id'];
+               
+                $result['data_weekly'] = $this->Admin_model->getAccountsPlayerWeeklyByTransactionId($transaction_id,$date,$draw_time);
+                
+                $this->load->view('admin/accounts_player_weekly_bytransactionid', $result);
+            //}    
+        }
+        
     }
     
 }
