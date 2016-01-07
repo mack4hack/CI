@@ -1582,7 +1582,7 @@ class Admin extends CI_Controller
     }
     public function dealerAccountsWeekly()
     {
-        $weekarr = explode('To', $_GET['week']);
+        $weekarr = explode('TO', $_GET['week']);
         $from = $weekarr[0];
         $from = date('Y-m-d',strtotime($from));
         $to = $weekarr[1];
