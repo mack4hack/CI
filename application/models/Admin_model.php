@@ -113,7 +113,7 @@ function delete_dealer($id)
 		$rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
 		//echo $rounded;
     	$max_time = date('Y-m-d H:i:s');
-    	$min_time = date('Y-m-d H:i:s',strtotime('-15 minutes',strtotime($max_time)));
+    	 $min_time = date('Y-m-d H:i:s',strtotime('-15 minutes',strtotime($max_time)));
     	/*select TRUNC_15_MINUTES(timeslot) AS period_starting, digit from game_lottery 
     	where timeslot >= $rounded and timeslot < date('Y-m-d H:i:s') 
     	group by TRUNC_15_MINUTES(timeslot), digit order by TRUNC_15_MINUTES(timeslot)*/
