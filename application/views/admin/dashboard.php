@@ -57,7 +57,7 @@
 						</div>
 						<div class="details">
 							<div class="number">
-								<?php echo $profit;  ?>
+								<?php echo $amount;  ?>
 							</div>
 							<div class="desc">
 								 Lottery
@@ -125,6 +125,45 @@
 				
 				
 			</div>
+                                                        <div class="row">
+                                                                      <div class="col-md-6 col-sm-6">
+                            <!-- BEGIN PORTLET-->
+                            <div class="portlet light bordered">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="icon-share font-red-sunglo hide"></i>
+                                        <span class="caption-subject font-red-sunglo bold uppercase">Lottery</span>
+                                        <span class="caption-helper">Daily stats...</span>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                   <div style="margin: 20px 0 10px 30px">
+                                        <div class="row">
+                                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
+                                                <span class="label label-sm label-success"> BET CHIPS </span>
+                                                <h3><?php echo $chips; ?></h3>
+                                            </div>
+                                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
+                                                <span class="label label-sm label-info"> DEBIT </span>
+                                                <h3><?php echo $debit; ?></h3>
+                                            </div>
+                                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
+                                                <span class="label label-sm label-danger"> COMMISSION </span>
+                                                <h3><?php echo $commission; ?></h3>
+                                            </div>
+                                            <div class="col-md-3 col-sm-3 col-xs-6 text-stat">
+                                                <span class="label label-sm label-warning"> BALANCE </span>
+                                                <h3><?php echo $amount; ?></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END PORTLET-->
+                        </div>
+
+
+                                                        </div>
 			<!-- END DASHBOARD STATS -->
 			<div class="clearfix">
 			</div>

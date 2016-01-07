@@ -18,6 +18,26 @@ class Admin extends CI_Controller
     }
     public function index() {
         $result['profit'] = $this->Admin_model->getMonthlyProfit();
+            $to = date('Y-m-d');
+            $from = date('Y-m-d');
+            $data_daily = $this->Admin_model->getAccounts($from, $to);
+            $amount = 0;
+            $chips = 0;
+            $debit = 0;
+            $commission = 0;
+         //   echo "<pre>";print_r($data_daily);die;
+            if(!empty($data_daily)){
+                foreach($data_daily as $data){
+                    $amount = $data['total_balance'];
+                    $chips = $data['total_bet'];
+                    $debit = $data['total_wins'];
+                    $commission = $data['total_commission'];
+                }
+            }
+        $result['amount'] = $amount;
+        $result['chips'] = $chips;
+        $result['debit'] = $debit;
+        $result['commission'] = $commission;
         $result['dealers'] = $this->Admin_model->getTotalUsers(2);
         $result['players'] = $this->Admin_model->getTotalUsers(3);
         
@@ -307,13 +327,15 @@ class Admin extends CI_Controller
         }
         
         //code ends here
-        
+        //echo $rounded;die;
         $this->db->select('sum(bet_amount) as stake,player_id');
-        $this->db->where('timeslot >=', $rounded);
+        $this->db->where('timeslot >=', $start);
         $this->db->where('timeslot <=', $end);
         $this->db->group_by('player_id');
         $this->db->order_by('stake', 'desc');
         $query = $this->db->get('player_history');
+        
+        //echo "<pre>";print_r($this->db->last_query());die;
         if (!empty($query)) {
             foreach ($query->result() as $result) {
                 $stake = $result->stake;
