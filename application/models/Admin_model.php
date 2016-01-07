@@ -119,7 +119,7 @@ function delete_dealer($id)
     	group by TRUNC_15_MINUTES(timeslot), digit order by TRUNC_15_MINUTES(timeslot)*/
     	$query = $this->db->query("select player_id,payout from game_lottery 
     	where (timeslot >= '".$min_time."' and timeslot < '".$max_time."')  
-    	and ( digit=".$first." or digit=".$second." or digit=".$jodi." )");
+    	and ( (digit=".$first." and game_type=1 ) or ( digit=".$second." and game_type=2 ) or ( digit=".$jodi." and game_type=3 ) )");
 
     	echo $this->db->last_query();
 
