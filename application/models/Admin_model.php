@@ -97,26 +97,28 @@ function delete_dealer($id)
 		 //     $minutes = $now['minutes'] - $rmin;
 		 // }
 
-                                    if($now['mday']<=9){
-                                        $now['mday'] = "0".$now['mday'];
-                                    }
-                                    if($now['mon']<=9){
-                                        $now['mon'] = "0".$now['mon'];
-                                    }
-                                    if($now['hours']<=9){
-                                        $now['hours'] = "0".$now['hours'];
-                                    }
-                                    if($minutes<=9){
-                                        $minutes = "0".$minutes;
-                                    }
+        if($now['mday']<=9){
+            $now['mday'] = "0".$now['mday'];
+        }
+        if($now['mon']<=9){
+            $now['mon'] = "0".$now['mon'];
+        }
+        if($now['hours']<=9){
+            $now['hours'] = "0".$now['hours'];
+        }
+        if($minutes<=9){
+            $minutes = "0".$minutes;
+        }
+
 		$rounded = $now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$minutes.":00";
 		//echo $rounded;
     	$max_time = date('Y-m-d H:i:s');
+    	$min_time = date('Y-m-d H:i:s',strtotime('-15 minutes',strtotime($max_time)));
     	/*select TRUNC_15_MINUTES(timeslot) AS period_starting, digit from game_lottery 
     	where timeslot >= $rounded and timeslot < date('Y-m-d H:i:s') 
     	group by TRUNC_15_MINUTES(timeslot), digit order by TRUNC_15_MINUTES(timeslot)*/
     	$query = $this->db->query("select player_id,payout from game_lottery 
-    	where (timeslot >= '".$rounded."' and timeslot < '".$max_time."')  
+    	where (timeslot >= '".$min_time."' and timeslot < '".$max_time."')  
     	and ( digit=".$first." or digit=".$second." or digit=".$jodi." )");
 
     	echo $this->db->last_query();
