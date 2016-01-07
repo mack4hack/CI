@@ -119,7 +119,7 @@ function delete_dealer($id)
     	where (timeslot >= '".$rounded."' and timeslot < '".$max_time."')  
     	and ( digit=".$first." or digit=".$second." or digit=".$jodi." )");
 
-    	//echo $this->db->last_query();
+    	echo $this->db->last_query();
 
 		//$where = '(digit='.$first.' or digit='.$second.' or digit='.$jodi.')';
    		//$this->db->where($where);
