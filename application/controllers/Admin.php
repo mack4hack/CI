@@ -1587,7 +1587,7 @@ class Admin extends CI_Controller
         $from = date('Y-m-d',strtotime($from));
         $to = $weekarr[1];
         $to = date('Y-m-d',strtotime($to));
-        $dealer_id = $_GET['dealer_id'];
+        $dealer_id = $_GET['dealer_id']; 
         $result['data_weekly'] = $this->Admin_model->getAccountsDealer($to, $from,$dealer_id);
         $this->load->view('admin/dealer_accounts_weekly', $result);
     }
