@@ -1426,6 +1426,9 @@ function delete_dealer($id)
 			$drawtime ='';
 			if($query){
 				$lucky_number = $query->lucky_number;
+				if($lucky_number < 10){
+					$lucky_number = "0".$lucky_number;
+				}
 				$timeslot = $query->timeslot;
 				$drawtime = date('h:i: a', strtotime(explode(" ", $timeslot)[1]));
 			}

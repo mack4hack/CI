@@ -294,7 +294,7 @@ class Admin extends CI_Controller
                 $sr_no++;
             }
             if (!empty($info['active_draw'])) {
-                $info['active_draw'] = $this->aasort($info['active_draw'], "profit");
+                $info['active_draw'] = $this->aasort($info['active_draw'], "credit");
             }
             
             //$info['active_draw'] =  '';
