@@ -79,6 +79,8 @@ function delete_dealer($id)
 
 	function getLuckyPlayers($jodi)
 	{
+		if($jodi < 10 )
+			$jodi = '0'.$jodi;
 		$first = floor($jodi/10);
     	$second = $jodi%10;
 
