@@ -18,6 +18,27 @@ class Auth extends CI_Controller {
 	// redirect if needed, otherwise display the user list
 	function index()
 	{
+            
+                                        $to = date('Y-m-d');
+                                        $from = date('Y-m-d');
+                                        $data_daily = $this->Admin_model->getAccounts($from, $to);
+                                        $amount = 0;
+                                        $chips = 0;
+                                        $debit = 0;
+                                        $commission = 0;
+                                     //   echo "<pre>";print_r($data_daily);die;
+                                        if(!empty($data_daily)){
+                                            foreach($data_daily as $data){
+                                                $amount = $data['total_balance'];
+                                                $chips = $data['total_bet'];
+                                                $debit = $data['total_wins'];
+                                                $commission = $data['total_commission'];
+                                            }
+                                        }
+                                    $result['amount'] = $amount;
+                                    $result['chips'] = $chips;
+                                    $result['debit'] = $debit;
+                                    $result['commission'] = $commission;
                                       $result['profit'] = $this->Admin_model->getMonthlyProfit(); 
                                        $result['dealers'] = $this->Admin_model->getTotalUsers(2);
                                        $result['players'] = $this->Admin_model->getTotalUsers(3);
