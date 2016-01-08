@@ -124,7 +124,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!-- END RESPONSIVE MENU TOGGLER -->
 		<!-- BEGIN TOP NAVIGATION MENU -->
 		  <div class="col-sm-4"  style="padding:5px 0px 0px 0px">
-                                             <div id="clockDisplay" class="btn red"   style="float:right; font-size:16px;font-weight:bold;  "></div>
+                                             <div id="clockDisplay" class="btn"   style="float:right; font-size:16px;font-weight:bold; color:white;  "></div>
                                         </div> 
                                      <div class="top-menu col-sm-2">
                                                    
@@ -133,7 +133,7 @@ License: You must have a valid license purchased only from themeforest(the above
 			<ul class="nav navbar-nav pull-right">
 				<!-- BEGIN NOTIFICATION DROPDOWN -->
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
-				<li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+				<!--<li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
 					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 					<i class="icon-bell"></i>
 					<span class="badge badge-default">
@@ -239,7 +239,7 @@ License: You must have a valid license purchased only from themeforest(the above
 							</ul>
 						</li>
 					</ul>
-				</li>
+				</li> -->
 				<!-- END NOTIFICATION DROPDOWN -->
 				<!-- BEGIN INBOX DROPDOWN -->
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->

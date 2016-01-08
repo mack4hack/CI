@@ -27,13 +27,13 @@ $current_timestamp = $date->getTimestamp();
                                                                                             <div id="clockDisplay" class="clockStyle"></div>
                                                                                     </div>-->
                                                                                     <div class="col-sm-4">
-                                                                                            <span class="btn red" style="font-size:16px;" >Time To Draw : <a id="countdownDisplay" class="btn red" style="font-size:16px;font-weight:bold;padding:0px 0px 2px 0px;"  ></a></span>
+                                                                                            <span class="btn" style="font-size:16px; color:black;" >Time To Draw : <a id="countdownDisplay" class="btn" style="font-size:16px;font-weight:bold;padding:0px 0px 2px 0px; color:black;"  ></a></span>
                                                                                     </div>
                                                                                     <div class="col-sm-4">
-                                                                                            <span class="btn red" style="font-size:16px;" >Current Game :<span id="show_time"> <?php echo  $show_time  ;  ?></span></span>
+                                                                                            <span class="btn" style="font-size:16px; color:black;" >Current Game :<span id="show_time"> <?php echo  $show_time  ;  ?></span></span>
                                                                                     </div>
                                                                                     <div class="col-sm-4"   >
-                                                                                            <a href="javascript:;" class="btn red"   style="float:right;" >
+                                                                                            <a href="javascript:;" class="btn"   style="float:right; color:black;" >
                                                                                                             Last Result  (<span id="last_time"><?php echo $last_time; ?></span>) :	<span id="ash"   style="font-size:17px;font-weight:bold;"  ><?php echo $lucky_number;  ?></span> 	
 
 <!--
@@ -854,7 +854,7 @@ $current_timestamp = $date->getTimestamp();
                                                                                             <b>Total Bets All</b>
                                                                                     </div>
                                                                                     <div class="col-sm-3">
-                                                                                            <a href="javascript:;" class="btn red">
+                                                                                            <a href="javascript:;" class="btn">
                                                                                                             <?php if(!empty($total_payout->bet_amount)){
                                                                                                                     echo $total_payout->bet_amount;
                                                                                                                     }else{

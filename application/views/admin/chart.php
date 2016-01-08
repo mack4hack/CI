@@ -798,7 +798,7 @@
 												<b>Total Bets All</b>
 											</div>
 											<div class="col-sm-3">
-												<a href="javascript:;" class="btn red">
+												<a href="javascript:;" class="btn">
 														<?php if(!empty($total_payout->bet_amount)){
 															echo $total_payout->bet_amount;
 															}else{
