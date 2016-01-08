@@ -146,9 +146,10 @@ function delete_dealer($id)
     	
         $min_time = date('Y-m-d H:i:s',strtotime('-15 minutes',strtotime($max_time)));             
 		$this->db->set('result',1,FALSE);
-		$where = "((timeslot >= '".$min_time."' and timeslot < '".$max_time."') and ( (digit=".$first." and game_type=1 ) or ( digit=".$second." and game_type=2 ) or ( digit=".$jodi." and game_type=3 ) )";
+		$where = "((timeslot >= '".$min_time."' and timeslot < '".$max_time."') and  (  first_digit='".$first."' or second_digit='".$second."' or jodi_digit='".$jodi."'))";
    		$this->db->where($where);
-		$this->db->update('player_history');		
+		$this->db->update('player_history');
+		echo $this->db->last_query();		
 	}
 
 	function getAdminHistory($from = null , $to = null)
