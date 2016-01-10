@@ -960,13 +960,26 @@ function delete_dealer($id)
 
 		    $i=1;
 
-			$mon = date( 'Y-m-d', strtotime( 'monday this week' ) );
-			$tue = date( 'Y-m-d', strtotime( 'tuesday this week' ) );
-			$wed = date( 'Y-m-d', strtotime( 'wednesday this week' ) );
-			$thr = date( 'Y-m-d', strtotime( 'thursday this week' ) );
-			$fri = date( 'Y-m-d', strtotime( 'friday this week' ) );
-            $sat = date( 'Y-m-d', strtotime( 'saturday this week' ) );
-            $sun = date( 'Y-m-d', strtotime( 'sunday this week' ) );
+		    if(date('Y-m-d') == date('Y-m-d',strtotime('sunday')))
+		    {	
+				$mon = date( 'Y-m-d', strtotime( 'monday previous week' ) );
+				$tue = date( 'Y-m-d', strtotime( 'tuesday previous week' ) );
+				$wed = date( 'Y-m-d', strtotime( 'wednesday previous week' ) );
+				$thr = date( 'Y-m-d', strtotime( 'thursday previous week' ) );
+				$fri = date( 'Y-m-d', strtotime( 'friday previous week' ) );
+	            $sat = date( 'Y-m-d', strtotime( 'saturday previous week' ) );
+	            $sun = date( 'Y-m-d', strtotime( 'sunday previous week' ) );
+	        }
+	        else{
+
+	        	$mon = date( 'Y-m-d', strtotime( 'monday this week' ) );
+				$tue = date( 'Y-m-d', strtotime( 'tuesday this week' ) );
+				$wed = date( 'Y-m-d', strtotime( 'wednesday this week' ) );
+				$thr = date( 'Y-m-d', strtotime( 'thursday this week' ) );
+				$fri = date( 'Y-m-d', strtotime( 'friday this week' ) );
+	            $sat = date( 'Y-m-d', strtotime( 'saturday this week' ) );
+	            $sun = date( 'Y-m-d', strtotime( 'sunday this week' ) );
+	        }
 
 			$week_days = array($mon,$tue,$wed,
 								$thr,$fri,$sat,$sun,);
