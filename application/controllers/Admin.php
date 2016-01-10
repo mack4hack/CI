@@ -1396,8 +1396,8 @@ class Admin extends CI_Controller
             $sunday = date( 'Y-m-d', strtotime( 'sunday this week' ) );
 
             $from = date('Y-m-d');
-            $to = date('Y-m-d', strtotime("+1 day", strtotime($from)));
-            $to = date('Y-m-d', strtotime("-1 week", strtotime($to)));
+            //$to = date('Y-m-d', strtotime("+1 day", strtotime($from)));
+            //$to = date('Y-m-d', strtotime("-1 week", strtotime($to)));
             //$to = date('Y-m-d', strtotime("1 day", strtotime($from)));
 
             if(strtotime($monday) > strtotime($from)){
@@ -1407,15 +1407,16 @@ class Admin extends CI_Controller
             $result['data_weekly'] = $this->Admin_model->getAccounts($from, $monday);
             
             //die;
-            $this_week = date( 'd-m-Y', strtotime( 'monday this week' ) ).' TO '.date('d-m-Y', strtotime( 'Sunday this week' )); 
+            date_default_timezone_set("Asia/Calcutta");
+            $this_week = date( 'd-m-Y', strtotime( $monday ) ).' TO '.date( 'd-m-Y', strtotime( 'sunday previous week' ) );
             $prev_first_week = date( 'd-m-Y', strtotime( '-2  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-1  Sunday' ) );
             $prev_second_week = date( 'd-m-Y', strtotime( '-3  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-2  Sunday' ) ); 
             $prev_third_week = date( 'd-m-Y', strtotime( '-4  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-3  Sunday' ) ); 
 
 
-            $from = date('Y-m-d');
-            $to = date('Y-m-d', strtotime("-1 month", strtotime($from)));
-            $from = date('Y-m-d', strtotime("1 day", strtotime($from)));
+            //$from = date('Y-m-d');
+            //$to = date('Y-m-d', strtotime("-1 month", strtotime($from)));
+            //$from = date('Y-m-d', strtotime("1 day", strtotime($from)));
             //$result['data_monthly'] = $this->Admin_model->getAccounts($from, $to);
             $result['data_monthly'] = array($prev_third_week,$prev_second_week,$prev_first_week,$this_week);
 
