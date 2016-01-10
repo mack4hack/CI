@@ -114,10 +114,11 @@ class Bets_model extends CI_Model
         $second = $lucky_number % 10;
         
         $this->db->select('sum(bet_amount ) as bet_amount,sum(payout ) as payout');
-        $this->db->from('game_lottery');
+        $this->db->from('player_history');
         $this->db->where("timeslot >= '" . $start . "' and timeslot < '" . $end . "' ");
-        $where = '((digit="' . $first . '" and game_type=1) or (digit="' . $second . '" and game_type=2) or digit="' . $lucky_number . '")';
+        $where = '(first_digit="' . $first . '" or second_digit="' . $second . '" or jodi_digit="' . $lucky_number . '")';
         $this->db->where($where);
+        $this->db->where('result',1);
         
         //  $this->db->where('where',$whr);
         //$this->db->group_by('digit');

@@ -18,7 +18,7 @@
 											<div class="col-sm-2">
 												<a href="javascript:;" class="btn red">
 														Total Bets All :  <span id="bet_amount"><?php if(!empty($total_bets->bet_amount)){
-															echo $total_bets->bet_amount;
+															echo $bet_amount = $total_bets->bet_amount;
 															}else{
 																echo "0";
 																}?></span>
@@ -31,25 +31,25 @@
 											<div class="col-sm-2">
 												<a href="javascript:;" class="btn red">
 													Total Payout :		<span id="payout"><?php if(!empty($total_payout->payout)){
-															echo $total_payout->payout;
+															echo $payout = $total_payout->payout;
 															}else{
-																echo "0";
+																echo $payout=0;
 																}?></span>
                     							</a>
 											</div>
 											<div class="col-sm-2">
 												<a href="javascript:;" class="btn red">
-													Commission :		<span id="payout"><?php if(!empty($total_payout->commission)){
-															//echo $total_payout->payout;
+													Commission :		<span id="payout"><?php if(!empty($total_bets->bet_amount)){
+															echo $commission = $total_bets->bet_amount*0.05;
 															}else{
-																echo "0";
+																echo $commission =0;
 																}?></span>
                     							</a>
 											</div>
 											<div class="col-sm-2">
 												<a href="javascript:;" class="btn red">
-													Balance :		<span id="payout"><?php if(!empty($total_payout->payout)){
-															//echo $total_payout->payout;
+													Balance :		<span id="payout"><?php if(!empty($total_bets->bet_amount)){
+															echo $bet_amount-$payout-$commission;
 															}else{
 																echo "0";
 																}?></span>
