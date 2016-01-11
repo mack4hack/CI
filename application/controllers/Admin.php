@@ -25,6 +25,10 @@ class Admin extends CI_Controller
             $chips = 0;
             $debit = 0;
             $commission = 0;
+            $amount_cric = 0;
+            $chips_cric = 0;
+            $debit_cric = 0;
+            $commission_cric = 0;
          //   echo "<pre>";print_r($data_daily);die;
             if(!empty($data_daily)){
                 foreach($data_daily as $data){
@@ -38,6 +42,10 @@ class Admin extends CI_Controller
         $result['chips'] = $chips;
         $result['debit'] = $debit;
         $result['commission'] = $commission;
+        $result['amount_cric'] = $amount_cric;
+        $result['chips_cric'] = $chips_cric;
+        $result['debit_cric'] = $debit_cric;
+        $result['commission_cric'] = $commission_cric;
         $result['dealers'] = $this->Admin_model->getTotalUsers(2);
         $result['players'] = $this->Admin_model->getTotalUsers(3);
         

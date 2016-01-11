@@ -313,6 +313,7 @@ class Bets_model extends CI_Model
             
             $this->db->delete('player_history', array('transaction_id' => $transaction_id));
             $this->db->delete('dealer_history', array('transaction_id' => $transaction_id));
+            $this->db->delete('game_lottery', array('transaction_id' => $transaction_id));
             //set is_canceled 1  so that user cannot cancel bet
              $this->db->set('is_canceled', 1, FALSE);
              $this->db->where('player_id',$player_id);
