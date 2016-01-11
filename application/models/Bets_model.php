@@ -772,7 +772,7 @@ class Bets_model extends CI_Model
             $query=$this->db->get()->row();
             //echo $this->db->last_query(); die;
             if($query)
-                $trans_time = date('d-m-Y h:i:s a',strtotime($query->timeslot));
+                $trans_time = date('h:i:s a',strtotime($query->timeslot));
 
             
 
