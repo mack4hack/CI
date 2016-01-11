@@ -368,7 +368,9 @@
                 if(isset($_GET['transaction_id']))
 		{
 			$transaction_id = $_GET['transaction_id'];
-                                                      $result['data_weekly'] = $this->bets_model->getAccountsPlayerByTransactionId($transaction_id);
+			$date = $_GET['date'];
+            $draw_time = $_GET['draw_time'];
+          	$result['data_weekly'] = $this->bets_model->getAccountsPlayerByTransactionId($transaction_id,$date,$draw_time);
 			if(!empty($result))
 			{
 				$this->response([

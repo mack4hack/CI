@@ -672,7 +672,7 @@ class Bets_model extends CI_Model
 	  	return $data;
 	}
 
-	function getAccountsPlayerByTransactionId($transaction_id)
+	function getAccountsPlayerByTransactionId($transaction_id,$date,$draw_time)
 	{
 			
 		$data = array();
