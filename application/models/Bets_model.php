@@ -763,7 +763,7 @@ class Bets_model extends CI_Model
                     $lucky_number = "0".$lucky_number;
                 }
                 $timeslot = $query->timeslot;
-                $drawtime = date('h:i: a', strtotime(explode(" ", $timeslot)[1]));
+                $drawtime = date('h:i a', strtotime(explode(" ", $timeslot)[1]));
             }
 
             $this->db->select('timeslot');
