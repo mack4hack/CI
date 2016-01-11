@@ -1408,12 +1408,18 @@ class Admin extends CI_Controller
             
             //die;
             date_default_timezone_set("Asia/Calcutta");
-            $this_week = date( 'd-m-Y', strtotime( $monday ) ).' TO '.date( 'd-m-Y', strtotime( 'sunday previous week' ) );
-            $prev_first_week = date( 'd-m-Y', strtotime( '-2  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-1  Sunday' ) );
-            $prev_second_week = date( 'd-m-Y', strtotime( '-3  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-2  Sunday' ) ); 
-            $prev_third_week = date( 'd-m-Y', strtotime( '-4  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-3  Sunday' ) ); 
-
-
+            if(date('Y-m-d') == $sunday){
+                $this_week = date( 'd-m-Y', strtotime( $monday ) ).' TO '.date( 'd-m-Y', strtotime( 'sunday previous week' ) );
+                $prev_first_week = date( 'd-m-Y', strtotime( '-2  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-1  Sunday' ) );
+                $prev_second_week = date( 'd-m-Y', strtotime( '-3  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-2  Sunday' ) ); 
+                $prev_third_week = date( 'd-m-Y', strtotime( '-4  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-3  Sunday' ) ); 
+            }else{ #if (date('Y-m-d') == $monday) {
+                $this_week = date( 'd-m-Y', strtotime( $monday ) ).' TO '.date( 'd-m-Y', strtotime( 'sunday this week' ) );
+                $prev_first_week = date( 'd-m-Y', strtotime( '-1  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-1  Sunday' ) );
+                $prev_second_week = date( 'd-m-Y', strtotime( '-2  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-2  Sunday' ) ); 
+                $prev_third_week = date( 'd-m-Y', strtotime( '-3  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-3  Sunday' ) ); 
+            }
+            // die;
             //$from = date('Y-m-d');
             //$to = date('Y-m-d', strtotime("-1 month", strtotime($from)));
             //$from = date('Y-m-d', strtotime("1 day", strtotime($from)));
