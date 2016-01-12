@@ -592,224 +592,209 @@ class Bets_model extends CI_Model
 	{
 			
 		$data = array();
-		
-		$this->db->select('*');
-     	$this->db->from('player_history');
-     	$where = 'player_id = "'.$player_id.'" AND timeslot LIKE "%'.$day.'%" AND timeslot_id="'.$timeslot_id.'"';
-	    $this->db->where($where);
-	    //$this->db->where('dealer_id','13');
-	    $query=$this->db->get();
-	    //echo($this->db->last_query());  die;
-	    $records =  $query->result();
+        
+        $this->db->select('id,transaction_id');
+        $this->db->from('player_history');
+        $where = 'player_id = "'.$player_id.'" AND timeslot LIKE "%'.$day.'%" AND timeslot_id="'.$timeslot_id.'"';
+        $this->db->where($where);
+        $this->db->group_by('transaction_id');
+        $query=$this->db->get();
+        //echo($this->db->last_query());  die;
+        $records =  $query->result();
 
         //echo "<pre>";
-	    //	print_r($timeslots); die;
+        //  print_r($timeslots); die;
 
-	    $this->db->select('user_code');
-     	$this->db->from('user_master');
-	    $this->db->where('id',$player_id);
-	    $query=$this->db->get()->row();;
-	    $user_code =  $query->user_code;
+        $this->db->select('user_code');
+        $this->db->from('user_master');
+        $this->db->where('id',$player_id);
+        $query=$this->db->get()->row();;
+        $user_code =  $query->user_code;
 
         $total_bet = 0 ;
-		$total_wins = 0;
-		$total_balance = 0;
-		$total_commission = 0;
+        $total_wins = 0;
+        $total_balance = 0;
+        $total_commission = 0;
 
 
-		if(!empty($records))
-		{	$i=1;
-			foreach ($records as $record)
-			{
-				//print_r($timeslot); die;
-				$this->db->select('sum(bet_amount) as chips');
-				$this->db->from('player_history');
-				// $this->db->where('id',$record->id);
-				$this->db->where('player_id',$player_id);
-				$this->db->where('transaction_id',$record->transaction_id);
-				$this->db->like('timeslot',$day);
-				$this->db->group_by('transaction_id');
-				//$this->db->like('timeslot',$timeslot->timeslot);
-				$query=$this->db->get()->row();
-				// echo $this->db->last_query(); die;
-				$chips = $query->chips;
+        if(!empty($records))
+        {   $i=1;
+            foreach ($records as $record)
+            {
+                //print_r($timeslot); die;
+                $this->db->select('sum(bet_amount) as chips');
+                $this->db->from('player_history');
+                // $this->db->where('id',$record->id);
+                $this->db->where('player_id',$player_id);
+                $this->db->where('transaction_id',$record->transaction_id);
+                $this->db->like('timeslot',$day);
+                $this->db->group_by('transaction_id');
+                //$this->db->like('timeslot',$timeslot->timeslot);
+                $query=$this->db->get()->row();
+                // echo $this->db->last_query(); die;
+                $chips = $query->chips;
 
-				$this->db->select('sum(payout) as win');
-				$this->db->from('player_history');
-				$this->db->where('result','1');
-				// $this->db->where('id',$record->id);
-				$this->db->where('player_id',$player_id);
-				$this->db->where('transaction_id',$record->transaction_id);
-				$this->db->like('timeslot',$day);
-				$query=$this->db->get()->row();
-				//echo $this->db->last_query(); die;
-				$win = $query->win;
+                $this->db->select('sum(payout) as win');
+                $this->db->from('player_history');
+                $this->db->where('result','1');
+                // $this->db->where('id',$record->id);
+                $this->db->where('player_id',$player_id);
+                $this->db->where('transaction_id',$record->transaction_id);
+                $this->db->like('timeslot',$day);
+                $query=$this->db->get()->row();
+                //echo $this->db->last_query(); die;
+                $win = $query->win;
 
-				
-			   	$balance =  $win   - $chips;
-			   	$total_bet = $total_bet + $chips ;
-				$total_wins = $total_wins + $win;
-				$total_balance = $total_balance + $balance;
+                
+                $balance = $chips - $win;
+                $total_bet = $total_bet + $chips ;
+                $total_wins = $total_wins + $win;
+                $total_balance = $total_balance + $balance;
 
-			   	$data[]= array(
-			   			'sr_no' => $i,
-			   			'user_code' => $user_code,
-			   			'bet_amount'=>$chips,
-			   			'payout'=>$win,
-			   			'transaction_id'=>$record->transaction_id,
-			   			'total_bet'=>$total_bet,
-			   			'total_wins'=>$total_wins,
-			   			//'total_balance'=>$total_balance,
-			   			//'draw_time'=>$timeslot['timeslot'],
-			   		);
-			   	$i++;
-			}
-		}	
+                $data[]= array(
+                        'sr_no' => $i,
+                        'user_code' => $user_code,
+                        'bet_amount'=>$chips,
+                        'payout'=>$win,
+                        'transaction_id'=>$record->transaction_id,
+                        'total_bet'=>number_format($total_bet,2),
+                        'total_wins'=>number_format($total_wins,2),
+                        //'total_balance'=>$total_balance,
+                        //'draw_time'=>$timeslot['timeslot'],
+                    );
+                $i++;
+            }
+        }   
 
-		//echo "<pre>";
-		//print_r($data);
-	   //	die;
-	  	return $data;
+        //echo "<pre>";
+        //print_r($data);
+       //   die;
+        return $data;
 	}
 
-	function getAccountsPlayerByTransactionId($transaction_id)
+	function getAccountsPlayerByTransactionId($transaction_id,$date,$draw_time)
 	{
 			
 		$data = array();
-		
-		$this->db->select('*');
-     	$this->db->from('player_history');
-     	//$where = 'player_id = "'.$player_id.'" AND timeslot LIKE "%'.$day.'%" AND timeslot_id="'.$timeslot_id.'"';
-	    $this->db->where('transaction_id',$transaction_id);
-	    //$this->db->where('dealer_id','13');
-	    $query=$this->db->get();
-	    //echo($this->db->last_query());  die;
-	    $records =  $query->result();
+        
+        $this->db->select('id,transaction_id');
+        $this->db->from('player_history');
+        //$where = 'player_id = "'.$player_id.'" AND timeslot LIKE "%'.$day.'%" AND timeslot_id="'.$timeslot_id.'"';
+        $this->db->where('transaction_id',$transaction_id);
+        //$this->db->group_by('transaction_id');
+        $query=$this->db->get();
+        //echo($this->db->last_query());  die;
+        $transactions =  $query->result();
 
-        // echo "<pre>";
-    	// print_r($result); die;
+        //echo "<pre>";
+        //print_r($transactions); die;
+
 
         $total_bet = 0 ;
-		$total_wins = 0;
-		$total_balance = 0;
-		$total_commission = 0;
+        $total_wins = 0;
+        $total_balance = 0;
+        $total_commission = 0;
 
 
-		if(!empty($records))
-		{	$i=1;
-			foreach ($records as $record)
-			{
-				//print_r($timeslot); die;
-				$this->db->select('sum(bet_amount) as chips');
-				$this->db->from('player_history');
-				// $this->db->where('timeslot_id',$record->timeslot_id);
-				// $this->db->where('player_id',$player_id);
-				$this->db->where('transaction_id',$record->transaction_id);
-				//$this->db->like('timeslot',$day);
-				//$this->db->like('timeslot',$timeslot->timeslot);
-				$query=$this->db->get()->row();
-				// echo $this->db->last_query(); die;
-				$chips = $query->chips;
+		foreach ($transactions as $transaction) {
+            $this->db->select('bet_amount as chips');
+            $this->db->from('player_history');
+            $this->db->where('id',$transaction->id);
+            $query=$this->db->get()->row();
+            // echo $this->db->last_query(); die;
+            $chips = '';
+            if($query)
+                $chips = $query->chips;
 
-				$this->db->select('sum(payout) as win');
-				$this->db->from('player_history');
-				$this->db->where('result','1');
-				//$this->db->where('timeslot_id',$record->timeslot_id);
-				//$this->db->where('player_id',$player_id);
-				$this->db->where('transaction_id',$record->transaction_id);
-				// $this->db->like('timeslot',$day);
-				$query=$this->db->get()->row();
-				//echo $this->db->last_query(); die;
-				$win = $query->win;
-
-				$this->db->select('first_digit');
-				$this->db->from('player_history');
-				$this->db->where('transaction_id',$record->transaction_id);
-				$this->db->where('game_type','1');
-				$query=$this->db->get()->row();
-				$first_digit ='';
-				if($query)
-					$first_digit = $query->first_digit;
-
-				$this->db->select('bet_amount');
-				$this->db->from('player_history');
-				$this->db->where('game_type','1');
-				$this->db->where('transaction_id',$record->transaction_id);
-				$query=$this->db->get()->row();
-				$bet_amount_first ='';
-				if($query)
-					$bet_amount_first = $query->bet_amount;
-
-				$this->db->select('payout');
-				$this->db->from('player_history');
-				$this->db->where('game_type','1');
-				$this->db->where('transaction_id',$record->transaction_id);
-				$this->db->where('result','1');
-				$query=$this->db->get()->row();
-				$win_amount_first = '';
-				if($query)
-					$win_amount_first = $query->payout;
-
-				$this->db->select('second_digit');
-				$this->db->from('player_history');
-				$this->db->where('game_type','2');
-				$this->db->where('transaction_id',$record->transaction_id);
-				$query=$this->db->get()->row();
-				$second_digit = '';
-				if($query)
-					$second_digit = $query->second_digit;
-
-				$this->db->select('bet_amount');
-				$this->db->from('player_history');
-				$this->db->where('game_type','2');
-				$this->db->where('transaction_id',$record->transaction_id);
-				$query=$this->db->get()->row();
-				$bet_amount_second ='';
-				if($query)
-					$bet_amount_second = $query->bet_amount;
-	    		// echo($this->db->last_query());  //die;
+            $this->db->select('payout as win');
+            $this->db->from('player_history');
+            $this->db->where('result','1');
+            $this->db->where('id',$transaction->id);
+            // $this->db->where('transaction_id',$record->transaction_id);
+            // $this->db->like('timeslot',$day);
+            $win = 0;
+            $query=$this->db->get()->row();
+            // echo $this->db->last_query(); die;
+            if($query)
+                $win = number_format($query->win,2);
 
 
-				$this->db->select('payout');
-				$this->db->from('player_history');
-				$this->db->where('game_type','2');
-				$this->db->where('transaction_id',$record->transaction_id);
-				$this->db->where('result','1');
-				$query=$this->db->get()->row();
-				$win_amount_second ='';
-				if($query)
-					$win_amount_second = $query->payout;
+            $this->db->select('sum(bet_amount) as total_bet');
+            $this->db->from('player_history');
+            $this->db->where('transaction_id',$transaction->transaction_id);
+            $query=$this->db->get()->row();
+            // echo $this->db->last_query(); die;
+            $total_bet = '';
+            if($query)
+                $total_bet = number_format($query->total_bet,2);
+
+            $this->db->select('sum(payout) as total_wins');
+            $this->db->from('player_history');
+            $this->db->where('result','1');
+            $this->db->where('transaction_id',$transaction->transaction_id);
+            $query=$this->db->get()->row();
+            //echo $this->db->last_query(); die;
+            $total_wins ='';
+            if($query)
+                $total_wins = number_format($query->total_wins,2);
 
 
-			   	$balance =  $win   - $chips;
-			   	$total_bet = $total_bet + $chips ;
-				$total_wins = $total_wins + $win;
-				$total_balance = $total_balance + $balance;
+            $this->db->select('first_digit,second_digit,jodi_digit');
+            $this->db->from('player_history');
+            $this->db->where('id',$transaction->id);
+            $query=$this->db->get()->row();
+            // echo $this->db->last_query(); die;
+            $first_digit = $query->first_digit;
+            $second_digit = $query->second_digit;
+            $jodi_digit = $query->jodi_digit;
 
-			   	$data[]= array(
-			   			'sr_no' => $i,
-			   			'bet_amount'=>$chips,
-			   			'payout'=>$win,
-			   			'transaction_id'=>$record->transaction_id,
-			   			'total_bet'=>$total_bet,
-			   			'total_wins'=>$total_wins,
-			   			'first_digit'=>$first_digit,
-			   			'bet_amount_first' =>$bet_amount_first,
-			   			'win_amount_first' =>$win_amount_first,
-			   			'second_digit'=>$second_digit,
-			   			'bet_amount_second' =>$bet_amount_second,
-			   			'win_amount_second' =>$win_amount_second,
-			   			//'total_balance'=>$total_balance,
-			   			//'draw_time'=>$timeslot['timeslot'],
-			   		);
-			   	$i++;
-			}
-		}	
+            $this->db->select('lucky_number,timeslot');
+            $this->db->from('lucky_numbers');
+            $this->db->where('timeslot_id',$draw_time+1);
+            $this->db->like('timeslot',$date);
+            $query=$this->db->get()->row();
+            // echo $this->db->last_query(); die;
+            $lucky_number ='';
+            $timeslot='';
+            $drawtime ='';
+            if($query){
+                $lucky_number = $query->lucky_number;
+                if($lucky_number < 10){
+                    $lucky_number = "0".$lucky_number;
+                }
+                $timeslot = $query->timeslot;
+                $drawtime = date('h:i a', strtotime(explode(" ", $timeslot)[1]));
+            }
 
-		//echo "<pre>";
-		//print_r($data);
-	   //	die;
-	  	return $data;
+            $this->db->select('timeslot');
+            $this->db->from('player_history');
+            $this->db->where('transaction_id',$transaction->transaction_id);
+            $query=$this->db->get()->row();
+            //echo $this->db->last_query(); die;
+            if($query)
+                $trans_time = date('h:i:s a',strtotime($query->timeslot));
+
+            
+
+            $data[$transaction->transaction_id][] = array('id'=>$transaction->id,
+                            'first_digit'=>(isset($first_digit)) ? $first_digit : 999,
+                            'second_digit'=>(isset($second_digit)) ? $second_digit : 999,
+                            'jodi_digit'=>(isset($jodi_digit)) ? $jodi_digit : 999,
+                            'win'=>$win,
+                            'total_bet'=>$total_bet,
+                            'total_wins'=>$total_wins,
+                            'chips'=>$chips,
+                            'lucky_number'=>$lucky_number,
+                            'drawtime'=>$drawtime,
+                            'trans_time'=>$trans_time,
+
+                            );
+
+
+        }
+        
+        // echo "<pre>"; print_r($data);    die;
+        return $data;
 	}
     
 }
