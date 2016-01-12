@@ -1342,31 +1342,7 @@ class Admin extends CI_Controller
     }
     
     
-     public function top_bowler() {
-        
-        $this->load->view('admin/top_bowler');
-    }
-    
-    public function top_batsman() {
-        
-        $this->load->view('admin/top_batsman');
-     }
-    public function first_ball() {
-        
-        $this->load->view('admin/first_ball');
-     }
-    public function first_wicket_method() {
-        
-        $this->load->view('admin/first_wicket_method');
-     }
-    public function first_over_runs() {
-        
-        $this->load->view('admin/first_over_runs');
-     }
-    public function to_make_fifty() {
-        
-        $this->load->view('admin/to_make_fifty');
-     }
+     
     
     public function daySummarySlots() {
         if (isset($_GET['date'])) {
@@ -1702,5 +1678,13 @@ class Admin extends CI_Controller
         }
         
     }
+   
+    
+     public function cricket() {
+        
+        $this->load->view('admin/cricket');
+     }
+    
+    
     
 }
