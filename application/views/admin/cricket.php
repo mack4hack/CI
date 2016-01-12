@@ -4,18 +4,17 @@
 <div class="page-content">
 
    <div class="btn-group">
-            <button data-toggle="dropdown" class="btn yellow dropdown-toggle" type="button" id="btnGroupVerticalDrop5" aria-expanded="false"> Game Menu
+            <button data-toggle="dropdown"  data-hover="dropdown"  class="btn yellow dropdown-toggle" type="button" id="btnGroupVerticalDrop5" aria-expanded="false"> Game Menu
                 <i class="fa fa-angle-down"></i>
             </button>
             <ul aria-labelledby="btnGroupVerticalDrop5" role="menu" class="dropdown-menu">
-                <li><a href="javascript:;"> First Ball </a></li>
-                <li><a href="javascript:;"> First Over Runs </a></li>
-                <li><a href="javascript:;"> First Over Runs </a></li>
-                <li><a href="javascript:;"> First Wicket Method</a></li>
-                <li><a href="javascript:;"> Top Batsman</a></li>
-                <li><a href="javascript:;"> Top Bowler</a></li>
-                <li><a href="javascript:;"> To Make Fifty</a></li>
-                <li><a href="javascript:;"> To Make Hundred</a></li>
+                <li><a href="#game1" onclick="expand(1);"  > First Ball </a></li>
+                <li><a href="#game2"  onclick="expand(2);"  > First Over Runs </a></li>
+                <li><a href="#game3"  onclick="expand(3);" > First Wicket Method</a></li>
+                <li><a href="#game4"  onclick="expand(4);" > Top Batsman</a></li>
+                <li><a href="#game5"  onclick="expand(5);"  > Top Bowler</a></li>
+                <li><a href="#game6"   onclick="expand(6);"   > To Make Fifty</a></li>
+                <li><a href="#game7"   onclick="expand(7);"  > To Make Hundred</a></li>
             </ul>
     </div>
 
@@ -68,9 +67,7 @@
                                                                 <th>
                                                                          Action
                                                                 </th>
-                                                                <th>
-                                                                         Action
-                                                                </th>
+                                                             
 
                                                         </tr>
                                                         </thead>
@@ -96,10 +93,7 @@
 
                                                                          <input type="button"   name="execute"  id="execute" class="execute btn"  value="Execute"   />
                                                                 </td>
-                                                                <td class="center ">
-
-                                                                         <input type="button"   name="cancel"  id="cancel" class="cancel btn"  value="Cancel All Bets"   />
-                                                                </td>
+                                                               
                                                         </tr>
                                                        <?php } ?>
 
@@ -126,9 +120,7 @@
                                                                 <th>
                                                                          Action
                                                                 </th>
-                                                                <th>
-                                                                         Action
-                                                                </th>
+                                                              
 
                                                         </tr>
                                                         </thead>
@@ -155,10 +147,7 @@
 
                                                                          <input type="button"   name="execute"  id="execute" class="execute btn"  value="Execute"   />
                                                                 </td>
-                                                                <td class="center ">
-
-                                                                         <input type="button"   name="cancel"  id="cancel" class="cancel btn"  value="Cancel All Bets"   />
-                                                                </td>
+                                                             
                                                         </tr>
                                                        <?php } ?>
 
@@ -248,9 +237,7 @@
                                                                 <th>
                                                                          Action
                                                                 </th>
-                                                                <th>
-                                                                         Action
-                                                                </th>
+                                                           
 
                                                         </tr>
                                                         </thead>
@@ -276,10 +263,7 @@
 
                                                                          <input type="button"   name="execute"  id="execute" class="execute btn"  value="Execute"   />
                                                                 </td>
-                                                                <td class="center ">
-
-                                                                         <input type="button"   name="cancel"  id="cancel" class="cancel btn"  value="Cancel All Bets"   />
-                                                                </td>
+                                                               
                                                         </tr>
                                                        <?php } ?>
 
@@ -306,9 +290,7 @@
                                                                 <th>
                                                                          Action
                                                                 </th>
-                                                                <th>
-                                                                         Action
-                                                                </th>
+                                                            
 
                                                         </tr>
                                                         </thead>
@@ -335,10 +317,7 @@
 
                                                                          <input type="button"   name="execute"  id="execute" class="execute btn"  value="Execute"   />
                                                                 </td>
-                                                                <td class="center ">
-
-                                                                         <input type="button"   name="cancel"  id="cancel" class="cancel btn"  value="Cancel All Bets"   />
-                                                                </td>
+                                                               
                                                         </tr>
                                                        <?php } ?>
 
@@ -428,9 +407,7 @@
                                                                 <th>
                                                                          Action
                                                                 </th>
-                                                                <th>
-                                                                         Action
-                                                                </th>
+                                                            
 
                                                         </tr>
                                                         </thead>
@@ -456,10 +433,7 @@
 
                                                                          <input type="button"   name="execute"  id="execute" class="execute btn"  value="Execute"   />
                                                                 </td>
-                                                                <td class="center ">
-
-                                                                         <input type="button"   name="cancel"  id="cancel" class="cancel btn"  value="Cancel All Bets"   />
-                                                                </td>
+                                                             
                                                         </tr>
                                                        <?php } ?>
 
@@ -486,9 +460,7 @@
                                                                 <th>
                                                                          Action
                                                                 </th>
-                                                                <th>
-                                                                         Action
-                                                                </th>
+                                                              
 
                                                         </tr>
                                                         </thead>
@@ -515,10 +487,7 @@
 
                                                                          <input type="button"   name="execute"  id="execute" class="execute btn"  value="Execute"   />
                                                                 </td>
-                                                                <td class="center ">
-
-                                                                         <input type="button"   name="cancel"  id="cancel" class="cancel btn"  value="Cancel All Bets"   />
-                                                                </td>
+                                                              
                                                         </tr>
                                                        <?php } ?>
 
@@ -608,9 +577,7 @@
                                                                 <th>
                                                                          Action
                                                                 </th>
-                                                                <th>
-                                                                         Action
-                                                                </th>
+                                                               
 
                                                         </tr>
                                                         </thead>
@@ -636,10 +603,7 @@
 
                                                                          <input type="button"   name="execute"  id="execute" class="execute btn"  value="Execute"   />
                                                                 </td>
-                                                                <td class="center ">
-
-                                                                         <input type="button"   name="cancel"  id="cancel" class="cancel btn"  value="Cancel All Bets"   />
-                                                                </td>
+                                                              
                                                         </tr>
                                                        <?php } ?>
 
@@ -666,9 +630,7 @@
                                                                 <th>
                                                                          Action
                                                                 </th>
-                                                                <th>
-                                                                         Action
-                                                                </th>
+                                                              
 
                                                         </tr>
                                                         </thead>
@@ -695,10 +657,7 @@
 
                                                                          <input type="button"   name="execute"  id="execute" class="execute btn"  value="Execute"   />
                                                                 </td>
-                                                                <td class="center ">
-
-                                                                         <input type="button"   name="cancel"  id="cancel" class="cancel btn"  value="Cancel All Bets"   />
-                                                                </td>
+                                                               
                                                         </tr>
                                                        <?php } ?>
 
@@ -788,9 +747,7 @@
                                                                 <th>
                                                                          Action
                                                                 </th>
-                                                                <th>
-                                                                         Action
-                                                                </th>
+                                                               
 
                                                         </tr>
                                                         </thead>
@@ -816,10 +773,7 @@
 
                                                                          <input type="button"   name="execute"  id="execute" class="execute btn"  value="Execute"   />
                                                                 </td>
-                                                                <td class="center ">
-
-                                                                         <input type="button"   name="cancel"  id="cancel" class="cancel btn"  value="Cancel All Bets"   />
-                                                                </td>
+                                                               
                                                         </tr>
                                                        <?php } ?>
 
@@ -846,9 +800,7 @@
                                                                 <th>
                                                                          Action
                                                                 </th>
-                                                                <th>
-                                                                         Action
-                                                                </th>
+                                                             
 
                                                         </tr>
                                                         </thead>
@@ -875,10 +827,7 @@
 
                                                                          <input type="button"   name="execute"  id="execute" class="execute btn"  value="Execute"   />
                                                                 </td>
-                                                                <td class="center ">
-
-                                                                         <input type="button"   name="cancel"  id="cancel" class="cancel btn"  value="Cancel All Bets"   />
-                                                                </td>
+                                                             
                                                         </tr>
                                                        <?php } ?>
 
@@ -968,9 +917,7 @@
                                                                 <th>
                                                                          Action
                                                                 </th>
-                                                                <th>
-                                                                         Action
-                                                                </th>
+                                                          
 
                                                         </tr>
                                                         </thead>
@@ -996,10 +943,7 @@
 
                                                                          <input type="button"   name="execute"  id="execute" class="execute btn"  value="Execute"   />
                                                                 </td>
-                                                                <td class="center ">
-
-                                                                         <input type="button"   name="cancel"  id="cancel" class="cancel btn"  value="Cancel All Bets"   />
-                                                                </td>
+                                                              
                                                         </tr>
                                                        <?php } ?>
 
@@ -1026,9 +970,7 @@
                                                                 <th>
                                                                          Action
                                                                 </th>
-                                                                <th>
-                                                                         Action
-                                                                </th>
+                                                            
 
                                                         </tr>
                                                         </thead>
@@ -1055,10 +997,7 @@
 
                                                                          <input type="button"   name="execute"  id="execute" class="execute btn"  value="Execute"   />
                                                                 </td>
-                                                                <td class="center ">
-
-                                                                         <input type="button"   name="cancel"  id="cancel" class="cancel btn"  value="Cancel All Bets"   />
-                                                                </td>
+                                                              
                                                         </tr>
                                                        <?php } ?>
 
@@ -1148,9 +1087,7 @@
                                                                 <th>
                                                                          Action
                                                                 </th>
-                                                                <th>
-                                                                         Action
-                                                                </th>
+                                                        
 
                                                         </tr>
                                                         </thead>
@@ -1176,10 +1113,7 @@
 
                                                                          <input type="button"   name="execute"  id="execute" class="execute btn"  value="Execute"   />
                                                                 </td>
-                                                                <td class="center ">
-
-                                                                         <input type="button"   name="cancel"  id="cancel" class="cancel btn"  value="Cancel All Bets"   />
-                                                                </td>
+                                                            
                                                         </tr>
                                                        <?php } ?>
 
@@ -1206,9 +1140,7 @@
                                                                 <th>
                                                                          Action
                                                                 </th>
-                                                                <th>
-                                                                         Action
-                                                                </th>
+                                                           
 
                                                         </tr>
                                                         </thead>
@@ -1235,10 +1167,7 @@
 
                                                                          <input type="button"   name="execute"  id="execute" class="execute btn"  value="Execute"   />
                                                                 </td>
-                                                                <td class="center ">
-
-                                                                         <input type="button"   name="cancel"  id="cancel" class="cancel btn"  value="Cancel All Bets"   />
-                                                                </td>
+                                                               
                                                         </tr>
                                                        <?php } ?>
 
@@ -1299,8 +1228,23 @@ QuickSidebar.init(); // init quick sidebar
 Demo.init(); // init demo features
 });
 
+$(document).ready(function(){
+    
+   $('.portlet-body').css('display','none') ;
+   $('.tools  a').removeClass('collapse');
+   $('.tools  a').addClass('expand');
+
+    
+});
 
 
+
+function expand(a){
+       
+   if($('#game'+a).find('.tools a').hasClass('expand')){
+        $('#game'+a).find('.tools a').click();
+    }
+}
 
 </script>
 <style type="text/css">
