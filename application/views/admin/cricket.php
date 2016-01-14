@@ -1755,22 +1755,32 @@ function expand(a){
 
 
 $('.group-checkable').on('click',function(){
+        
+       var id =  $(this).parent().parent().parent().parent().parent().parent().attr('id');
+        var a= '#'+id+' .checkboxes';
+            var b= '#'+id+' span';
         if(this.checked){
-            $('.checkboxes').each(function(){
-                this.checked = true;
-            });
+           
+            $(a).prop('checked',true);
+            $(b).addClass('checked');
         }else{
-             $('.checkboxes').each(function(){
-                this.checked = false;
-            });
+            $(a).prop('checked',false);
+            $(b).removeClass('checked');
         }
     });
     
     $('.checkboxes').on('click',function(){
-        if($('.checkboxes:checked').length == $('.checkboxes').length){
-            $('.group-checkable').prop('checked',true);
+         var id =  $(this).parent().parent().parent().parent().parent().parent().attr('id');
+        
+        var a= '#'+id+' .checkboxes:checked';
+        var b= '#'+id+' .checkboxes';
+        
+        if($(a).length == $(b).length){
+            $('#'+id+' .group-checkable').prop('checked',true);
         }else{
-            $('.group-checkable').prop('checked',false);
+        
+            $('#'+id+' .group-checkable').prop('checked',false);
+            $('#'+id+' .group-checkable ').parent().removeClass('checked');
         }
     });
 
