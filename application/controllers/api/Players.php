@@ -330,9 +330,9 @@
                          if(isset($_GET['player_id'])  && isset($_GET['date']) && isset($_GET['draw_time']))
 		{
 			$player_id = $_GET['player_id'];
-                                                      $date = $_GET['date'];
-                                                      $draw_time = $_GET['draw_time'];
-                                                      $result['data_weekly'] = $this->bets_model->getAccountsPlayerByDrawTime($player_id,$date,$draw_time);
+	          $date = $_GET['date'];
+	          $draw_time = $_GET['draw_time'];
+	          $result['data_weekly'] = $this->bets_model->getAccountsPlayerByDrawTime($player_id,$date,$draw_time);
 			if(!empty($result))
 			{
 				$this->response([
