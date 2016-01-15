@@ -3,6 +3,33 @@
 <div class="page-content-wrapper">
 <div class="page-content">
 
+    
+    <div class="row">
+        <?php for($i=1;$i<5;$i++){ ?>
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+					<div class="dashboard-stat blue-madison">
+						<div class="visual">
+							<i class="fa fa-money"></i>
+						</div>
+						<div class="details">
+							<div class="number">
+								
+							</div>
+							<div class="desc">
+								Match 1
+							</div>
+						</div>
+						<a class="more" href="">
+						View more <i class="m-icon-swapright m-icon-white"></i>
+						</a>
+					</div>
+				</div>
+        <?php } ?>	
+				
+				
+			</div>
+    
+    <div class="btn-group btn-group btn-group-justified"  style="padding:0% 10% 1% 9%;">
    <div class="btn-group">
             <button data-toggle="dropdown"  data-hover="dropdown"  class="btn yellow dropdown-toggle" type="button" id="btnGroupVerticalDrop5" aria-expanded="false"> Game Menu
                 <i class="fa fa-angle-down"></i>
@@ -20,7 +47,39 @@
                 <li><a href="#game10"   onclick="expand(10);"  > Innings Run Rate</a></li>
             </ul>
     </div>
-
+    <div class="btn-group">
+            <button data-toggle="dropdown"  data-hover="dropdown"  class="btn red dropdown-toggle" type="button" id="btnGroupVerticalDrop5" aria-expanded="false"> Stop All Bets
+                <i class="fa fa-angle-down"></i>
+            </button>
+            <ul aria-labelledby="btnGroupVerticalDrop5" role="menu" class="dropdown-menu">
+                <li><a href="" onclick="stop(1);"  >Toss </a></li>
+                <li><a href=""  onclick="stop(2);"  >First Ball </a></li>
+                <li><a href=""  onclick="stop(3);" > First Over Runs  </a></li>
+                <li><a href=""  onclick="stop(4);" >10 Over Session </a></li>
+                <li><a href=""  onclick="stop(5);"  >First Wicket Method   </a></li>
+                <li><a href=""   onclick="stop(6);"   >Top Batsman </a></li>
+                <li><a href=""   onclick="stop(7);"  >  Top Bowler </a></li>
+                <li><a href=""   onclick="stop(8);"  >To Make Fifty </a></li>
+                <li><a href=""   onclick="stop(9);"  > To Make Hundred</a></li>
+                <li><a href=""   onclick="stop(10);"  > Innings Run Rate</a></li>
+            </ul>
+    </div>
+    <div class="btn-group">
+            <button data-toggle="dropdown"  data-hover="dropdown"  class="btn green dropdown-toggle" type="button" id="btnGroupVerticalDrop5" aria-expanded="false"> Menu
+                <i class="fa fa-angle-down"></i>
+            </button>
+            <ul aria-labelledby="btnGroupVerticalDrop5" role="menu" class="dropdown-menu">
+                <li><a href="" onclick=""  >Detail Scorecard </a></li>
+                <li><a href="" onclick=""  >Upcoming Matches</a></li>
+                <li><a href="" onclick=""  >Cricket Calender</a></li>
+                <li><a href="" onclick=""  >Day Summary</a></li>
+                <li><a href="" onclick=""  >All Games Result</a></li>
+                <li><a href="" onclick=""  >Info</a></li>
+                <li><a href="" onclick=""  >Execute Results</a></li>
+               
+            </ul>
+    </div>
+</div>
    
     <div class="row"  id="game1">
 
@@ -1755,22 +1814,32 @@ function expand(a){
 
 
 $('.group-checkable').on('click',function(){
+        
+       var id =  $(this).parent().parent().parent().parent().parent().parent().attr('id');
+        var a= '#'+id+' .checkboxes';
+            var b= '#'+id+' span';
         if(this.checked){
-            $('.checkboxes').each(function(){
-                this.checked = true;
-            });
+           
+            $(a).prop('checked',true);
+            $(b).addClass('checked');
         }else{
-             $('.checkboxes').each(function(){
-                this.checked = false;
-            });
+            $(a).prop('checked',false);
+            $(b).removeClass('checked');
         }
     });
     
     $('.checkboxes').on('click',function(){
-        if($('.checkboxes:checked').length == $('.checkboxes').length){
-            $('.group-checkable').prop('checked',true);
+         var id =  $(this).parent().parent().parent().parent().parent().parent().attr('id');
+        
+        var a= '#'+id+' .checkboxes:checked';
+        var b= '#'+id+' .checkboxes';
+        
+        if($(a).length == $(b).length){
+            $('#'+id+' .group-checkable').prop('checked',true);
         }else{
-            $('.group-checkable').prop('checked',false);
+        
+            $('#'+id+' .group-checkable').prop('checked',false);
+            $('#'+id+' .group-checkable ').parent().removeClass('checked');
         }
     });
 
