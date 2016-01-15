@@ -386,7 +386,7 @@ class Bets extends REST_Controller
         
         $result = array();
         if (isset($_GET['month'])) {
-            $result['lucky_numbers'] = $this->Bets_model->getLuckyNumberAccToMonth($_GET['month']);
+            $result['lucky_numbers'] = $this->Bets_model->getLuckyNumberAccToMnth($_GET['month']);
         } 
         else {
             

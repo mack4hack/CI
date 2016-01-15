@@ -400,6 +400,53 @@ class Bets_model extends CI_Model
             $date = explode(' ', $d->timeslot) [0];
             //$datearr = explode('-', $date);
             //$day = end($datearr);
+            $numbers[] = array('lucky_number' => $d->lucky_number, 'date' => $date, 'timeslot_id' => $d->timeslot_id,);
+        }
+        
+        if (!empty($query)) {
+            return $numbers;
+        } 
+        else {
+            return "";
+        }
+    }
+    function getLuckyNumberAccToMnth() {
+        
+        
+        date_default_timezone_set("Asia/Calcutta");
+        $now = getdate();
+        $now['minutes'] = $now['minutes'] - 1;
+        $minutes = $now['minutes'] - $now['minutes'] % 15;
+        if($minutes<=9){
+            $minutes = "0".$minutes;
+        }
+       // $rounded = $now['year'] . "-" . $now['mon'] . "-" . $now['mday'] . " " . $now['hours'] . ":" . $minutes . ":00";
+        $max_time = date('Y-m-d H:i:s');
+        
+        $current_month = $now['year'] . "-" . $now['mon'] . "-" . $now['mday'];
+        //$start_date = date('Y-m-d H:m:s');
+        //$pre_date = date($current_month,strtotime("60 days"));
+        $pre_date = date('Y-m-d', strtotime('-60 days', strtotime($current_month)));
+        //echo $pre_date;die;
+        $this->db->select('lucky_number,timeslot,timeslot_id');
+        $this->db->from('lucky_numbers');
+        //$this->db->where("timeslot like '" . $month . "%'");
+        $this->db->where("timeslot >=", $pre_date );
+        $this->db->where("timeslot <=", $max_time );
+        $query = $this->db->get();
+        
+        //echo $this->db->last_query(); die;
+        
+        $data = $query->result();
+        
+        //print_r($data); die;
+        $numbers = array();
+        foreach ($data as $d) {
+            
+            //$d->timeslot; die;
+            $date = explode(' ', $d->timeslot) [0];
+            //$datearr = explode('-', $date);
+            //$day = end($datearr);
             $numbers[$date][] = array('lucky_number' => $d->lucky_number, 'date' => $date, 'timeslot_id' => $d->timeslot_id,);
         }
         
