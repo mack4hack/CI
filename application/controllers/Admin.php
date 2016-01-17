@@ -1377,7 +1377,7 @@ class Admin extends CI_Controller
            // print_r($result); die;        
                 
             $monday = date( 'Y-m-d', strtotime( 'monday this week' ) );
-            $sunday = date( 'Y-m-d', strtotime( 'sunday this week' ) );
+            $sunday = date( 'Y-m-d', strtotime( 'sunday' ) );
 
             $from = date('Y-m-d');
             //$to = date('Y-m-d', strtotime("+1 day", strtotime($from)));
@@ -1568,7 +1568,7 @@ class Admin extends CI_Controller
         else{
 
             $monday = date( 'Y-m-d', strtotime( 'monday this week' ) );
-            $sunday = date( 'Y-m-d', strtotime( 'sunday this week' ) );
+            $sunday = date( 'Y-m-d', strtotime( 'sunday' ) );
 
             $from = date('Y-m-d');
             //$to = date('Y-m-d', strtotime("+1 day", strtotime($from)));
