@@ -7,7 +7,11 @@
     <div class="row">
         <?php for($i=1;$i<5;$i++){ ?>
 				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-					<div class="dashboard-stat blue-madison">
+					<div   <?php  if ($i % 2 == 0) { 
+                                            echo "class='dashboard-stat red-intense' ";
+}else{
+    echo "class='dashboard-stat green' ";
+} ?>>
 						<div class="visual">
 							<i class="fa fa-money"></i>
 						</div>
@@ -85,7 +89,7 @@
 
             <div class="col-md-12">
 
-                    <div class="portlet box purple">
+                    <div class="portlet box white">
                             <div class="portlet-title">
                                     <div class="caption">
                                             <i class="fa fa-gift"></i>Toss
@@ -165,7 +169,7 @@
 
             <div class="col-md-12">
 
-                    <div class="portlet box purple">
+                    <div class="portlet box white">
                             <div class="portlet-title">
                                     <div class="caption">
                                             <i class="fa fa-gift"></i>First Ball
@@ -347,7 +351,7 @@
 
             <div class="col-md-12">
 
-                    <div class="portlet box purple">
+                    <div class="portlet box white">
                             <div class="portlet-title">
                                     <div class="caption">
                                             <i class="fa fa-gift"></i>First Over Runs
@@ -526,7 +530,7 @@
 
             <div class="col-md-12">
 
-                    <div class="portlet box purple">
+                    <div class="portlet box white">
                             <div class="portlet-title">
                                     <div class="caption">
                                             <i class="fa fa-gift"></i>10 Over Session
@@ -705,7 +709,7 @@
 
             <div class="col-md-12">
 
-                    <div class="portlet box purple">
+                    <div class="portlet box white">
                             <div class="portlet-title">
                                     <div class="caption">
                                             <i class="fa fa-gift"></i>First Wicket Method
@@ -884,7 +888,7 @@
 
             <div class="col-md-12">
 
-                    <div class="portlet box purple">
+                    <div class="portlet box white">
                             <div class="portlet-title">
                                     <div class="caption">
                                             <i class="fa fa-gift"></i>Top Batsman
@@ -1062,7 +1066,7 @@
 
             <div class="col-md-12">
 
-                    <div class="portlet box purple">
+                    <div class="portlet box white">
                             <div class="portlet-title">
                                     <div class="caption">
                                             <i class="fa fa-gift"></i>Top Bowler
@@ -1241,7 +1245,7 @@
 
             <div class="col-md-12">
 
-                    <div class="portlet box purple">
+                    <div class="portlet box white">
                             <div class="portlet-title">
                                     <div class="caption">
                                             <i class="fa fa-gift"></i>To Make Fifty
@@ -1420,7 +1424,7 @@
 
             <div class="col-md-12">
 
-                    <div class="portlet box purple">
+                    <div class="portlet box white">
                             <div class="portlet-title">
                                     <div class="caption">
                                             <i class="fa fa-gift"></i>To Make Hundred
@@ -1599,7 +1603,7 @@
 
             <div class="col-md-12">
 
-                    <div class="portlet box purple">
+                    <div class="portlet box white">
                             <div class="portlet-title">
                                     <div class="caption">
                                             <i class="fa fa-gift"></i>Innings Run Rate
@@ -1852,4 +1856,14 @@ thead {
 background-color: #95a5a6;
 }
 
+.portlet.box{
+    border:solid 1px;
+}
+
+.portlet.box > .portlet-title{
+    color:#000;
+}
+.portlet > .portlet-title > .tools > a{
+    background:#000;
+}
 </style>
