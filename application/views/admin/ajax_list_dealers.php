@@ -7,7 +7,7 @@
 							</div>
 							<input type="text" id="search_dealer"  class="col-sm-3"    placeholder ="Search  Dealer"   style="color:black;float: right;margin-top:8px;"  name="search_dealer" >
 						</div>
-						<div class="portlet-body">
+						<div class="portlet-body  table-scrollable">
 							
 							<table class="table table-striped table-bordered table-hover" id="sample_1">
 							<thead>

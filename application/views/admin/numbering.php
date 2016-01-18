@@ -18,7 +18,7 @@
 									</div>
 								  </div>
 								<?php //echo "<pre>";print_r($data);die;?>
-								<div class="portlet-body">
+								<div class="portlet-body table-scrollable">
 								 <table class="table table-bordered table-hover ">
 								   <?php foreach($data as $key =>$value ) { 
                                                                                                                                                         if($key == 0) {  ?> 

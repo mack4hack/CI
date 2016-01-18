@@ -85,7 +85,7 @@
 									</div>
 								  </div>
 								
-								<div class="portlet-body">
+								<div class="portlet-body table-scrollable">
 								 <table class="table table-bordered table-hover">
 								   <thead>
 								     <tr>

@@ -104,7 +104,7 @@
                                     <div class="tabbable-custom nav-justified">
                                        
                                             <div class="tab-content">
-                                                    <div class="tab-pane active" id="tab_1_1_1">
+                                                    <div class=" tab-pane active  table-scrollable" id="tab_1_1_1">
                                                      <table class="table table-striped table-bordered table-hover" id="sample_1">
                                                         <thead>
                                                         <tr>
@@ -195,7 +195,7 @@
 
                                             </ul>
                                             <div class="tab-content">
-                                                    <div class="tab-pane active" id="tab_1_2_1">
+                                                    <div class=" tab-pane active table-scrollable" id="tab_1_2_1">
                                                      <table class="table table-striped table-bordered table-hover" id="sample_21">
                                                         <thead>
                                                         <tr>
@@ -254,7 +254,7 @@
                                                         </tbody>
                                                         </table>	
                                                     </div>
-                                                    <div class="tab-pane" id="tab_1_2_2">
+                                                    <div class="tab-pane table-scrollable" id="tab_1_2_2">
                                                            <table class="table table-striped table-bordered table-hover" id="sample_22">
                                                         <thead>
                                                         <tr>
@@ -377,7 +377,7 @@
 
                                             </ul>
                                             <div class="tab-content">
-                                                    <div class="tab-pane active" id="tab_1_3_1">
+                                                    <div class=" tab-pane active table-scrollable" id="tab_1_3_1">
                                                      <table class="table table-striped table-bordered table-hover" id="sample_31">
                                                         <thead>
                                                         <tr>
@@ -434,7 +434,7 @@
                                                         </tbody>
                                                         </table>	
                                                     </div>
-                                                    <div class="tab-pane" id="tab_1_3_2">
+                                                    <div class="tab-pane table-scrollable" id="tab_1_3_2">
                                                            <table class="table table-striped table-bordered table-hover" id="sample_32">
                                                         <thead>
                                                         <tr>
@@ -556,7 +556,7 @@
 
                                             </ul>
                                             <div class="tab-content">
-                                                    <div class="tab-pane active" id="tab_1_4_1">
+                                                    <div class=" tab-pane active table-scrollable" id="tab_1_4_1">
                                                      <table class="table table-striped table-bordered table-hover" id="sample_41">
                                                         <thead>
                                                         <tr>
@@ -613,7 +613,7 @@
                                                         </tbody>
                                                         </table>	
                                                     </div>
-                                                    <div class="tab-pane" id="tab_1_4_2">
+                                                    <div class="tab-pane table-scrollable" id="tab_1_4_2">
                                                            <table class="table table-striped table-bordered table-hover" id="sample_42">
                                                         <thead>
                                                         <tr>
@@ -735,7 +735,7 @@
 
                                             </ul>
                                             <div class="tab-content">
-                                                    <div class="tab-pane active" id="tab_1_5_1">
+                                                    <div class=" tab-pane active table-scrollable" id="tab_1_5_1">
                                                      <table class="table table-striped table-bordered table-hover" id="sample_51">
                                                         <thead>
                                                         <tr>
@@ -792,7 +792,7 @@
                                                         </tbody>
                                                         </table>	
                                                     </div>
-                                                    <div class="tab-pane" id="tab_1_5_2">
+                                                    <div class="tab-pane table-scrollable" id="tab_1_5_2">
                                                            <table class="table table-striped table-bordered table-hover" id="sample_52">
                                                         <thead>
                                                         <tr>
@@ -914,7 +914,7 @@
 
                                             </ul>
                                             <div class="tab-content">
-                                                    <div class="tab-pane active" id="tab_1_6_1">
+                                                    <div class=" tab-pane active table-scrollable" id="tab_1_6_1">
                                                      <table class="table table-striped table-bordered table-hover" id="sample_61">
                                                         <thead>
                                                         <tr>
@@ -971,7 +971,7 @@
                                                         </tbody>
                                                         </table>	
                                                     </div>
-                                                    <div class="tab-pane" id="tab_1_6_2">
+                                                    <div class="tab-pane table-scrollable" id="tab_1_6_2">
                                                            <table class="table table-striped table-bordered table-hover" id="sample_62">
                                                         <thead>
                                                         <tr>
@@ -1092,7 +1092,7 @@
 
                                             </ul>
                                             <div class="tab-content">
-                                                    <div class="tab-pane active" id="tab_1_7_1">
+                                                    <div class=" tab-pane active table-scrollable" id="tab_1_7_1">
                                                      <table class="table table-striped table-bordered table-hover" id="sample_71">
                                                         <thead>
                                                         <tr>
@@ -1149,7 +1149,7 @@
                                                         </tbody>
                                                         </table>	
                                                     </div>
-                                                    <div class="tab-pane" id="tab_1_7_2">
+                                                    <div class="tab-pane table-scrollable" id="tab_1_7_2">
                                                            <table class="table table-striped table-bordered table-hover" id="sample_72">
                                                         <thead>
                                                         <tr>
@@ -1271,7 +1271,7 @@
 
                                             </ul>
                                             <div class="tab-content">
-                                                    <div class="tab-pane active" id="tab_1_8_1">
+                                                    <div class=" tab-pane active table-scrollable" id="tab_1_8_1">
                                                      <table class="table table-striped table-bordered table-hover" id="sample_81">
                                                         <thead>
                                                         <tr>
@@ -1328,7 +1328,7 @@
                                                         </tbody>
                                                         </table>	
                                                     </div>
-                                                    <div class="tab-pane" id="tab_1_8_2">
+                                                    <div class="tab-pane table-scrollable" id="tab_1_8_2">
                                                            <table class="table table-striped table-bordered table-hover" id="sample_82">
                                                         <thead>
                                                         <tr>
@@ -1450,7 +1450,7 @@
 
                                             </ul>
                                             <div class="tab-content">
-                                                    <div class="tab-pane active" id="tab_1_9_1">
+                                                    <div class=" tab-pane active table-scrollable" id="tab_1_9_1">
                                                      <table class="table table-striped table-bordered table-hover" id="sample_91">
                                                         <thead>
                                                         <tr>
@@ -1507,7 +1507,7 @@
                                                         </tbody>
                                                         </table>	
                                                     </div>
-                                                    <div class="tab-pane" id="tab_1_9_2">
+                                                    <div class="tab-pane table-scrollable" id="tab_1_9_2">
                                                            <table class="table table-striped table-bordered table-hover" id="sample_92">
                                                         <thead>
                                                         <tr>
@@ -1629,7 +1629,7 @@
 
                                             </ul>
                                             <div class="tab-content">
-                                                    <div class="tab-pane active" id="tab_1_10_1">
+                                                    <div class=" tab-pane active table-scrollable" id="tab_1_10_1">
                                                      <table class="table table-striped table-bordered table-hover" id="sample_101">
                                                         <thead>
                                                         <tr>
@@ -1686,7 +1686,7 @@
                                                         </tbody>
                                                         </table>	
                                                     </div>
-                                                    <div class="tab-pane" id="tab_1_10_2">
+                                                    <div class="tab-pane table-scrollable" id="tab_1_10_2">
                                                            <table class="table table-striped table-bordered table-hover" id="sample_102">
                                                         <thead>
                                                         <tr>
