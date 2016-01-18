@@ -41,7 +41,7 @@
                                 </li>
                             </ul>
                             <div class="tab-content">
-                                <div class="tab-pane active" id="tab_1_1_1">
+                                <div class="tab-pane active table-scrollable" id="tab_1_1_1">
                                     <table class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
@@ -85,7 +85,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="tab-pane" id="tab_1_1_2">
+                                <div class="tab-pane table-scrollable" id="tab_1_1_2">
                                     <table class="table table-bordered table-hover">
                                         <thead>
                                         	<tr><th colspan="6">Week : <?php if(!empty($data_weekly)  ) {
@@ -131,7 +131,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="tab-pane" id="tab_1_1_3">
+                                <div class="tab-pane table-scrollable" id="tab_1_1_3">
                                     <table class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
