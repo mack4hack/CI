@@ -13,7 +13,7 @@
 </head>
 			<div class="portlet-body">
 						<div class="nav-justified">
-							<div class="tab-content">
+							<div class="tab-content table-scrollable">
 								<table class="table table-bordered table-hover">
 								<thead>
 								<tr>

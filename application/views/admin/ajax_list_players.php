@@ -8,7 +8,7 @@
 							<input type="text" id="search_player"  class="col-sm-3 "    placeholder ="Search Player"   style="color:black;float: right;margin-top:8px;"  name="search_player" >
 
 						</div>
-						<div class="portlet-body">
+						<div class="portlet-body table-scrollable">
 							
 							<table class="table table-striped table-bordered table-hover" id="sample_1">
 							<thead>

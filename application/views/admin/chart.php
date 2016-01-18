@@ -20,7 +20,7 @@
 									</div> 
 								  </div>
 								
-								<div class="portlet-body" id="mack">
+								<div class="portlet-body table-scrollable" id="mack">
 								 <table class="table table-bordered table-hover">
 								   <thead>
 								     <tr>

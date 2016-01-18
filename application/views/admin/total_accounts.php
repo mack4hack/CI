@@ -34,7 +34,7 @@
                             </ul>
                           
                             
-                                <div class="tab-pane active" id="tab_1_1_3">
+                                <div class="tab-pane active table-scrollable" id="tab_1_1_3">
                                     <table class="table table-bordered table-hover">
                                         <thead>
                                             <tr>

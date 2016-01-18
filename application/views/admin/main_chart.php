@@ -68,7 +68,7 @@ $current_timestamp = $date->getTimestamp();
                                                                     </div>
                                                               </div>
 
-                                                            <div class="portlet-body">
+                                                            <div class="portlet-body table-scrollable">
                                                              <table class="table table-bordered table-hover">
                                                                <thead>
                                                                  <tr>
@@ -967,7 +967,7 @@ $current_timestamp = $date->getTimestamp();
 
 
             <div class="portlet-body">
-                                <div class="table-responsive">
+                                <div class="table-scrollable">
                                     <table class="table table-bordered">
                                         <thead>
                                         </thead>

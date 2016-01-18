@@ -28,9 +28,11 @@
 				</div>
               </div>
             </div>
+                    <div class="table-scrollable">
             <table class="print">
             <div id="mack" class="mack"></div>	
             </table>		
+                        </div>
 					 
 
 

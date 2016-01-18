@@ -55,9 +55,10 @@
 	                  </div>
 	                </div>
 	            <?php } ?>    
-            <table class="print">
+                    <div class="table-scrollable">
+                    <table class="print">
             <div id="mack" class="mack"></div>	
-            </table>		
+            </table>		</div>
 					 
 
 
