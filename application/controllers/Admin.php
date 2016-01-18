@@ -1377,7 +1377,7 @@ class Admin extends CI_Controller
            // print_r($result); die;        
                 
             $monday = date( 'Y-m-d', strtotime( 'monday this week' ) );
-            $sunday = date( 'Y-m-d', strtotime( 'sunday this week' ) );
+            $sunday = date( 'Y-m-d', strtotime( 'sunday' ) );
 
             $from = date('Y-m-d');
             //$to = date('Y-m-d', strtotime("+1 day", strtotime($from)));
@@ -1568,7 +1568,7 @@ class Admin extends CI_Controller
         else{
 
             $monday = date( 'Y-m-d', strtotime( 'monday this week' ) );
-            $sunday = date( 'Y-m-d', strtotime( 'sunday this week' ) );
+            $sunday = date( 'Y-m-d', strtotime( 'sunday' ) );
 
             $from = date('Y-m-d');
             //$to = date('Y-m-d', strtotime("+1 day", strtotime($from)));
@@ -1740,6 +1740,64 @@ class Admin extends CI_Controller
         $result['data_weekly'] = $this->Admin_model->getAccountsDealer($to, $from,$dealer_id);
         $this->load->view('admin/dealer_accounts_weekly_combined', $result);
     }
-    
+    public function accounts_cricket()
+    {
+        if (!$this->ion_auth->logged_in()) {
+            redirect('auth/login', 'refresh');
+        }    
+        else{
+
+            $monday = date( 'Y-m-d', strtotime( 'monday this week' ) );
+            $sunday = date( 'Y-m-d', strtotime( 'sunday' ) );
+
+            $from = date('Y-m-d');
+            //$to = date('Y-m-d', strtotime("+1 day", strtotime($from)));
+            //$to = date('Y-m-d', strtotime("-1 week", strtotime($to)));
+            //$to = date('Y-m-d', strtotime("1 day", strtotime($from)));
+
+            if(strtotime($monday) > strtotime($from)){
+                $monday = date( 'Y-m-d', strtotime( '-6 day' ) );
+            }
+
+            date_default_timezone_set("Asia/Calcutta");
+            if(date('Y-m-d') == $sunday){
+                $this_week = date( 'd-m-Y', strtotime( $monday ) ).' TO '.date( 'd-m-Y', strtotime( 'sunday previous week' ) );
+                $prev_first_week = date( 'd-m-Y', strtotime( '-2  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-1  Sunday' ) );
+                $prev_second_week = date( 'd-m-Y', strtotime( '-3  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-2  Sunday' ) ); 
+                $prev_third_week = date( 'd-m-Y', strtotime( '-4  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-3  Sunday' ) ); 
+            }elseif (date('Y-m-d') == $monday) {
+                $this_week = date( 'd-m-Y', strtotime( $monday ) ).' TO '.date( 'd-m-Y', strtotime( 'sunday this week' ) );
+                $prev_first_week = date( 'd-m-Y', strtotime( '-1  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-1  Sunday' ) );
+                $prev_second_week = date( 'd-m-Y', strtotime( '-2  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-2  Sunday' ) ); 
+                $prev_third_week = date( 'd-m-Y', strtotime( '-3  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-3  Sunday' ) ); 
+            }else{
+                $this_week = date( 'd-m-Y', strtotime( $monday ) ).' TO '.date( 'd-m-Y', strtotime( 'sunday this week' ) );
+                $prev_first_week = date( 'd-m-Y', strtotime( '-2  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( 'Sunday previous week' ) );
+                $prev_second_week = date( 'd-m-Y', strtotime( '-3  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-2  Sunday' ) ); 
+                $prev_third_week = date( 'd-m-Y', strtotime( '-4  Monday' ) ).' TO '.date( 'd-m-Y', strtotime( '-3  Sunday' ) ); 
+            }
+            // die;
+            //$from = date('Y-m-d');
+            //$to = date('Y-m-d', strtotime("-1 month", strtotime($from)));
+            //$from = date('Y-m-d', strtotime("1 day", strtotime($from)));
+            //$result['data_monthly'] = $this->Admin_model->getAccounts($from, $to);
+            $result['data_monthly'] = array($prev_third_week,$prev_second_week,$prev_first_week,$this_week);
+
+
+            $this->load->view('admin/accounts_cricket', $result);
+        }
+        
+    }
+
+    public function accountsCricketWeekly()
+    {
+        $weekarr = explode('TO', $_GET['week']);
+        $from = $weekarr[0];
+        $from = date('Y-m-d',strtotime($from));
+        $to = $weekarr[1];
+        $to = date('Y-m-d',strtotime($to));
+        $result['data_weekly'] = $this->Admin_model->getAccounts($to, $from);
+        $this->load->view('admin/accounts_cricket_weekly', $result);
+    }
     
 }
