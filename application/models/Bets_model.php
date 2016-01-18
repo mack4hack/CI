@@ -447,6 +447,9 @@ class Bets_model extends CI_Model
             $date = explode(' ', $d->timeslot) [0];
             //$datearr = explode('-', $date);
             //$day = end($datearr);
+            if($d->lucky_number < 10){
+                $d->lucky_number = '0'.$d->lucky_number;
+            }
             $numbers[] = array('lucky_number' => $d->lucky_number, 'date' => $date, 'timeslot_id' => $d->timeslot_id,);
         }
         
