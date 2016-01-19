@@ -559,7 +559,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             </a>
                             <ul class="sub-menu" style="display: none;">
                                 <li class="nav-item start active open">
-                                    <a class="nav-link " href="#">
+                                    <a class="nav-link " href="<?php echo base_url()?>admin/accounts_cricket">
                                         <i class="icon-bar-chart"></i>
                                         <span class="title">Cricket</span>
                                         
