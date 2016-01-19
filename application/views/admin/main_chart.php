@@ -693,7 +693,7 @@ $current_timestamp = $date->getTimestamp();
 
 
                                                             </div>
-
+                                                        <div class="table-scrollable ">
                                                                     <table class="table table-bordered table-hover">
                                                                             <thead>
                                                                             <tr>
@@ -757,6 +757,7 @@ $current_timestamp = $date->getTimestamp();
                                                                             </tbody>
                                                                             </table>	
                                                             </div>
+                                                            </div>
                                                     </div>	
                                                     </div>	
 
@@ -780,6 +781,7 @@ $current_timestamp = $date->getTimestamp();
 
 
                                                                      </div>
+                                                                   <div class="table-scrollable ">
                                                                             <table class="table table-bordered table-hover">
                                                                             <thead>
                                                                             <tr>
@@ -843,6 +845,7 @@ $current_timestamp = $date->getTimestamp();
                                                                             </tbody>
                                                                             </table>	
 
+                                                                      </div>
                                                             </div>
                                                             </div>
                                                             </div>

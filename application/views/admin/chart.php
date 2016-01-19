@@ -642,7 +642,7 @@
 										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['payout_first'];  ?> ) </span>-->
 									</div>
 								</div>
-								
+                                                            <div class="table-scrollable">
 									<table class="table table-bordered table-hover">
 										<thead>
 										<tr>
@@ -706,6 +706,7 @@
 										</tbody>
 										</table>	
 								</div>
+								</div>
 							</div>	
 							</div>	
 										
@@ -727,6 +728,7 @@
 										<span class="caption-subject bold uppercase font-red-haze"  > ( <?php  echo $bets_and_payout['payout_second'];  ?> ) </span>-->
 									</div>
 									 </div>
+                                                                       <div class="table-scrollable">
 										<table class="table table-bordered table-hover">
 										<thead>
 										<tr>
@@ -790,6 +792,7 @@
 										</tbody>
 										</table>	
 									
+								</div>
 								</div>
 								</div>
 								</div>
