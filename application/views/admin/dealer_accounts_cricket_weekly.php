@@ -1,13 +1,12 @@
 <table class="table table-bordered table-hover">
     <thead>
-        <tr><th colspan="6">Week : <?php if(!empty($data_weekly)  ) {
-        foreach($data_weekly as $dw){ echo $dw['week']; break;}} ?></th></tr>
+        <tr><th colspan="6">Dealer Code : <?php echo $_GET['user_code']; ?></th></tr>
         <tr>
             <th>
                 Sr No
             </th>
             <th>
-                Dealer Code
+                Player Code
             </th>
             <th>
                 Total Bets
@@ -25,11 +24,10 @@
     </thead>
     <tbody>
         <?php if(!empty($data_weekly)  ) {
-        foreach($data_weekly as $dw){ $dealer_id = $dw['dealer_id']; ?>
+        foreach($data_weekly as $dw){ $player_id = $dw['player_id']; $week =$dw['week'];   ?>
          <tr class="success">
             <td><?php echo $dw['sr_no']; ?></td>
-            <!-- <td><a href="<?php echo base_url("/admin/accountsdealer?dealer_id=$dealer_id") ?>"><?php echo $dw['user_code']; ?></td> -->
-            <td id="week_dealer"><a attr="<?php echo $dw['dealer_id']; ?>" value="<?php echo $dw['week'] ?>"><?php echo $dw['user_code']; ?></td>
+            <td id="week_player"><a week="<?php echo $week; ?>"  value="<?php echo $player_id ?>"><?php echo $dw['user_code']; ?></td>
             <td><?php echo $dw['bet_amount']; ?></td>
             <td><?php echo $dw['payout']; ?></td>
             <td><?php echo $dw['commission']; ?></td>
@@ -43,17 +41,19 @@
         <?php  } ?>
     </tbody>
 </table>
-<div id="mack1"></div>
+<div id="mack3"></div>
+
 <script type="text/javascript">
     
-    $('.table #week_dealer').each(function(){
+    $('.table #week_player').each(function(){
         dealer_id = $('#dealer_id').val();
         $(this).click(function(){
-            week = $(this).find('a').attr('value');
-            dealer_id = $(this).find('a').attr('attr');
+            week = $(this).find('a').attr('week');
+            //week = '';
+            player_id = $(this).find('a').attr('value');
             user_code = $(this).find('a').text();
             week = encodeURIComponent(week);
-            $('#mack1').load('<?php echo base_url("/admin/dealeraccountscricketweekly?week='+week+'&user_code='+user_code+'&dealer_id="); ?>'+dealer_id,function () { });
+            $('#mack3').load('<?php echo base_url("/admin/playeraccountscricketweekly?user_code='+user_code+'&week='+week+'&player_id="); ?>'+player_id,function () { });
             return false;
         });
     });
