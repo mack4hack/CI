@@ -4,13 +4,15 @@
 <div class="page-content">
 
     
+
     <div class="row">
-        <?php for($i=1;$i<5;$i++){ ?>
-				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-					<div   <?php  if ($i % 2 == 0) { 
-                                            echo "class='dashboard-stat red-intense' ";
+        <div class="slider4">
+        <?php for($i=1;$i<9;$i++){ ?>
+				
+					<div  <?php  if ($i % 2 == 0) { 
+                                            echo "class='dashboard-stat red-intense slide' ";
 }else{
-    echo "class='dashboard-stat green' ";
+    echo "class='dashboard-stat green  slide' ";
 } ?>>
 						<div class="visual">
 							<i class="fa fa-money"></i>
@@ -27,11 +29,12 @@
 						View more <i class="m-icon-swapright m-icon-white"></i>
 						</a>
 					</div>
-				</div>
+				
         <?php } ?>	
 				
-				
+		</div>		
 			</div>
+			
     
     <div class="btn-group btn-group btn-group-justified"  style="padding:0% 10% 1% 9%;">
    <div class="btn-group">
@@ -1790,6 +1793,9 @@
 <!-- BEGIN FOOTER -->
 <?php include'footer.php';?>
 <!-- END FOOTER -->
+<link href="<?php echo base_url()?>assets/global/plugins/jquery.bxslider/jquery.bxslider.css" rel="stylesheet" type="text/css"/>
+ <script src="<?php echo base_url()?>/assets/global/plugins/jquery.bxslider/jquery.bxslider.min.js" type="text/javascript"></script>
+ <script src="<?php echo base_url()?>/assets/global/plugins/jquery.bxslider/jquery.bxslider.js" type="text/javascript"></script>
 <script type="text/javascript" >
 $(document).ready(function() {   
 Metronic.init(); // init metronic core components
@@ -1799,7 +1805,16 @@ Demo.init(); // init demo features
 });
 
 $(document).ready(function(){
-    
+
+
+   $('.slider4').bxSlider({
+    slideWidth: 300,
+    minSlides: 2,
+    maxSlides: 4,
+    moveSlides: 1,
+    slideMargin: 10
+  });
+      
    $('.portlet-body').css('display','none') ;
    $('.tools  a').removeClass('collapse');
    $('.tools  a').addClass('expand');

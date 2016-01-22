@@ -60,6 +60,8 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- END CORE PLUGINS -->
         <!-- BEGIN PAGE LEVEL PLUGINS -->
         <script src="<?php echo base_url()?>/assets/global/plugins/moment.min.js" type="text/javascript"></script>
+        
+       
       
         <script src="<?php echo base_url()?>/assets/global/plugins/morris/morris.min.js" type="text/javascript"></script>
         <script src="<?php echo base_url()?>/assets/global/plugins/morris/raphael-min.js" type="text/javascript"></script>
