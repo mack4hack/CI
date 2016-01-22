@@ -89,7 +89,7 @@
 
             <div class="col-md-12">
 
-                    <div class="portlet box white">
+                    <div class="portlet box green">
                             <div class="portlet-title">
                                     <div class="caption">
                                             <i class="fa fa-gift"></i>Toss
@@ -169,7 +169,7 @@
 
             <div class="col-md-12">
 
-                    <div class="portlet box white">
+                    <div class="portlet box red">
                             <div class="portlet-title">
                                     <div class="caption">
                                             <i class="fa fa-gift"></i>First Ball
@@ -351,7 +351,7 @@
 
             <div class="col-md-12">
 
-                    <div class="portlet box white">
+                    <div class="portlet box yellow">
                             <div class="portlet-title">
                                     <div class="caption">
                                             <i class="fa fa-gift"></i>First Over Runs
@@ -530,7 +530,7 @@
 
             <div class="col-md-12">
 
-                    <div class="portlet box white">
+                    <div class="portlet box purple">
                             <div class="portlet-title">
                                     <div class="caption">
                                             <i class="fa fa-gift"></i>10 Over Session
@@ -709,7 +709,7 @@
 
             <div class="col-md-12">
 
-                    <div class="portlet box white">
+                    <div class="portlet box green">
                             <div class="portlet-title">
                                     <div class="caption">
                                             <i class="fa fa-gift"></i>First Wicket Method
@@ -888,7 +888,7 @@
 
             <div class="col-md-12">
 
-                    <div class="portlet box white">
+                    <div class="portlet box red">
                             <div class="portlet-title">
                                     <div class="caption">
                                             <i class="fa fa-gift"></i>Top Batsman
@@ -1066,7 +1066,7 @@
 
             <div class="col-md-12">
 
-                    <div class="portlet box white">
+                    <div class="portlet box yellow">
                             <div class="portlet-title">
                                     <div class="caption">
                                             <i class="fa fa-gift"></i>Top Bowler
@@ -1245,7 +1245,7 @@
 
             <div class="col-md-12">
 
-                    <div class="portlet box white">
+                    <div class="portlet box purple">
                             <div class="portlet-title">
                                     <div class="caption">
                                             <i class="fa fa-gift"></i>To Make Fifty
@@ -1424,7 +1424,7 @@
 
             <div class="col-md-12">
 
-                    <div class="portlet box white">
+                    <div class="portlet box green">
                             <div class="portlet-title">
                                     <div class="caption">
                                             <i class="fa fa-gift"></i>To Make Hundred
@@ -1603,7 +1603,7 @@
 
             <div class="col-md-12">
 
-                    <div class="portlet box white">
+                    <div class="portlet box red">
                             <div class="portlet-title">
                                     <div class="caption">
                                             <i class="fa fa-gift"></i>Innings Run Rate
@@ -1856,7 +1856,7 @@ thead {
 background-color: #95a5a6;
 }
 
-.portlet.box{
+/*.portlet.box{
     border:solid 1px;
 }
 
@@ -1865,5 +1865,5 @@ background-color: #95a5a6;
 }
 .portlet > .portlet-title > .tools > a{
     background:#000;
-}
+}*/
 </style>

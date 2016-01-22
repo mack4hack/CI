@@ -1865,4 +1865,28 @@ class Admin extends CI_Controller
         
     }
     
+    
+    
+     public function schedule()
+    {
+            
+                $this->load->view('admin/schedule');
+            
+        
+    }
+     public function recentmatches()
+    {
+            
+                $this->load->view('admin/recentmatches');
+            
+        
+    }
+     public function singlematch()
+    {
+            
+                $this->load->view('admin/singlematch');
+            
+        
+    }
+    
 }

@@ -55,7 +55,8 @@
 
 
                                         </div>
-                                        <table class="table table-bordered table-hover">
+                                            <div class="table-scrollable">
+                                                  <table class="table table-bordered table-hover">
                                         <thead>
                                         <tr>
                                         <th>
@@ -117,7 +118,7 @@
                                         </tr>
                                         </tbody>
                                         </table>    
-
+                                            </div>
                                         </div>
                                         </div>
                                     </div>
@@ -140,6 +141,7 @@
 
 
                                         </div>
+                                            <div class="table-scrollable">
                                         <table class="table table-bordered table-hover">
                                         <thead>
                                         <tr>
@@ -203,7 +205,7 @@
                                         </tr>
                                         </tbody>
                                         </table>    
-
+                                         </div>
                                         </div>
                                         </div>
                                     </div>
@@ -217,7 +219,7 @@
                                     </div>
                                     </div>
 
-                                    <div class="portlet-body">
+                                    <div class="portlet-body table-scrollable">
                                     <table class="table table-bordered table-hover">
                                     <thead>
                                     <tr>

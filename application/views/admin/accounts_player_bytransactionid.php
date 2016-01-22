@@ -86,6 +86,7 @@
 
 
                                         </div>
+                                            <div class="table-scrollable">
                                         <table class="table table-bordered table-hover">
                                         <thead>
                                         <tr>
@@ -147,7 +148,8 @@
 
                                         </tr>
                                         </tbody>
-                                        </table>    
+                                        </table>   
+                                                </div>
 
                                         </div>
                                         </div>
@@ -171,6 +173,7 @@
 
 
                                         </div>
+                                         <div class="table-scrollable">   
                                         <table class="table table-bordered table-hover">
                                         <thead>
                                         <tr>
@@ -237,6 +240,7 @@
 
                                         </div>
                                         </div>
+                                        </div>
                                     </div>
                                     <!-- BEGIN CHART PORTLET-->
                                     <div class="portlet light bordered">
@@ -248,7 +252,7 @@
                                     </div>
                                     </div>
 
-                                    <div class="portlet-body">
+                                    <div class="portlet-body table-scrollable">
                                     <table class="table table-bordered table-hover">
                                     <thead>
                                     <tr>
