@@ -9,10 +9,14 @@
         <div class="slider4">
         <?php for($i=1;$i<9;$i++){ ?>
 				
-					<div  <?php  if ($i % 2 == 0) { 
+					<div  <?php  if ($i % 4 == 0) { 
                                             echo "class='dashboard-stat red-intense slide' ";
-}else{
+}elseif($i%3==0){
     echo "class='dashboard-stat green  slide' ";
+}elseif($i%2==0){
+    echo "class='dashboard-stat purple  slide' ";
+}else{
+    echo "class='dashboard-stat yellow  slide' ";
 } ?>>
 						<div class="visual">
 							<i class="fa fa-money"></i>
