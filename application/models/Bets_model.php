@@ -826,7 +826,11 @@ class Bets_model extends CI_Model
             if($query)
                 $trans_time = date('h:i:s a',strtotime($query->timeslot));
 
-            
+            if(isset($jodi_digit)){
+                if($jodi_digit<10){
+                    $jodi_digit = "0".$jodi_digit;
+                }
+            }
 
             $data[$transaction->transaction_id][] = array('id'=>$transaction->id,
                             'first_digit'=>(isset($first_digit)) ? $first_digit : 999,
