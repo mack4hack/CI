@@ -344,10 +344,11 @@ class Bets extends REST_Controller
     }
     public function LuckyNumber_get() {
         
-        $result['lucky_number'] = $this->Bets_model->getLuckyNumber();
+        $result   = $this->Bets_model->getLuckyNumber();
+        
         if (!empty($result)) {
             
-            $this->response(['status' => TRUE, 'lucky_number' => $result['lucky_number']
+            $this->response(['status' => TRUE, 'lucky_number' => $result['lucky_number'],'draw_time' =>$result['draw_time']
             ], REST_Controller::HTTP_OK);
              // NOT_FOUND (404) being the HTTP response code
             

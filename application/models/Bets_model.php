@@ -200,16 +200,18 @@ class Bets_model extends CI_Model
         $this->db->from('lucky_numbers');
         $this->db->where('timeslot <= ', $date);
         $this->db->where('timeslot >= ', $rounded);
-        
+        $draw_time = $now['hours'].":".$minutes;
         //$this->db->where("timeslot >= '".$date."' and timeslot < '".$rounded."' ");
         $query = $this->db->get()->row();
-        
+        $data = array();
+        $data['draw_time'] = $draw_time;
         //echo $this->db->last_query();die;
         if (!empty($query)) {
             if ($query->lucky_number <= 9) {
                 $query->lucky_number = "0" . $query->lucky_number;
             }
-            return $query->lucky_number;
+           $data['lucky_number'] = $query->lucky_number;
+           return $data;
         } 
         else {
             return "";
