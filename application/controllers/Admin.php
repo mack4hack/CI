@@ -193,8 +193,11 @@ class Admin extends CI_Controller
         $this->load->view('admin/chart', $result);
     }
     public function getLuckyNumber() {
-        $result['lucky_number'] = $this->Bets_model->getLuckyNumber();
-        echo $result['lucky_number'];
+        $result= $this->Bets_model->getLuckyNumber();
+        if(isset($result['lucky_number'])){
+        echo $result['lucky_number'];}else{
+            echo "";
+        }
     }
     public function getcurrent() {
        date_default_timezone_set("Asia/Calcutta");
