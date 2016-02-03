@@ -189,7 +189,11 @@ class Admin extends CI_Controller
         
         $result['bets_and_payout'] = $bet_amount_and_payout;
         $result['total_payout'] = $this->Bets_model->getTotalPayoutAndBets();
-        $result['lucky_number'] = $this->Bets_model->getLuckyNumber();
+       $result_lucky_number = $this->Bets_model->getLuckyNumber();
+        if(isset($result_lucky_number['lucky_number'])){
+        $result['lucky_number'] = $result_lucky_number['lucky_number'];}else{
+            $result['lucky_number']= '';
+        }
         $this->load->view('admin/chart', $result);
     }
     public function getLuckyNumber() {
@@ -806,7 +810,11 @@ class Admin extends CI_Controller
         $result['second_digit_data'] = $this->Bets_model->getseconddigitchart();
         $result['jodi_data'] = $this->Bets_model->getjodichart();
         $result['total_payout'] = $this->Bets_model->getTotalPayoutAndBets();
-        $result['lucky_number'] = $this->Bets_model->getLuckyNumber();
+       $result_lucky_number = $this->Bets_model->getLuckyNumber();
+        if(isset($result_lucky_number['lucky_number'])){
+        $result['lucky_number'] = $result_lucky_number['lucky_number'];}else{
+            $result['lucky_number']= '';
+        }
         
         for ($i = 0 * 60; $i < 24 * 60; $i+= 15) {
             $hr = floor($i / 60);

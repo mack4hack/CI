@@ -418,7 +418,11 @@ class Bets extends REST_Controller
         $start = strtotime('+15 minutes', strtotime($rounded));
         $result['start'] = date("h:i a", strtotime($rounded));
         $result['end'] = date("h:i a", $start);
-        $result['lucky_number'] = $this->Bets_model->getLuckyNumber();
+      $result_lucky_number = $this->Bets_model->getLuckyNumber();
+        if(isset($result_lucky_number['lucky_number'])){
+        $result['lucky_number'] = $result_lucky_number['lucky_number'];}else{
+            $result['lucky_number']= '';
+        }
         
         if (!empty($result)) {
             
