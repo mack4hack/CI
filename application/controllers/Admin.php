@@ -122,7 +122,11 @@ class Admin extends CI_Controller
         
         $result['bets_and_payout'] = $bet_amount_and_payout;
         $result['total_payout'] = $this->Bets_model->getTotalPayoutAndBets();
-        $result['lucky_number'] = $this->Bets_model->getLuckyNumber();
+        $result_lucky_number = $this->Bets_model->getLuckyNumber();
+        if(isset($result_lucky_number['lucky_number'])){
+        $result['lucky_number'] = $result_lucky_number['lucky_number'];}else{
+            $result['lucky_number']= '';
+        }
         $result['time_slots'] = $time_slots;
         
         
